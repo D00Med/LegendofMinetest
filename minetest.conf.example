@@ -1,0 +1,44 @@
+# This file contains settings of LegendofMinetest that can be changed in minetest.conf
+# By default, all the settings are commented and not functional.
+# Uncomment settings by removing the preceding #.
+
+# Whether creative mode (fast digging of all blocks, unlimited resources) should be enabled
+#creative_mode = false
+
+# Whether players inventory is placed into a node on death (bones node)
+#enable_bones = true
+
+# The time in seconds after which the bones of a dead player can be looted by everyone
+# 0 to disable
+#share_bones_time = 1200
+
+# Whether fire should be disabled (all fire nodes will instantly disappear)
+#disable_fire = false
+
+# Whether steel tools, torches and cobblestone should be given to new players
+#give_initial_stuff = false
+
+# Whether the TNT mod should be enabled
+#enable_tnt = <true in singleplayer, false in multiplayer>
+
+# The radius of a TNT explosion
+#tnt_radius = 3
+
+# Enable the stairs mod ABM that replaces the old 'upside down'
+# stair and slab nodes in old maps with the new param2 versions.
+#enable_stairs_replace_abm = false
+
+# Whether you allow respawning in beds
+# Default value is true
+#enable_bed_respawn = true
+
+# Whether players can skip night by sleeping
+# Default value is true
+#enable_bed_night_skip = true
+
+# Whether there is weather
+# enable_weather = true
+
+# Loz mode 
+# if false will disable most loz based mobs and items
+# loz_mode = true

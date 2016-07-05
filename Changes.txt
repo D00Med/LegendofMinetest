@@ -1,0 +1,44 @@
+changelog incomple(v0.2 changes missing)
+
+V0.4
+>fixed mapgen problems, forests are now much less scarce
+>spawning is improved in biomes with dirt_with_grass2 and 3
+>fixed spawning of fairies
+>added aspen trees
+>doomshrooms, flat dandelions and new tree shapes spawn on new worlds.
+>wild trees are improved, leaves changed to orange/red
+>Unified inventory removed, but worktables are given to new players(for crafting recipes)
+>Throwing has been replaced with bowsv3
+>doors and tnt updated(from minetest_game for 0.4.14)
+>New tool and weapon textures(swords, picks, and axes)
+>New obsidian axe(like steel but more durable), and ice axe(about the same as diamond but slightly weaker)
+>Finished seed effects
+>Added roc's feather(found in dungeons)
+>Improved temporary player effects from tools(such as zora scales)
+>removed player_effects mod, and made cacti hurt
+>Added experience, and the triforce spawns experience orbs when used.
+>Added crafting recipes for kblocks
+>Gorons, and Scrubs now trade items for rupees if they are right-clicked with them.
+>There are now multiple Npc textures.
+>Added many more plants(moreplants)
+>improved quartz ore texture
+>removed deku nuts
+>red ocarina's now set the weather to stormy
+>The sky is grey when there is stormy weather, even if the player is inside
+>Added the sun texture that was removed with twilight
+>Added a new moon texture(there are other texture improvements that are not listed)
+>Nyan rupees are now required for enchantment, they can be found in dungeons.
+>buckets are much easier to craft, since less poe souls are required, however the original crafting recipe is the same(loz_mode=false)
+>added boost cart(may have been in there since last version?)
+>Added a background to creative and changed the default ui background
+
+V0.3
+>changed papyrus and brick textures
+>added magic tree, wild tree, and lost wood biomes
+>added loz_mode and enable_weather to config. This allows loz related items/mobs and weather to be enabled/disabled
+>added sprinting
+>removed old traders, pmobs npc now trade using rupees.
+>buckets must be crafted from poe souls in loz mode
+>added plants to jungle, coniferous, grassland and lava biomes (moreplants mod)
+>goron huts now spawn in lavabiomes
+

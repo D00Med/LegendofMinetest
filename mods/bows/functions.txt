@@ -1,0 +1,33 @@
+-- useful functions if you want to use this api.. all other functions are automatic used (no idea to use them in your code)
+
+bows.arrow_remove(self) -- remove the arrow
+self.target= target --(punching its target when it self is punched)
+
+bows.register_bow("bow_test",{
+	description="Test bow",
+	texture="bows_bow.png",
+	texture_loaded="bows_bow_loaded.png",
+	uses=50,
+	level=1,-- (19 is double speed)
+	craft={
+		{"","group:stick","farming:cotton"},
+		{"group:stick","","farming:cotton"},
+		{"","group:stick","farming:cotton"}
+	},
+})
+
+bows.register_arrow("arrow_test",{
+	description="Test arrow",
+	texture="bows_arrow_wood.png",
+	damage=5,
+	craft_count=8,-- count of items from craft
+	craft={
+		{"default:flint","group:stick","group:leaves"}
+	}
+	on_hit_node=function(self,pos,user,lastpos)
+	end,
+	on_hit_object=function(self,target,hp,user,lastpos)
+	end,
+	on_step=function(self,dtime,user,pos,lastpos)
+	end,
+})
