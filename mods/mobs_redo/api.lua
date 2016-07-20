@@ -321,10 +321,11 @@ function check_for_death(self)
 		return false
 	end
 
+	--experience added as part of this subgame
 	-- drop items when dead
 	local obj
 	local pos = self.object:getpos()
-
+	local exp = minetest.env:add_entity(pos, "experience:orb")
 	for n = 1, #self.drops do
 
 		if random(1, self.drops[n].chance) == 1 then

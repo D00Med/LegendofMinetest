@@ -54,7 +54,7 @@ mobs:register_mob("mobs_loz:ganon", {
 	visual_size = {x=2, y=2},
 	makes_footstep_sound = true,
 	sounds = {
-		random = "mobs_pig_angry",
+		random = "mobs_pig_angry_slow",
 	},
 	walk_velocity = 2,
 	run_velocity = 3,

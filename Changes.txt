@@ -1,4 +1,23 @@
 changelog incomple(v0.2 changes missing)
+V1
+>Added glowstone
+>Added bosses; Bongo Bongo, Kind Dodongo, Volvagia and Ganon
+>Changed crafting recipe for mastersword
+>Added gossip stones
+>Added spiritual stones(ruby, emerald, sapphire)
+>Added boss spawners
+>Fixed survival inventory
+>re-introduced twilight, which now causes a visual change and transforms the player into a wolf
+>The mastersword becomes more powerful in twilight mode
+>Moreplants mdecorations can be disabled
+>Changed weather to weather_pack by xeranas. 
+>added adult dodongo's 
+>updated mobs_redo
+>Added hud_hunger
+>added sword stands, zora tunic and goron tunic
+>added eye of truth, and dirt_with_grass_hole
+>updated enchanting table(xdecor)
+>improved tree trunks from hyrule_mapgen
 
 V0.4
 >fixed mapgen problems, forests are now much less scarce

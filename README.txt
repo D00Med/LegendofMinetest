@@ -1,5 +1,19 @@
 --readme of LegendofMinetest
-Since most of this subgame is a modification of Minetest Next, please do not give credit for the default code, unless it is for something added(see changes in forum post). 
+ _                               _        _____  ____            _            _   
+| |                             | |      / _|  \/  (_)          | |          | |  
+| |     ___  __ _  ___ _ __   __| | ___ | |_| .  . |_ _ __   ___| |_ ___  ___| |_ 
+| |    / _ \/ _` |/ _ \ '_ \ / _` |/ _ \|  _| |\/| | | '_ \ / _ \ __/ _ \/ __| __|
+| |___|  __/ (_| |  __/ | | | (_| | (_) | | | |  | | | | | |  __/ ||  __/\__ \ |_ 
+\_____/\___|\__, |\___|_| |_|\__,_|\___/|_| \_|  |_/_|_| |_|\___|\__\___||___/\__|
+             __/ |                                                                
+            |___/                                                                 
+Gameplay information:
+In addition to the usual mining and building objectives of the game, there are now bosses and the triforce as objectives.
+The triforce can be obtained either by mining mese, searching dungeons, or by defeating Ganon. Scattered throughout the dungeons are triforce shards, and magic pendants. 
+These pendants can be used to craft boss spawners. Once placed, the bosses will spawn after 5 seconds. Currently there are three minor bosses, spawned with blocks crafted with the three pendants.
+These bosses drop the three stones required to obtain the mastersword, which will turn any boss spawner into a Ganon spawner when right clicked. 
+The bosses are tough so be prepared! Also, in an attempt to break away from the usual mining aspect, some materials can be traded with npc's.
+
 Mods by D00Med:
 decor_shield
 decor_vase
@@ -9,8 +23,12 @@ hyruletools
 icetools
 lavabiome
 mobs_fairy(based on mobs_bat)
+mobs_loz
 moreplants
 rocks
+kblocks
+twilight
+
 For other mods see license.txt in the folder of each mod.
 License of code: GNU GPL v3 (C) 2016 D00Med
 License of textures: CC BY-SA 3.0 (C) 2016 D00Med

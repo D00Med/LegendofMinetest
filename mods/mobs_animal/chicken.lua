@@ -3,7 +3,9 @@
 
 mobs:register_mob("mobs_animal:chicken", {
 	type = "animal",
-	passive = true,
+	passive = false,
+	reach = 2,
+	damage = 5,
 	hp_min = 5,
 	hp_max = 10,
 	armor = 200,

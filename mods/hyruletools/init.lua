@@ -1598,8 +1598,8 @@ minetest.register_craft({
 	output = 'hyruletools:swordstand',
 	recipe = {
 		{'', '', ''},
-		{'quartz:quartz', 'quartz:quartz', 'quartz:quartz'},
-		{'quartz:quartz', 'quartz:quartz', 'quartz:quartz'},
+		{'quartz:quartz_crystal', 'quartz:quartz_crystal', 'quartz:quartz_crystal'},
+		{'quartz:quartz_crystal', 'quartz:quartz_crystal', 'quartz:quartz_crystal'},
 	}
 })
 
