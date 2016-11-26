@@ -12,7 +12,7 @@ HUD_AIR_POS = {x = 0.5, y = 1}
 HUD_AIR_OFFSET = {x = 15, y = -87}
 HUD_HUNGER_POS = {x = 0.5, y = 1}
 HUD_HUNGER_OFFSET = {x = 15, y = -110}
-HUD_ARMOR_POS = {x = 0.5, y = 1}
+HUD_ARMOR_POS = {x = 0.505, y = 0.97}
 HUD_ARMOR_OFFSET = {x = 0, y = -110}
 
 -- Reorder everything when using ItemWeel
