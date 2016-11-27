@@ -1,3 +1,29 @@
+
+minetest.register_node("hyrule_mapgen:dungeon_barrier", {
+	description = "Dungeon Barrier",
+	tiles = {
+		"hyrule_mapgen_dungeon_barrier.png",
+	},
+	groups = {cracky=3},
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_tile", {
+	description = "Dungeon Tile",
+	tiles = {
+		"hyrule_mapgen_dungeon_tile.png",
+	},
+	groups = {cracky=3},
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_brick", {
+	description = "Dungeon Brick",
+	tiles = {
+		"hyrule_mapgen_dungeon_brick.png",
+	},
+	groups = {cracky=3},
+})
+
+
 minetest.register_node("hyrule_mapgen:statue", {
 	description = "Gossip Stone",
 	tiles = {

@@ -1,24 +1,23 @@
-This mod is part of Minetest NeXt
-=================================
+Minetest Game mod: creative
+===========================
 
-License of source code:
------------------------
-Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>
+Implements creative mode.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-at your option) any later version.
+Switch on by using the "creative_mode" setting.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Registered items that
+- have a description, and
+- do not have the group not_in_creative_inventory
+are added to the creative inventory.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+License of source code and media files:
+---------------------------------------
+Copyright (C) 2012 Perttu Ahola (celeron55) <celeron55@gmail.com>
+Copyright (C) 2016 Jean-Patrick G. (kilbith) <jeanpatrick.guerrero@gmail.com>
 
+This program is free software. It comes without any warranty, to
+the extent permitted by applicable law. You can redistribute it
+and/or modify it under the terms of the Do What The Fuck You Want
+To Public License, Version 2, as published by Sam Hocevar. See
+http://sam.zoy.org/wtfpl/COPYING for more details.
 
-License of media (textures, sounds, meshes):
---------------------------------------------
-(by Authors)
