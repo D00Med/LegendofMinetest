@@ -1,6 +1,9 @@
 A simple mod that adds a few new plants.
-Changed in V2: 
+Changed in V1.2: 
 >more plants
 >plants now spawn on new worlds(as decorations not using an ABM)
 >curly plants have fruit, and eyeweeds drop eyeballs
 >smaller textures
+
+Changed in V1.3:
+>added all plants to the group attatched_node

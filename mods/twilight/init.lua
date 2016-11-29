@@ -170,8 +170,7 @@ if twilight_mode == true then
     text = "twilight_hud.png"
   })
 	model = true
-	default.player_set_model(player, "wolfplayer.b3d")
-	default.player_set_skin(player, "wolfplayer.png")
+	player:set_properties({mesh = "wolfplayer.b3d", textures = {"wolfplayer.png"}})
 	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=3,z=-3})
 	player:set_local_animation({x=0, y=9}, {x=28, y=44}, {x=11, y=26}, {x=11, y=26}, 20)
 	player:set_physics_override({
@@ -200,8 +199,7 @@ else
 	end
 	if model == true then
 	model = false
-	default.player_set_model(player, "character.b3d")
-	default.player_set_skin(player, "character.png")
+	player:set_properties({mesh = "character.b3d", textures = {"character.png"}})
 	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=10,z=-4})
 	player:set_local_animation({x=0, y=79}, {x=168, y=187}, {x=189, y=198}, {x=200, y=219}, 30)
 	player:set_physics_override({

@@ -36,7 +36,7 @@ mobs:register_mob("mobs_loz:deku", {
 	drops = {
 		{name = "default:stick",
 		chance = 9, min = 1, max = 3},
-		{name = "maptools:copper_coin",
+		{name = "hyruletools:green_rupee",
 		chance = 1, min = 1, max = 9},
 	},
 	water_damage = 1,
@@ -57,7 +57,7 @@ mobs:register_mob("mobs_loz:deku", {
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		
-		if item:get_name() == "maptools:copper_coin" then
+		if item:get_name() == "hyruletools:green_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
 				clicker:set_wielded_item(item)
@@ -65,7 +65,7 @@ mobs:register_mob("mobs_loz:deku", {
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
 			minetest.add_item(pos, {name = "default:leaves"})
-		elseif item:get_name() == "maptools:silver_coin" then
+		elseif item:get_name() == "hyruletools:blue_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
 				clicker:set_wielded_item(item)
@@ -74,7 +74,7 @@ mobs:register_mob("mobs_loz:deku", {
 			pos.y = pos.y + 0.5
 			minetest.add_item(pos, {name = "default:stick"})
 		
-		elseif item:get_name() == "maptools:silver_coin" then
+		elseif item:get_name() == "hyruletools:blue_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
 				clicker:set_wielded_item(item)
@@ -82,7 +82,7 @@ mobs:register_mob("mobs_loz:deku", {
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
 			minetest.add_item(pos, {name = "default:stick"})
-		elseif item:get_name() == "maptools:gold_coin" then
+		elseif item:get_name() == "hyruletools:red_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
 				clicker:set_wielded_item(item)

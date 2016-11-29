@@ -35,7 +35,7 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	fall_speed = -6,
 	stepheight = 3,
 	drops = {
-		{name = "maptools:silver_coin",
+		{name = "hyruletools:blue_rupee",
 		chance = 5, min = 5, max = 15},
 		{name = "hyruletools:heart",
 		chance = 1, min = 1, max = 9},
@@ -52,8 +52,8 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 		walk_end = 146,
 		run_start = 123,
 		run_end = 146,
-		punch_start = 60,
-		punch_end = 88,
+		shoot_start = 60,
+		shoot_end = 88,
 	},
 })
 

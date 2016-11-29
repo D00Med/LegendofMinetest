@@ -28,7 +28,7 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	drops = {
 		{name = "hyruletools:heart",
 		chance = 1, min = 3, max = 5},
-		{name = "maptools:gold_coin",
+		{name = "hyruletools:red_rupee",
 		chance = 1, min = 1, max = 3},
 	},
 	water_damage = -1,

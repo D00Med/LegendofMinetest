@@ -14,16 +14,10 @@ function default.player_register_model(name, def)
 	models[name] = def
 end
 
---better 3rd person view by D00Med, improves 3rd person view from behind, but makes
---3rd person worse from the front
-minetest.register_on_joinplayer(function(player)
-	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=10,z=-4})
-	end)
-
 -- Default player appearance
 default.player_register_model("character.b3d", {
 	animation_speed = 30,
-	textures = {"character.png", "default_armor_blank.png", "16x_blank.png"},
+	textures = {"character.png", },
 	animations = {
 		-- Standard animations.
 		stand     = { x=  0, y= 79, },
@@ -31,8 +25,6 @@ default.player_register_model("character.b3d", {
 		walk      = { x=168, y=187, },
 		mine      = { x=189, y=198, },
 		walk_mine = { x=200, y=219, },
-		swing     = { x= 223, y=239, },
-		-- Extra animations (not currently used by the game).
 		sit       = { x= 81, y=160, },
 	},
 })
@@ -61,43 +53,26 @@ function default.player_set_model(player, model_name)
 		if player_model[name] == model_name then
 			return
 		end
-		player_textures[name] = player_textures[name] or model.textures
 		player:set_properties({
 			mesh = model_name,
-			textures = player_textures[name],
+			textures = player_textures[name] or model.textures,
 			visual = "mesh",
-			visual_size = model.visual_size or {x = 1, y =1,}
+			visual_size = model.visual_size or {x=1, y=1},
 		})
 		default.player_set_animation(player, "stand")
 	else
 		player:set_properties({
-			textures = {"player.png", "player_back.png"},
+			textures = { "player.png", "player_back.png", },
 			visual = "upright_sprite",
 		})
 	end
 	player_model[name] = model_name
 end
 
-function default.player_set_armor_texture(player, texture)
-	local name = player:get_player_name()
-	player_textures[name][2] = texture
-	player:set_properties({textures = player_textures[name]})
-end
-
-function default.player_set_skin(player, texture)
-	local name = player:get_player_name()
-	player_textures[name][1] = texture
-	player:set_properties({textures = player_textures[name]})
-end
-
 function default.player_set_textures(player, textures)
 	local name = player:get_player_name()
-	if textures[2] == nil or textures[3] == nil then
-		textures = {textures[1], "default_armor_blank.png", "16x_blank.png"}
-		minetest.log("error", "Deprecated use of 'default.player_set_textures()'. Use 'default.player_set_skin()' instead.")
-	end
 	player_textures[name] = textures
-	player:set_properties({textures = textures})
+	player:set_properties({textures = textures,})
 end
 
 function default.player_set_animation(player, anim_name, speed)
@@ -159,20 +134,8 @@ minetest.register_globalstep(function(dtime)
 			if controls.sneak then
 				animation_speed_mod = animation_speed_mod / 2
 			end
-			
-			
 
 			-- Apply animations based on what the player is doing
-			if player:get_hp() <= 2 then
-			local pname = player:get_player_name();
-			local pos = player:getpos();
-				local inv = minetest.get_inventory({type="player", name=pname});
-			if inv:contains_item("main", "mobs_fairy:fairy") then
-			local remov = inv:remove_item("main", "mobs_fairy:fairy")
-			player:set_hp(20)
-			minetest.env:add_entity(pos, "mobs_fairy:fairy")
-			end
-			end
 			if player:get_hp() == 0 then
 				player_set_animation(player, "lay")
 			elseif walking then

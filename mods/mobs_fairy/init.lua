@@ -76,7 +76,7 @@ if mobs.mod and mobs.mod == "redo" then
 	--name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height
 	mobs:spawn_specific("mobs_fairy:fairy", {"air"}, {"default:tree"}, 20, 10, 300, 15000, 2, -100, 11000)
 	mobs:register_egg("mobs_fairy:fairy", "Fairy", "fairy_inv.png", 0)
-	mobs:register_spawn("mobs_fairy:fairy",
-	{"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"}, 20, 10, 15000, 2, 31000, true)
+	mobs:register_spawn("mobs_fairy:fairy",	{"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"}, 20, 10, 15000, 2, 31000, true)
+	mobs:register_spawn("mobs_fairy:fairy",	{"hyrule_mapgen:healwater_src"}, 20, 10, 1500, 2, 31000, true)
 	
 end

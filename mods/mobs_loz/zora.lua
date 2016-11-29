@@ -31,7 +31,7 @@ mobs:register_mob("mobs_loz:zora", {
 	drops = {
 		{name = "icetools:ice_shard",
 		chance = 9, min = 1, max = 3},
-		{name = "maptools:copper_coin",
+		{name = "hyruletools:green_rupee",
 		chance = 1, min = 1, max = 2},
 	},
 	water_damage = 0,
@@ -70,6 +70,19 @@ local name = minetest.get_player_name()
 local pos = player:getpos()
 end
 
+playereffects.register_effect_type("potion_swim_lv1", "Fast Swim", nil, {"swim"}, 
+	function(player)
+		player:set_physics_override(4,nil,nil)
+		physics_overriden = true
+	end,
+	
+	function(effect, player)
+		player:set_physics_override(1,nil,nil)
+		physics_overriden = false
+	end,
+	false
+)
+
 minetest.register_craftitem("mobs_loz:scale", {
 	description = "Zora scale",
 	inventory_image = "mobs_scale.png",
@@ -77,26 +90,7 @@ minetest.register_craftitem("mobs_loz:scale", {
 		local player = user:get_player_name()
 		local breath = user:get_breath()
 	if breath <= 10 then
-		local spd = user:set_physics_override({
-
-		speed = 4, -- multiplier to default value
-		jump = 1.0, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
+		playereffects.apply_effect_type("potion_swim_lv1", 10, user)
 	end
-		local reset = minetest.after(50, function()
-			user:set_physics_override({
-
-		speed = 1.5, -- multiplier to default value
-		jump = 1.0, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
-		end)
-	end
+	end,
 })

@@ -1,5 +1,5 @@
 
-MOB API (23rd May 2016)
+MOB API (28th September 2016)
 
 The mob api is a function that can be called on by other mods to add new animals or monsters into minetest.
 
@@ -10,7 +10,8 @@ The mob api is a function that can be called on by other mods to add new animals
     'mobs_disable_blood' if false blood effects appear when mob is hit (default is false)
     'mobs_spawn_protected' if set to 1 then mobs will not spawn in protected areas (default is 0)
     'remove_far_mobs' if true then mobs that are outside players visual range will be removed (default is false)
-    'mobname_chance' can change specific mob chance rates or set to 0 to disable e.g. mobs_animal:cow_chance = 1000
+    'mobname' can change specific mob chance rate (0 to disable) and spawn number e.g. mobs_animal:cow = 1000,5
+    'mob_difficulty' sets difficulty level (health and hit damage multiplied by this number), defaults to 1.0.
 
 
 mobs:register_mob(name, definition)
@@ -24,6 +25,8 @@ This functions registers a new mob as a Minetest entity.
         'docile_by_day' when true, mob will not attack during daylight hours unless provoked
         'attacks_monsters' usually for npc's to attack monsters in area
         'group_attack' true to defend same kind of mobs from attack in area
+        'attack_animals' true for monster to attack animals as well as player and npc's
+        'attack_specific' has a table of entity names that monsters can attack {"player", "mobs_animal:chicken"}
         'hp_min' minimum health
         'hp_max' maximum health (mob health is randomly selected between both)
         'physical' same is in minetest.register_entity()
@@ -136,7 +139,7 @@ The mob api also has some preset variables and functions that it will remember f
 
 mobs:register_spawn(name, nodes, max_light, min_light, chance, active_object_count, max_height, day_toggle)
 
-mobs:spawn_specfic(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height, day_toggle)
+mobs:spawn_specfic(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height, day_toggle, on_spawn)
 
 These functions register a spawn algorithm for the mob. Without this function the call the mobs won't spawn.
 
@@ -151,6 +154,14 @@ These functions register a spawn algorithm for the mob. Without this function th
     'min_height' is the maximum height the mob can spawn
     'max_height' is the maximum height the mob can spawn
     'day_toggle' true for day spawning, false for night or nil for anytime
+    'on_spawn' is a custom function which runs after mob has spawned and gives self and pos values.
+
+... also a simpler way to handle mob spawns has been added with the mobs:spawn(def) command which uses above names to make settings clearer:
+
+    mobs:spawn({name = "mobs_monster:tree_monster",
+       nodes = {"group:leaves"},
+       max_light = 7,
+    })
 
 
 Players can override the spawn chance for each mob registered by adding a line to their minetest.conf file with a new value, the lower the value the more each mob will spawn e.g.
@@ -179,6 +190,7 @@ This function registers a arrow for mobs with the attack type shoot.
             the parameters are (self, pos, node)
         'tail' when set to 1 adds a trail or tail to mob arrows
         'tail_texture' texture string used for above effect
+        'tail_size' has size for above texture (defaults to between 5 and 10)
     'on_step' is a custom function when arrow is active, nil for default.
 
 
@@ -226,3 +238,22 @@ This function allows the mob to be fed the item inside self.follow be it apple, 
     'feed_count' number of times mob must be fed to tame or breed
     'breed' true or false stating if mob can be bred and a child created afterwards
     'tame' true or false stating if mob can be tamed so player can pick them up
+
+
+mobs:protect(self, clicker)
+
+This function can be used to right-click any tamed mob with mobs:protector item, this will protect the mob from harm inside of a protected area from other players.
+
+    'self' mob information
+    'clicker' player information
+
+
+Useful Internal Variables
+
+    'self.health' contains current health of mob
+    'self.texture_list' contains list of all mob textures
+    'self.child_texture' contains mob child texture when growing up
+    'self.base_texture' contains current skin texture which was randomly selected from textures list
+    'self.gotten' true when sheep have been sheared or cows have been milked, a toggle switch which can be used for many functions
+    'self.child' true when mob is currently a child (when two mobs have bred and current mob is the outcome)
+    'self.hornytimer' background timer that controls breeding functions and mob childhood timings

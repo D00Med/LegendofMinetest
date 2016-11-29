@@ -236,4 +236,3 @@ minetest.register_entity("experience:orb", {
 		end
 	end,
 })
-

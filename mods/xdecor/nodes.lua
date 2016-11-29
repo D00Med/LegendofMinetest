@@ -551,7 +551,7 @@ xdecor.register("tatami", {
 xdecor.register("tv", {
 	description = "Television",
 	light_source = 11,
-	groups = {snappy=3},
+	groups = {snappy=3, not_in_creative_inventory=1},
 	on_rotate = screwdriver.rotate_simple,
 	tiles = {
 		"xdecor_television_left.png^[transformR270",

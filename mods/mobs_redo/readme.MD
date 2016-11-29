@@ -10,8 +10,19 @@ This mod contains the API only for adding your own mobs into the world, so pleas
 https://forum.minetest.net/viewtopic.php?f=11&t=9917
 
 
+Crafts:
+
+ - Nametag (paper, black dye, string) can be used right-click on a tamed mob to give them a name.
+ - Nets can be used to right-click tamed mobs to pick them up and place inside inventory as a spawn egg.
+ - Magic Lasso is similar to nets but with a better chance of picking up larger mobs.
+ - Shears are used to right-click sheep and return 1-3 wool.
+ - Protection Rune lets you protect tamed mobs from harm by other players
+
+
 Changelog:
 
+- 1.32- Added new spawn check to count specific mobs AND new minetest.conf setting to chance spawn chance and numbers, added ability to protect tamed mobs
+- 1.31- Added 'attack_animals' and 'specific_attack' flags for custom monster attacks, also 'mob_difficulty' .conf setting to make mobs harder.
 - 1.30- Added support for invisibility mod (mobs cant attack what they cant see), tweaked and tidied code
 - 1.29- Split original Mobs Redo into a modpack to make it easier to disable mob sets (animal, monster, npc) or simply use the Api itself for your own mod
 - 1.28- New damage system added with ability for mob to be immune to weapons or healed by them :)

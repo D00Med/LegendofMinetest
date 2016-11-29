@@ -28,7 +28,7 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	floats = 0,
 	view_range = 5,
 	drops = {
-		{name = "maptools:silver_coin",
+		{name = "hyruletools:blue_rupee",
 		chance = 2, min = 3, max = 5},
 		{name = "default:iron_lump",
 		chance=5, min=1, max=2},
@@ -88,7 +88,7 @@ mobs:register_mob("mobs_loz:dodongo", {
 	floats = 0,
 	view_range = 5,
 	drops = {
-		{name = "maptools:silver_coin",
+		{name = "hyruletools:blue_rupee",
 		chance = 2, min = 3, max = 5},
 		{name = "default:copper_lump",
 		chance=5, min=1, max=2},

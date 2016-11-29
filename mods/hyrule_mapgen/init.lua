@@ -1,4 +1,246 @@
 
+local mg_name = minetest.get_mapgen_params().mgname or ""
+
+if mg_name ~= "v6" then
+dofile(minetest.get_modpath("hyrule_mapgen").."/mapgen.lua")
+end
+
+--overrides
+
+minetest.override_item("default:furnace", {
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.3125, 0.5}, -- NodeBox1
+			{-0.4375, 0.375, -0.5, 0.4375, 0.4375, 0.5}, -- NodeBox2
+			{-0.375, 0.4375, -0.5, 0.375, 0.5, 0.5}, -- NodeBox3
+			{-0.5, 0.3125, -0.5, 0.5, 0.375, 0.5}, -- NodeBox4
+			{-0.5, -0.5, -0.5, -0.3125, 0.3125, 0.5}, -- NodeBox5
+			{0.3125, -0.5, -0.5, 0.5, 0.375, 0.5}, -- NodeBox6
+			{-0.5, -0.0625, -0.5, 0.5, 0.0625, 0.5}, -- NodeBox7
+			{-0.5, -0.5, -0.375, 0.5, 0.3125, 0.5}, -- NodeBox8
+		}
+	},
+})
+
+minetest.override_item("default:chest_locked", {
+	paramtype = "light",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	},
+})
+
+minetest.override_item("default:chest", {
+	paramtype = "light",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	},
+})
+
+minetest.override_item("default:bookshelf", {
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.375, -0.4375, 0.4375, 0.4375, 0.4375}, -- NodeBox1
+			{-0.5, -0.5, -0.5, 0.5, -0.375, 0.5}, -- NodeBox2
+			{-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox3
+			{-0.5, -0.0625, -0.5, 0.5, 0.125, 0.5}, -- NodeBox4
+			{-0.5, -0.5, -0.5, -0.4375, 0.5, -0.4375}, -- NodeBox5
+			{-0.5, -0.5, 0.4375, -0.4375, 0.5, 0.5}, -- NodeBox6
+			{0.4375, -0.5, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox7
+			{0.4375, -0.5, -0.5, 0.5, 0.5, -0.4375}, -- NodeBox8
+		}
+	},
+})
+
+minetest.override_item("vessels:shelf", {
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.375, -0.4375, 0.4375, 0.4375, 0.4375}, -- NodeBox1
+			{-0.5, -0.5, -0.5, 0.5, -0.375, 0.5}, -- NodeBox2
+			{-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox3
+			{-0.5, -0.0625, -0.5, 0.5, 0.125, 0.5}, -- NodeBox4
+			{-0.5, -0.5, -0.5, -0.4375, 0.5, -0.4375}, -- NodeBox5
+			{-0.5, -0.5, 0.4375, -0.4375, 0.5, 0.5}, -- NodeBox6
+			{0.4375, -0.5, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox7
+			{0.4375, -0.5, -0.5, 0.5, 0.5, -0.4375}, -- NodeBox8
+		}
+	},
+})
+
+
+--ore overrides
+
+minetest.override_item("default:stone_with_iron", {
+	groups = {cracky = 2, xp = 1},
+})
+
+minetest.override_item("default:stone_with_copper", {
+	groups = {cracky = 2, xp = 1},
+})
+
+minetest.override_item("default:stone_with_mese", {
+	groups = {cracky = 1, xp = 1},
+})
+
+minetest.override_item("default:mese", {
+	groups = {cracky = 1, level = 2, xp = 1},
+})
+
+minetest.override_item("default:stone_with_diamond", {
+	groups = {cracky = 1, xp = 1},
+})
+
+minetest.override_item("default:stone_with_gold", {
+	groups = {cracky = 2, xp = 1},
+})
+
+--new nodes
+
+minetest.register_node("hyrule_mapgen:healwater_src", {
+	description = "Healing Water Source",
+	drawtype = "liquid",
+	tiles = {
+		{
+			name = "default_water_source_animated.png^[colorize:pink:150",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 2.0,
+			},
+		},
+	},
+	alpha = 160,
+	light_source = 15,
+	paramtype = "light",
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = -1,
+	liquidtype = "source",
+	liquid_alternative_flowing = "hyrule_mapgen:healwater_src",
+	liquid_alternative_source = "hyrule_mapgen:healwater_src",
+	liquid_range = 0,
+	liquid_viscosity = 1,
+	post_effect_color = {a = 103, r = 80, g = 50, b = 50},
+	groups = {water = 3, liquid = 3,},
+	sounds = default.node_sound_water_defaults(),
+})
+
+-- GENERATED CODE
+-- Node Box Editor, version 0.8.1 - Glass
+-- Namespace: test
+
+minetest.register_node("hyrule_mapgen:geyser", {
+	description = "Lava Geyser",
+	tiles = {
+		"hyrule_mapgen_geyser_top.png",
+		"hyrule_mapgen_geyser_side.png",
+		"hyrule_mapgen_geyser_side.png",
+		"hyrule_mapgen_geyser_side.png",
+		"hyrule_mapgen_geyser_side.png",
+		"hyrule_mapgen_geyser_side.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {crumbly=2, oddly_breakable_by_hand=1},
+	damage_per_second = 1,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.3125, 0.5}, -- NodeBox1
+			{-0.4375, -0.3125, -0.4375, 0.4375, -0.125, 0.4375}, -- NodeBox2
+			{-0.375, -0.125, -0.375, -0.125, 0, 0.375}, -- NodeBox3
+			{0.1875, -0.125, -0.375, 0.375, 0, 0.375}, -- NodeBox4
+			{-0.375, -0.125, -0.375, 0.375, 0, -0.1875}, -- NodeBox5
+			{-0.3125, -0.125, 0.125, 0.3125, 0, 0.375}, -- NodeBox6
+		}
+	}
+})
+
+--end of generated code
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:geyser"},
+	interval = 0.5,
+	chance = 2,
+	action = function(pos, node)
+		minetest.add_particlespawner({
+			amount = 30,
+			time = 4,
+			minpos = {x=pos.x-0.2, y=pos.y, z=pos.z-0.2},
+			maxpos = {x=pos.x+0.2, y=pos.y+1, z=pos.z+0.2},
+			minvel = {x=-0.1, y=1, z=-0.1},
+			maxvel = {x=0.1, y=2, z=0.1},
+			minacc = {x=0, y=-0.5, z=0},
+			maxacc = {x=0, y=-1, z=0},
+			minexptime = 1,
+			maxexptime = 2,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			texture = "hyrule_mapgen_spark.png"
+		})
+	end
+})
+
+
+minetest.register_node("hyrule_mapgen:lavabiome_dirt", {
+	description = "Burnt Dirt",
+	tiles = {
+		"hyrule_mapgen_dirt.png"
+	},
+	paramtype = "light",
+	groups = {crumbly=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:stone_with_redrupee", {
+	description = "Buried red rupee",
+	tiles = {"default_stone.png^hyruletools_redrupee_ore.png"},
+	groups = {cracky = 2, xp = 1},
+	drop = 'hyruletools:red_rupee',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("hyrule_mapgen:stone_with_bluerupee", {
+	description = "Buried blue rupee",
+	tiles = {"default_stone.png^hyruletools_bluerupee_ore.png"},
+	groups = {cracky = 2, xp = 1},
+	drop = 'hyruletools:blue_rupee',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("hyrule_mapgen:stone_with_greenrupee", {
+	description = "Buried green rupee",
+	tiles = {"default_stone.png^hyruletools_greenrupee_ore.png"},
+	groups = {cracky = 2, xp = 1},
+	drop = 'hyruletools:green_rupee',
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("hyrule_mapgen:dungeon_barrier", {
 	description = "Dungeon Barrier",
 	tiles = {

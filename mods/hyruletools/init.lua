@@ -1,4 +1,162 @@
-if minetest.setting_getbool("loz_mode") then	
+if minetest.setting_getbool("loz_mode") then
+
+--hud (rupee counter)
+--[[
+minetest.register_on_joinplayer(function(player)
+local rupee = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.05, y = 0.9},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "hyruletools_green_rupee.png"
+	})
+	
+local arrow = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.05, y = 0.8},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "bows_arrow_wood.png"
+	})
+	
+local text1 = player:hud_add({
+    hud_elem_type = "text",
+    position = {x = 0.1, y = 0.8},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "x ",
+	number = 0xFFFFFF
+	})
+	
+local text1 = player:hud_add({
+    hud_elem_type = "text",
+    position = {x = 0.09, y = 0.9},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "x ",
+	number = 0xFFFFFF
+	})
+end)
+--]]
+
+--player effects
+
+playereffects.register_effect_type("potion_speed_lv1", "High speed", nil, {"speed"}, 
+	function(player)
+		player:set_physics_override(3,nil,nil)
+		physics_overriden = true
+	end,
+	
+	function(effect, player)
+		player:set_physics_override(1,nil,nil)
+		physics_overriden = false
+	end,
+	false
+)
+
+playereffects.register_effect_type("potion_antigrav_lvx", "Light weight", nil, {"gravity"}, 
+	function(player)
+		player:set_physics_override(nil,nil,0.1)
+		physics_overriden = true
+	end,
+	
+	function(effect, player)
+		player:set_physics_override(nil,nil,1)
+		physics_overriden = false
+	end,
+	false
+)
+
+--tools
+
+minetest.register_node("hyruletools:shield", {
+	description = "Wall Shield",
+	drawtype = "signlike",
+	tiles = {"hyruletools_swdshld.png"},
+	inventory_image = "hyruletools_swdshld.png",
+	wield_image = "hyruletools_swdshld.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	walkable = false,
+	selection_box = {
+		type = "wallmounted",
+	},
+	groups = {choppy=2,dig_immediate=2,attached_node=1}})
+
+minetest.register_craft( {
+	output = "hyruletools:shield 1",
+	recipe = {
+		{ "default:steel_ingot", "", "default:steel_ingot" },
+		{ "default:steel_ingot", "", "default:steel_ingot" },
+		{ "", "default:sword_steel", "" }
+	}
+})
+
+minetest.register_node("hyruletools:vase", {
+	description = "Pot",
+	tiles = {
+		"hyruletools_vase_base.png",
+		"hyruletools_vase_base.png",
+		"hyruletools_vase.png",
+		"hyruletools_vase.png",
+		"hyruletools_vase.png",
+		"hyruletools_vase.png"
+	},
+	drawtype = "nodebox",
+	sounds = default.node_sound_glass_defaults(),
+	paramtype = "light",
+	groups = {oddly_breakable_by_hand=1, falling_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.25}, -- NodeBox1
+			{-0.25, -0.5, -0.25, 0.25, 0.375, 0.3125}, -- NodeBox2
+			{-0.3125, -0.4375, -0.3125, 0.3125, 0.3125, 0.375}, -- NodeBox3
+			{-0.375, -0.375, -0.375, 0.375, 0.25, 0.4375}, -- NodeBox4
+			{-0.4375, -0.3125, -0.4375, 0.4375, 0.1875, 0.5}, -- NodeBox5
+			{-0.3125, 0.375, -0.3125, 0.3125, 0.5, 0.375}, -- NodeBox6
+		}
+	},
+	drop = {
+		items = {
+			{items = {"hyruletools:green_rupee"}, rarity = 1},
+		}
+	},
+})
+
+minetest.register_craft( {
+	output = "hyruletools:vase 5",
+	recipe = {
+		{ "default:clay_lump", "", "default:clay_lump" },
+		{ "default:clay_lump", "", "default:clay_lump" },
+		{ "", "default:clay_lump", "" }
+	}
+})
+
+minetest.register_tool("hyruletools:axe_obsidian", {
+	description = "Obsidian Axe",
+	inventory_image = "hyruletools_tool_obaxe.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=40, maxlevel=2},
+		},
+		damage_groups = {fleshy=4},
+	},
+})
+
 minetest.register_craftitem("hyruletools:magic_powder", {
 	description = "magicpowder",
 	inventory_image = "hyruletools_powder.png",
@@ -22,6 +180,34 @@ minetest.register_craftitem("hyruletools:magic_powder", {
 			"hyruletools_powder4.png" --texture
 		)
 	end,
+})
+
+minetest.register_node("hyruletools:rock", {
+	description = "Rock",
+	tiles = {
+		"default_stone.png",
+		"default_stone.png",
+		"default_stone.png",
+		"default_stone.png",
+		"default_stone.png",
+		"default_stone.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=1, falling_node=1},
+	drop = "hyruletools:green_rupee",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.3125, -0.4375, 0.3125}, -- NodeBox1
+			{-0.4375, -0.4375, -0.3125, 0.375, -0.125, 0.25}, -- NodeBox2
+			{-0.3125, -0.125, -0.375, 0.25, -0.0625, 0.3125}, -- NodeBox3
+			{-0.3125, -0.4375, -0.4375, 0.25, -0.125, 0.375}, -- NodeBox4
+			{-0.375, -0.4375, -0.375, 0.3125, -0.125, 0.3125}, -- NodeBox5
+			{-0.25, -0.0625, -0.3125, 0.1875, 0, 0.25}, -- NodeBox6
+			{-0.375, -0.125, -0.25, 0.3125, -0.0625, 0.1875}, -- NodeBox7
+		}
+	}
 })
 
 minetest.register_craft({
@@ -74,8 +260,32 @@ minetest.register_craftitem("hyruletools:triforce", {
 	end
 })
 
+minetest.register_craftitem("hyruletools:red_rupee", {
+	description = "Red Rupee",
+	inventory_image = "hyruletools_red_rupee.png",
+	stack_max = 1000,
+})
+
+minetest.register_craftitem("hyruletools:green_rupee", {
+	description = "Green Rupee",
+	inventory_image = "hyruletools_green_rupee.png",
+	stack_max = 1000,
+})
+
+minetest.register_craftitem("hyruletools:blue_rupee", {
+	description = "Blue Rupee",
+	inventory_image = "hyruletools_blue_rupee.png",
+	stack_max = 1000,
+})
+
+minetest.register_craftitem("hyruletools:nyan_rupee", {
+	description = "Nyan Rupee",
+	inventory_image = "hyruletools_nyan_rupee.png",
+	stack_max = 1000,
+})
+
 minetest.register_craftitem("hyruletools:triforce_shard", {
-	description = "triforce_shard",
+	description = "Triforce Shard",
 	inventory_image = "hyruletools_triforce_shard.png"
 })
 
@@ -1034,19 +1244,7 @@ minetest.register_craftitem("hyruletools:seed_pegasus", {
 	inventory_image = "hyruletools_seedbag_green2.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
-		local breath_change = user:set_breath(5)
-		local spd = user:set_physics_override({
-
-		speed = 3, -- multiplier to default value
-		jump = 1.0, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
-		local reset = minetest.after(5, function()
-			user:set_breath(11)
-		end)
+		playereffects.apply_effect_type("potion_speed_lv1", 5, user)
 		item:take_item()
 	return item
 	end
@@ -1057,28 +1255,7 @@ minetest.register_craftitem("hyruletools:rocfeather", {
 	inventory_image = "hyruletools_feather.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
-		local breath_change = user:set_breath(5)
-		local spd = user:set_physics_override({
-
-		speed = 1.0, -- multiplier to default value
-		jump = 1, -- multiplier to default value
-		gravity = 0.2, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
-		local reset = minetest.after(6, function()
-			user:set_breath(11)
-			local spd = user:set_physics_override({
-
-		speed = 1.0, -- multiplier to default value
-		jump = 1.0, -- multiplier to default value
-		gravity = 1, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
-		end)
+		playereffects.apply_effect_type("potion_antigrav_lvx", 10, user)
 		item:take_item()
 	return item
 	end

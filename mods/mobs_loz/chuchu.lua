@@ -25,7 +25,7 @@ mobs:register_mob("mobs_loz:chuchu", {
 	drops = {
 		{name = "hyruletools:heart",
 		chance = 1, min = 3, max = 5},
-		{name = "maptools:silver_coin",
+		{name = "hyruletools:blue_rupee",
 		chance = 1, min = 1, max = 3},
 	},
 	water_damage = -1,
