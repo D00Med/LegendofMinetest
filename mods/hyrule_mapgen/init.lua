@@ -288,6 +288,19 @@ minetest.register_node("hyrule_mapgen:railblock", {
 	groups = {cracky=1,}
 })
 
+minetest.register_node("hyrule_mapgen:wallring", {
+	description = "Wall Ring",
+	tiles = {
+		"hyrule_mapgen_railblock.png",
+		"hyrule_mapgen_railblock.png",
+		"hyrule_mapgen_wallring.png",
+		"hyrule_mapgen_wallring.png",
+		"hyrule_mapgen_wallring.png",
+		"hyrule_mapgen_wallring.png",
+	},
+	groups = {cracky=1, hook=1}
+})
+
 
 minetest.register_node("hyrule_mapgen:lavabiome_dirt", {
 	description = "Burnt Dirt",

@@ -1841,79 +1841,175 @@ minetest.register_abm({
 	end
 })
 
--- minetest.register_entity("hyruletools:chain", {
-	-- textures = {"hyruletools_hook.png"},
-	-- velocity = 15,
-	-- acceleration = -5,
-	-- damage = 2,
-	-- collisionbox = {0, 0, 0, 0, 0, 0},
-	-- on_step = function(self, obj, pos, player)		
-		-- local remove = minetest.after(1, function() 
-		-- self.object:remove()
-		-- end)
-		-- local player = minetest.get_connected_players()
-		-- local inv = player.get_inventory
-		-- local pos = self.object:getpos()
-		-- local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)	
-			-- for k, obj in pairs(objs) do
-				-- if obj:get_luaentity() ~= nil then
-					-- if obj:get_luaentity().name ~= "hyruletools:chain" and obj:get_luaentity().name ~= "__builtin:item" then
-						-- obj:punch(self.object, 1.0, {
-							-- full_punch_interval=1.0,
-							-- damage_groups={fleshy=1},
-						-- }, nil)
-						-- self.object:remove()
-					-- end
-				-- end
+minetest.register_entity("hyruletools:chain", {
+	textures = {"hyruletools_hook.png"},
+	velocity = 15,
+	acceleration = -5,
+	damage = 2,
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_step = function(self)		
+		local remove_ent = minetest.after(1, function() 
+		self.object:remove()
+		end)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius(pos, 2)	
+			for k, obj in pairs(objs) do
+				if obj:get_luaentity() ~= nil then
+					if obj:get_luaentity().name ~= "hyruletools:chain" and obj:get_luaentity().name ~= "__builtin:item" then
+						obj:punch(self.object, 1.0, {
+							full_punch_interval=2.0,
+							damage_groups={fleshy=1},
+						}, nil)
+					end
+				end
 				
-				-- end
-			
-		-- local apos = self.object:getpos()
+				end
 		
-		-- local part = minetest.add_particlespawner(
-			-- 1, --amount
-			-- 0.3, --time
-			-- {x=apos.x, y=apos.y, z=apos.z}, --minpos
-			-- {x=apos.x, y=apos.y, z=apos.z}, --maxpos
-			-- {x=0, y=0, z=0}, --minvel
-			-- {x=0, y=0, z=0}, --maxvel
-			-- {x=0,y=0,z=0}, --minacc
-			-- {x=0,y=0,z=0}, --maxacc
-			-- 1, --minexptime
-			-- 1, --maxexptime
-			-- 1, --minsize
-			-- 1, --maxsize
-			-- false, --collisiondetection
-			-- "hyruletools_chain.png" --texture
-		-- )
-	-- end,
--- })
+		if minetest.get_item_group(minetest.get_node(pos).name, "hook") ~= 0  then 
+			if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == "air" then
+				self.launcher:setpos({x=pos.x+1, y=pos.y, z=pos.z})
+				self.object:remove()
+			elseif minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name == "air" then
+				self.launcher:setpos({x=pos.x-1, y=pos.y, z=pos.z})
+				self.object:remove()
+			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name == "air" then
+				self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z+1})
+				self.object:remove()
+			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name == "air" then
+				self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z-1})
+				self.object:remove()
+			end
+		end
+		
+		local part = minetest.add_particlespawner(
+			1, --amount
+			0.3, --time
+			{x=pos.x, y=pos.y, z=pos.z}, --minpos
+			{x=pos.x, y=pos.y, z=pos.z}, --maxpos
+			{x=0, y=0, z=0}, --minvel
+			{x=0, y=0, z=0}, --maxvel
+			{x=0,y=0,z=0}, --minacc
+			{x=0,y=0,z=0}, --maxacc
+			1, --minexptime
+			1, --maxexptime
+			1, --minsize
+			1, --maxsize
+			false, --collisiondetection
+			"hyruletools_chain.png" --texture
+		)
+	end,
+})
 
--- minetest.register_tool("hyruletools:hookshot", {
-	-- description = "hookshot",
-	-- inventory_image = "hyruletools_hookshot.png",
-	-- wield_scale = {x = 1.5, y = 1.5, z = 1},
-	-- tool_capabilities = {
-		-- full_punch_interval = 0.7,
-		-- max_drop_level=1,
-		-- groupcaps={
-			-- snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
-		-- },
-		-- damage_groups = {fleshy=1},
-	-- },
-	-- on_use = function(item, placer, pointed_thing)
-			-- local dir = placer:get_look_dir();
-			-- local playerpos = placer:getpos();
-			-- local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:chain")
-			-- local vec = {x=dir.x*10,y=dir.y*10,z=dir.z*10}
-			-- obj:setvelocity(vec)
-			-- local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
-			-- obj:setacceleration(acc)
-			-- return item
-	-- end,
--- })
+minetest.register_entity("hyruletools:chain_2", {
+	textures = {"hyruletools_hook_gold.png"},
+	velocity = 15,
+	acceleration = -5,
+	damage = 2,
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_step = function(self)		
+		local remove_ent = minetest.after(2, function() 
+		self.object:remove()
+		end)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius(pos, 2)	
+			for _, obj in pairs(objs) do
+				if obj:get_luaentity() ~= nil then
+					if obj:get_luaentity().name ~= "hyruletools:chain_2" and obj:get_luaentity().name ~= "__builtin:item" then
+						obj:punch(self.object, 1.0, {
+							full_punch_interval=2.0,
+							damage_groups={fleshy=2},
+						}, nil)
+					end
+				end
+				
+				end
+		
+		if minetest.get_item_group(minetest.get_node(pos).name, "hook") ~= 0 then 
+			if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == "air" then
+				self.launcher:setpos({x=pos.x+1, y=pos.y, z=pos.z})
+				self.object:remove()
+			elseif minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name == "air" then
+				self.launcher:setpos({x=pos.x-1, y=pos.y, z=pos.z})
+				self.object:remove()
+			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name == "air" then
+				self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z+1})
+				self.object:remove()
+			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name == "air" then
+				self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z-1})
+				self.object:remove()
+			end
+		end
+		
+		local part = minetest.add_particlespawner(
+			1, --amount
+			0.3, --time
+			{x=pos.x, y=pos.y, z=pos.z}, --minpos
+			{x=pos.x, y=pos.y, z=pos.z}, --maxpos
+			{x=0, y=0, z=0}, --minvel
+			{x=0, y=0, z=0}, --maxvel
+			{x=0,y=0,z=0}, --minacc
+			{x=0,y=0,z=0}, --maxacc
+			1, --minexptime
+			1, --maxexptime
+			1, --minsize
+			1, --maxsize
+			false, --collisiondetection
+			"hyruletools_chain.png" --texture
+		)
+	end,
+})
 
+minetest.register_tool("hyruletools:hookshot", {
+	description = "Clawshot",
+	inventory_image = "hyruletools_hookshot.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=1},
+	},
+	on_use = function(item, placer, pointed_thing)
+			local dir = placer:get_look_dir();
+			local playerpos = placer:getpos();
+			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:chain")
+			local vec = {x=dir.x*10,y=dir.y*10,z=dir.z*10}
+			obj:setvelocity(vec)
+			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
+			obj:setacceleration(acc)
+			local object = obj:get_luaentity()
+			object.launcher = placer
+			return item
+	end,
+})
 
+minetest.register_tool("hyruletools:hookshot_2", {
+	description = "Gold Clawshot",
+	inventory_image = "hyruletools_hookshot_gold.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=1},
+	},
+	on_use = function(item, placer, pointed_thing)
+			local dir = placer:get_look_dir();
+			local playerpos = placer:getpos();
+			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:chain_2")
+			local vec = {x=dir.x*12,y=dir.y*12,z=dir.z*12}
+			obj:setvelocity(vec)
+			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
+			obj:setacceleration(acc)
+			local object = obj:get_luaentity()
+			object.launcher = placer
+			return item
+	end,
+})
 
 
 
