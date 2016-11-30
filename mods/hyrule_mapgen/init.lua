@@ -5,6 +5,184 @@ if mg_name ~= "v6" then
 dofile(minetest.get_modpath("hyrule_mapgen").."/mapgen.lua")
 end
 
+--effects
+minetest.register_abm({
+	nodenames = {"flowers:flower_rose", "flowers:flower_tulip", "flowers:flower_dandelion_yellow", "flowers:flower_viola", "flowers:flower_dandelion_white", "flowers:flower_geranium"},
+	interval = 3.0, -- Run every 10 seconds
+	chance = 5, -- Select every 1 in 50 nodes
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		minetest.env:add_entity({x=pos.x,y=pos.y,z=pos.z}, "hyrule_mapgen:butterfly")
+	end
+})
+
+sound = false
+
+minetest.register_abm({
+	nodenames = {"default:water_flowing"},
+	interval = 1.0, -- Run every 10 seconds
+	chance = 1, -- Select every 1 in 50 nodes
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local above2 = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name
+		if above == "default:water_flowing" and below ~= "default:water_flowing" and above2 == "default:water_flowing" then
+		minetest.add_particlespawner({
+			amount = 9,
+			time = 1,
+			minpos = {x=pos.x-0.9, y=pos.y+0.3, z=pos.z-0.9},
+			maxpos = {x=pos.x+0.9, y=pos.y+0.9, z=pos.z+0.9},
+			minvel = {x=0, y=0.1, z=0},
+			maxvel = {x=0.1, y=0.3, z=0.1},
+			minacc = {x=0, y=0.1, z=0},
+			maxacc = {x=0.2, y=0.2, z=0.2},
+			minexptime = 0.5,
+			maxexptime = 1,
+			minsize = 8,
+			maxsize = 12,
+			collisiondetection = false,
+			vertical = false,
+			texture = "hyrule_mapgen_mist.png",
+		})
+		minetest.add_particlespawner({
+			amount = 9,
+			time = 1,
+			minpos = {x=pos.x-0.8, y=pos.y+0.7, z=pos.z-0.8},
+			maxpos = {x=pos.x+0.8, y=pos.y+0.8, z=pos.z+0.8},
+			minvel = {x=0, y=0.1, z=0},
+			maxvel = {x=0.1, y=0.3, z=0.1},
+			minacc = {x=0, y=0.5, z=0},
+			maxacc = {x=0.1, y=0.9, z=0.1},
+			minexptime = 0.2,
+			maxexptime = 0.3,
+			minsize = 7,
+			maxsize = 9,
+			collisiondetection = false,
+			vertical = false,
+			texture = "hyrule_mapgen_splash.png",
+		})
+		if not sound then
+		minetest.sound_play("waterfall", {
+			pos = pos,
+			gain = 1.0,
+			max_hear_distance = 3,
+		})
+		sound = true
+		minetest.after(12, function()
+			sound = false
+		end)
+		end
+		end
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"default:river_water_flowing"},
+	interval = 1.0, -- Run every 10 seconds
+	chance = 1, -- Select every 1 in 50 nodes
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local above2 = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name
+		if above == "default:river_water_flowing" and below ~= "default:river_water_flowing" and above2 == "default:river_water_flowing" then
+		minetest.add_particlespawner({
+			amount = 9,
+			time = 1,
+			minpos = {x=pos.x-0.9, y=pos.y+0.3, z=pos.z-0.9},
+			maxpos = {x=pos.x+0.9, y=pos.y+0.9, z=pos.z+0.9},
+			minvel = {x=0, y=0.1, z=0},
+			maxvel = {x=0.1, y=0.3, z=0.1},
+			minacc = {x=0, y=0.1, z=0},
+			maxacc = {x=0.2, y=0.2, z=0.2},
+			minexptime = 0.5,
+			maxexptime = 1,
+			minsize = 8,
+			maxsize = 12,
+			collisiondetection = false,
+			vertical = false,
+			texture = "hyrule_mapgen_mist.png",
+		})
+		minetest.add_particlespawner({
+			amount = 9,
+			time = 1,
+			minpos = {x=pos.x-0.8, y=pos.y+0.7, z=pos.z-0.8},
+			maxpos = {x=pos.x+0.8, y=pos.y+0.8, z=pos.z+0.8},
+			minvel = {x=0, y=0.1, z=0},
+			maxvel = {x=0.1, y=0.3, z=0.1},
+			minacc = {x=0, y=0.5, z=0},
+			maxacc = {x=0.1, y=0.9, z=0.1},
+			minexptime = 0.2,
+			maxexptime = 0.3,
+			minsize = 7,
+			maxsize = 9,
+			collisiondetection = false,
+			vertical = false,
+			texture = "hyrule_mapgen_splash.png",
+		})
+		if not sound then
+		minetest.sound_play("waterfall", {
+			pos = pos,
+			gain = 1.0,
+			max_hear_distance = 3,
+		})
+		sound = true
+		minetest.after(12, function()
+			sound = false
+		end)
+		end
+		end
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"fire:basic_flame"},
+	interval = 1.0, -- Run every 10 seconds
+	chance = 2, -- Select every 1 in 50 nodes
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local num = math.random(1,100)
+		minetest.add_particlespawner({
+			amount = 3,
+			time = 1,
+			minpos = {x=pos.x-0.3, y=pos.y+0.5, z=pos.z-0.3},
+			maxpos = {x=pos.x+0.3, y=pos.y+0.5, z=pos.z+0.3},
+			minvel = {x=0, y=0.3, z=0},
+			maxvel = {x=0, y=0.7, z=0},
+			minacc = {x=0, y=0.1, z=0},
+			maxacc = {x=0.1, y=0.2, z=0.1},
+			minexptime = 1,
+			maxexptime = 2,
+			minsize = 0.1,
+			maxsize = 0.5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "hyrule_mapgen_spark.png^[colorize:red:"..num,
+		})
+	end
+})
+
+
+--entities
+
+minetest.register_entity("hyrule_mapgen:butterfly", {
+	visual = "sprite",
+	physical = true,
+	textures = {"hyrule_mapgen_butterfly.png",},
+	visual_size = {x=0.2, y=0.2},
+	on_activate = function(self)
+		num = math.random(1,4)
+		self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
+		minetest.after(5, function()
+		self.object:remove()
+		end)
+	end,
+	on_step = function(self)
+		local pos = self.object:getpos()
+		local vec = self.object:getvelocity()
+		self.object:setvelocity({x=-math.sin(12*pos.y), y=math.cos(12*pos.x), z=-math.sin(12*pos.y)})
+		self.object:setacceleration({x=-math.sin(6*vec.y), y=math.cos(6*vec.x), z=-math.sin(6*vec.y)})
+	end,
+	collisionbox = {0,0,0,0,0.1,0},
+})
+
 --overrides
 
 minetest.override_item("default:grass_1", {
@@ -274,7 +452,7 @@ minetest.register_abm({
 			minsize = 3,
 			maxsize = 5,
 			collisiondetection = false,
-			texture = "hyrule_mapgen_spark.png"
+			texture = "hyrule_mapgen_fire.png"
 		})
 	end
 })

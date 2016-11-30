@@ -25,10 +25,13 @@ local chest_stuff = {
 	{name="hyruletools:pendant2", max = 1},
 	{name="hyruletools:rocfeather", max = 10},
 	{name="default:diamond", max = 5},
-	{name="maptools:nyan_coin", max = 5},
+	{name="hyruletools:nyan_rupee", max = 5},
 	{name="twilight:crystal", max = 1},
-	{name="hyruletools:triforce_shard", max = 1},
 	{name="hyruletools:steel_boomerang", max = 1},
+	{name="hyruletools:hookshot", max = 1},
+	{name="binoculars:binoculars", max = 1},
+	{name="hyruletools:classic_sword", max = 1},
+	{name="hyruletools:hookshot_gold", max = 1},
 	{name="default:ice", max = 3}
 }
 
@@ -43,9 +46,6 @@ local function fill_chest(pos)
 			local meta = minetest.get_meta(pos)
 			local inv = meta:get_inventory()
 			inv:set_size("main", 8*4)
-			if math.random(1, 10) < 7 then
-				return
-			end
 			for i=1,3,1 do
 				local stuff = chest_stuff[math.random(1, #chest_stuff)]
 				local stack = ItemStack({name = stuff.name, count = math.random(1, stuff.max)})
