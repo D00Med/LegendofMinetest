@@ -180,6 +180,7 @@ minetest.register_node("hyruletools:pot", {
 	},
 	drawtype = "nodebox",
 	sounds = default.node_sound_glass_defaults(),
+	drop = "",
 	paramtype = "light",
 	groups = {oddly_breakable_by_hand=1, falling_node=1},
 	node_box = {
@@ -205,6 +206,9 @@ minetest.register_node("hyruletools:pot", {
 		if num == 5 then
 		minetest.env:add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:green_rupee")
 		end
+		if math.random(1,10) == 5 then
+		minetest.env:add_entity(pos, "mobs_fairy:fairy")
+		end
 	end,
 })
 
@@ -220,6 +224,7 @@ minetest.register_node("hyruletools:pot2", {
 	},
 	drawtype = "nodebox",
 	sounds = default.node_sound_glass_defaults(),
+	drop = "",
 	paramtype = "light",
 	groups = {oddly_breakable_by_hand=1, falling_node=1},
 	node_box = {
@@ -244,6 +249,9 @@ minetest.register_node("hyruletools:pot2", {
 		local num = math.random(3,5)
 		if num == 5 then
 		minetest.env:add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:green_rupee")
+		end
+		if math.random(1,10) == 5 then
+		minetest.env:add_entity(pos, "mobs_fairy:fairy")
 		end
 	end,
 })
@@ -1865,7 +1873,7 @@ minetest.register_entity("hyruletools:chain", {
 				
 				end
 		
-		if minetest.get_item_group(minetest.get_node(pos).name, "hook") ~= 0  then 
+		if minetest.get_item_group(minetest.get_node(pos).name, "hook") ~= 0 or minetest.get_item_group(minetest.get_node(pos).name, "choppy") ~= 0 then 
 			if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == "air" then
 				self.launcher:setpos({x=pos.x+1, y=pos.y, z=pos.z})
 				self.object:remove()
@@ -1924,7 +1932,7 @@ minetest.register_entity("hyruletools:chain_2", {
 				
 				end
 		
-		if minetest.get_item_group(minetest.get_node(pos).name, "hook") ~= 0 then 
+		if minetest.get_item_group(minetest.get_node(pos).name, "hook") ~= 0 or minetest.get_item_group(minetest.get_node(pos).name, "choppy") ~= 0 then 
 			if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == "air" then
 				self.launcher:setpos({x=pos.x+1, y=pos.y, z=pos.z})
 				self.object:remove()

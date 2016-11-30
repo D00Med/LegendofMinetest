@@ -1,21 +1,9 @@
 
 if mobs.mod and mobs.mod == "redo" then
---change skin texture to l_skins for differrent colours
--- local variables
-	local l_skins = {
-		{"fairy2.png"},
-		{"fairy2.png^[colorize:lime:190"},
-		{"fairy2.png^[colorize:purple:190"},
-		{"fairy2.png^[colorize:pink:190"},
-		{"fairy2.png^[colorize:orange:190"},
-		{"fairy2.png^[colorize:white:190"},
-		{"fairy2.png^[colorize:yellow:190"}
-	}
 	
 	mobs:register_mob("mobs_fairy:fairy", {
-		type = "monster",
-		passive = false,
-		light_source = 30,
+		type = "animal",
+		passive = true,
 		damage = -1,
 		reach = 1,
 		attack_type = "dogfight",
@@ -26,7 +14,10 @@ if mobs.mod and mobs.mod == "redo" then
 		visual = "mesh",
 		mesh = "fairy2.b3d",
 		textures = {
-		{"fairy2.png"}
+		{"fairy.png"},
+		{"fairy2.png"},
+		{"fairy3.png"},
+		{"fairy4.png"},
 		},
 		rotate = 0,
 		walk_velocity = 2,
@@ -51,6 +42,17 @@ if mobs.mod and mobs.mod == "redo" then
 			false, --collisiondetection
 			"mobs_fairy_spark.png" --texture
 		)
+		
+		local objs = minetest.env:get_objects_inside_radius(pos, 1.5) 
+		for _, obj in pairs(objs) do
+			if obj:is_player() == true then
+				local player = obj:get_luaentity()
+				local hp = obj:get_hp()
+				obj:set_hp(hp+10)
+				self.object:remove()
+			end
+		end
+		
 		end,
 		sounds = {
 			random = "mobs_fairy",

@@ -366,6 +366,75 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:bridge", {
+	description = "Wooden Bridge",
+	tiles = {
+		"hyrule_mapgen_bridge.png",
+		"hyrule_mapgen_bridge.png",
+		"hyrule_mapgen_bridge_side.png",
+		"hyrule_mapgen_bridge_side.png",
+		"hyrule_mapgen_bridge.png",
+		"hyrule_mapgen_bridge.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.4375, 0.5, -0.125, -0.1875}, -- NodeBox1
+			{-0.5, -0.5, 0.1875, 0.5, -0.125, 0.4375}, -- NodeBox2
+			{-0.5, -0.5, -0.125, 0.5, -0.125, 0.125}, -- NodeBox3
+			{-0.5, -0.4375, -0.5, 0.5, -0.1875, 0.5}, -- NodeBox4
+		}
+	},
+	groups = {choppy=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:bridge2", {
+	description = "Subrosian Bridge",
+	tiles = {
+		"hyrule_mapgen_bridge2.png",
+		"hyrule_mapgen_bridge2.png",
+		"hyrule_mapgen_bridge_side2.png",
+		"hyrule_mapgen_bridge_side2.png",
+		"hyrule_mapgen_bridge2.png",
+		"hyrule_mapgen_bridge2.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.4375, 0.5, -0.125, -0.1875}, -- NodeBox1
+			{-0.5, -0.5, 0.1875, 0.5, -0.125, 0.4375}, -- NodeBox2
+			{-0.5, -0.5, -0.125, 0.5, -0.125, 0.125}, -- NodeBox3
+			{-0.5, -0.4375, -0.5, 0.5, -0.1875, 0.5}, -- NodeBox4
+		}
+	},
+	groups = {choppy=2, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:swamp_flower", {
+	description = "Swamp Flower",
+	drawtype = "signlike",
+	visual_scale = 3.0,
+	tiles = {"hyrule_mapgen_swampflower.png"},
+	inventory_image = "hyrule_mapgen_swampflower.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	sunlight_propagates = false,	
+	light_source = 50,
+	walkable = false,
+	is_ground_content = true,
+	selection_box = {
+		type = "wallmounted",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
+	},
+	groups = {cracky=3,dig_immediate=3},
+})
+
 minetest.register_node("hyrule_mapgen:healwater_src", {
 	description = "Healing Water Source",
 	drawtype = "liquid",
