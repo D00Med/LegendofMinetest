@@ -532,7 +532,7 @@ function tnt.register_tnt(def)
 
 	minetest.register_node(":" .. name, {
 		description = def.description,
-		drawtype = "mesh",
+		drawtype = def.drawtype,
 		mesh = def.mesh,
 		tiles = def.tiles,
 		paramtype = "light",
@@ -546,6 +546,8 @@ function tnt.register_tnt(def)
 				minetest.set_node(pos, {name = name .. "_burning"})
 			end
 		end,
+		selection_box = def.selection_box,
+		collision_box = def.selection_box,
 		on_blast = function(pos, intensity)
 			minetest.after(0.1, function()
 				tnt.boom(pos, def)
@@ -561,7 +563,7 @@ function tnt.register_tnt(def)
 	})
 
 	minetest.register_node(":" .. name .. "_burning", {
-		drawtype = "mesh",
+		drawtype = def.drawtype,
 		mesh = def.mesh,
 		tiles = def.tiles,
 		light_source = 5,
@@ -614,9 +616,13 @@ tnt.register_tnt({
 	tiles = {
 		"hyruletools_bomb.png",
 	},
-	collisionbox = {
+	collision_box = {
 	type = "fixed",
-	fixed = { -0.2, -0.2, -0.2, 0, 0, 0 }
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
+	},
+	selection_box = {
+	type = "fixed",
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
 	},
 	radius = radius,
 })

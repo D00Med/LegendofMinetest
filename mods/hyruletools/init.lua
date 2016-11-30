@@ -75,6 +75,72 @@ playereffects.register_effect_type("potion_antigrav_lvx", "Light weight", nil, {
 	false
 )
 
+--shields
+
+
+
+minetest.register_globalstep(function()
+	for _, player in ipairs(minetest.get_connected_players()) do
+		local item = player:get_wielded_item():get_name()
+		if item == "shields:shield_steel" and fr2 == nil or item == "shields:shield_admin" and fr2 == nil or item == "shields:shield_bronze" and fr2 == nil then
+			local timeoday = minetest.get_timeofday()
+			if timeoday >= 0.25 and timeoday <= 0.75 then
+			fr2 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 15,y = 15},
+			text = "hyruletools_shield_back.png"
+			})
+			else
+			fr2 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 15,y = 15},
+			text = "hyruletools_shield_back.png^[colorize:black:200"
+			})
+			end
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor+10})
+		elseif item ~= "shields:shield_steel" and item ~= "shields:shield_admin" and item ~= "shields:shield_bronze" then
+		if fr2 ~= nil then
+		player:hud_remove(fr2)
+		fr2 = nil
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor-10})
+		end
+		end
+		
+		if item == "shields:shield_cactus" and fr1 == nil or item == "shields:shield_cactus_enhanced" and fr1 == nil or item == "shields:shield_wood" and fr1 == nil or item == "shields:shield_wood_enhanced" and fr1 == nil then
+			local timeoday = minetest.get_timeofday()
+			if timeoday >= 0.25 and timeoday <= 0.75 then
+			fr1 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 15,y = 15},
+			text = "hyruletools_shield_back_wood.png"
+			})
+			else
+			fr1 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 15,y = 15},
+			text = "hyruletools_shield_back_wood.png^[colorize:black:200"
+			})
+			end
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor+5})
+		elseif item ~= "shields:shield_wood" and item ~= "shields:shield_cactus" and item ~= "shields:shield_wood_enhanced" and item ~= "shields:shield_cactus_enhanced" then
+		if fr1 ~= nil then
+		player:hud_remove(fr1)
+		fr1 = nil
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor-10})
+		end
+		end
+	end
+end)
+
+
 --tools
 
 minetest.register_node("hyruletools:shield", {
@@ -102,10 +168,10 @@ minetest.register_craft( {
 	}
 })
 
-minetest.register_node("hyruletools:vase", {
+minetest.register_node("hyruletools:pot", {
 	description = "Pot",
 	tiles = {
-		"hyruletools_vase_base.png",
+		"hyruletools_vase_top.png",
 		"hyruletools_vase_base.png",
 		"hyruletools_vase.png",
 		"hyruletools_vase.png",
@@ -119,26 +185,83 @@ minetest.register_node("hyruletools:vase", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.25}, -- NodeBox1
-			{-0.25, -0.5, -0.25, 0.25, 0.375, 0.3125}, -- NodeBox2
-			{-0.3125, -0.4375, -0.3125, 0.3125, 0.3125, 0.375}, -- NodeBox3
-			{-0.375, -0.375, -0.375, 0.375, 0.25, 0.4375}, -- NodeBox4
-			{-0.4375, -0.3125, -0.4375, 0.4375, 0.1875, 0.5}, -- NodeBox5
-			{-0.3125, 0.375, -0.3125, 0.3125, 0.5, 0.375}, -- NodeBox6
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.4375, -0.4375, -0.375, 0.4375, 0, 0.375}, -- NodeBox2
+			{-0.375, -0.4375, -0.4375, 0.375, 0, 0.4375}, -- NodeBox3
+			{-0.375, -0.0625, -0.3125, 0.375, 0.125, 0.3125}, -- NodeBox4
+			{-0.3125, 0, -0.375, 0.3125, 0.125, 0.375}, -- NodeBox5
+			{-0.25, 0.125, -0.25, 0.25, 0.25, -0.125}, -- NodeBox6
+			{-0.25, 0.125, 0.125, 0.25, 0.25, 0.25}, -- NodeBox7
+			{0.125, 0.125, -0.25, 0.25, 0.25, 0.25}, -- NodeBox8
+			{-0.25, 0.125, -0.25, -0.125, 0.25, 0.25}, -- NodeBox9
+			{-0.3125, 0.25, 0.25, 0.3125, 0.3125, 0.3125}, -- NodeBox10
+			{-0.3125, 0.25, -0.3125, 0.3125, 0.3125, -0.25}, -- NodeBox11
+			{0.25, 0.25, -0.3125, 0.3125, 0.3125, 0.3125}, -- NodeBox12
+			{-0.3125, 0.25, -0.3125, -0.25, 0.3125, 0.3125}, -- NodeBox13
 		}
 	},
-	drop = {
-		items = {
-			{items = {"hyruletools:green_rupee"}, rarity = 1},
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:green_rupee")
+		end
+	end,
+})
+
+minetest.register_node("hyruletools:pot2", {
+	description = "Blue Pot",
+	tiles = {
+		"hyruletools_vase_top2.png",
+		"hyruletools_vase_base2.png",
+		"hyruletools_vase2.png",
+		"hyruletools_vase2.png",
+		"hyruletools_vase2.png",
+		"hyruletools_vase2.png"
+	},
+	drawtype = "nodebox",
+	sounds = default.node_sound_glass_defaults(),
+	paramtype = "light",
+	groups = {oddly_breakable_by_hand=1, falling_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.4375, -0.4375, -0.375, 0.4375, 0, 0.375}, -- NodeBox2
+			{-0.375, -0.4375, -0.4375, 0.375, 0, 0.4375}, -- NodeBox3
+			{-0.375, -0.0625, -0.3125, 0.375, 0.125, 0.3125}, -- NodeBox4
+			{-0.3125, 0, -0.375, 0.3125, 0.125, 0.375}, -- NodeBox5
+			{-0.25, 0.125, -0.25, 0.25, 0.25, -0.125}, -- NodeBox6
+			{-0.25, 0.125, 0.125, 0.25, 0.25, 0.25}, -- NodeBox7
+			{0.125, 0.125, -0.25, 0.25, 0.25, 0.25}, -- NodeBox8
+			{-0.25, 0.125, -0.25, -0.125, 0.25, 0.25}, -- NodeBox9
+			{-0.3125, 0.25, 0.25, 0.3125, 0.3125, 0.3125}, -- NodeBox10
+			{-0.3125, 0.25, -0.3125, 0.3125, 0.3125, -0.25}, -- NodeBox11
+			{0.25, 0.25, -0.3125, 0.3125, 0.3125, 0.3125}, -- NodeBox12
+			{-0.3125, 0.25, -0.3125, -0.25, 0.3125, 0.3125}, -- NodeBox13
 		}
 	},
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:green_rupee")
+		end
+	end,
 })
 
 minetest.register_craft( {
 	output = "hyruletools:vase 5",
 	recipe = {
 		{ "default:clay_lump", "", "default:clay_lump" },
+		{ "default:clay_lump", "dye:brown", "default:clay_lump" },
+		{ "", "default:clay_lump", "" }
+	}
+})
+
+minetest.register_craft( {
+	output = "hyruletools:vase 5",
+	recipe = {
 		{ "default:clay_lump", "", "default:clay_lump" },
+		{ "default:clay_lump", "dye:cyan", "default:clay_lump" },
 		{ "", "default:clay_lump", "" }
 	}
 })
@@ -1135,6 +1258,62 @@ minetest.register_tool("hyruletools:sword_light", {
 	end,
 })
 
+minetest.register_entity("hyruletools:swdspark_classic", {
+	visual = "mesh",
+	mesh = "flatplane.b3d",
+	textures = {"hyruletools_classicsword.png"},
+	visual_size = {x=1.5, y=1.5},
+	physical = true,
+	velocity = 15,
+	damage = 2,
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_step = function(self, obj, pos)		
+		local remove = minetest.after(2, function() 
+		self.object:remove()
+		end)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)	
+			for k, obj in pairs(objs) do
+				if obj:get_luaentity() ~= nil then
+					if obj:get_luaentity().name ~= "hyruletools:swdspark_classic" and obj:get_luaentity().name ~= "__builtin:item" then
+						obj:punch(self.object, 1.0, {
+							full_punch_interval=1.0,
+							damage_groups={fleshy=2},
+						}, nil)
+					self.object:remove()
+					end
+				end
+			end
+		if minetest.get_node(pos).name ~= "air" then
+		self.object:setvelocity({x=0, y=0, z=0})
+		end
+	end,
+})
+
+--classic sword, an edit of Mese sword(see liscence for default)
+minetest.register_tool("hyruletools:classic_sword", {
+	description = "Classic Sword",
+	inventory_image = "hyruletools_classicsword.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=4},
+	},
+	on_use = function(itemstack, placer, pointed_thing)
+			local dir = placer:get_look_dir();
+			local playerpos = placer:getpos();
+			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark_classic")
+			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
+			obj:setvelocity(vec)
+			obj:setyaw(placer:get_look_yaw() - math.pi / 2)
+		return itemstack
+	end,
+})
+
 minetest.register_craft({
 	output = 'hyruletools:sword',
 	recipe = {
@@ -1610,9 +1789,13 @@ tnt.register_tnt({
 	tiles = {
 		"hyruletools_bombflower.png",
 	},
-	collisionbox = {
+	collision_box = {
 	type = "fixed",
-	fixed = { -0.2, -0.2, -0.2, 0, 0, 0 }
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
+	},
+	selection_box = {
+	type = "fixed",
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
 	},
 	radius = 2,
 	--on_construct = function(pos, node)
