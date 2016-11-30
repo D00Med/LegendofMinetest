@@ -1576,7 +1576,7 @@ minetest.register_node("default:lava_flowing", {
 				type = "vertical_frames",
 				aspect_w = 16,
 				aspect_h = 16,
-				length = 3.3,
+				length = 0.4,
 			},
 		},
 		{

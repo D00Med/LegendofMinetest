@@ -1890,8 +1890,8 @@ minetest.register_entity("hyruletools:chain", {
 		end
 		
 		local part = minetest.add_particlespawner(
-			1, --amount
-			0.3, --time
+			5, --amount
+			0.2, --time
 			{x=pos.x, y=pos.y, z=pos.z}, --minpos
 			{x=pos.x, y=pos.y, z=pos.z}, --maxpos
 			{x=0, y=0, z=0}, --minvel
@@ -1949,8 +1949,8 @@ minetest.register_entity("hyruletools:chain_2", {
 		end
 		
 		local part = minetest.add_particlespawner(
-			1, --amount
-			0.3, --time
+			10, --amount
+			0.2, --time
 			{x=pos.x, y=pos.y, z=pos.z}, --minpos
 			{x=pos.x, y=pos.y, z=pos.z}, --maxpos
 			{x=0, y=0, z=0}, --minvel

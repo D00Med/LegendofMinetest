@@ -391,6 +391,14 @@ minetest.register_node("hyrule_mapgen:bridge", {
 	groups = {choppy=1, oddly_breakable_by_hand=1}
 })
 
+minetest.register_craft({
+	output = 'hyrule_mapgen:bridge',
+	recipe = {
+		{'', 'group:wood', ''},
+		{'group:wood', 'group:wood', 'group:wood'},
+	}
+})
+
 minetest.register_node("hyrule_mapgen:bridge2", {
 	description = "Subrosian Bridge",
 	tiles = {
@@ -535,6 +543,15 @@ minetest.register_node("hyrule_mapgen:railblock", {
 	groups = {cracky=1,}
 })
 
+minetest.register_craft({
+	output = 'hyrule_mapgen:railblock',
+	recipe = {
+		{'', 'default:steel_ingot', ''},
+		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
 minetest.register_node("hyrule_mapgen:wallring", {
 	description = "Wall Ring",
 	tiles = {
@@ -546,6 +563,13 @@ minetest.register_node("hyrule_mapgen:wallring", {
 		"hyrule_mapgen_wallring.png",
 	},
 	groups = {cracky=1, hook=1}
+})
+
+minetest.register_craft({
+	output = 'hyrule_mapgen:wallring',
+	recipe = {
+		{'hyrule_mapgen:railblock', 'default:steel_ingot'},
+	}
 })
 
 
