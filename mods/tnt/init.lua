@@ -533,12 +533,14 @@ function tnt.register_tnt(def)
 	minetest.register_node(":" .. name, {
 		description = def.description,
 		drawtype = "mesh",
-		mesh = "hyruletools_bomb.b3d",
-		tiles = {"hyruletools_bomb.png"},
+		mesh = def.mesh,
+		tiles = def.tiles,
 		paramtype = "light",
 		is_ground_content = false,
 		groups = {dig_immediate = 2, mesecon = 2, tnt = 1},
 		sounds = default.node_sound_wood_defaults(),
+		on_construct = def.on_construct or nil,
+		on_rightclick = def.on_rightclick or nil,
 		on_punch = function(pos, node, puncher)
 			if puncher:get_wielded_item():get_name() == "default:torch" then
 				minetest.set_node(pos, {name = name .. "_burning"})
@@ -560,10 +562,8 @@ function tnt.register_tnt(def)
 
 	minetest.register_node(":" .. name .. "_burning", {
 		drawtype = "mesh",
-		mesh = "hyruletools_bomb.b3d",
-		tiles = {
-			"hyruletools_bomb.png"
-		},
+		mesh = def.mesh,
+		tiles = def.tiles,
 		light_source = 5,
 		paramtype = "light",
 		drop = "",

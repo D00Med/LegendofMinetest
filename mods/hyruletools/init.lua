@@ -1331,11 +1331,17 @@ minetest.register_craft({
 })
 
 minetest.register_entity("hyruletools:boomer", {
-	textures = {"hyruletools_boomerp.png"},
+	visual = "mesh",
+	mesh = "boomerang.b3d",
+	textures = {"hyruletools_boomerang_tex.png"},
+	physical = true,
 	velocity = 15,
 	acceleration = -5,
 	damage = 2,
 	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_activate = function(self)
+		self.object:set_animation({x=2, y=19}, 30, 0)
+	end,
 	on_step = function(self, obj, pos)		
 		local remove = minetest.after(3, function() 
 		self.object:remove()
@@ -1375,7 +1381,7 @@ minetest.register_tool("hyruletools:boomerang", {
 			end)
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
-			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:boomer")
+			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:boomer")
 			local vec = {x=dir.x*8,y=dir.y*8,z=dir.z*8}
 			obj:setvelocity(vec)
 			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
@@ -1386,11 +1392,16 @@ minetest.register_tool("hyruletools:boomerang", {
 })
 
 minetest.register_entity("hyruletools:sboomer", {
-	textures = {"hyruletools_boomerps.png"},
+	visual = "mesh",
+	mesh = "boomerang.b3d",
+	textures = {"hyruletools_boomerang_tex2.png"},
 	velocity = 15,
 	acceleration = -5,
 	damage = 2,
 	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_activate = function(self)
+		self.object:set_animation({x=2, y=19}, 30, 0)
+	end,
 	on_step = function(self, obj, pos)		
 		local remove = minetest.after(4, function() 
 		self.object:remove()
@@ -1447,7 +1458,7 @@ minetest.register_tool("hyruletools:boomerang_steel", {
 			end)
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
-			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:sboomer")
+			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:sboomer")
 			local vec = {x=dir.x*10,y=dir.y*10,z=dir.z*10}
 			obj:setvelocity(vec)
 			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
@@ -1570,10 +1581,11 @@ minetest.register_node("hyruletools:bomb", {
 
 })
 
+--[[
 minetest.register_node("hyruletools:bomb_flower", {
 	description = "decorative bomb flower",
 	drawtype = "mesh",
-	mesh = "hyruletools_bombflower.b3d",
+	mesh = "hyruletools_bomb.b3d",
 	tiles = {
 		"hyruletools_bombflower.png",
 	},
@@ -1581,8 +1593,63 @@ minetest.register_node("hyruletools:bomb_flower", {
 	groups = {cracky=1},
 	collisionbox = {
 	type = "fixed",
-	fixed = { -0.2, -0.2, -0.2, 0, 0, 0 }
+	fixed = { -0.1, -0.1, -0.1, 0.1, 0.1, 0.1 }
+},
+	selectionbox = {
+	type = "fixed",
+	fixed = { -0.1, -0.1, -0.1, 0.1, 0.1, 0.1 }
 }
+})
+--]]
+
+tnt.register_tnt({
+	name = "hyruletools:bomb_flower",
+	description = "bombflower",
+	drawtype = "mesh",
+	mesh = "hyruletools_bomb.b3d",
+	tiles = {
+		"hyruletools_bombflower.png",
+	},
+	collisionbox = {
+	type = "fixed",
+	fixed = { -0.2, -0.2, -0.2, 0, 0, 0 }
+	},
+	radius = 2,
+	--on_construct = function(pos, node)
+		--minetest.env:set_node(pos, {name="hyruletools:bomb_flower_burning"})
+	--end,
+	on_rightclick = function(pos, node)
+		minetest.env:set_node(pos, {name="hyruletools:bomb_plant"})
+		minetest.env:add_item(pos, "tnt:tnt")
+	end,
+})
+
+minetest.register_node("hyruletools:bomb_plant", {
+	description = "decorative bomb flower",
+	drawtype = "mesh",
+	mesh = "hyruletools_bomb.b3d",
+	tiles = {
+		"hyruletools_bombflower_plant.png",
+	},
+	paramtype = "light",
+	groups = {cracky=1},
+	collision_box = {
+	type = "fixed",
+	fixed = { -0.5, -0.5, -0.5, 0.5, -0.5, 0.5 }
+},
+	selection_box = {
+	type = "fixed",
+	fixed = { -0.2, -0.5, -0.2, 0.2, -0.4, 0.2 }
+}
+})
+
+minetest.register_abm({
+	nodenames = {"hyruletools:bomb_plant"},
+	interval = 30,
+	chance = 5,
+	action = function(pos, node)
+		minetest.env:set_node(pos, {name="hyruletools:bomb_flower"})
+	end
 })
 
 -- minetest.register_entity("hyruletools:chain", {
