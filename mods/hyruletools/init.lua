@@ -1187,6 +1187,7 @@ minetest.register_tool("hyruletools:sword", {
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
+			itemstack:add_wear(1000)
 		return itemstack
 	end,
 })
@@ -1262,7 +1263,7 @@ minetest.register_entity("hyruletools:swdspark_classic", {
 	visual = "mesh",
 	mesh = "flatplane.b3d",
 	textures = {"hyruletools_classicsword.png"},
-	visual_size = {x=1.5, y=1.5},
+	visual_size = {x=2.5, y=2.5},
 	physical = true,
 	velocity = 15,
 	damage = 2,
@@ -1310,6 +1311,7 @@ minetest.register_tool("hyruletools:classic_sword", {
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
 			obj:setyaw(placer:get_look_yaw() - math.pi / 2)
+			itemstack:add_wear(1000)
 		return itemstack
 	end,
 })
@@ -1751,9 +1753,13 @@ minetest.register_node("hyruletools:bomb", {
 	tiles = {
 		"hyruletools_bomb.png",
 	},
-	collisionbox = {
+	collision_box = {
 	type = "fixed",
-	fixed = { -0.2, -0.2, -0.2, 0, 0, 0 }
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
+	},
+	selection_box = {
+	type = "fixed",
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
 	},
 	paramtype = "light",
 	groups = {cracky=1},

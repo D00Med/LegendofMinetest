@@ -84,6 +84,11 @@ default_diamond.png
   default_torch_on_floor_animated.png
  default_brick.png
 default_jungletree.png default_tree_top.png
+  default_water_source_animated.png
+  default_water_flowing_animated.png
+  default_sand.png
+  default_river_water_source_animated.png
+  default_river_water_flowing_animated.png
 
 
 Original textures:

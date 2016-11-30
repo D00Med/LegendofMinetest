@@ -36,8 +36,8 @@ if mobs.mod and mobs.mod == "redo" then
 		do_custom = function(self, pos)
 		local pos = self.object:getpos()
 		minetest.add_particlespawner(
-			2, --amount
-			1, --time
+			1, --amount
+			2, --time
 			{x=pos.x-0.1, y=pos.y, z=pos.z-0.1}, --minpos
 			{x=pos.x+0.1, y=pos.y, z=pos.z+0.1}, --maxpos
 			{x=-0, y=-0, z=-0}, --minvel

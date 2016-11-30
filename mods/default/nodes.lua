@@ -1388,7 +1388,7 @@ minetest.register_node("default:water_flowing", {
 				type = "vertical_frames",
 				aspect_w = 16,
 				aspect_h = 16,
-				length = 0.8,
+				length = 0.4,
 			},
 		},
 		{
@@ -1481,7 +1481,7 @@ minetest.register_node("default:river_water_flowing", {
 				type = "vertical_frames",
 				aspect_w = 16,
 				aspect_h = 16,
-				length = 0.8,
+				length = 0.3,
 			},
 		},
 		{
@@ -1965,43 +1965,58 @@ register_sign("steel", "Steel", {
 minetest.register_node("default:ladder_wood", {
 	description = "Wooden Ladder",
 	drawtype = "signlike",
-	tiles = {"default_ladder_wood.png"},
+	tiles = {"default_wood.png"},
 	inventory_image = "default_ladder_wood.png",
 	wield_image = "default_ladder_wood.png",
 	paramtype = "light",
-	paramtype2 = "wallmounted",
+	paramtype2 = "facedir",
 	sunlight_propagates = true,
-	walkable = false,
+	walkable = true,
 	climbable = true,
-	is_ground_content = false,
-	selection_box = {
-		type = "wallmounted",
-		--wall_top = = <default>
-		--wall_bottom = = <default>
-		--wall_side = = <default>
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.5, 0.3125, 0.375, 0.5, 0.4375, 0.5}, -- NodeBox3
+			{-0.5, 0.0625, 0.375, 0.5, 0.1875, 0.5}, -- NodeBox4
+			{-0.5, -0.1875, 0.375, 0.5, -0.0625, 0.5}, -- NodeBox5
+			{-0.5, -0.4375, 0.375, 0.5, -0.3125, 0.5}, -- NodeBox6
+		}
 	},
 	groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_wood_defaults(),
 })
 
+
+
 minetest.register_node("default:ladder_steel", {
 	description = "Steel Ladder",
 	drawtype = "signlike",
-	tiles = {"default_ladder_steel.png"},
+	tiles = {"default_steel_block.png"},
 	inventory_image = "default_ladder_steel.png",
 	wield_image = "default_ladder_steel.png",
 	paramtype = "light",
-	paramtype2 = "wallmounted",
+	paramtype2 = "facedir",
 	sunlight_propagates = true,
-	walkable = false,
+	walkable = true,
 	climbable = true,
 	is_ground_content = false,
-	selection_box = {
-		type = "wallmounted",
-		--wall_top = = <default>
-		--wall_bottom = = <default>
-		--wall_side = = <default>
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.5, 0.3125, 0.375, 0.5, 0.4375, 0.5}, -- NodeBox3
+			{-0.5, 0.0625, 0.375, 0.5, 0.1875, 0.5}, -- NodeBox4
+			{-0.5, -0.1875, 0.375, 0.5, -0.0625, 0.5}, -- NodeBox5
+			{-0.5, -0.4375, 0.375, 0.5, -0.3125, 0.5}, -- NodeBox6
+		}
 	},
 	groups = {cracky = 2},
 	sounds = default.node_sound_metal_defaults(),

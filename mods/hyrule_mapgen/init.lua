@@ -7,6 +7,76 @@ end
 
 --overrides
 
+minetest.override_item("default:grass_1", {
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item(pos, "hyruletools:green_rupee")
+		end
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
+	},
+})
+
+minetest.override_item("default:grass_2", {
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item(pos, "hyruletools:green_rupee")
+		end
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
+	},
+})
+
+minetest.override_item("default:grass_3", {
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item(pos, "hyruletools:green_rupee")
+		end
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
+	},
+})
+
+minetest.override_item("default:grass_4", {
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item(pos, "hyruletools:green_rupee")
+		end
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
+	},
+})
+
+minetest.override_item("default:grass_5", {
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item(pos, "hyruletools:green_rupee")
+		end
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
+	},
+})
+
+minetest.override_item("default:ice", {
+	drawtype = "glasslike",
+	use_texture_alpha = true,
+})
+
 minetest.override_item("default:furnace", {
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -210,12 +280,20 @@ minetest.register_abm({
 })
 
 
+minetest.register_node("hyrule_mapgen:railblock", {
+	description = "Railway Block",
+	tiles = {
+		"hyrule_mapgen_railblock.png"
+	},
+	groups = {cracky=1,}
+})
+
+
 minetest.register_node("hyrule_mapgen:lavabiome_dirt", {
 	description = "Burnt Dirt",
 	tiles = {
 		"hyrule_mapgen_dirt.png"
 	},
-	paramtype = "light",
 	groups = {crumbly=1, oddly_breakable_by_hand=1}
 })
 
