@@ -4,7 +4,7 @@
 --------------------------
 --------------------------
 --  
--- Models and textures by D00Med License of media (models, textures ) (CC BY-SA 3.0)  
+-- Models and textures by D00Med and toby109tt(aka tobyplowy) License of media (models, textures ) (CC BY-SA 3.0)  
 -- License of Api  WTFPL Simple Mobs by PilzAdam > Mob Redo by Ten1plus > Redo+ Mahmutelmas06
 -- Sounds from bigsoundbank and WTFPL ( confirmed by email )
 -- Code is a modified version of

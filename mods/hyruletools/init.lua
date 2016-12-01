@@ -84,7 +84,7 @@ minetest.register_globalstep(function()
 		local item = player:get_wielded_item():get_name()
 		if item == "shields:shield_steel" and fr2 == nil or item == "shields:shield_admin" and fr2 == nil or item == "shields:shield_bronze" and fr2 == nil then
 			local timeoday = minetest.get_timeofday()
-			if timeoday >= 0.25 and timeoday <= 0.75 then
+			if timeoday >= 0.35 and timeoday <= 0.85 then
 			fr2 = player:hud_add({
 			hud_elem_type = "image",
 			position = {x = 0.9, y = 0.9},
@@ -112,7 +112,7 @@ minetest.register_globalstep(function()
 		
 		if item == "shields:shield_cactus" and fr1 == nil or item == "shields:shield_cactus_enhanced" and fr1 == nil or item == "shields:shield_wood" and fr1 == nil or item == "shields:shield_wood_enhanced" and fr1 == nil then
 			local timeoday = minetest.get_timeofday()
-			if timeoday >= 0.25 and timeoday <= 0.75 then
+			if timeoday >= 0.35 and timeoday <= 0.85 then
 			fr1 = player:hud_add({
 			hud_elem_type = "image",
 			position = {x = 0.9, y = 0.9},
@@ -137,11 +137,48 @@ minetest.register_globalstep(function()
 			player:set_armor_groups({fleshy=player_armor-10})
 		end
 		end
+		
+		if item == "hyruletools:shield_classic" and fr0 == nil then
+			local timeoday = minetest.get_timeofday()
+			if timeoday >= 0.35 and timeoday <= 0.85 then
+			fr0 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 15,y = 15},
+			text = "hyruletools_shield_back_classic.png"
+			})
+			else
+			fr0 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 15,y = 15},
+			text = "hyruletools_shield_back_classic.png^[colorize:black:200"
+			})
+			end
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor+5})
+		elseif item ~= "hyruletools:shield_classic" then
+		if fr0 ~= nil then
+		player:hud_remove(fr0)
+		fr0 = nil
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor-10})
+		end
+		end
 	end
 end)
 
 
 --tools
+
+
+minetest.register_tool("hyruletools:shield_classic", {
+	description = "Classic Shield",
+	inventory_image = "shields_inv_shield_classic.png",
+	wield_image = "3d_armor_trans.png",
+	groups = {armor_shield=8, armor_heal=0, armor_use=1000},
+	wear = 0,
+})
 
 minetest.register_node("hyruletools:shield", {
 	description = "Wall Shield",
@@ -414,6 +451,20 @@ minetest.register_craftitem("hyruletools:nyan_rupee", {
 	inventory_image = "hyruletools_nyan_rupee.png",
 	stack_max = 1000,
 })
+
+minetest.register_craftitem("hyruletools:red_ore", {
+	description = "Red Ore",
+	inventory_image = "hyruletools_red_ore.png",
+	stack_max = 1000,
+})
+
+
+minetest.register_craftitem("hyruletools:blue_ore", {
+	description = "Blue Ore",
+	inventory_image = "hyruletools_blue_ore.png",
+	stack_max = 1000,
+})
+
 
 minetest.register_craftitem("hyruletools:triforce_shard", {
 	description = "Triforce Shard",

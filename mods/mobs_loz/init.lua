@@ -13,5 +13,6 @@ dofile(path.."/stalchid.lua") -- D00Med
 dofile(path.."/volvagia.lua") -- D00Med
 dofile(path.."/bongobongo.lua") -- D00Med
 dofile(path.."/ganon.lua") -- D00Med
-dofile(path.."/midna.lua") -- D00Med
+dofile(path.."/midna.lua")
+dofile(path.."/subrosian.lua") 
 end

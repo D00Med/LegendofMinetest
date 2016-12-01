@@ -10,6 +10,7 @@ minetest.register_tool("shields:shield_admin", {
 	wear = 0,
 })
 
+
 if ARMOR_MATERIALS.wood then
 	minetest.register_tool("shields:shield_wood", {
 		description = "Wooden Shield",

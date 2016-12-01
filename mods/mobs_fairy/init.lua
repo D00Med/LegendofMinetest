@@ -15,10 +15,8 @@ if mobs.mod and mobs.mod == "redo" then
 		mesh = "fairy2.b3d",
 		textures = {
 		{"fairy.png"},
-		{"fairy2.png"},
-		{"fairy3.png"},
-		{"fairy4.png"},
 		},
+		visual_size = {x=1.5, y=1.5},
 		rotate = 0,
 		walk_velocity = 2,
 		run_velocity = 3,
@@ -63,7 +61,7 @@ if mobs.mod and mobs.mod == "redo" then
 		light_damage = 0,
 		view_range = 2,
 		animation = {
-			speed_normal = 20,		speed_run = 30,
+			speed_normal = 40,		speed_run = 60,
 			stand_start = 1,		stand_end = 10,
 			walk_start = 1,		walk_end = 10,
 			run_start = 1,			run_end = 10,

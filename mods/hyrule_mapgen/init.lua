@@ -543,6 +543,15 @@ minetest.register_node("hyrule_mapgen:railblock", {
 	groups = {cracky=1,}
 })
 
+minetest.register_node("hyrule_mapgen:subrosian_stone", {
+	description = "Subrosian Stone",
+	tiles = {
+		"hyrule_mapgen_subrosianstone.png"
+	},
+	groups = {cracky=2,}
+})
+
+
 minetest.register_craft({
 	output = 'hyrule_mapgen:railblock',
 	recipe = {
@@ -646,7 +655,7 @@ minetest.register_node("hyrule_mapgen:statue", {
 		type = "fixed",
 		fixed = {
 			{-0.4375, -0.5, -0.1875, 0.4375, 0.4375, 0.25}, -- NodeBox1
-			{-0.375, 0.4375, -0.1875, 0.3125, 0.5, 0.25}, -- NodeBox2
+			{-0.375, 0.4375, -0.1875, 0.375, 0.5, 0.25}, -- NodeBox2
 		}
 	},
 	on_rightclick = function(pos, node, clicker, item, _)
