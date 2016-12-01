@@ -110,9 +110,9 @@ minetest.register_globalstep(function()
 		end
 		end
 		
-		if item == "shields:shield_cactus" and fr1 == nil or item == "shields:shield_cactus_enhanced" and fr1 == nil or item == "shields:shield_wood" and fr1 == nil or item == "shields:shield_wood_enhanced" and fr1 == nil then
+		if item == "shields:shield_cactus" and fr1 == nil or item == "shields:shield_cactus_enhanced" and fr1 == nil or item == "shields:shield_wood_enhanced" and fr1 == nil then
 			local timeoday = minetest.get_timeofday()
-			if timeoday >= 0.35 and timeoday <= 0.85 then
+			if timeoday >= 0.25 and timeoday <= 0.75 then
 			fr1 = player:hud_add({
 			hud_elem_type = "image",
 			position = {x = 0.9, y = 0.9},
@@ -129,18 +129,18 @@ minetest.register_globalstep(function()
 			end
 			local player_armor = player:get_armor_groups().fleshy
 			player:set_armor_groups({fleshy=player_armor+5})
-		elseif item ~= "shields:shield_wood" and item ~= "shields:shield_cactus" and item ~= "shields:shield_wood_enhanced" and item ~= "shields:shield_cactus_enhanced" then
+		elseif item ~= "shields:shield_cactus" and item ~= "shields:shield_wood_enhanced" and item ~= "shields:shield_cactus_enhanced" then
 		if fr1 ~= nil then
 		player:hud_remove(fr1)
 		fr1 = nil
 			local player_armor = player:get_armor_groups().fleshy
-			player:set_armor_groups({fleshy=player_armor-10})
+			player:set_armor_groups({fleshy=player_armor-5})
 		end
 		end
 		
 		if item == "hyruletools:shield_classic" and fr0 == nil then
 			local timeoday = minetest.get_timeofday()
-			if timeoday >= 0.35 and timeoday <= 0.85 then
+			if timeoday >= 0.25 and timeoday <= 0.75 then
 			fr0 = player:hud_add({
 			hud_elem_type = "image",
 			position = {x = 0.9, y = 0.9},
@@ -156,13 +156,41 @@ minetest.register_globalstep(function()
 			})
 			end
 			local player_armor = player:get_armor_groups().fleshy
-			player:set_armor_groups({fleshy=player_armor+5})
+			player:set_armor_groups({fleshy=player_armor+10})
 		elseif item ~= "hyruletools:shield_classic" then
 		if fr0 ~= nil then
 		player:hud_remove(fr0)
 		fr0 = nil
 			local player_armor = player:get_armor_groups().fleshy
 			player:set_armor_groups({fleshy=player_armor-10})
+		end
+		end
+		
+		if item == "shields:shield_wood" and fr4 == nil then
+			local timeoday = minetest.get_timeofday()
+			if timeoday >= 0.25 and timeoday <= 0.75 then
+			fr4 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 21,y = 21},
+			text = "hyruletools_shield_back_deku.png"
+			})
+			else
+			fr4 = player:hud_add({
+			hud_elem_type = "image",
+			position = {x = 0.9, y = 0.9},
+			scale = {x = 21,y = 21},
+			text = "hyruletools_shield_back_deku.png^[colorize:black:200"
+			})
+			end
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor+5})
+		elseif item ~= "shields:shield_wood" then
+		if fr4 ~= nil then
+		player:hud_remove(fr4)
+		fr4 = nil
+			local player_armor = player:get_armor_groups().fleshy
+			player:set_armor_groups({fleshy=player_armor-5})
 		end
 		end
 	end
