@@ -1,0 +1,45 @@
+
+
+mobs:register_mob("mobs_loz:peahat", {
+	type = "monster",
+	passive = false,
+	reach = 3,
+	damage = 2,
+	attack_type = "dogfight",
+	hp_min = 7,
+	hp_max = 12,
+	armor = 130,
+	collisionbox = {-0.3, 0, -0.3, 0.3, 0.5, 0.3},
+	visual = "mesh",
+	mesh = "peahat.b3d",
+	textures = {
+		{"mobs_peahat.png"},
+	},
+	makes_footstep_sound = false,
+	walk_velocity = 0,
+	run_velocity = 2,
+	jump = false,
+	stepheight = 1.5,
+	water_damage = 1,
+	lava_damage = 2,
+	light_damage = 0,
+	view_range = 10,
+	drops = {
+		{name = "hyruletools:blue_rupee",
+		chance = 5, min = 1, max = 3},
+	},
+	animation = {
+		speed_normal = 7,
+		speed_run = 12,
+		walk_start = 20,
+		walk_end = 40,
+		stand_start = 20,
+		stand_end = 40,
+		run_start = 6,
+		run_end = 14,
+	},
+})
+
+mobs:register_spawn("mobs_loz:peahat", {"default:dirt_with_dry_grass","default:dirt_with_grass3",}, 5, 0, 7000, 1, 31000)
+
+mobs:register_egg("mobs_loz:peahat", "Peahat", "default_dry_grass.png", 1)

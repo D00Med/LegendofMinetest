@@ -16,4 +16,5 @@ dofile(path.."/ganon.lua") -- D00Med
 dofile(path.."/midna.lua")
 dofile(path.."/subrosian.lua") 
 dofile(path.."/redead.lua") 
+dofile(path.."/peahat.lua") 
 end

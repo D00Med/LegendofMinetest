@@ -199,6 +199,16 @@ end)
 
 --tools
 
+minetest.register_tool("hyruletools:magglv_n", {
+	description = "Magnetic Glove (N)",
+	inventory_image = "hyruletools_magglv_n.png",
+	wield_image = "hyruletools_magglv_n.png",
+	on_use = function(itemstack, placer, pointed_thing)
+		local pos = user:getpos()
+		local dir = user:get_look_dir()
+		return itemstack
+	end,
+})
 
 minetest.register_tool("hyruletools:shield_classic", {
 	description = "Classic Shield",

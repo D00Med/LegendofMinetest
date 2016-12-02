@@ -2,7 +2,7 @@
 
 playereffects.register_effect_type("paralysed", "Paralysed", nil, {"speed"}, 
 	function(player)
-		player:set_physics_override(0,0,nil)
+		player:set_physics_override(0.001,0,nil)
 		physics_overriden = true
 	end,
 	
