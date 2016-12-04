@@ -1,4 +1,4 @@
-License of source code
+﻿License of source code
 ----------------------
 
 GNU Lesser General Public License, version 2.1
@@ -19,7 +19,7 @@ https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 Licenses of media (textures)
 ----------------------------
 --------------------------------------------
-(by Authors)D00Med (CC BY-SA 3.0):
+Created by toby109tt(aka tobyplowy) (CC BY-SA 3.0):
   bucket_*.png
 
 You are free to:
