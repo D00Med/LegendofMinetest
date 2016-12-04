@@ -199,13 +199,58 @@ end)
 
 --tools
 
+
+minetest.register_entity("hyruletools:block_dummy", {
+	visual = "mesh",
+	mesh = "node.b3d",
+	textures = {"hyrule_mapgen_magnblock.png"},
+	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+	visual_size = {x=3.5, y=3.5},
+	physical = true
+})
+
 minetest.register_tool("hyruletools:magglv_n", {
 	description = "Magnetic Glove (N)",
 	inventory_image = "hyruletools_magglv_n.png",
 	wield_image = "hyruletools_magglv_n.png",
 	on_use = function(itemstack, placer, pointed_thing)
-		local pos = user:getpos()
-		local dir = user:get_look_dir()
+		local pos = pointed_thing.under
+		local dir = placer:get_look_dir()
+		if minetest.get_item_group(minetest.get_node(pos).name, "magnetic") ~= 0 and minetest.get_node_or_nil(pos) ~= nil then
+		local node = minetest.get_node(pos).name
+		minetest.remove_node(pos)
+		local obj =  minetest.env:add_entity(pos, "hyruletools:block_dummy")
+		obj:setvelocity({x=-dir.x*8, y=-4, z=-dir.z*8})
+		obj:setacceleration({x=dir.x*2, y=-5, z=dir.z*2})
+		minetest.after(0.5, function()
+		local pos2 = obj:getpos()
+		obj:remove()
+		minetest.set_node(pos2, {name=node})
+		end)
+		end
+		return itemstack
+	end,
+})
+
+minetest.register_tool("hyruletools:magglv_s", {
+	description = "Magnetic Glove (S)",
+	inventory_image = "hyruletools_magglv_s.png",
+	wield_image = "hyruletools_magglv_s.png",
+	on_use = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.under
+		local dir = placer:get_look_dir()
+		if minetest.get_item_group(minetest.get_node(pos).name, "magnetic") ~= 0 and minetest.get_node_or_nil(pos) ~= nil then
+		local node = minetest.get_node(pos).name
+		minetest.remove_node(pos)
+		local obj =  minetest.env:add_entity(pos, "hyruletools:block_dummy")
+		obj:setvelocity({x=dir.x*8, y=-4, z=dir.z*8})
+		obj:setacceleration({x=-dir.x*2, y=-5, z=-dir.z*2})
+		minetest.after(0.5, function()
+		local pos2 = obj:getpos()
+		obj:remove()
+		minetest.set_node(pos2, {name=node})
+		end)
+		end
 		return itemstack
 	end,
 })
@@ -1937,6 +1982,7 @@ minetest.register_abm({
 		minetest.env:set_node(pos, {name="hyruletools:bomb_flower"})
 	end
 })
+
 
 minetest.register_entity("hyruletools:chain", {
 	textures = {"hyruletools_hook.png"},

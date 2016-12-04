@@ -23,3 +23,5 @@ License for Textures, Models and Sounds
 ---------------------------------------
 
 CC-BY-SA 3.0 UNPORTED. Created by DOOMED
+
+hyrule_mapgen_roots.png, hyrule_mapgen_statue_active.png, hyrule_mapgen_statue_front.png, hyrule_mapgen_statue_side.png   -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)

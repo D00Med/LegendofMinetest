@@ -694,10 +694,10 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
-	biomes = {"stone_grassland", "sandstone_grassland"},
+	biomes = {"stone_grassland", "sandstone_grassland", "wild_forest"},
 	decoration = "moreplants:tallgrass",
 	height = 1,
 })
@@ -730,7 +730,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2",
 	sidelen = 16,
 	fill_ratio = 0.01,
 	biomes = {"rainforest", "coniferous_forest"},
@@ -766,7 +766,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:water_source",
+	place_on = "default:dirt",
 	sidelen = 16,
 	fill_ratio = 0.005,
 	biomes = {"stone_grassland_ocean", "deciduous_forest_ocean"},
@@ -819,10 +819,10 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:snow_block",
+	place_on = "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.005,
-	biomes = {"tundra"},
+	biomes = {"wild_forest"},
 	decoration = "moreplants:moonflower",
 	height = 1,
 })
@@ -855,7 +855,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass2",
 	sidelen = 16,
 	fill_ratio = 0.02,
 	biomes = {"coniferous_forest"},
@@ -864,7 +864,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass2",
 	sidelen = 26,
 	fill_ratio = 0.02,
 	biomes = {"coniferous_forest"},
@@ -873,7 +873,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass2",
 	sidelen = 26,
 	fill_ratio = 0.02,
 	biomes = {"coniferous_forest"},
@@ -882,10 +882,10 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_dry_grass",
 	sidelen = 16,
 	fill_ratio = 0.01,
-	biomes = {"deciduous_forest"},
+	biomes = {"deciduous_forest", "magic_forest"},
 	decoration = "moreplants:mushroom",
 	height = 1,
 })

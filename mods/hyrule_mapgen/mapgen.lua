@@ -6,7 +6,7 @@ minetest.clear_registered_biomes()
 minetest.register_biome({
 	name = "lavabiome",
 	--node_dust = "",
-	node_top = "hyrule_mapgen:dirt",
+	node_top = "hyrule_mapgen:lavabiome_dirt",
 	depth_top = 2,
 	node_filler = "default:obsidian",
 	depth_filler = 0,
@@ -28,7 +28,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass2",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -46,7 +46,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass2",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -54,8 +54,8 @@ minetest.register_biome({
 	node_river_water = "default:water_source",
 	y_min = 9,
 	y_max = 100,
-	heat_point = 45,
-	humidity_point = 25,
+	heat_point = 35,
+	humidity_point = 15,
 })
 
 minetest.register_biome({
@@ -64,7 +64,7 @@ minetest.register_biome({
 	node_top = "default:sand",
 	depth_top = 1,
 	node_filler = "default:sand",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -82,7 +82,7 @@ minetest.register_biome({
 	node_top = "default:sand",
 	depth_top = 1,
 	node_filler = "default:sand",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -137,7 +137,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 0,
+	depth_filler = 3,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -173,7 +173,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 0,
+	depth_filler = 5,
 	node_stone = "default:sandstone",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -209,7 +209,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_dry_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -227,7 +227,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass3",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -245,7 +245,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 5,
+	depth_filler = 6,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -300,7 +300,7 @@ minetest.register_biome({
 	node_top = "default:desert_sand",
 	depth_top = 1,
 	node_filler = "default:desert_sand",
-	depth_filler = 1,
+	depth_filler = 2,
 	node_stone = "default:desert_stone",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -336,7 +336,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_dry_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 1,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -390,7 +390,7 @@ minetest.register_biome({
 	node_top = "default:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
-	depth_filler = 2,
+	depth_filler = 5,
 	--node_stone = "",
 	--node_water_top = "",
 	--depth_water_top = ,
@@ -596,7 +596,6 @@ minetest.register_decoration({
 	flags = "place_center_x, place_center_z",
 })
 
---rocks(req. rocks mod)
 minetest.register_decoration({
 	deco_type = "simple",
 	place_on = {"default:dirt_with_grass", "default:dirt", "default:sand", "default:desert_sand"},
@@ -610,7 +609,7 @@ minetest.register_decoration({
 			persist = 0.6
 		},
 	biomes = {"stone_grassland", "sandstone_grassland", "deciduous_forest", "desert"},
-	decoration = "rocks:rock",
+	decoration = "hyrule_mapgen:rock",
 	y_min = 15,
 	y_max = 40,
 })
@@ -618,7 +617,7 @@ minetest.register_decoration({
 --geysers(lavabiome)
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"hyrule_mapgen:dirt"},
+	place_on = {"hyrule_mapgen:lavabiome_dirt"},
 	sidelen = 80,
 	noise_params = {
 			offset = 0.004,
@@ -774,7 +773,7 @@ minetest.register_decoration({
 -- goron hut
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = {"hyrule_mapgen:dirt"},
+	place_on = {"hyrule_mapgen:lavabiome_dirt"},
 	sidelen = 16,
 	noise_params = {
 			offset = 0.004,
@@ -794,7 +793,7 @@ minetest.register_decoration({
 -- volcano
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = {"hyrule_mapgen:dirt"},
+	place_on = {"hyrule_mapgen:lavabiome_dirt"},
 	sidelen = 16,
 	noise_params = {
 		offset = 0.004,

@@ -540,7 +540,15 @@ minetest.register_node("hyrule_mapgen:railblock", {
 	tiles = {
 		"hyrule_mapgen_railblock.png"
 	},
-	groups = {cracky=1,}
+	groups = {cracky=1, magnetic=0}
+})
+
+minetest.register_node("hyrule_mapgen:magnblock", {
+	description = "Magnetic Block (almost unbreakeable)",
+	tiles = {
+		"hyrule_mapgen_magnblock.png"
+	},
+	groups = {cracky=7, magnetic=1}
 })
 
 minetest.register_node("hyrule_mapgen:subrosian_stone", {
@@ -636,6 +644,50 @@ minetest.register_node("hyrule_mapgen:dungeon_brick", {
 	groups = {cracky=3},
 })
 
+minetest.register_node("hyrule_mapgen:subrosian_tile", {
+	description = "Subrosian Tile",
+	tiles = {
+		"hyrule_mapgen_subrosiantile.png",
+	},
+	groups = {cracky=2},
+})
+
+minetest.register_node("hyrule_mapgen:subrosian_sand", {
+	description = "Subrosian Sand",
+	tiles = {
+		"hyrule_mapgen_subrosiansand.png",
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:roots", {
+	description = "Hanging Roots",
+	drawtype = "torchlike",
+	tiles = {"hyrule_mapgen_roots.png"},
+	inventory_image = "hyrule_mapgen_roots.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+tnt.register_tnt({
+	name = "hyrule_mapgen:powder_keg",
+	description = "Powder Keg",
+	tiles = {
+		"hyrule_mapgen_keg_top.png",
+		"hyrule_mapgen_keg_top.png",
+		"hyrule_mapgen_keg_side.png",
+		"hyrule_mapgen_keg_side.png",
+		"hyrule_mapgen_keg_front.png",
+		"hyrule_mapgen_keg_front.png",
+	},
+	radius = 3,
+})
 
 minetest.register_node("hyrule_mapgen:statue", {
 	description = "Gossip Stone",

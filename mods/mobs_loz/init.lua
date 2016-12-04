@@ -17,4 +17,6 @@ dofile(path.."/midna.lua")
 dofile(path.."/subrosian.lua") 
 dofile(path.."/redead.lua") 
 dofile(path.."/peahat.lua") 
+dofile(path.."/octorock.lua") 
+dofile(path.."/poe.lua") 
 end
