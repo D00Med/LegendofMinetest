@@ -1,6 +1,6 @@
 
 mobs:register_mob("mobs_loz:midna", {
-	type = "animal",
+	type = "npc",
 	passive = false,
 	attacks_monsters = true,
 	damage = 4,
@@ -9,6 +9,8 @@ mobs:register_mob("mobs_loz:midna", {
 	hp_min = 50,
 	hp_max = 85,
 	armor = 80,
+	owner = "",
+	order = "follow",
 	collisionbox = {-0.3, 0, -0.3, 0.3, 1.5, 0.3},
 	visual = "mesh",
 	mesh = "midna.b3d",
@@ -58,8 +60,18 @@ mobs:register_mob("mobs_loz:midna", {
 			"mobs_particle.png" --texture
 		)
 	end,
+	on_rightclick = function(self, clicker)
+		local player = clicker:get_player_name()
+			if self.order == "follow" then
+				self.order = "stand"
+				minetest.chat_send_player(player, "I will stay here")
+			else
+				self.order = "follow"
+				minetest.chat_send_player(player, "Midna is wandering")
+			end
+	end,
 })
 
-mobs:register_spawn("mobs_loz:midna", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 15000, 2, 31000)
+--mobs:register_spawn("mobs_loz:midna", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 15000, 2, 31000)
 
 mobs:register_egg("mobs_loz:midna", "Midna", "hyrulemapgen_glowstone.png", 1)

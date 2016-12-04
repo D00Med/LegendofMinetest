@@ -28,6 +28,13 @@ mobs:register_mob("mobs_loz:peahat", {
 		{name = "hyruletools:blue_rupee",
 		chance = 5, min = 1, max = 3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,3) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	animation = {
 		speed_normal = 7,
 		speed_run = 12,

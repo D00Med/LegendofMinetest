@@ -23,11 +23,16 @@ mobs:register_mob("mobs_loz:chuchu", {
 	run_velocity = 1,
 	jump = false,
 	drops = {
-		{name = "hyruletools:heart",
-		chance = 1, min = 3, max = 5},
 		{name = "hyruletools:blue_rupee",
-		chance = 1, min = 1, max = 3},
+		chance = 2, min = 1, max = 3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = -1,
 	lava_damage = 5,
 	light_damage = 0,

@@ -220,11 +220,18 @@ end)
 minetest.register_craftitem("twilight:crystal", {
 	description = "Shadow crystal",
 	inventory_image = "twilight_crystal.png",
-	on_use =  function(itemstack)
+	on_use =  function(itemstack, placer)
 	if twilight_mode == true then
 	twilight_mode = false
 	elseif twilight_mode == false then
 	twilight_mode = true
+	if not midna_spawned then
+	local pos = placer:getpos()
+	local obj = minetest.env:add_entity({x=pos.x, y=pos.y+2, z=pos.z}, "mobs_loz:midna")
+	local midna = obj:get_luaentity()
+	midna.owner = placer
+	midna_spawned = true
+	end
 	return itemstack
 	end
 	end

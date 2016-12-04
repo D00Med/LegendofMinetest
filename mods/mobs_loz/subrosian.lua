@@ -30,6 +30,12 @@ mobs:register_mob("mobs_loz:subrosian", {
 		{name = "hyruletools:red_ore",
 		chance = 1, min = 1, max = 2},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+	end,
 	water_damage = 1,
 	lava_damage = 0,
 	light_damage = 0,

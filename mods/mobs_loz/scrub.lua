@@ -37,9 +37,14 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	drops = {
 		{name = "hyruletools:blue_rupee",
 		chance = 5, min = 5, max = 3},
-		{name = "hyruletools:heart",
-		chance = 1, min = 1, max = 2},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 1,
 	lava_damage = 1,
 	light_damage = 0,

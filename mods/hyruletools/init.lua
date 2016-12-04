@@ -209,6 +209,30 @@ minetest.register_entity("hyruletools:block_dummy", {
 	physical = true
 })
 
+minetest.register_entity("hyruletools:heart_entity", {
+	visual = "mesh",
+	mesh = "heart.b3d",
+	textures = {"hyruletools_heart.png"},
+	collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
+	physical = true,
+	visual_size = {x=1.5, y=1.5},
+	on_activate = function(self)
+		self.object:set_animation({x=2, y=18}, 5, 0)
+		self.object:setacceleration({x=0, y=-4, z=0})
+	end,
+	on_step = function(self)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius(pos, 1)
+		for _, obj in pairs(objs) do
+			if obj:is_player() then
+				local hp = obj:get_hp()
+				obj:set_hp(hp+5)
+				self.object:remove()
+			end
+		end
+	end,
+})
+
 minetest.register_tool("hyruletools:magglv_n", {
 	description = "Magnetic Glove (N)",
 	inventory_image = "hyruletools_magglv_n.png",

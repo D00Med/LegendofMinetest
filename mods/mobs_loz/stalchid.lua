@@ -25,10 +25,11 @@ mobs:register_mob("mobs_loz:stalchid", {
 	walk_velocity = 0.8,
 	run_velocity = 1.4,
 	jump = true,
-	drops = {
-		{name = "hyruletools:heart",
-		chance = 1, min = 1, max = 1},
-	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 1,
 	lava_damage = 5,
 	light_damage = 0,

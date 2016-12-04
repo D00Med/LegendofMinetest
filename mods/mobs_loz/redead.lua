@@ -30,6 +30,13 @@ mobs:register_mob("mobs_loz:redead", {
 	textures = {
 		{"redead.png"},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,3) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	makes_footstep_sound = true,
 	walk_velocity = 0.2,
 	run_velocity = 0.3,

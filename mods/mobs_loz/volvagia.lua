@@ -37,6 +37,16 @@ mobs:register_mob("mobs_loz:volvagia", {
 	drops = {
 		{name = "hyruletools:firestone", chance = 1, min = 3, max = 5},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 0,
 	lava_damage = 5,
 	light_damage = 0,

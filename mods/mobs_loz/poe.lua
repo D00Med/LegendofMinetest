@@ -8,7 +8,7 @@ mobs:register_mob("mobs_loz:poe", {
 	hp_min = 12,
 	hp_max = 22,
 	armor = 110,
-	collisionbox = {-0.3, 0, -0.3, 0.3, 1, 0.3},
+	collisionbox = {-0.3, 0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "poe.b3d",
 	textures = {
@@ -29,6 +29,10 @@ mobs:register_mob("mobs_loz:poe", {
 		{name = "mobs_loz:soul",
 		chance = 5, min = 1, max = 1},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	animation = {
 	speed_normal = 12,
 	speed_run = 12,

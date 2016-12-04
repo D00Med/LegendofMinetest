@@ -66,6 +66,15 @@ mobs:register_mob("mobs_loz:bongobongo", {
 		{name = "hyruletools:waterstone",
 		chance = 1, min = 1, max = 1},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(2,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 0,
