@@ -13,6 +13,8 @@ mobs:register_mob("mobs_loz:poe", {
 	mesh = "poe.b3d",
 	textures = {
 		{"mobs_poe.png"},
+		{"mobs_poe2.png"},
+		{"mobs_poe3.png"},
 	},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = false,
@@ -27,6 +29,8 @@ mobs:register_mob("mobs_loz:poe", {
 	view_range = 10,
 	drops = {
 		{name = "mobs_loz:soul",
+		chance = 2, min = 1, max = 1},
+		{name = "hyruletools:lantern",
 		chance = 5, min = 1, max = 1},
 	},
 	on_die = function(self)

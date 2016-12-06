@@ -795,14 +795,7 @@ minetest.register_tool("hyruletools:lantern", {
 	end
 })
 
-minetest.register_craft({
-	output = "hyruletools:lantern",
-	recipe = {
-		{"", "default:glass", ""},
-		{"", "xdecor:candle", ""},
-		{"", "default:glass",  ""}
-	}
-})
+
 
 minetest.register_tool("hyruletools:mirror", {
 	description = "magic mirror (use at your own risk!)",

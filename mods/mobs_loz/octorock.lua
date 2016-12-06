@@ -15,6 +15,7 @@ mobs:register_mob("mobs_loz:octorock", {
 	mesh = "octorock.b3d",
 	textures = {
 		{"mobs_octorock.png"},
+		{"mobs_octorock2.png"},
 	},
 	makes_footstep_sound = true,
 	view_range = 10,

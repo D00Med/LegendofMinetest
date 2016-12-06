@@ -8,10 +8,10 @@ end
 --effects
 minetest.register_abm({
 	nodenames = {"flowers:flower_rose", "flowers:flower_tulip", "flowers:flower_dandelion_yellow", "flowers:flower_viola", "flowers:flower_dandelion_white", "flowers:flower_geranium"},
-	interval = 3.0, -- Run every 10 seconds
-	chance = 5, -- Select every 1 in 50 nodes
+	interval = 3.0,
+	chance = 5,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		minetest.env:add_entity({x=pos.x,y=pos.y,z=pos.z}, "hyrule_mapgen:butterfly")
+		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:butterfly")
 	end
 })
 
@@ -19,8 +19,8 @@ sound = false
 
 minetest.register_abm({
 	nodenames = {"default:water_flowing"},
-	interval = 1.0, -- Run every 10 seconds
-	chance = 1, -- Select every 1 in 50 nodes
+	interval = 1.0,
+	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
@@ -77,8 +77,8 @@ minetest.register_abm({
 
 minetest.register_abm({
 	nodenames = {"default:river_water_flowing"},
-	interval = 1.0, -- Run every 10 seconds
-	chance = 1, -- Select every 1 in 50 nodes
+	interval = 1.0,
+	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
@@ -134,9 +134,21 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	nodenames = {"hyrule_mapgen:deku_flower"},
+	interval = 1.0,
+	chance = 1,
+	action = function(pos, node)
+		local node_1 = minetest.get_node(pos)
+		if node_1.param2 ~= 1 then
+		node_1.param2 = 1
+		end
+	end
+})
+
+minetest.register_abm({
 	nodenames = {"fire:basic_flame"},
-	interval = 1.0, -- Run every 10 seconds
-	chance = 2, -- Select every 1 in 50 nodes
+	interval = 1.0,
+	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local num = math.random(1,100)
 		minetest.add_particlespawner({
@@ -163,13 +175,16 @@ minetest.register_abm({
 --entities
 
 minetest.register_entity("hyrule_mapgen:butterfly", {
-	visual = "sprite",
+	visual = "mesh",
+	mesh = "butterfly.b3d",
 	physical = true,
-	textures = {"hyrule_mapgen_butterfly.png",},
-	visual_size = {x=0.2, y=0.2},
+	textures = {"hyrule_mapgen_butterfly1.png",},
+	visual_size = {x=0.3, y=0.3},
 	on_activate = function(self)
 		num = math.random(1,4)
 		self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
+		self.object:set_animation({x=1, y=10}, 20, 0)
+		self.object:setyaw(math.pi+num)
 		minetest.after(5, function()
 		self.object:remove()
 		end)
@@ -177,6 +192,8 @@ minetest.register_entity("hyrule_mapgen:butterfly", {
 	on_step = function(self)
 		local pos = self.object:getpos()
 		local vec = self.object:getvelocity()
+		local num = math.random(-math.pi, math.pi)
+		self.object:setyaw(math.pi+num)
 		self.object:setvelocity({x=-math.sin(12*pos.y), y=math.cos(12*pos.x), z=-math.sin(12*pos.y)})
 		self.object:setacceleration({x=-math.sin(6*vec.y), y=math.cos(6*vec.x), z=-math.sin(6*vec.y)})
 	end,
@@ -432,8 +449,7 @@ minetest.register_node("hyrule_mapgen:swamp_flower", {
 	inventory_image = "hyrule_mapgen_swampflower.png",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
-	sunlight_propagates = false,	
-	light_source = 50,
+	sunlight_propagates = false,
 	walkable = false,
 	is_ground_content = true,
 	selection_box = {
@@ -441,6 +457,44 @@ minetest.register_node("hyrule_mapgen:swamp_flower", {
 		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
 	},
 	groups = {cracky=3,dig_immediate=3},
+})
+
+playereffects.register_effect_type("float", "", nil, {"gravity"}, 
+	function(player)
+		player:set_physics_override(nil,nil,0.2)
+		physics_overriden = true
+	end,
+	
+	function(effect, player)
+		player:set_physics_override(nil,nil,1)
+		physics_overriden = false
+	end,
+	false
+)
+
+minetest.register_node("hyrule_mapgen:deku_flower", {
+	description = "Deku Flower",
+	drawtype = "signlike",
+	visual_scale = 2.5,
+	tiles = {"hyrule_mapgen_dekuflower.png"},
+	inventory_image = "hyrule_mapgen_dekuflower.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	place_param2 = 1,
+	sunlight_propagates = false,	
+	walkable = false,
+	is_ground_content = true,
+	selection_box = {
+		type = "wallmounted",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
+	},
+	groups = {snappy=1, dig_immediate=3},
+	on_construct = function(pos, node)
+	minetest.after(1, function()
+		local node_1 = minetest.get_node(pos)
+		node.param2 = 2
+	end)
+	end
 })
 
 minetest.register_node("hyrule_mapgen:healwater_src", {
@@ -534,6 +588,117 @@ minetest.register_abm({
 	end
 })
 
+
+minetest.register_node("hyrule_mapgen:sandstone", {
+	description = "Dungeon Sandstone",
+	tiles = {
+		"hyrule_mapgen_sandstone.png"
+	},
+	groups = {cracky=2,}
+})
+
+minetest.register_node("hyrule_mapgen:sandstone_tile", {
+	description = "Dungeon Sandstone Tile",
+	tiles = {
+		"hyrule_mapgen_sandstone_tile.png"
+	},
+	groups = {cracky=2,}
+})
+
+minetest.register_node("hyrule_mapgen:sandstone_decoration", {
+	description = "Dungeon Sandstone Decoration",
+	tiles = {
+		"hyrule_mapgen_sandstone.png",
+		"hyrule_mapgen_sandstone.png",
+		"hyrule_mapgen_sandstone_decoration.png",
+		"hyrule_mapgen_sandstone_decoration.png",
+		"hyrule_mapgen_sandstone_decoration.png",
+		"hyrule_mapgen_sandstone_decoration.png",
+	},
+	groups = {cracky=2,}
+})
+
+minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
+	description = "Dungeon Sandstone Decoration 2",
+	tiles = {
+		"hyrule_mapgen_sandstone.png",
+		"hyrule_mapgen_sandstone.png",
+		"hyrule_mapgen_sandstone_decoration2.png",
+		"hyrule_mapgen_sandstone_decoration2.png",
+		"hyrule_mapgen_sandstone_decoration2.png",
+		"hyrule_mapgen_sandstone_decoration2.png",
+	},
+	groups = {cracky=2,}
+})
+
+minetest.register_node("hyrule_mapgen:pillar", {
+	description = "Sandstone Pillar",
+	tiles = {
+		"hyrule_mapgen_sandstone_tile.png",
+		"hyrule_mapgen_sandstone_tile.png",
+		"hyrule_mapgen_sandstone_pillar.png",
+		"hyrule_mapgen_sandstone_pillar.png",
+		"hyrule_mapgen_sandstone_pillar.png",
+		"hyrule_mapgen_sandstone_pillar.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=2, falling_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, 0.5, 0.25}, -- NodeBox4
+		}
+	}
+})
+
+minetest.register_node("hyrule_mapgen:pillar_base", {
+	description = "Sandstone Pillar (base)",
+	tiles = {
+		"hyrule_mapgen_sandstone_tile.png",
+		"hyrule_mapgen_sandstone_tile.png",
+		"hyrule_mapgen_sandstone_pillar_base.png",
+		"hyrule_mapgen_sandstone_pillar_base.png",
+		"hyrule_mapgen_sandstone_pillar_base.png",
+		"hyrule_mapgen_sandstone_pillar_base.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=2, falling_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.4375, 0.4375}, -- NodeBox1
+			{-0.375, -0.4375, -0.375, 0.375, -0.3125, 0.375}, -- NodeBox2
+			{-0.3125, -0.3125, -0.3125, 0.3125, -0.1875, 0.3125}, -- NodeBox3
+			{-0.25, -0.1875, -0.25, 0.25, 0.5, 0.25}, -- NodeBox4
+		}
+	}
+})
+
+minetest.register_node("hyrule_mapgen:pillar_top", {
+	description = "Sandstone Pillar (top)",
+	tiles = {
+		"hyrule_mapgen_sandstone_tile.png",
+		"hyrule_mapgen_sandstone_tile.png",
+		"hyrule_mapgen_sandstone_pillar_top.png",
+		"hyrule_mapgen_sandstone_pillar_top.png",
+		"hyrule_mapgen_sandstone_pillar_top.png",
+		"hyrule_mapgen_sandstone_pillar_top.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=2, falling_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, 0.4375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox1
+			{-0.375, 0.3125, -0.375, 0.375, 0.4375, 0.375}, -- NodeBox2
+			{-0.3125, 0.1875, -0.3125, 0.3125, 0.3125, 0.3125}, -- NodeBox3
+			{-0.25, -0.5, -0.25, 0.25, 0.1875, 0.25}, -- NodeBox4
+		}
+	}
+})
 
 minetest.register_node("hyrule_mapgen:railblock", {
 	description = "Railway Block",

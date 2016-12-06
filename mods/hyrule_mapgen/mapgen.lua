@@ -614,6 +614,24 @@ minetest.register_decoration({
 	y_max = 40,
 })
 
+-- minetest.register_decoration({
+	-- deco_type = "simple",
+	-- place_on = {"default:dirt_with_grass", "default:dirt_with_grass3", "default:dirt_with_dry_grass"},
+	-- sidelen = 16,
+	-- noise_params = {
+			-- offset = 0.004,
+			-- scale = 0.006,
+			-- spread = {x = 100, y = 100, z = 100},
+			-- seed = 329,
+			-- octaves = 3,
+			-- persist = 0.6
+		-- },
+	-- biomes = {"deciduous_forest", "magic_forest", "wild_forest",},
+	-- decoration = "hyrule_mapgen:deku_flower",
+	-- y_min = 15,
+	-- y_max = 40,
+-- })
+
 --geysers(lavabiome)
 minetest.register_decoration({
 	deco_type = "simple",
@@ -956,6 +974,8 @@ minetest.register_decoration({
 	spawn_by = "air",
 })
 
+
+
 minetest.register_decoration({
 	deco_type = "simple",
 	place_on = {"default:dirt_with_grass2"},
@@ -975,3 +995,22 @@ minetest.register_decoration({
 	spawn_by = "air",
 })
 
+moreplants.mapgen()
+
+local frequency = 5
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -5 then
+		return
+	end
+	local dirt = minetest.find_nodes_in_area(minp, maxp,
+		{"default:dirt", "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"})
+	for n = 1, #dirt do
+		if math.random(1, frequency) == 1 then
+			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:roots"})
+				end
+		end
+	end
+end)
