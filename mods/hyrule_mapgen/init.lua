@@ -8,10 +8,19 @@ end
 --effects
 minetest.register_abm({
 	nodenames = {"flowers:flower_rose", "flowers:flower_tulip", "flowers:flower_dandelion_yellow", "flowers:flower_viola", "flowers:flower_dandelion_white", "flowers:flower_geranium"},
-	interval = 3.0,
-	chance = 5,
+	interval = 7.0,
+	chance = 6,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:butterfly")
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"moreplants:tallgrass", "moreplants:bulrush"},
+	interval = 7.0,
+	chance = 6,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:dragonfly")
 	end
 })
 
@@ -133,17 +142,6 @@ minetest.register_abm({
 	end
 })
 
-minetest.register_abm({
-	nodenames = {"hyrule_mapgen:deku_flower"},
-	interval = 1.0,
-	chance = 1,
-	action = function(pos, node)
-		local node_1 = minetest.get_node(pos)
-		if node_1.param2 ~= 1 then
-		node_1.param2 = 1
-		end
-	end
-})
 
 minetest.register_abm({
 	nodenames = {"fire:basic_flame"},
@@ -185,7 +183,7 @@ minetest.register_entity("hyrule_mapgen:butterfly", {
 		self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
 		self.object:set_animation({x=1, y=10}, 20, 0)
 		self.object:setyaw(math.pi+num)
-		minetest.after(5, function()
+		minetest.after(10, function()
 		self.object:remove()
 		end)
 	end,
@@ -196,6 +194,34 @@ minetest.register_entity("hyrule_mapgen:butterfly", {
 		self.object:setyaw(math.pi+num)
 		self.object:setvelocity({x=-math.sin(12*pos.y), y=math.cos(12*pos.x), z=-math.sin(12*pos.y)})
 		self.object:setacceleration({x=-math.sin(6*vec.y), y=math.cos(6*vec.x), z=-math.sin(6*vec.y)})
+	end,
+	collisionbox = {0,0,0,0,0.1,0},
+})
+
+minetest.register_entity("hyrule_mapgen:dragonfly", {
+	visual = "mesh",
+	mesh = "butterfly.b3d",
+	physical = true,
+	textures = {"hyrule_mapgen_dragonfly.png",},
+	visual_size = {x=0.3, y=0.3},
+	on_activate = function(self)
+		num = math.random(1,4)
+		--self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
+		self.object:set_animation({x=1, y=10}, 40, 0)
+		self.object:setyaw(math.pi+num)
+		minetest.after(10, function()
+		self.object:remove()
+		end)
+	end,
+	on_step = function(self, dtime)
+		local num = math.random(-math.pi, math.pi)
+		local num1 = math.random(-1, 1)
+		local num2 = math.random(-1, 1)
+		local pos = self.object:getpos()
+		local vec = self.object:getvelocity()		
+		--self.object:setyaw(math.pi+num)
+		self.object:setvelocity({x=num1*2, y=math.cos(12*pos.x), z=num2*2})
+		self.object:setacceleration({x=-num1*1, y=math.cos(6*vec.x), z=-1})
 	end,
 	collisionbox = {0,0,0,0,0.1,0},
 })
@@ -443,17 +469,16 @@ minetest.register_node("hyrule_mapgen:bridge2", {
 
 minetest.register_node("hyrule_mapgen:swamp_flower", {
 	description = "Swamp Flower",
-	drawtype = "signlike",
-	visual_scale = 3.0,
+	drawtype = "mesh",
+	mesh = "flatnode.b3d",
 	tiles = {"hyrule_mapgen_swampflower.png"},
 	inventory_image = "hyrule_mapgen_swampflower.png",
 	paramtype = "light",
-	paramtype2 = "wallmounted",
 	sunlight_propagates = false,
 	walkable = false,
 	is_ground_content = true,
 	selection_box = {
-		type = "wallmounted",
+		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
 	},
 	groups = {cracky=3,dig_immediate=3},
@@ -474,27 +499,20 @@ playereffects.register_effect_type("float", "", nil, {"gravity"},
 
 minetest.register_node("hyrule_mapgen:deku_flower", {
 	description = "Deku Flower",
-	drawtype = "signlike",
-	visual_scale = 2.5,
+	drawtype = "mesh",
+	mesh = "flatnode.b3d",
+	visual_size = {x=1.2, y=1.2},
 	tiles = {"hyrule_mapgen_dekuflower.png"},
 	inventory_image = "hyrule_mapgen_dekuflower.png",
 	paramtype = "light",
-	paramtype2 = "wallmounted",
-	place_param2 = 1,
 	sunlight_propagates = false,	
 	walkable = false,
 	is_ground_content = true,
 	selection_box = {
-		type = "wallmounted",
+		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
 	},
-	groups = {snappy=1, dig_immediate=3},
-	on_construct = function(pos, node)
-	minetest.after(1, function()
-		local node_1 = minetest.get_node(pos)
-		node.param2 = 2
-	end)
-	end
+	groups = {snappy=1, dig_immediate=3, bouncy=2},
 })
 
 minetest.register_node("hyrule_mapgen:healwater_src", {
@@ -594,15 +612,25 @@ minetest.register_node("hyrule_mapgen:sandstone", {
 	tiles = {
 		"hyrule_mapgen_sandstone.png"
 	},
-	groups = {cracky=2,}
+	groups = {cracky=5,}
 })
+
+stairs.register_stair_and_slab(
+	"dsandstone",
+	"hyrule_mapgen:sandstone",
+	{cracky = 5, oddly_breakable_by_hand = 2, flammable = 2},
+	{"hyrule_mapgen_sandstone.png"},
+	"Dungeon Sandstone Stair",
+	"Dungeon Sandstne Slab",
+	default.node_sound_stone_defaults()
+)
 
 minetest.register_node("hyrule_mapgen:sandstone_tile", {
 	description = "Dungeon Sandstone Tile",
 	tiles = {
 		"hyrule_mapgen_sandstone_tile.png"
 	},
-	groups = {cracky=2,}
+	groups = {cracky=5,}
 })
 
 minetest.register_node("hyrule_mapgen:sandstone_decoration", {
@@ -615,7 +643,7 @@ minetest.register_node("hyrule_mapgen:sandstone_decoration", {
 		"hyrule_mapgen_sandstone_decoration.png",
 		"hyrule_mapgen_sandstone_decoration.png",
 	},
-	groups = {cracky=2,}
+	groups = {cracky=5,}
 })
 
 minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
@@ -628,7 +656,7 @@ minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
 		"hyrule_mapgen_sandstone_decoration2.png",
 		"hyrule_mapgen_sandstone_decoration2.png",
 	},
-	groups = {cracky=2,}
+	groups = {cracky=5,}
 })
 
 minetest.register_node("hyrule_mapgen:pillar", {
@@ -807,6 +835,29 @@ minetest.register_node("hyrule_mapgen:dungeon_brick", {
 		"hyrule_mapgen_dungeon_brick.png",
 	},
 	groups = {cracky=3},
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_torch", {
+	description = "Dungeon Torch",
+	drawtype = "plantlike",
+	visual_scale = 1.6,
+	walkable = false,
+	tiles = {
+		{name = "hyrule_mapgen_torch.png", animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 0.5,},
+		},
+	},
+	inventory_image = "hyrule_mapgen_torch_inv.png",
+	wield_image = "hyrule_mapgen_torch_inv.png",
+	paramtype = "light",
+	light_source = 20,
+	use_texture_alpha = true,
+	groups = {choppy=1},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.2, 0.5},
+		}
+	},
 })
 
 minetest.register_node("hyrule_mapgen:subrosian_tile", {

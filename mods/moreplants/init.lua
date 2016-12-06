@@ -791,7 +791,6 @@ minetest.register_decoration({
 	place_on = "default:sand",
 	sidelen = 16,
 	fill_ratio = 0.01,
-	biomes = {"stone_grassland_ocean", "deciduous_forest_ocean"},
 	decoration = "moreplants:bulrush",
 	height = 1,
 })

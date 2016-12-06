@@ -1,19 +1,39 @@
 if minetest.setting_getbool("loz_mode") then
+minetest.register_node("kblocks:blue", {
+	description = "Blue rooftile",
+	tiles = {
+		"kblocks_blue.png"
+	},
+	groups = {cracky=1}
+})
+
 minetest.register_node("kblocks:red", {
-	description = "red rooftile",
+	description = "Red rooftile",
 	tiles = {
 		"kblocks_red.png"
 	},
 	groups = {cracky=1}
 })
 
-minetest.register_node("kblocks:blue", {
-	description = "blue rooftile",
-	tiles = {
-		"kblocks_blue.png"
-	},
-	groups = {cracky=1}
-})
+stairs.register_stair_and_slab(
+	"red",
+	"kblocks:red",
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	{"kblocks_red.png"},
+	"Red Roof Slope",
+	"Red Roof Slab",
+	default.node_sound_wood_defaults()
+)
+
+stairs.register_stair_and_slab(
+	"blue",
+	"kblocks:blue",
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	{"kblocks_blue.png"},
+	"Blue Roof Slope",
+	"Blue Roof Slab",
+	default.node_sound_wood_defaults()
+)
 
 minetest.register_node("kblocks:brown", {
 	description = "brown tile",
@@ -130,18 +150,18 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'kblocks:red 4',
-	recipe = {
-		{'default:brick', 'dye:red', 'default:brick'},
-		{'default:brick', 'dye:red', 'default:brick'},
-	}
-})
-
-minetest.register_craft({
 	output = 'kblocks:blue 4',
 	recipe = {
 		{'default:brick', 'dye:blue', 'default:brick'},
 		{'default:brick', 'dye:blue', 'default:brick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'kblocks:red 4',
+	recipe = {
+		{'default:brick', 'dye:red', 'default:brick'},
+		{'default:brick', 'dye:red', 'default:brick'},
 	}
 })
 

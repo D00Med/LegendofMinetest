@@ -26,15 +26,15 @@ if mobs.mod and mobs.mod == "redo" then
 		local pos = self.object:getpos()
 		minetest.add_particlespawner(
 			1, --amount
-			2, --time
+			1, --time
 			{x=pos.x-0.1, y=pos.y, z=pos.z-0.1}, --minpos
 			{x=pos.x+0.1, y=pos.y, z=pos.z+0.1}, --maxpos
 			{x=-0, y=-0, z=-0}, --minvel
 			{x=0, y=0, z=0}, --maxvel
 			{x=-0.2,y=-0.2,z=-0.2}, --minacc
 			{x=0.2,y=-0.5,z=0.2}, --maxacc
-			3, --minexptime
-			3, --maxexptime
+			0.5, --minexptime
+			1, --maxexptime
 			1, --minsize
 			2, --maxsize
 			false, --collisiondetection

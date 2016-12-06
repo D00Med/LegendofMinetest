@@ -614,23 +614,23 @@ minetest.register_decoration({
 	y_max = 40,
 })
 
--- minetest.register_decoration({
-	-- deco_type = "simple",
-	-- place_on = {"default:dirt_with_grass", "default:dirt_with_grass3", "default:dirt_with_dry_grass"},
-	-- sidelen = 16,
-	-- noise_params = {
-			-- offset = 0.004,
-			-- scale = 0.006,
-			-- spread = {x = 100, y = 100, z = 100},
-			-- seed = 329,
-			-- octaves = 3,
-			-- persist = 0.6
-		-- },
-	-- biomes = {"deciduous_forest", "magic_forest", "wild_forest",},
-	-- decoration = "hyrule_mapgen:deku_flower",
-	-- y_min = 15,
-	-- y_max = 40,
--- })
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:dirt_with_grass", "default:dirt_with_grass3", "default:dirt_with_dry_grass"},
+	sidelen = 32,
+	noise_params = {
+			offset = 0.002,
+			scale = 0.006,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+	biomes = {"deciduous_forest", "magic_forest", "wild_forest",},
+	decoration = "hyrule_mapgen:deku_flower",
+	y_min = 15,
+	y_max = 40,
+})
 
 --geysers(lavabiome)
 minetest.register_decoration({
