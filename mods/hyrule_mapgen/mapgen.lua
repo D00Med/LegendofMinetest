@@ -1009,7 +1009,11 @@ minetest.register_on_generated(function(minp, maxp)
 		if math.random(1, frequency) == 1 then
 			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:roots"})
+					else
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:roots2"})
+					end
 				end
 		end
 	end

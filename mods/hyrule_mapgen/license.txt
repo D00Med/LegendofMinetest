@@ -24,4 +24,31 @@ License for Textures, Models and Sounds
 
 CC-BY-SA 3.0 UNPORTED. Created by DOOMED
 
-hyrule_mapgen_roots.png, hyrule_mapgen_statue_active.png, hyrule_mapgen_statue_front.png, hyrule_mapgen_statue_side.png   -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
+hyrule_mapgen_roots.png, hyrule_mapgen_roots2.png, hyrule_mapgen_statue_active.png, hyrule_mapgen_statue_front.png, hyrule_mapgen_statue_side.png   -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
+
+For moreblocks_slope.obj:
+
+zlib license
+============
+
+Copyright (c) 2011-2015 Calinou and contributors
+
+**This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.**
+
+Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any source distribution.
+**Forum topic:** <https://forum.minetest.net/viewtopic.php?f=11&t=509>
+
+For simplyslopes_slopecorner.obj:
+
+https://github.com/Delaroyas/simplyslopes
+
+Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)                                 
+http://creativecommons.org/licenses/by-sa/3.0/
+
+Copyright (C) 2010-2012 celeron55, Perttu Ahola <celeron55@gmail.com>

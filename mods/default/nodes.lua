@@ -1528,7 +1528,7 @@ minetest.register_node("default:lava_source", {
 				type = "vertical_frames",
 				aspect_w = 16,
 				aspect_h = 16,
-				length = 3.0,
+				length = 2.0,
 			},
 		},
 	},

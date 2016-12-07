@@ -5,6 +5,93 @@ if mg_name ~= "v6" then
 dofile(minetest.get_modpath("hyrule_mapgen").."/mapgen.lua")
 end
 
+--functions
+hyrule_mapgen = {}
+
+function hyrule_mapgen.register_slope(name, desc, texture, craft)
+minetest.register_node("hyrule_mapgen:slope_"..name, {
+	description = desc.." Slope",
+	sunlight_propagates = false,
+	drawtype = "mesh",
+	mesh = "moreblocks_slope.obj",
+	tiles = texture,
+		selection_box = {
+			type = "fixed",
+	fixed = {
+		{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
+		{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
+		{-0.5,     0,     0, 0.5,  0.25, 0.5},
+		{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
+	}
+		},
+		collision_box = {
+			type = "fixed",
+	fixed = {
+		{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
+		{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
+		{-0.5,     0,     0, 0.5,  0.25, 0.5},
+		{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
+	}
+		},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1},
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("hyrule_mapgen:corner_"..name, {
+	description = desc.." Slope Corner",
+	sunlight_propagates = false,
+	drawtype = "mesh",
+	mesh = "simplyslopes_slopecorner.obj",
+	tiles = texture,
+	selection_box = {
+			type = "fixed",
+			fixed = {
+			  {-0.5, -0.5, -0.5, 0.5, -0.1875, 0.5},
+			  {-0.5, -0.1875, -0.1875, 0.5, 0.1875, 0.5},
+			  {-0.5, 0.1875, 0.1875, 0.5, 0.5, 0.5},
+			},
+		},
+
+		collision_box = {
+			type = "fixed",
+			fixed = {
+			  {-0.5, -0.5, -0.5, 0.5, -0.1875, 0.5},
+			  {-0.5, -0.1875, -0.1875, 0.5, 0.1875, 0.5},
+			  {-0.5, 0.1875, 0.1875, 0.5, 0.5, 0.5},
+			},
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1},
+	on_place = minetest.rotate_node
+})
+
+minetest.register_craft({
+	output = "hyrule_mapgen:slope_"..name,
+	recipe = {
+		{craft, "",},
+		{craft, craft,}
+	}
+})
+
+minetest.register_craft({
+	output = "hyrule_mapgen:corner_"..name,
+	recipe = {
+		{"", craft,},
+		{craft, craft,}
+	}
+})
+
+
+
+end
+
+hyrule_mapgen.register_slope("rroof", "Red Roof", {"kblocks_red.png"}, "kblocks:red")
+hyrule_mapgen.register_slope("broof", "Blue Roof", {"kblocks_blue.png"}, "kblocks:blue")
+hyrule_mapgen.register_slope("straw", "Straw Roof", {"farming_straw.png"}, "farming:straw")
+
 --effects
 minetest.register_abm({
 	nodenames = {"flowers:flower_rose", "flowers:flower_tulip", "flowers:flower_dandelion_yellow", "flowers:flower_viola", "flowers:flower_dandelion_white", "flowers:flower_geranium"},
@@ -166,6 +253,39 @@ minetest.register_abm({
 			vertical = false,
 			texture = "hyrule_mapgen_spark.png^[colorize:red:"..num,
 		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:healwater_src"},
+	interval = 4,
+	chance = 2,
+	action = function(pos, node)
+		minetest.add_particlespawner({
+			amount = 10,
+			time = 4,
+			minpos = {x=pos.x-0.5, y=pos.y+0.3, z=pos.z-0.5},
+			maxpos = {x=pos.x+0.5, y=pos.y+0.5, z=pos.z+0.5},
+			minvel = {x=-0, y=0.5, z=-0},
+			maxvel = {x=0, y=0.5, z=0},
+			minacc = {x=0, y=0.5, z=0},
+			maxacc = {x=0, y=0.5, z=0},
+			minexptime = 0.5,
+			maxexptime = 2,
+			minsize = 1,
+			maxsize = 2,
+			collisiondetection = false,
+			texture = "mobs_fairy_spark.png"
+		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:subrosian_sand"},
+	interval = 30,
+	chance = 100,
+	action = function(pos, node)
+		minetest.env:add_entity(pos, "mobs_loz:subrosian")
 	end
 })
 
@@ -612,13 +732,13 @@ minetest.register_node("hyrule_mapgen:sandstone", {
 	tiles = {
 		"hyrule_mapgen_sandstone.png"
 	},
-	groups = {cracky=5,}
+	groups = {cracky=3,}
 })
 
 stairs.register_stair_and_slab(
 	"dsandstone",
 	"hyrule_mapgen:sandstone",
-	{cracky = 5, oddly_breakable_by_hand = 2, flammable = 2},
+	{cracky = 3, oddly_breakable_by_hand = 2, flammable = 2},
 	{"hyrule_mapgen_sandstone.png"},
 	"Dungeon Sandstone Stair",
 	"Dungeon Sandstne Slab",
@@ -630,7 +750,7 @@ minetest.register_node("hyrule_mapgen:sandstone_tile", {
 	tiles = {
 		"hyrule_mapgen_sandstone_tile.png"
 	},
-	groups = {cracky=5,}
+	groups = {cracky=3,}
 })
 
 minetest.register_node("hyrule_mapgen:sandstone_decoration", {
@@ -643,7 +763,7 @@ minetest.register_node("hyrule_mapgen:sandstone_decoration", {
 		"hyrule_mapgen_sandstone_decoration.png",
 		"hyrule_mapgen_sandstone_decoration.png",
 	},
-	groups = {cracky=5,}
+	groups = {cracky=3,}
 })
 
 minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
@@ -656,7 +776,7 @@ minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
 		"hyrule_mapgen_sandstone_decoration2.png",
 		"hyrule_mapgen_sandstone_decoration2.png",
 	},
-	groups = {cracky=5,}
+	groups = {cracky=3,}
 })
 
 minetest.register_node("hyrule_mapgen:pillar", {
@@ -749,6 +869,8 @@ minetest.register_node("hyrule_mapgen:subrosian_stone", {
 	tiles = {
 		"hyrule_mapgen_subrosianstone.png"
 	},
+	paramtype = "light",
+	light_source = 10,
 	groups = {cracky=2,}
 })
 
@@ -865,6 +987,8 @@ minetest.register_node("hyrule_mapgen:subrosian_tile", {
 	tiles = {
 		"hyrule_mapgen_subrosiantile.png",
 	},
+	paramtype = "light",
+	light_source = 10,
 	groups = {cracky=2},
 })
 
@@ -872,8 +996,47 @@ minetest.register_node("hyrule_mapgen:subrosian_sand", {
 	description = "Subrosian Sand",
 	tiles = {
 		"hyrule_mapgen_subrosiansand.png",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:50",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:20",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:20",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:10",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:60",
 	},
+	paramtype = "light",
+	light_source = 10,
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:blue_ore", {
+	description = "Subrosian Sand",
+	tiles = {
+		"hyrule_mapgen_subrosiansand.png",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:50",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:20",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:20",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:10",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:60",
+	},
+	paramtype = "light",
+	light_source = 10,
+	drop = "hyruletools:blue_ore",
+	groups = {crumbly=1, oddly_breakable_by_hand=1, xp=1, not_in_creative_inventory=1},
+})
+
+minetest.register_node("hyrule_mapgen:red_ore", {
+	description = "Subrosian Sand",
+	tiles = {
+		"hyrule_mapgen_subrosiansand.png",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:50",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:20",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:20",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:10",
+		"hyrule_mapgen_subrosiansand.png^[colorize:black:60",
+	},
+	paramtype = "light",
+	light_source = 10,
+	drop = "hyruletools:red_ore",
+	groups = {crumbly=1, oddly_breakable_by_hand=1, xp=1, not_in_creative_inventory=1},
 })
 
 minetest.register_node("hyrule_mapgen:roots", {
@@ -881,6 +1044,21 @@ minetest.register_node("hyrule_mapgen:roots", {
 	drawtype = "torchlike",
 	tiles = {"hyrule_mapgen_roots.png"},
 	inventory_image = "hyrule_mapgen_roots.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:roots2", {
+	description = "Hanging Root",
+	drawtype = "torchlike",
+	tiles = {"hyrule_mapgen_roots2.png"},
+	inventory_image = "hyrule_mapgen_roots2.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
 	paramtype = "light",
