@@ -862,6 +862,11 @@ minetest.register_craft({
 minetest.register_entity("hyruletools:spark", {
 	textures = {"hyruletools_spark.png"},
 	velocity = 15,
+	on_activate = function(self)
+		minetest.after(10, function()
+			self.object:remove()
+			end)
+	end,
 	on_step = function (self, pos, node, dtime)
 				local pos = self.object:getpos()
 					local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
@@ -929,25 +934,6 @@ minetest.register_entity("hyruletools:spark", {
 													}, vec)
 												end
 										end
---[[
-                    --This is the particle spawner, but it will slow your pc. If you have a powerful pc you can uncomment this section     
-					minetest.add_particlespawner(
-			1, --amount
-			0.1, --time
-			{x=pos.x-3, y=pos.y-3, z=pos.z-3}, --minpos
-			{x=pos.x+3, y=pos.y+3, z=pos.z+3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=5,z=-0.5}, --minacc
-			{x=0.5,y=5,z=0.5}, --maxacc
-			0.1, --minexptime
-			1, --maxexptime
-			8, --minsize
-			15, --maxsize
-			false, --collisiondetection
-			"tnt_smoke.png" --texture
-		)
-                        ]]--
 				end
 			end
 		end
@@ -981,6 +967,11 @@ minetest.register_craft({
 minetest.register_entity("hyruletools:spark2", {
 	textures = {"hyruletools_spark2.png"},
 	velocity = 15,
+	on_activate = function(self)
+		minetest.after(10, function()
+			self.object:remove()
+			end)
+	end,
 	on_step = function (self, pos, node, dtime)
 				local pos = self.object:getpos()
 					local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
@@ -1048,25 +1039,6 @@ minetest.register_entity("hyruletools:spark2", {
 													}, vec)
 												end
 										end
---[[
-                    --This is the particle spawner, but it will slow your pc. If you have a powerful pc you can uncomment this section     
-					minetest.add_particlespawner(
-			1, --amount
-			0.1, --time
-			{x=pos.x-3, y=pos.y-3, z=pos.z-3}, --minpos
-			{x=pos.x+3, y=pos.y+3, z=pos.z+3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=5,z=-0.5}, --minacc
-			{x=0.5,y=5,z=0.5}, --maxacc
-			0.1, --minexptime
-			1, --maxexptime
-			8, --minsize
-			15, --maxsize
-			false, --collisiondetection
-			"tnt_smoke.png" --texture
-		)
-                        ]]--
 				end
 			end
 		end
@@ -1100,6 +1072,11 @@ minetest.register_craft({
 minetest.register_entity("hyruletools:spark3", {
 	textures = {"hyruletools_spark3.png"},
 	velocity = 15,
+	on_activate = function(self)
+		minetest.after(10, function()
+			self.object:remove()
+			end)
+	end,
 	on_step = function (self, pos, node, dtime)
 				local pos = self.object:getpos()
 					local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
@@ -1167,24 +1144,6 @@ minetest.register_entity("hyruletools:spark3", {
 													}, vec)
 												end
 										end
-
-                    --This is the particle spawner, but it will slow your pc. If you have a powerful pc you can uncomment this section     
-					minetest.add_particlespawner(
-			1, --amount
-			0.3, --time
-			{x=pos.x-3, y=pos.y-3, z=pos.z-3}, --minpos
-			{x=pos.x+3, y=pos.y+3, z=pos.z+3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=5,z=-0.5}, --minacc
-			{x=0.5,y=5,z=0.5}, --maxacc
-			0.1, --minexptime
-			1, --maxexptime
-			8, --minsize
-			15, --maxsize
-			false, --collisiondetection
-			"lavabiome_spark.png" --texture
-		)
                         
 				end
 			end

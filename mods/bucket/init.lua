@@ -110,7 +110,7 @@ function bucket.register_liquid(source, flowing, itemname, inventory_image, name
 end
 
 minetest.register_craftitem("bucket:bucket_empty", {
-	description = "Empty Bucket",
+	description = "Empty Bottle",
 	inventory_image = "bucket.png",
 	stack_max = 99,
 	liquids_pointable = true,
@@ -184,7 +184,7 @@ bucket.register_liquid(
 	"default:water_flowing",
 	"bucket:bucket_water",
 	"bucket_water.png",
-	"Water Bucket",
+	"Water Bottle",
 	{water_bucket = 1}
 )
 
@@ -193,7 +193,7 @@ bucket.register_liquid(
 	"default:river_water_flowing",
 	"bucket:bucket_river_water",
 	"bucket_river_water.png",
-	"River Water Bucket",
+	"River Water Bottle",
 	{water_bucket = 1},
 	true
 )
@@ -203,7 +203,7 @@ bucket.register_liquid(
 	"default:lava_flowing",
 	"bucket:bucket_lava",
 	"bucket_lava.png",
-	"Lava Bucket"
+	"Lava Bottle"
 )
 
 minetest.register_craft({

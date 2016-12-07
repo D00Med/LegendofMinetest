@@ -1039,6 +1039,113 @@ minetest.register_node("hyrule_mapgen:red_ore", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1, xp=1, not_in_creative_inventory=1},
 })
 
+minetest.register_node("hyrule_mapgen:stalagmite", {
+	description = "Stalagmite",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_stalagmite0.png"},
+	inventory_image = "hyrule_mapgen_stalagmite0.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:stalagmite1", {
+	description = "Stalagmite",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_stalagmite1.png"},
+	inventory_image = "hyrule_mapgen_stalagmite1.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:stalagmite2", {
+	description = "Stalagmite",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_stalagmite2.png"},
+	inventory_image = "hyrule_mapgen_stalagmite2.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:stalagmite3", {
+	description = "Stalagmite",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_stalagmite3.png"},
+	inventory_image = "hyrule_mapgen_stalagmite3.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:stalagtite0", {
+	description = "Stalagtite",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_stalagmite0.png^[transformFY"},
+	inventory_image = "hyrule_mapgen_stalagmite0.png^[transformFY",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:stalagtite1", {
+	description = "Stalagtite",
+	drawtype = "plantlike",
+	visual_scale = 1.5,
+	tiles = {"hyrule_mapgen_stalagmite3.png^[transformFY"},
+	inventory_image = "hyrule_mapgen_stalagmite3.png^[transformFY",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
+minetest.register_node("hyrule_mapgen:stalagtite2", {
+	description = "Stalagtite",
+	drawtype = "plantlike",
+	visual_scale = 1.5,
+	tiles = {"hyrule_mapgen_stalagmite2.png^[transformFY"},
+	inventory_image = "hyrule_mapgen_stalagmite2.png^[transformFY",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+})
+
 minetest.register_node("hyrule_mapgen:roots", {
 	description = "Hanging Roots",
 	drawtype = "torchlike",

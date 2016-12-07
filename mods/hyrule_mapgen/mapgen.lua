@@ -1018,3 +1018,49 @@ minetest.register_on_generated(function(minp, maxp)
 		end
 	end
 end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -50 then
+		return
+	end
+	local dirt = minetest.find_nodes_in_area(minp, maxp,
+		{"default:stone"})
+	for n = 1, #dirt do
+		if math.random(1, 50) == 1 then
+			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite"})
+					elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite1"})
+					elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite2"})
+					else
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite3"})
+					end
+				end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -50 then
+		return
+	end
+	local dirt = minetest.find_nodes_in_area(minp, maxp,
+		{"default:stone"})
+	for n = 1, #dirt do
+		if math.random(1, 50) == 1 then
+			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagtite0"})
+					elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagtite1"})
+					else
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagtite2"})
+					end
+				end
+		end
+	end
+end)
