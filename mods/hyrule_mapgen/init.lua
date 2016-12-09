@@ -104,8 +104,8 @@ minetest.register_abm({
 
 minetest.register_abm({
 	nodenames = {"moreplants:tallgrass", "moreplants:bulrush"},
-	interval = 7.0,
-	chance = 6,
+	interval = 10.0,
+	chance = 60,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:dragonfly")
 	end
@@ -1039,8 +1039,8 @@ minetest.register_node("hyrule_mapgen:red_ore", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1, xp=1, not_in_creative_inventory=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagmite", {
-	description = "Stalagmite",
+minetest.register_node("hyrule_mapgen:stalagtite", {
+	description = "Stalagtite",
 	drawtype = "plantlike",
 	tiles = {"hyrule_mapgen_stalagmite0.png"},
 	inventory_image = "hyrule_mapgen_stalagmite0.png",
@@ -1054,8 +1054,8 @@ minetest.register_node("hyrule_mapgen:stalagmite", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagmite1", {
-	description = "Stalagmite",
+minetest.register_node("hyrule_mapgen:stalagtite1", {
+	description = "Stalagtite",
 	drawtype = "plantlike",
 	tiles = {"hyrule_mapgen_stalagmite1.png"},
 	inventory_image = "hyrule_mapgen_stalagmite1.png",
@@ -1069,8 +1069,8 @@ minetest.register_node("hyrule_mapgen:stalagmite1", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagmite2", {
-	description = "Stalagmite",
+minetest.register_node("hyrule_mapgen:stalagtite2", {
+	description = "Stalagtite",
 	drawtype = "plantlike",
 	tiles = {"hyrule_mapgen_stalagmite2.png"},
 	inventory_image = "hyrule_mapgen_stalagmite2.png",
@@ -1084,8 +1084,8 @@ minetest.register_node("hyrule_mapgen:stalagmite2", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagmite3", {
-	description = "Stalagmite",
+minetest.register_node("hyrule_mapgen:stalagtite3", {
+	description = "Stalagtite",
 	drawtype = "plantlike",
 	tiles = {"hyrule_mapgen_stalagmite3.png"},
 	inventory_image = "hyrule_mapgen_stalagmite3.png",
@@ -1099,8 +1099,8 @@ minetest.register_node("hyrule_mapgen:stalagmite3", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagtite0", {
-	description = "Stalagtite",
+minetest.register_node("hyrule_mapgen:stalagmite0", {
+	description = "Stalagmite",
 	drawtype = "plantlike",
 	tiles = {"hyrule_mapgen_stalagmite0.png^[transformFY"},
 	inventory_image = "hyrule_mapgen_stalagmite0.png^[transformFY",
@@ -1114,8 +1114,8 @@ minetest.register_node("hyrule_mapgen:stalagtite0", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagtite1", {
-	description = "Stalagtite",
+minetest.register_node("hyrule_mapgen:stalagmite1", {
+	description = "Stalagmite",
 	drawtype = "plantlike",
 	visual_scale = 1.5,
 	tiles = {"hyrule_mapgen_stalagmite3.png^[transformFY"},
@@ -1130,8 +1130,8 @@ minetest.register_node("hyrule_mapgen:stalagtite1", {
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 })
 
-minetest.register_node("hyrule_mapgen:stalagtite2", {
-	description = "Stalagtite",
+minetest.register_node("hyrule_mapgen:stalagmite2", {
+	description = "Stalagmite",
 	drawtype = "plantlike",
 	visual_scale = 1.5,
 	tiles = {"hyrule_mapgen_stalagmite2.png^[transformFY"},

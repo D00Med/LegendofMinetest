@@ -1,55 +1,59 @@
 
 -- Chicken by JK Murray
 
+
+--cucco.b3d, cucco.png CC-BY-SA 3.0 UNPORTED Created by toby109tt(aka tobyplowy) and D00Med
+
 mobs:register_mob("mobs_animal:chicken", {
 	type = "animal",
 	passive = false,
+	attack_type = "dogfight",
+	group_attack = true,
 	reach = 2,
 	damage = 5,
-	hp_min = 5,
-	hp_max = 10,
+	hp_min = 50,
+	hp_max = 90,
 	armor = 200,
-	collisionbox = {-0.3, -0.75, -0.3, 0.3, 0.1, 0.3},
+	collisionbox = {-0.25, -0.05, -0.25, 0.25, 0.5, 0.25},
 	visual = "mesh",
-	mesh = "mobs_chicken.x",
+	visual_size = {x=1.2, y=1.2},
+	mesh = "cucco.b3d",
 	-- seems a lot of textures but this fixes the problem with the model
 	textures = {
-		{"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
-		"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png"},
-		{"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png",
-		"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png"},
+		{"mobs_cucco.png"},
 	},
 	child_texture = {
-		{"mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png",
-		"mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png"},
+		{"mobs_cucco_chick.png"},
 	},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_chicken",
 	},
-	walk_velocity = 1,
-	run_velocity = 3,
-	runaway = true,
+	walk_velocity = 0.5,
+	run_velocity = 3.5,
 	jump = true,
+	jump_height = 4,
 	drops = {
 		{name = "mobs:chicken_raw", chance = 1, min = 2, max = 2},
 	},
-	water_damage = 1,
+	water_damage = 0,
 	lava_damage = 5,
 	light_damage = 0,
 	fall_damage = 0,
 	fall_speed = -8,
 	fear_height = 5,
 	animation = {
-		speed_normal = 15,
-		stand_start = 0,
-		stand_end = 1, -- 20
+		speed_normal = 10,
+		speed_run = 33,
+		stand_start = 1,
+		stand_end = 15,
 		walk_start = 20,
 		walk_end = 40,
+		run_start = 50,
+		run_end = 70,
 	},
 	follow = {"farming:seed_wheat", "farming:seed_cotton"},
 	view_range = 5,
-
 	on_rightclick = function(self, clicker)
 
 		if mobs:feed_tame(self, clicker, 8, true, true) then
@@ -78,10 +82,69 @@ mobs:register_mob("mobs_animal:chicken", {
 	end,
 })
 
+mobs:register_mob("mobs_animal:chicken_evil", {
+	type = "monster",
+	passive = false,
+	attack_type = "dogfight",
+	reach = 2,
+	damage = 5,
+	hp_min = 50,
+	hp_max = 90,
+	armor = 10,
+	collisionbox = {-0.25, -0.05, -0.25, 0.25, 0.5, 0.25},
+	visual = "mesh",
+	mesh = "cucco.b3d",
+	-- seems a lot of textures but this fixes the problem with the model
+	textures = {
+		{"mobs_cucco.png"},
+	},
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_chicken",
+	},
+	walk_velocity = 1,
+	run_velocity = 3,
+	jump = true,
+	drops = {
+		{name = "mobs:chicken_raw", chance = 1, min = 2, max = 2},
+	},
+	water_damage = 0,
+	lava_damage = 0,
+	light_damage = 0,
+	fall_damage = 0,
+	fall_speed = -1,
+	fear_height = 5,
+	animation = {
+		speed_normal = 12,
+		speed_run = 17,
+		stand_start = 1,
+		stand_end = 15,
+		walk_start = 20,
+		walk_end = 40,
+		run_start = 50,
+		run_end = 70,
+	},
+	view_range = 5,
+	on_punch = function(self)
+		local pos = self.object:get_pos()
+		minetest.env:add_entity({x=pos.x+1, y=pos.y, z=pos.z+1}, "mobs_animal:chicken_evil")
+		minetest.env:add_entity({x=pos.x-2, y=pos.y, z=pos.z+1}, "mobs_animal:chicken_evil")
+		minetest.env:add_entity({x=pos.x+1, y=pos.y, z=pos.z-2}, "mobs_animal:chicken_evil")
+		minetest.env:add_entity({x=pos.x-1, y=pos.y, z=pos.z-1}, "mobs_animal:chicken_evil")
+		minetest.env:add_entity({x=pos.x, y=pos.y, z=pos.z+1}, "mobs_animal:chicken_evil")
+		minetest.env:add_entity({x=pos.x+1, y=pos.y, z=pos.z}, "mobs_animal:chicken_evil")
+	end,
+	on_activate = function(self)
+		minetest.after(60, function()
+			self.object:remove()
+		end)
+	end,
+})
+
 mobs:register_spawn("mobs_animal:chicken",
 	{"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 20, 10, 15000, 1, 31000, true)
 
-mobs:register_egg("mobs_animal:chicken", "Chicken", "mobs_chicken_inv.png", 0)
+mobs:register_egg("mobs_animal:chicken", "Cucco", "mobs_chicken_inv.png", 0)
 
 -- compatibility
 mobs:alias_mob("mobs:chicken", "mobs_animal:chicken")

@@ -1030,13 +1030,13 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
 					if math.random(1,2) == 1 then
-					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite"})
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagtite"})
 					elseif math.random(1,2) == 1 then
-					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite1"})
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagtite1"})
 					elseif math.random(1,2) == 1 then
-					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite2"})
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagtite2"})
 					else
-					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagmite3"})
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagtite3"})
 					end
 				end
 		end
@@ -1054,11 +1054,11 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 					if math.random(1,2) == 1 then
-					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagtite0"})
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagmite0"})
 					elseif math.random(1,2) == 1 then
-					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagtite1"})
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagmite1"})
 					else
-					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagtite2"})
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagmite2"})
 					end
 				end
 		end

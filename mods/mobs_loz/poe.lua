@@ -16,7 +16,7 @@ mobs:register_mob("mobs_loz:poe", {
 		{"mobs_poe2.png"},
 		{"mobs_poe3.png"},
 	},
-	visual_size = {x=1, y=1},
+	visual_size = {x=1.2, y=1.2},
 	makes_footstep_sound = false,
 	walk_velocity = 1,
 	run_velocity = 2,
