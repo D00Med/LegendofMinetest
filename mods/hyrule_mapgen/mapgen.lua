@@ -995,6 +995,18 @@ minetest.register_decoration({
 	spawn_by = "air",
 })
 
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:glowstone",
+	wherein        = "default:stone",
+	clust_scarcity = 18 * 18 * 18,
+	clust_num_ores = 2,
+	clust_size     = 2,
+	y_min          = -3113,
+	y_max          = -66,
+})
+
+
 moreplants.mapgen()
 
 local frequency = 5

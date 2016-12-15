@@ -13,7 +13,7 @@ mobs:register_mob("mobs_animal:chicken", {
 	damage = 5,
 	hp_min = 50,
 	hp_max = 90,
-	armor = 200,
+	armor = 0,
 	collisionbox = {-0.25, -0.05, -0.25, 0.25, 0.5, 0.25},
 	visual = "mesh",
 	visual_size = {x=1.2, y=1.2},
@@ -265,11 +265,11 @@ end
 -- egg
 minetest.register_node(":mobs:egg", {
 	description = "Chicken Egg",
-	tiles = {"mobs_chicken_egg.png"},
-	inventory_image  = "mobs_chicken_egg.png",
+	tiles = {"mobs_cucco_egg.png"},
+	inventory_image  = "mobs_cucco_egg.png",
 	visual_scale = 0.7,
 	drawtype = "plantlike",
-	wield_image = "mobs_chicken_egg.png",
+	wield_image = "mobs_cucco_egg.png",
 	paramtype = "light",
 	walkable = false,
 	is_ground_content = true,
@@ -302,14 +302,14 @@ minetest.register_craft({
 
 -- raw chicken
 minetest.register_craftitem(":mobs:chicken_raw", {
-description = "Raw Chicken",
+description = "Raw Cucco Meat",
 	inventory_image = "mobs_chicken_raw.png",
 	on_use = minetest.item_eat(2),
 })
 
 -- cooked chicken
 minetest.register_craftitem(":mobs:chicken_cooked", {
-description = "Cooked Chicken",
+description = "Cooked Cucco Meat",
 	inventory_image = "mobs_chicken_cooked.png",
 	on_use = minetest.item_eat(6),
 })

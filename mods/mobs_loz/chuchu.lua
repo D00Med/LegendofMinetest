@@ -10,7 +10,8 @@ mobs:register_mob("mobs_loz:chuchu", {
 	hp_min = 3,
 	hp_max = 27,
 	armor = 100,
-	collisionbox = {-0.2, -0, -0.2, 0.2, 0.6, 0.2},
+	collisionbox = {-0.2, -0, -0.2, 0.2, 0.7, 0.2},
+	visual_size = {x=1.5, y=1.5},
 	visual = "mesh",
 	mesh = "chuchu.b3d",
 	textures = {

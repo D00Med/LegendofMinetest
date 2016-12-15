@@ -450,6 +450,7 @@ minetest.override_item("default:chest_locked", {
 	},
 })
 
+
 minetest.override_item("default:chest", {
 	paramtype = "light",
 	drawtype = "nodebox",
@@ -528,6 +529,89 @@ minetest.override_item("default:stone_with_gold", {
 })
 
 --new nodes
+
+chest_items = {
+	{"hyruletools:clawshot"},
+	{"hyruletools:eye"},
+	{"hyruletools:"},
+}
+
+minetest.register_node("hyrule_mapgen:chest", {
+	description = "Dungeon Chest",
+	tiles = {"hyrule_mapgen_chest_top.png", "hyrule_mapgen_chest_top.png", "hyrule_mapgen_chest_side.png",
+		"hyrule_mapgen_chest_side.png", "hyrule_mapgen_chest_side.png", "hyrule_mapgen_chest.png"},
+	paramtype2 = "facedir",
+	paramtype = "light",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	},
+	groups = {cracky = 2, oddly_breakable_by_hand = 1},
+	is_ground_content = false,
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		for _, row in ipairs(chest_items) do
+		local item = row[1]
+		if math.random(1,5) == 1 then
+			meta:set_string("item", item)
+		end
+		end
+		inv:set_size("main", 1*1)
+	end,
+	can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		return inv:is_empty("main")
+	end,
+	on_rightclick = function(pos, node, clicker, item, _)
+		if clicker:get_wielded_item():get_name() == "hyruletools:key" then
+			item:take_item()
+			local meta = minetest.get_meta(pos)
+			local item = meta:get_string("item")
+			minetest.env:add_item(pos, item)
+			minetest.env:remove_node(pos)
+		end
+	end,
+})
+
+minetest.register_node("hyrule_mapgen:chest_bosskey", {
+	description = "Dungeon Chest (Boss key)",
+	tiles = {"hyrule_mapgen_chest_top.png", "hyrule_mapgen_chest_top.png", "hyrule_mapgen_chest_side.png",
+		"hyrule_mapgen_chest_side.png", "hyrule_mapgen_chest_side.png", "hyrule_mapgen_chest_bosskey.png"},
+	paramtype2 = "facedir",
+	paramtype = "light",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	},
+	groups = {cracky = 2, oddly_breakable_by_hand = 1},
+	is_ground_content = false,
+	can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		return inv:is_empty("main")
+	end,
+	on_rightclick = function(pos, node, clicker, item, _)
+		if clicker:get_wielded_item():get_name() == "hyruletools:key" then
+			item:take_item()
+			minetest.env:add_item(pos, "hyruletools:key_boss")
+			minetest.env:remove_node(pos)
+		end
+	end,
+})
 
 minetest.register_node("hyrule_mapgen:bridge", {
 	description = "Wooden Bridge",

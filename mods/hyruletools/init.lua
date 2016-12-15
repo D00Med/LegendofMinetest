@@ -238,6 +238,10 @@ minetest.register_tool("hyruletools:magglv_n", {
 	inventory_image = "hyruletools_magglv_n.png",
 	wield_image = "hyruletools_magglv_n.png",
 	on_use = function(itemstack, placer, pointed_thing)
+		local ctrl = placer:get_player_control()
+		if ctrl.sneak then
+		itemstack:replace("hyruletools:magglv_s")
+		else
 		local pos = pointed_thing.under
 		local dir = placer:get_look_dir()
 		if minetest.get_item_group(minetest.get_node(pos).name, "magnetic") ~= 0 and minetest.get_node_or_nil(pos) ~= nil then
@@ -252,6 +256,7 @@ minetest.register_tool("hyruletools:magglv_n", {
 		minetest.set_node(pos2, {name=node})
 		end)
 		end
+		end
 		return itemstack
 	end,
 })
@@ -261,6 +266,10 @@ minetest.register_tool("hyruletools:magglv_s", {
 	inventory_image = "hyruletools_magglv_s.png",
 	wield_image = "hyruletools_magglv_s.png",
 	on_use = function(itemstack, placer, pointed_thing)
+		local ctrl = placer:get_player_control()
+		if ctrl.sneak then
+		itemstack:replace("hyruletools:magglv_n")
+		else
 		local pos = pointed_thing.under
 		local dir = placer:get_look_dir()
 		if minetest.get_item_group(minetest.get_node(pos).name, "magnetic") ~= 0 and minetest.get_node_or_nil(pos) ~= nil then
@@ -274,6 +283,7 @@ minetest.register_tool("hyruletools:magglv_s", {
 		obj:remove()
 		minetest.set_node(pos2, {name=node})
 		end)
+		end
 		end
 		return itemstack
 	end,
@@ -1277,21 +1287,22 @@ minetest.register_entity("hyruletools:swdspark", {
 				end
 			end
 		local apos = self.object:getpos()
+		local velo = self.object:getvelocity()
 		local part = minetest.add_particlespawner(
 			1, --amount
 			0.3, --time
-			{x=apos.x-0.3, y=apos.y-0.3, z=apos.z-0.3}, --minpos
-			{x=apos.x+0.3, y=apos.y+0.3, z=apos.z+0.3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=0,y=-0.5,z=0}, --minacc
-			{x=0.5,y=0.5,z=0.5}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			1, --minsize
-			2, --maxsize
+			{x=apos.x-0, y=apos.y-0, z=apos.z-0}, --minpos
+			{x=apos.x+0, y=apos.y+0, z=apos.z+0}, --maxpos
+			{x=-velo.x/2, y=-velo.y/2, z=-velo.z/2}, --minvel
+			{x=-velo.x/2, y=-velo.y/2, z=-velo.z/2}, --maxvel
+			{x=0,y=-0,z=0}, --minacc
+			{x=0,y=0,z=0}, --maxacc
+			0.1, --minexptime
+			0.2, --maxexptime
+			8, --minsize
+			8, --maxsize
 			false, --collisiondetection
-			"hyruletools_swdbeam_trail.png" --texture
+			"hyruletools_swdbeam.png" --texture
 		)
 	end,
 })
@@ -1465,6 +1476,71 @@ minetest.register_craft({
 		{'default:paper', '', 'default:paper'},
 		{'', 'default:paper', ''},
 	}
+})
+
+minetest.register_entity("hyruletools:fireball", {
+	textures = {"hyruletools_flame.png"},
+	velocity = 15,
+	damage = 2,
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_step = function(self, obj, pos)		
+		local remove = minetest.after(2, function() 
+		self.object:remove()
+		end)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)	
+			for k, obj in pairs(objs) do
+				if obj:get_luaentity() ~= nil then
+					if obj:get_luaentity().name ~= "hyruletools:fireball" and obj:get_luaentity().name ~= "__builtin:item" then
+						obj:punch(self.object, 1.0, {
+							full_punch_interval=1.0,
+							damage_groups={fleshy=2},
+						}, nil)
+					self.object:remove()
+					end
+				end
+			end
+			for dx=0,0.5 do
+						for dy=0,0.5 do
+							for dz=0,0.5 do
+								local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+								local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+								local n = minetest.env:get_node(p).name
+								if n ~= "hyruletools:fireball" and n ~="default:dirt_with_grass" and n ~="default:dirt_with_dry_grass" and n ~="default:stone"  then	
+									if minetest.registered_nodes[n].groups.flammable then
+										minetest.env:set_node(t, {name="fire:basic_flame"})
+									self.object:remove()
+									return
+									end
+								end
+							end
+						end
+					end
+	end,
+})
+
+--master sword, an edit of Mese sword(see liscence for default)
+minetest.register_tool("hyruletools:flame_rod", {
+	description = "Flame Rod",
+	inventory_image = "hyruletools_flamerod.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=4},
+	},
+	on_use = function(itemstack, placer, pointed_thing)
+			local dir = placer:get_look_dir();
+			local playerpos = placer:getpos();
+			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:fireball")
+			local vec = {x=dir.x*16,y=dir.y*16,z=dir.z*16}
+			obj:setvelocity(vec)
+			itemstack:add_wear(2000)
+		return itemstack
+	end,
 })
 
 minetest.register_craftitem("hyruletools:seed_fire", {
@@ -1648,13 +1724,27 @@ minetest.register_entity("hyruletools:boomer", {
 	acceleration = -5,
 	damage = 2,
 	collisionbox = {0, 0, 0, 0, 0, 0},
-	on_activate = function(self)
-		self.object:set_animation({x=2, y=19}, 30, 0)
-	end,
-	on_step = function(self, obj, pos)		
+	on_activate = function(self)		
 		local remove = minetest.after(3, function() 
 		self.object:remove()
 		end)
+		self.object:set_animation({x=2, y=19}, 30, 0)
+		-- returning from experience mod by jordan4ibanez (dwtfywt)
+		minetest.after(1.5, function()
+			if self.thrower ~= nil then
+			local pos2 = self.object:getpos()
+			local pos1 = self.thrower:getpos()
+			if pos1 ~= nil and pos2 ~= nil then
+			local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
+			vec.x = vec.x/1.5
+			vec.y = vec.y/1.5
+			vec.z = vec.z/1.5
+			self.object:setvelocity(vec)
+			end
+			end
+		end)
+	end,
+	on_step = function(self, obj, pos)
 		local pos = self.object:getpos()
 		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)	
 			for k, obj in pairs(objs) do
@@ -1694,7 +1784,9 @@ minetest.register_tool("hyruletools:boomerang", {
 			local vec = {x=dir.x*8,y=dir.y*8,z=dir.z*8}
 			obj:setvelocity(vec)
 			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
-			obj:setacceleration(acc)
+			--obj:setacceleration(acc)
+			local object = obj:get_luaentity()
+			object.thrower = placer
 				item:take_item()
 			return item
 	end,
@@ -1710,11 +1802,33 @@ minetest.register_entity("hyruletools:sboomer", {
 	collisionbox = {0, 0, 0, 0, 0, 0},
 	on_activate = function(self)
 		self.object:set_animation({x=2, y=19}, 30, 0)
+		-- returning from experience mod by jordan4ibanez (dwtfywt)
+		minetest.after(2.6, function()
+			if self.thrower ~= nil then
+			self.returning = true
+			local pos2 = self.object:getpos()
+			local pos1 = self.thrower:getpos()
+			if pos1 ~= nil and pos2 ~= nil then
+			local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
+			vec.x = vec.x/1.5
+			vec.y = vec.y/1.5
+			vec.z = vec.z/1.5
+			self.object:setvelocity(vec)
+			end
+			end
+		end)
 	end,
 	on_step = function(self, obj, pos)		
 		local remove = minetest.after(4, function() 
 		self.object:remove()
 		end)
+		if self.thrower ~= nil and not self.returning then
+		local dir = self.thrower:get_look_dir();
+		local vec = {x=dir.x*5,y=dir.y*5,z=dir.z*5}
+		local yaw = self.thrower:get_look_yaw();
+		self.object:setyaw(yaw+math.pi/2)
+		self.object:setvelocity(vec)
+		end
 		local pos = self.object:getpos()
 		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)	
 			for k, obj in pairs(objs) do
@@ -1772,6 +1886,8 @@ minetest.register_tool("hyruletools:boomerang_steel", {
 			obj:setvelocity(vec)
 			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
 			obj:setacceleration(acc)
+			local object = obj:get_luaentity()
+			object.thrower = placer
 				item:take_item()
 			return item
 	end,
@@ -2216,6 +2332,120 @@ minetest.register_entity("hyruletools:emerald", {
 	end
 })
 
+minetest.register_entity("hyruletools:swordent_mese", {
+	visual = "upright_sprite",
+	visual_size = {x=1, y=1},
+	collisionbox = {0},
+	physical = false,
+	textures = {"hyruletools_mesesword.png"},
+	on_activate = function(self)
+		local pos = self.object:getpos()
+		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+
+		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_mese" then
+			self.object:remove()
+		end
+		if minetest.get_node(pos_under).name == "hyruletools:swordstand" then
+			self.object:remove()
+		end
+	end
+})
+
+minetest.register_entity("hyruletools:swordent_bronze", {
+	visual = "upright_sprite",
+	visual_size = {x=1, y=1},
+	collisionbox = {0},
+	physical = false,
+	textures = {"hyruletools_bronzesword.png"},
+	on_activate = function(self)
+		local pos = self.object:getpos()
+		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+
+		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_bronze" then
+			self.object:remove()
+		end
+		if minetest.get_node(pos_under).name == "hyruletools:swordstand" then
+			self.object:remove()
+		end
+	end
+})
+
+minetest.register_entity("hyruletools:swordent_diamond", {
+	visual = "upright_sprite",
+	visual_size = {x=1, y=1},
+	collisionbox = {0},
+	physical = false,
+	textures = {"hyruletools_diamondsword.png"},
+	on_activate = function(self)
+		local pos = self.object:getpos()
+		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+
+		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_diamond" then
+			self.object:remove()
+		end
+		if minetest.get_node(pos_under).name == "hyruletools:swordstand" then
+			self.object:remove()
+		end
+	end
+})
+
+minetest.register_entity("hyruletools:swordent_steel", {
+	visual = "upright_sprite",
+	visual_size = {x=1, y=1},
+	collisionbox = {0},
+	physical = false,
+	textures = {"hyruletools_steelsword.png"},
+	on_activate = function(self)
+		local pos = self.object:getpos()
+		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+
+		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_steel" then
+			self.object:remove()
+		end
+		if minetest.get_node(pos_under).name == "hyruletools:swordstand" then
+			self.object:remove()
+		end
+	end
+})
+
+minetest.register_entity("hyruletools:swordent_stone", {
+	visual = "upright_sprite",
+	visual_size = {x=1, y=1},
+	collisionbox = {0},
+	physical = false,
+	textures = {"hyruletools_stonesword.png"},
+	on_activate = function(self)
+		local pos = self.object:getpos()
+		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+
+		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_stone" then
+			self.object:remove()
+		end
+		if minetest.get_node(pos_under).name == "hyruletools:swordstand" then
+			self.object:remove()
+		end
+	end
+})
+
+minetest.register_entity("hyruletools:swordent_wood", {
+	visual = "upright_sprite",
+	visual_size = {x=1, y=1},
+	collisionbox = {0},
+	physical = false,
+	textures = {"hyruletools_woodsword.png"},
+	on_activate = function(self)
+		local pos = self.object:getpos()
+		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+
+		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_wood" then
+			self.object:remove()
+		end
+		if minetest.get_node(pos_under).name == "hyruletools:swordstand" then
+			self.object:remove()
+		end
+	end
+})
+
 
 
 minetest.register_node("hyruletools:swordstand", {
@@ -2247,6 +2477,30 @@ minetest.register_node("hyruletools:swordstand", {
 		elseif wield_item == "hyruletools:foreststone" then
 			minetest.set_node(pos, {name="hyruletools:swordstand_emerald", param2=node.param2})
 			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:emerald")
+			item:take_item()
+		elseif wield_item == "default:sword_steel" then
+			minetest.set_node(pos, {name="hyruletools:swordstand_steel", param2=node.param2})
+			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_steel")
+			item:take_item()
+		elseif wield_item == "default:sword_bronze" then
+			minetest.set_node(pos, {name="hyruletools:swordstand_bronze", param2=node.param2})
+			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_bronze")
+			item:take_item()
+		elseif wield_item == "default:sword_mese" then
+			minetest.set_node(pos, {name="hyruletools:swordstand_mese", param2=node.param2})
+			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_mese")
+			item:take_item()
+		elseif wield_item == "default:sword_diamond" then
+			minetest.set_node(pos, {name="hyruletools:swordstand_diamond", param2=node.param2})
+			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_diamond")
+			item:take_item()
+		elseif wield_item == "default:sword_stone" then
+			minetest.set_node(pos, {name="hyruletools:swordstand_stone", param2=node.param2})
+			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_stone")
+			item:take_item()
+		elseif wield_item == "default:sword_wood" then
+			minetest.set_node(pos, {name="hyruletools:swordstand_wood", param2=node.param2})
+			minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_wood")
 			item:take_item()
 		end
 	end,
@@ -2286,6 +2540,180 @@ minetest.register_node("hyruletools:swordstand_used", {
 	on_rightclick = function(pos, node, clicker, item, _)
 		local wield_item = clicker:get_wielded_item():get_name()
 			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:sword")
+			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
+	end
+})
+
+minetest.register_node("hyruletools:swordstand_mese", {
+	drawtype = "nodebox",
+	tiles = {
+	"hyruletools_stand.png",
+	},
+	paramtype = "light",
+	node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+	on_construct = function(pos)
+	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_mese")
+	end,
+	on_destruct = function(pos)
+	for _, obj in pairs(minetest.get_objects_inside_radius(pos, 0.9)) do
+		if obj and obj:get_luaentity() and
+				obj:get_luaentity().name == "hyruletools:swordent_mese" then
+			obj:remove()
+		end
+	end
+	end,
+	groups = {cracky=1},
+	on_rightclick = function(pos, node, clicker, item, _)
+		local wield_item = clicker:get_wielded_item():get_name()
+			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "default:sword_mese")
+			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
+	end
+})
+
+minetest.register_node("hyruletools:swordstand_diamond", {
+	drawtype = "nodebox",
+	tiles = {
+	"hyruletools_stand.png",
+	},
+	paramtype = "light",
+	node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+	on_construct = function(pos)
+	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_diamond")
+	end,
+	on_destruct = function(pos)
+	for _, obj in pairs(minetest.get_objects_inside_radius(pos, 0.9)) do
+		if obj and obj:get_luaentity() and
+				obj:get_luaentity().name == "hyruletools:swordent_diamond" then
+			obj:remove()
+		end
+	end
+	end,
+	groups = {cracky=1},
+	on_rightclick = function(pos, node, clicker, item, _)
+		local wield_item = clicker:get_wielded_item():get_name()
+			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "default:sword_diamond")
+			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
+	end
+})
+
+minetest.register_node("hyruletools:swordstand_steel", {
+	drawtype = "nodebox",
+	tiles = {
+	"hyruletools_stand.png",
+	},
+	paramtype = "light",
+	node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+	on_construct = function(pos)
+	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_steel")
+	end,
+	on_destruct = function(pos)
+	for _, obj in pairs(minetest.get_objects_inside_radius(pos, 0.9)) do
+		if obj and obj:get_luaentity() and
+				obj:get_luaentity().name == "hyruletools:swordent_steel" then
+			obj:remove()
+		end
+	end
+	end,
+	groups = {cracky=1},
+	on_rightclick = function(pos, node, clicker, item, _)
+		local wield_item = clicker:get_wielded_item():get_name()
+			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "default:sword_steel")
+			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
+	end
+})
+
+minetest.register_node("hyruletools:swordstand_bronze", {
+	drawtype = "nodebox",
+	tiles = {
+	"hyruletools_stand.png",
+	},
+	paramtype = "light",
+	node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+	on_construct = function(pos)
+	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_bronze")
+	end,
+	on_destruct = function(pos)
+	for _, obj in pairs(minetest.get_objects_inside_radius(pos, 0.9)) do
+		if obj and obj:get_luaentity() and
+				obj:get_luaentity().name == "hyruletools:swordent_bronze" then
+			obj:remove()
+		end
+	end
+	end,
+	groups = {cracky=1},
+	on_rightclick = function(pos, node, clicker, item, _)
+		local wield_item = clicker:get_wielded_item():get_name()
+			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "default:sword_bronze")
+			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
+	end
+})
+
+minetest.register_node("hyruletools:swordstand_stone", {
+	drawtype = "nodebox",
+	tiles = {
+	"hyruletools_stand.png",
+	},
+	paramtype = "light",
+	node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+	on_construct = function(pos)
+	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_stone")
+	end,
+	on_destruct = function(pos)
+	for _, obj in pairs(minetest.get_objects_inside_radius(pos, 0.9)) do
+		if obj and obj:get_luaentity() and
+				obj:get_luaentity().name == "hyruletools:swordent_stone" then
+			obj:remove()
+		end
+	end
+	end,
+	groups = {cracky=1},
+	on_rightclick = function(pos, node, clicker, item, _)
+		local wield_item = clicker:get_wielded_item():get_name()
+			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "default:sword_stone")
+			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
+	end
+})
+
+minetest.register_node("hyruletools:swordstand_wood", {
+	drawtype = "nodebox",
+	tiles = {
+	"hyruletools_stand.png",
+	},
+	paramtype = "light",
+	node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+	on_construct = function(pos)
+	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:swordent_wood")
+	end,
+	on_destruct = function(pos)
+	for _, obj in pairs(minetest.get_objects_inside_radius(pos, 0.9)) do
+		if obj and obj:get_luaentity() and
+				obj:get_luaentity().name == "hyruletools:swordent_wood" then
+			obj:remove()
+		end
+	end
+	end,
+	groups = {cracky=1},
+	on_rightclick = function(pos, node, clicker, item, _)
+		local wield_item = clicker:get_wielded_item():get_name()
+			minetest.add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "default:sword_wood")
 			minetest.set_node(pos, {name="hyruletools:swordstand", param2=node.param2})
 	end
 })
@@ -2486,3 +2914,102 @@ minetest.register_craft({
 })
 
 end
+
+--icetools
+
+
+
+minetest.register_craftitem("hyruletools:ice_fragment", {
+	description = "Ice Fragment",
+	inventory_image = "hyruletools_ice_shard.png"
+})
+
+minetest.register_craft({
+	output = "hyruletools:ice_fragment 9",
+	type = "shapeless",
+	recipe = {"default:ice"}
+})
+
+minetest.register_craft({
+	output = "default:ice 1",
+	recipe = {
+		{"hyruletools:ice_fragment", "hyruletools:ice_fragment", "hyruletools:ice_fragment"},
+		{"hyruletools:ice_fragment", "hyruletools:ice_fragment", "hyruletools:ice_fragment"},
+		{"hyruletools:ice_fragment", "hyruletools:ice_fragment",  "hyruletools:ice_fragment"}
+	}
+})
+
+minetest.register_tool("hyruletools:wand", {
+	description = "Ice Rod",
+	inventory_image = "hyruletools_ice_wand.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=10, maxlevel=3},
+		},
+		damage_groups = {fleshy=0},
+	},
+	on_place = function(item, player, pointed)
+	local pos = player:getpos()
+	if pointed ~= nil then
+	 stack = minetest.place_node(pos, {name="default:ice"})
+	 end
+end
+})
+
+minetest.register_craft({
+	output = 'hyruletools:wand',
+	recipe = {
+		{'default:diamond'},
+		{'hyruletools:ice_fragment'},
+		{'hyruletools:ice_fragment'},
+	}
+})
+
+minetest.register_tool("hyruletools:ice_sword", {
+	description = "Ice Sword",
+	inventory_image = "hyruletools_ice_sword.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=5},
+	}
+})
+
+minetest.register_tool("hyruletools:ice_axe", {
+	description = "Ice Axe",
+	inventory_image = "hyruletools_ice_axe.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=25, maxlevel=3},
+		},
+		damage_groups = {fleshy=5},
+	},
+})
+
+minetest.register_craft({
+	output = 'hyruletools:ice_sword',
+	recipe = {
+		{'hyruletools:ice_fragment'},
+		{'hyruletools:ice_fragment'},
+		{'default:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyruletools:ice_axe',
+	recipe = {
+		{'hyruletools:ice_fragment', 'hyruletools:ice_fragment'},
+		{'hyruletools:ice_fragment', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})

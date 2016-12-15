@@ -379,6 +379,7 @@ minetest.register_tool("default:sword_diamond", {
 	sound = {breaks = "default_tool_breaks"},
 })
 
+
 minetest.register_tool("default:skeleton_key", {
 	description = "Skeleton Key",
 	inventory_image = "default_key_skeleton.png",
