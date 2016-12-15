@@ -533,7 +533,7 @@ minetest.override_item("default:stone_with_gold", {
 chest_items = {
 	{"hyruletools:clawshot"},
 	{"hyruletools:eye"},
-	{"hyruletools:"},
+	{"hyruletools:boomerang"},
 }
 
 minetest.register_node("hyrule_mapgen:chest", {

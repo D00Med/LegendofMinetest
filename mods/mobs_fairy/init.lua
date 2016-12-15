@@ -15,6 +15,10 @@ if mobs.mod and mobs.mod == "redo" then
 		mesh = "fairy2.b3d",
 		textures = {
 		{"fairy.png"},
+		{"fairy_1.png"},
+		{"fairy_2.png"},
+		{"fairy_3.png"},
+		{"fairy_4.png"},
 		},
 		visual_size = {x=1.5, y=1.5},
 		rotate = 0,
