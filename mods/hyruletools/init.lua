@@ -77,10 +77,8 @@ playereffects.register_effect_type("potion_antigrav_lvx", "Light weight", nil, {
 
 --shields
 
-
-
 minetest.register_globalstep(function()
-	for _, player in ipairs(minetest.get_connected_players()) do
+	for _, player in ipairs(minetest.get_connected_players()) do	
 		local item = player:get_wielded_item():get_name()
 		if item == "shields:shield_steel" and fr2 == nil or item == "shields:shield_admin" and fr2 == nil or item == "shields:shield_bronze" and fr2 == nil then
 			local timeoday = minetest.get_timeofday()
@@ -1886,6 +1884,109 @@ minetest.register_tool("hyruletools:boomerang_steel", {
 			obj:setvelocity(vec)
 			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
 			obj:setacceleration(acc)
+			local object = obj:get_luaentity()
+			object.thrower = placer
+				item:take_item()
+			return item
+	end,
+})
+
+minetest.register_entity("hyruletools:gboomer", {
+	visual = "mesh",
+	mesh = "boomerang.b3d",
+	textures = {"hyruletools_boomerang_tex3.png"},
+	physical = true,
+	velocity = 15,
+	acceleration = -5,
+	damage = 2,
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	on_activate = function(self)		
+		local remove = minetest.after(3, function() 
+		self.object:remove()
+		if self.thrower ~= nil then
+		local pos3 = self.thrower:getpos()
+				local obj2 = minetest.env:add_entity(pos3, "__builtin:item")
+				obj2:get_luaentity():set_item(self.item)
+		end
+		end)
+		self.object:set_animation({x=2, y=19}, 30, 0)
+		-- returning from experience mod by jordan4ibanez (dwtfywt)
+		minetest.after(1.5, function()
+			if self.thrower ~= nil then
+			local pos2 = self.object:getpos()
+			local pos1 = self.thrower:getpos()
+			if pos1 ~= nil and pos2 ~= nil then
+			local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
+			vec.x = vec.x/1.5
+			vec.y = vec.y/1.5
+			vec.z = vec.z/1.5
+			self.object:setvelocity(vec)
+			end
+			end
+		end)
+	end,
+	on_step = function(self, obj, pos)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)	
+			for k, obj in pairs(objs) do
+				if obj:get_luaentity() ~= nil then
+					if obj:get_luaentity().name ~= "hyruletools:gboomer" and obj:get_luaentity().name ~= "__builtin:item" then
+						obj:punch(self.object, 1.0, {
+							full_punch_interval=1.0,
+							damage_groups={fleshy=1},
+						}, nil)
+						self.object:remove()
+					elseif obj:get_luaentity().name == "__builtin:item" then
+						self.item = obj:get_luaentity().itemstring
+						obj:remove()
+						self.object:remove()
+					end
+				end
+			end
+		local apos = self.object:getpos()
+		local part = minetest.add_particlespawner(
+			1, --amount
+			0.3, --time
+			{x=apos.x-0.1, y=apos.y-0.1, z=apos.z-0.1}, --minpos
+			{x=apos.x+0.1, y=apos.y+0.1, z=apos.z+0.1}, --maxpos
+			{x=-0, y=-0, z=-0}, --minvel
+			{x=0, y=0, z=0}, --maxvel
+			{x=0,y=-0.5,z=0}, --minacc
+			{x=0.5,y=0.5,z=0.5}, --maxacc
+			0.2, --minexptime
+			0.5, --maxexptime
+			0.5, --minsize
+			1, --maxsize
+			false, --collisiondetection
+			"hyruletools_wind.png" --texture
+		)
+	end,
+})
+
+minetest.register_tool("hyruletools:gboomerang", {
+	description = "Gale Boomerang",
+	inventory_image = "hyruletools_boomer_gale.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=1},
+	},
+	on_use = function(item, placer, pointed_thing)
+			local add = minetest.after(3, function()
+			local pos = placer:getpos()
+			minetest.add_item(pos, {name = "hyruletools:gboomerang"})
+			end)
+			local dir = placer:get_look_dir();
+			local playerpos = placer:getpos();
+			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:gboomer")
+			local vec = {x=dir.x*8,y=dir.y*8,z=dir.z*8}
+			obj:setvelocity(vec)
+			local acc = {x=dir.x*-6,y=dir.y*-6,z=dir.z*-6}
+			--obj:setacceleration(acc)
 			local object = obj:get_luaentity()
 			object.thrower = placer
 				item:take_item()

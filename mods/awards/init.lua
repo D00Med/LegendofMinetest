@@ -202,13 +202,26 @@ awards.register_achievement("award_youre_a_copper",{
 
 -- You're winner
 awards.register_achievement("award_youre_winner",{
-	title = S("YOU'RE A WINNER!"),
+	title = S("Break-In"),
 	description = S("Dig 1 mossy cobblestone."),
 	icon = "miniminer.png",
 	background = "bg_mining.png",
 	trigger = {
 		type = "dig",
 		node = "default:mossycobble",
+		target = 1
+	},
+	secret = true,
+})
+
+awards.register_achievement("award_treasure",{
+	title = S("Treasure!"),
+	description = S("Open a dungeon chest"),
+	icon = "miniminer.png",
+	background = "bg_mining.png",
+	trigger = {
+		type = "dig",
+		node = "hyrule_mapgen:chest",
 		target = 1
 	},
 	secret = true,
