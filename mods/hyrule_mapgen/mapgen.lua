@@ -1076,3 +1076,18 @@ minetest.register_on_generated(function(minp, maxp)
 		end
 	end
 end)
+
+--place a village on singleplayer spawn on day 1
+
+
+minetest.register_on_newplayer(function(player)
+	if not village_spawned and minetest.get_day_count() == 0 then
+		local name = player:get_player_name()
+		if name == "singleplayer" then
+		minetest.after(2, function()
+		local pos = player:getpos()
+		minetest.place_schematic({x=pos.x, y=pos.y-1, z=pos.z}, minetest.get_modpath("hyrule_mapgen").."/schematics/village.mts", 0, {}, true)
+		end)
+		end
+	end
+end)

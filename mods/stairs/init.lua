@@ -78,6 +78,54 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 			return minetest.item_place(itemstack, placer, pointed_thing, param2)
 		end,
 	})
+	
+	minetest.register_node(":stairs:stair_corner_" .. subname, {
+		description = description.." Corner",
+		drawtype = "nodebox",
+		paramtype = "light",
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0, -0.5, -0, 0.5, 0.5, 0.5}, -- NodeBox1
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5}, -- NodeBox2
+			}
+		},
+		tiles = images,
+		paramtype2 = "facedir",
+		is_ground_content = false,
+		groups = groups,
+		sounds = sounds,
+		on_place = function(itemstack, placer, pointed_thing)
+			if pointed_thing.type ~= "node" then
+				return itemstack
+			end
+
+			local p0 = pointed_thing.under
+			local p1 = pointed_thing.above
+			local param2 = 0
+
+			local placer_pos = placer:getpos()
+			if placer_pos then
+				local dir = {
+					x = p1.x - placer_pos.x,
+					y = p1.y - placer_pos.y,
+					z = p1.z - placer_pos.z
+				}
+				param2 = minetest.dir_to_facedir(dir)
+			end
+
+			if p0.y - 1 == p1.y then
+				param2 = param2 + 20
+				if param2 == 21 then
+					param2 = 23
+				elseif param2 == 23 then
+					param2 = 21
+				end
+			end
+
+			return minetest.item_place(itemstack, placer, pointed_thing, param2)
+		end,
+	})
 
 	-- for replace ABM
 	if replace then
@@ -103,6 +151,15 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 			recipe = {
 				{"", "", recipeitem},
 				{"", recipeitem, recipeitem},
+				{recipeitem, recipeitem, recipeitem},
+			},
+		})
+		
+		minetest.register_craft({
+			output = 'stairs:stair_corner_' .. subname .. ' 8',
+			recipe = {
+				{"", "", recipeitem},
+				{"", "", recipeitem},
 				{recipeitem, recipeitem, recipeitem},
 			},
 		})

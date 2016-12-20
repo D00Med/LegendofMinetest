@@ -3114,3 +3114,139 @@ minetest.register_craft({
 		{'', 'group:stick'},
 	}
 })
+
+--letters from default books Originally by celeron55, Perttu Ahola <celeron55@gmail.com> (LGPL 2.1)
+--Various Minetest developers and contributors (LGPL 2.1)
+
+local lpp = 14 -- Lines per book's page
+local function book_on_use(itemstack, user)
+	local player_name = user:get_player_name()
+	local data = minetest.deserialize(itemstack:get_metadata())
+	local title, text, owner = "", "", player_name
+	local page, page_max, lines, string = 1, 1, {}, ""
+
+	if data then
+		title = data.title
+		text = data.text
+		owner = data.owner
+
+		for str in (text .. "\n"):gmatch("([^\n]*)[\n]") do
+			lines[#lines+1] = str
+		end
+
+		if data.page then
+			page = data.page
+			page_max = data.page_max
+
+			for i = ((lpp * page) - lpp) + 1, lpp * page do
+				if not lines[i] then break end
+				string = string .. lines[i] .. "\n"
+			end
+		end
+	end
+
+	local formspec
+	if owner == player_name then
+		formspec = "size[8,8]" .. default.gui_bg ..
+			"background[0,0;8,8;hyruletools_paper.png]" ..
+			"field[0.5,1;7.5,0;title;Title:;" ..
+				minetest.formspec_escape(title) .. "]" ..
+			"textarea[0.5,1.5;7.5,7;text;Contents:;" ..
+				minetest.formspec_escape(text) .. "]" ..
+			"button_exit[2.5,7.5;3,1;save;Save]"
+	else
+		formspec = "size[8,8]" .. default.gui_bg ..
+			"hyruletools_paper.png" ..
+			"label[0.5,0.5;by " .. owner .. "]" ..
+			"tablecolumns[color;text]" ..
+			"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
+			"table[0.4,0;7,0.5;title;#FFFF00," .. minetest.formspec_escape(title) .. "]" ..
+			"textarea[0.5,1.5;7.5,7;;" ..
+				minetest.formspec_escape(string ~= "" and string or text) .. ";]" ..
+			"button[2.4,7.6;0.8,0.8;book_prev;<]" ..
+			"label[3.2,7.7;Page " .. page .. " of " .. page_max .. "]" ..
+			"button[4.9,7.6;0.8,0.8;book_next;>]"
+	end
+
+	minetest.show_formspec(player_name, "hyruletools:letter", formspec)
+end
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname ~= "hyruletools:letter" then return end
+	local inv = player:get_inventory()
+	local stack = player:get_wielded_item()
+
+	if fields.save and fields.title ~= "" and fields.text ~= "" then
+		local new_stack, data
+		if stack:get_name() ~= "hyruletools:letter_written" then
+			local count = stack:get_count()
+			if count == 1 then
+				stack:set_name("hyruletools:letter_written")
+			else
+				stack:set_count(count - 1)
+				new_stack = ItemStack("hyruletools:letter_written")
+			end
+		else
+			data = minetest.deserialize(stack:get_metadata())
+		end
+
+		if not data then data = {} end
+		data.title = fields.title
+		data.text = fields.text
+		data.text_len = #data.text
+		data.page = 1
+		data.page_max = math.ceil((#data.text:gsub("[^\n]", "") + 1) / lpp)
+		data.owner = player:get_player_name()
+		local data_str = minetest.serialize(data)
+
+		if new_stack then
+			new_stack:set_metadata(data_str)
+			if inv:room_for_item("main", new_stack) then
+				inv:add_item("main", new_stack)
+			else
+				minetest.add_item(player:getpos(), new_stack)
+			end
+		else
+			stack:set_metadata(data_str)
+		end
+
+	elseif fields.book_next or fields.book_prev then
+		local data = minetest.deserialize(stack:get_metadata())
+		if not data or not data.page then
+			return
+		end
+
+		if fields.book_next then
+			data.page = data.page + 1
+			if data.page > data.page_max then
+				data.page = 1
+			end
+		else
+			data.page = data.page - 1
+			if data.page == 0 then
+				data.page = data.page_max
+			end
+		end
+
+		local data_str = minetest.serialize(data)
+		stack:set_metadata(data_str)
+		book_on_use(stack, player)
+	end
+
+	player:set_wielded_item(stack)
+end)
+
+minetest.register_craftitem("hyruletools:letter", {
+	description = "Letter",
+	inventory_image = "hyruletools_letter_inv.png",
+	groups = {book = 1, flammable = 3},
+	on_use = book_on_use,
+})
+
+minetest.register_craftitem("hyruletools:letter_written", {
+	description = "Letter With Text",
+	inventory_image = "hyruletools_letter_inv.png",
+	groups = {book = 1, not_in_creative_inventory = 1, flammable = 3},
+	stack_max = 1,
+	on_use = book_on_use,
+})
