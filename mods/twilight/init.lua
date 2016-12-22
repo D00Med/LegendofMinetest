@@ -185,12 +185,12 @@ if twilight_mode == true then
 	end
 end
 else
-	if weather.state == "twilight" then
-	weather.state = "none"
-	end
 	for _, player in ipairs(minetest.get_connected_players()) do
+	if weather.state == "twilight" then
 	player:set_sky({}, "regular", {}) -- Sets skybox
 	player:override_day_night_ratio(nil)
+	weather.state = "none"
+	end
 			local pname = player:get_player_name();
 	local inv = minetest.get_inventory({type="player", name=pname});
 			if inv:contains_item("main", "hyruletools:sword_light") then

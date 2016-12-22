@@ -3,11 +3,12 @@ screwdriver = screwdriver or {}
 
 xdecor.register("mailbox", {
 	description = "Mailbox",
+	drawtype = "mesh",
+	mesh = "mailbox.b3d",
 	tiles = {
-		"xdecor_mailbox_top.png", "xdecor_mailbox_bottom.png",
-		"xdecor_mailbox_side.png", "xdecor_mailbox_side.png",
-		"xdecor_mailbox.png", "xdecor_mailbox.png",
+		"mailbox.png",
 	},
+	paramtype2= "facedir",
 	groups = {cracky=3, oddly_breakable_by_hand=1},
 	on_rotate = screwdriver.rotate_simple,
 	after_place_node = function(pos, placer, _)

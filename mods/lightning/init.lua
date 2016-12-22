@@ -192,7 +192,7 @@ minetest.register_node("lightning:dying_flame", {
 	buildable_to = true,
 	sunlight_propagates = true,
 	damage_per_second = 4,
-	groups = {dig_immediate = 3},
+	groups = {dig_immediate = 3, not_in_creative_inventory=1},
 	on_timer = function(pos)
 		minetest.remove_node(pos)
 	end,

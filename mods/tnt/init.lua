@@ -536,6 +536,7 @@ function tnt.register_tnt(def)
 		mesh = def.mesh,
 		tiles = def.tiles,
 		paramtype = "light",
+		paramtype2 = "facedir",
 		is_ground_content = false,
 		groups = {dig_immediate = 2, mesecon = 2, tnt = 1},
 		sounds = default.node_sound_wood_defaults(),

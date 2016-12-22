@@ -1056,7 +1056,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -50 then
+	if maxp.y < -100 then
 		return
 	end
 	local dirt = minetest.find_nodes_in_area(minp, maxp,

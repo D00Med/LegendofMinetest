@@ -79,27 +79,28 @@ playereffects.register_effect_type("potion_antigrav_lvx", "Light weight", nil, {
 
 minetest.register_globalstep(function()
 	for _, player in ipairs(minetest.get_connected_players()) do	
-		local item = player:get_wielded_item():get_name()
-		if item == "shields:shield_steel" and fr2 == nil or item == "shields:shield_admin" and fr2 == nil or item == "shields:shield_bronze" and fr2 == nil then
+		local playername = player:get_player_name()
+		local inv = minetest.get_inventory({type="player", name=playername});
+		if inv:contains_item("armor", "shields:shield_steel") and fr2 == nil or inv:contains_item("armor", "shields:shield_admin") and fr2 == nil or inv:contains_item("armor", "shields:shield_bronze") and fr2 == nil then
 			local timeoday = minetest.get_timeofday()
 			if timeoday >= 0.35 and timeoday <= 0.85 then
 			fr2 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 15,y = 15},
 			text = "hyruletools_shield_back.png"
 			})
 			else
 			fr2 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 15,y = 15},
 			text = "hyruletools_shield_back.png^[colorize:black:200"
 			})
 			end
 			local player_armor = player:get_armor_groups().fleshy
 			player:set_armor_groups({fleshy=player_armor+10})
-		elseif item ~= "shields:shield_steel" and item ~= "shields:shield_admin" and item ~= "shields:shield_bronze" then
+		elseif not inv:contains_item("armor", "shields:shield_steel") and not inv:contains_item("armor", "shields:shield_admin") and not inv:contains_item("armor", "shields:shield_bronze") then
 		if fr2 ~= nil then
 		player:hud_remove(fr2)
 		fr2 = nil
@@ -108,26 +109,26 @@ minetest.register_globalstep(function()
 		end
 		end
 		
-		if item == "shields:shield_cactus" and fr1 == nil or item == "shields:shield_cactus_enhanced" and fr1 == nil or item == "shields:shield_wood_enhanced" and fr1 == nil then
+		if inv:contains_item("armor", "shields:shield_cactus") and fr1 == nil or inv:contains_item("armor", "shields:shield_cactus_enhanced") and fr1 == nil or inv:contains_item("armor", "shields:shield_wood_enhanced") and fr1 == nil then
 			local timeoday = minetest.get_timeofday()
 			if timeoday >= 0.25 and timeoday <= 0.75 then
 			fr1 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 15,y = 15},
 			text = "hyruletools_shield_back_wood.png"
 			})
 			else
 			fr1 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 15,y = 15},
 			text = "hyruletools_shield_back_wood.png^[colorize:black:200"
 			})
 			end
 			local player_armor = player:get_armor_groups().fleshy
 			player:set_armor_groups({fleshy=player_armor+5})
-		elseif item ~= "shields:shield_cactus" and item ~= "shields:shield_wood_enhanced" and item ~= "shields:shield_cactus_enhanced" then
+		elseif not inv:contains_item("armor", "shields:shield_cactus") and not inv:contains_item("armor", "shields:shield_cactus_enhanced") and not inv:contains_item("armor", "shields:shield_wood_enhanced") then
 		if fr1 ~= nil then
 		player:hud_remove(fr1)
 		fr1 = nil
@@ -136,26 +137,26 @@ minetest.register_globalstep(function()
 		end
 		end
 		
-		if item == "hyruletools:shield_classic" and fr0 == nil then
+		if inv:contains_item("armor", "hyruletools:shield_classic") and fr0 == nil then
 			local timeoday = minetest.get_timeofday()
 			if timeoday >= 0.25 and timeoday <= 0.75 then
 			fr0 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 15,y = 15},
 			text = "hyruletools_shield_back_classic.png"
 			})
 			else
 			fr0 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 15,y = 15},
 			text = "hyruletools_shield_back_classic.png^[colorize:black:200"
 			})
 			end
 			local player_armor = player:get_armor_groups().fleshy
 			player:set_armor_groups({fleshy=player_armor+10})
-		elseif item ~= "hyruletools:shield_classic" then
+		elseif not inv:contains_item("armor", "hyruletools:shield_classic") then
 		if fr0 ~= nil then
 		player:hud_remove(fr0)
 		fr0 = nil
@@ -164,26 +165,26 @@ minetest.register_globalstep(function()
 		end
 		end
 		
-		if item == "shields:shield_wood" and fr4 == nil then
+		if inv:contains_item("armor", "shields:shield_wood") and fr4 == nil then
 			local timeoday = minetest.get_timeofday()
 			if timeoday >= 0.25 and timeoday <= 0.75 then
 			fr4 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 21,y = 21},
 			text = "hyruletools_shield_back_deku.png"
 			})
 			else
 			fr4 = player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.9, y = 0.9},
+			position = {x = 0.1, y = 0.9},
 			scale = {x = 21,y = 21},
 			text = "hyruletools_shield_back_deku.png^[colorize:black:200"
 			})
 			end
 			local player_armor = player:get_armor_groups().fleshy
 			player:set_armor_groups({fleshy=player_armor+5})
-		elseif item ~= "shields:shield_wood" then
+		elseif not inv:contains_item("armor", "shields:shield_wood") then
 		if fr4 ~= nil then
 		player:hud_remove(fr4)
 		fr4 = nil
