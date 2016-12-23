@@ -705,7 +705,7 @@ minetest.register_node("hyrule_mapgen:deku_flower", {
 	description = "Deku Flower",
 	drawtype = "mesh",
 	mesh = "flatnode.b3d",
-	visual_size = {x=1.2, y=1.2},
+	visual_size = {x=1.3, y=1.3},
 	tiles = {"hyrule_mapgen_dekuflower.png"},
 	inventory_image = "hyrule_mapgen_dekuflower.png",
 	paramtype = "light",

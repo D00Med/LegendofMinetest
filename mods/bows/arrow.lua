@@ -100,6 +100,16 @@ minetest.register_entity("bows:arrow",{
 			if self.timer<0 then
 				bows.arrow_remove(self)
 			end
+			local pos = self.object:getpos()
+			local objs = minetest.get_objects_inside_radius(pos, 1.3)
+			for _, obj in ipairs(objs) do
+				if obj:is_player() then
+					local pname = obj:get_player_name()
+					local inv = minetest.get_inventory({type="player", name=pname});
+					local remov = inv:add_item("main", self.name)
+					bows.arrow_remove(self)
+				end
+			end
 			return self
 		end
 		local pos=self.object:getpos()

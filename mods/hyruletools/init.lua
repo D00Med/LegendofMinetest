@@ -195,6 +195,12 @@ minetest.register_globalstep(function()
 	end
 end)
 
+--added height in 3rd person
+
+minetest.register_on_joinplayer(function(player)
+	player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+end)
+
 
 --tools
 
@@ -3053,10 +3059,19 @@ minetest.register_tool("hyruletools:wand", {
 		},
 		damage_groups = {fleshy=0},
 	},
-	on_place = function(item, player, pointed)
-	local pos = player:getpos()
-	if pointed ~= nil then
-	 stack = minetest.place_node(pos, {name="default:ice"})
+	on_use = function(item, placer, pointed_thing)
+	local pos = placer:getpos()
+	if pointed_thing ~= nil then
+		local dir = placer:get_look_dir()
+		local obj =  minetest.env:add_entity({x=pos.x+dir.x, y=pos.y+dir.y+0.5, z=pos.z+dir.z}, "hyruletools:block_dummy")
+		obj:setvelocity({x=dir.x*8, y=dir.y*8, z=dir.z*8})
+		obj:set_properties({textures = {"default_ice.png"},})
+		obj:setacceleration({x=-dir.x*2, y=-8, z=-dir.z*2})
+		minetest.after(1, function()
+		local pos2 = obj:getpos()
+		obj:remove()
+		minetest.set_node(pos2, {name="default:ice"})
+		end)
 	 end
 end
 })
@@ -3250,4 +3265,11 @@ minetest.register_craftitem("hyruletools:letter_written", {
 	groups = {book = 1, not_in_creative_inventory = 1, flammable = 3},
 	stack_max = 1,
 	on_use = book_on_use,
+})
+
+minetest.register_craft({
+	output = 'hyruletools:letter',
+	recipe = {
+		{'default:paper', 'default:paper'},
+	}
 })

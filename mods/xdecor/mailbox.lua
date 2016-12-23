@@ -8,6 +8,10 @@ xdecor.register("mailbox", {
 	tiles = {
 		"mailbox.png",
 	},
+	selection_box = {
+	type = "fixed",
+	fixed = {-0.3, -0.5, -0.3, 0.3, 0.8, 0.3}
+	},
 	paramtype2= "facedir",
 	groups = {cracky=3, oddly_breakable_by_hand=1},
 	on_rotate = screwdriver.rotate_simple,

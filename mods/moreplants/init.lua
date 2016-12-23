@@ -8,8 +8,6 @@ minetest.register_node("moreplants:tallgrass", {
 	drawtype = "plantlike",
 	tiles = {"moreplants_longgrass.png"},
 	paramtype = "light",
-	paramtype2 = "meshoptions",
-	place_param2 = 3,
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
@@ -17,6 +15,7 @@ minetest.register_node("moreplants:tallgrass", {
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -24,20 +23,79 @@ minetest.register_node("moreplants:tallgrass", {
 	walkable = false,
 })
 
-minetest.register_node("moreplants:pink", {
+minetest.register_node("moreplants:pinkflower", {
 	description = "Pink Flower",
 	drawtype = "plantlike",
 	tiles = {"moreplants_pink.png"},
 	paramtype = "light",
-	paramtype2 = "meshoptions",
-	place_param2 = 4,
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
 	inventory_image = "moreplants_pink.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
+	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
+	},
+	walkable = false,
+})
+
+minetest.register_node("moreplants:seaweed1", {
+	description = "Tall Blue Seaweed",
+	drawtype = "plantlike",
+	tiles = {"moreplants_seaweed1.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	buildable_to = true, 
+	sunlight_propagates = true,
+	inventory_image = "moreplants_seaweed1.png",
+	visual_scale = 1.4,
+	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
+	},
+	walkable = false,
+})
+
+minetest.register_node("moreplants:seaweed2", {
+	description = "Tall Green Seaweed",
+	drawtype = "plantlike",
+	tiles = {"moreplants_seaweed2.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	buildable_to = true, 
+	sunlight_propagates = true,
+	inventory_image = "moreplants_seaweed2.png",
+	visual_scale = 1.4,
+	wield_scale = {x=0.5, y=0.5, z=0.5},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
+	},
+	walkable = false,
+})
+
+minetest.register_node("moreplants:seaweed3", {
+	description = "Tall Red Seaweed",
+	drawtype = "plantlike",
+	tiles = {"moreplants_seaweed3.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	buildable_to = true, 
+	sunlight_propagates = true,
+	inventory_image = "moreplants_seaweed3.png",
+	visual_scale = 1.4,
+	wield_scale = {x=0.5, y=0.5, z=0.5},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -57,6 +115,7 @@ minetest.register_node("moreplants:aliengrass", {
 	visual_scale = 1.54,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -78,6 +137,7 @@ minetest.register_node("moreplants:bulrush", {
 	visual_scale = 1.3,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -97,6 +157,7 @@ minetest.register_node("moreplants:bigfern", {
 	visual_scale = 1.5,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -109,8 +170,6 @@ minetest.register_node("moreplants:umbrella", {
 	drawtype = "plantlike",
 	tiles = {"moreplants_umbrella.png"},
 	paramtype = "light",
-	paramtype2 = "meshoptions",
-	place_param2 = 2,
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
@@ -118,6 +177,7 @@ minetest.register_node("moreplants:umbrella", {
 	visual_scale = 2,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 3, 0.3}
@@ -137,6 +197,7 @@ minetest.register_node("moreplants:bigflower", {
 	visual_scale = 1.2,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -156,6 +217,7 @@ minetest.register_node("moreplants:medflower", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -177,6 +239,7 @@ minetest.register_node("moreplants:weed", {
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
@@ -196,6 +259,7 @@ minetest.register_node("moreplants:stoneweed", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -215,6 +279,7 @@ minetest.register_node("moreplants:spikefern", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -234,6 +299,7 @@ minetest.register_node("moreplants:bluespike", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -253,6 +319,7 @@ minetest.register_node("moreplants:blueflower", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -272,6 +339,7 @@ minetest.register_node("moreplants:eyeweed", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	drop = "moreplants:eye",
 	selection_box = {
 		type = "fixed",
@@ -285,8 +353,6 @@ minetest.register_node("moreplants:fern", {
 	drawtype = "plantlike",
 	tiles = {"moreplants_fern.png"},
 	paramtype = "light",
-	paramtype2 = "meshoptions",
-	place_param2 = 4,
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
@@ -294,6 +360,7 @@ minetest.register_node("moreplants:fern", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -313,6 +380,7 @@ minetest.register_node("moreplants:bush", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -332,6 +400,7 @@ minetest.register_node("moreplants:cactus", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -352,6 +421,7 @@ minetest.register_node("moreplants:firefung", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, igniter=1, hot=3, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -371,6 +441,7 @@ minetest.register_node("moreplants:bluemush", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -392,6 +463,7 @@ minetest.register_node("moreplants:caveflower", {
 	light_source = 5,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -411,6 +483,7 @@ minetest.register_node("moreplants:moonflower", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3}
@@ -430,6 +503,7 @@ minetest.register_node("moreplants:fireflower", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
@@ -442,8 +516,6 @@ minetest.register_node("moreplants:deadweed", {
 	drawtype = "plantlike",
 	tiles = {"moreplants_deadweed.png"},
 	paramtype = "light",
-	paramtype2 = "meshoptions",
-	place_param2 = 3,
 	light_source = 5,
 	is_ground_content = false,
 	buildable_to = true, 
@@ -452,6 +524,7 @@ minetest.register_node("moreplants:deadweed", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
@@ -464,8 +537,6 @@ minetest.register_node("moreplants:taigabush", {
 	drawtype = "plantlike",
 	tiles = {"moreplants_tundrabush.png"},
 	paramtype = "light",
-	paramtype2 = "meshoptions",
-	place_param2 = 4,
 	light_source = 5,
 	is_ground_content = false,
 	buildable_to = true, 
@@ -474,6 +545,7 @@ minetest.register_node("moreplants:taigabush", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
@@ -503,6 +575,7 @@ minetest.register_node("moreplants:glowfung", {
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	walkable = false,
 })
 
@@ -518,6 +591,7 @@ minetest.register_node("moreplants:jungleflower", {
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.4, -0.5, -0.4, 0.4, 0.4, 0.4}
@@ -549,6 +623,7 @@ minetest.register_node("moreplants:mushroom", {
 		}
 	},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	light_source=2,
 })
 
@@ -564,6 +639,7 @@ minetest.register_node("moreplants:curly", {
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	drop = "moreplants:curlyfruit",
 	selection_box = {
 		type = "fixed",
@@ -584,6 +660,7 @@ minetest.register_node("moreplants:clover", {
 		"moreplants_clover.png"
 	},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
 	sunlight_propagates = true,
@@ -608,6 +685,7 @@ minetest.register_node("moreplants:groundfung", {
 		"moreplants_groundfung.png"
 	},
 	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
 	walkable = false,
@@ -620,6 +698,147 @@ minetest.register_node("moreplants:groundfung", {
 	},
 })
 
+
+minetest.register_node("moreplants:cavefern", {
+	description = "Cave Fern",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_cavefern.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_cavefern.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, 0.1, -0.5, 0.5, 0.5, 0.5}
+	},
+})
+
+minetest.register_node("moreplants:hangingplant", {
+	description = "Hanging Plant",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_hanging_plant.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_hanging_plant.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, 0.1, -0.5, 0.5, 0.5, 0.5}
+	},
+})
+
+minetest.register_node("moreplants:seaweed", {
+	description = "Seaweed",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_seaweed.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_seaweed.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.1, 0.5}
+	},
+})
+
+minetest.register_node("moreplants:coral", {
+	description = "Pink Coral",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_coral.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_coral.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.5, -0.2, 0.2, -0.1, 0.2}
+	},
+})
+
+minetest.register_node("moreplants:coral1", {
+	description = "Yellow Coral",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_coral1.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_coral1.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.5, -0.2, 0.2, -0.1, 0.2}
+	},
+})
+
+minetest.register_node("moreplants:coral2", {
+	description = "Blue Coral",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_coral2.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_coral2.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.5, -0.2, 0.2, -0.1, 0.2}
+	},
+})
+
+minetest.register_node("moreplants:pinkflower", {
+	description = "Pink Flower",
+	drawtype = "plantlike",
+	tiles = {
+		"moreplants_pinkflower.png",
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	walkable = false,
+	inventory_image = "moreplants_pinkflower.png",
+	paramtype = "light",
+	sunlight_propagates=true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.5, -0.2, 0.2, -0.1, 0.2}
+	},
+})
+
 --trees
 
 minetest.register_node("moreplants:palm", {
@@ -627,7 +846,7 @@ minetest.register_node("moreplants:palm", {
 	tiles = {"moreplants_palmtree_top.png", "moreplants_palmtree_top.png", "moreplants_palmtree.png"},
 	paramtype2 = "facedir",
 	is_ground_content = false,
-	groups = {tree = 1, choppy = 2, flammable = 2},
+	groups = {tree = 1, choppy = 2, flammable = 2, oddly_breakeable_by_hand=1},
 	sounds = default.node_sound_wood_defaults(),
 	drop = "default:tree",
 	drawtype = "nodebox",
@@ -725,16 +944,16 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass", "default:dirt_with_grass3",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
-	biomes = {"stone_grassland", "sandstone_grassland", "wild_forest"},
+	biomes = {"stone_grassland", "sandstone_grassland"},
 	decoration = "moreplants:tallgrass",
 	height = 1,
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.001,
 	biomes = {"stone_grassland", "sandstone_grassland"},
@@ -743,7 +962,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.02,
 	biomes = {"rainforest"},
@@ -752,7 +971,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
 	biomes = {"rainforest"},
@@ -761,7 +980,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass", "default:dirt_with_grass2",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
 	biomes = {"rainforest", "coniferous_forest"},
@@ -770,7 +989,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
 	biomes = {"rainforest"},
@@ -779,7 +998,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
 	biomes = {"rainforest"},
@@ -796,7 +1015,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt",
+	place_on = "default:water_source",
 	sidelen = 16,
 	fill_ratio = 0.005,
 	biomes = {"stone_grassland_ocean", "deciduous_forest_ocean"},
@@ -831,7 +1050,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 26,
 	fill_ratio = 0.005,
 	biomes = {"deciduous_forest"},
@@ -840,7 +1059,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 26,
 	fill_ratio = 0.005,
 	biomes = {"deciduous_forest"},
@@ -849,19 +1068,10 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass", "default:dirt_with_dry_grass",
-	sidelen = 26,
-	fill_ratio = 0.005,
-	biomes = {"deciduous_forest", "magic_forest"},
-	decoration = "moreplants:pink",
-	height = 1,
-})
-minetest.register_decoration({
-	deco_type = "simple",
-	place_on = "default:dirt_with_grass3",
+	place_on = "default:snow_block", "default:dirt_with_snow",
 	sidelen = 16,
 	fill_ratio = 0.005,
-	biomes = {"wild_forest"},
+	biomes = {"tundra", "wild_forest"},
 	decoration = "moreplants:moonflower",
 	height = 1,
 })
@@ -894,7 +1104,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass2",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.02,
 	biomes = {"coniferous_forest"},
@@ -903,7 +1113,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass2",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 26,
 	fill_ratio = 0.02,
 	biomes = {"coniferous_forest"},
@@ -912,7 +1122,7 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass2",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 26,
 	fill_ratio = 0.02,
 	biomes = {"coniferous_forest"},
@@ -921,11 +1131,21 @@ minetest.register_decoration({
 })
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = "default:dirt_with_grass", "default:dirt_with_dry_grass",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
 	sidelen = 16,
 	fill_ratio = 0.01,
 	biomes = {"deciduous_forest", "magic_forest"},
 	decoration = "moreplants:mushroom",
+	height = 1,
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = "default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3",
+	sidelen = 16,
+	fill_ratio = 0.01,
+	biomes = {"deciduous_forest", "magic_forest"},
+	decoration = "moreplants:pinkflower",
 	height = 1,
 })
 -- minetest.register_decoration({
@@ -977,7 +1197,7 @@ end
 local frequency = 200
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y > 0 or maxp.y < -20000 then
+	if maxp.y > 0 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area_under_air(minp, maxp,
@@ -994,6 +1214,70 @@ minetest.register_on_generated(function(minp, maxp)
 					minetest.add_node(pos, {name = "moreplants:caveflower"})
 				end
 			end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y > -50 then
+		return
+	end
+	local stone = minetest.find_nodes_in_area(minp, maxp,
+		{"default:dirt", "default:sand"})
+	for n = 1, #stone do
+		if math.random(1, 50) == 1 then
+			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
+			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_flowing" then
+				if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:seaweed1"})
+				elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:seaweed2"})
+				elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:seaweed3"})
+				end
+			end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y > -50 then
+		return
+	end
+	local stone = minetest.find_nodes_in_area(minp, maxp,
+		{"default:dirt", "default:sand"})
+	for n = 1, #stone do
+		if math.random(1, 50) == 1 then
+			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
+			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_flowing" then
+				if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:coral"})
+				elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:coral1"})
+				elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:coral2"})
+				end
+			end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -100 then
+		return
+	end
+	local stone = minetest.find_nodes_in_area(minp, maxp,
+		{"default:stone"})
+	for n = 1, #stone do
+		if math.random(1, 50) == 1 then
+			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "moreplants:hangingplant"})
+					else
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "moreplants:cavefern"})
+					end
+				end
 		end
 	end
 end)
