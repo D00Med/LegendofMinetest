@@ -57,7 +57,7 @@ if mobs.mod and mobs.mod == "redo" then
 		
 		end,
 		sounds = {
-			random = "mobs_fairy",
+			random = "fairy",
 		},
 		fly = true,
 		water_damage = 2,
