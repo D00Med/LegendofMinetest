@@ -27,6 +27,7 @@ mobs:register_mob("mobs_loz:leever", {
 	do_custom = function(self)
 		if not self.active then
 		minetest.after(10, function()
+		if self.object ~= nil and self.object:getpos() ~= nil then
 		local pos = self.object:getpos()
 			minetest.add_particlespawner({
 			amount = 10,
@@ -48,6 +49,7 @@ mobs:register_mob("mobs_loz:leever", {
 		minetest.after(1, function()
 			self.object:remove()
 		end)
+		end
 		end)
 		self.active = true
 		end
@@ -71,7 +73,7 @@ mobs:register_mob("mobs_loz:leever", {
 		walk_start = 3,
 		walk_end = 16,
 		run_start = 3,
-		run_end = 16,
+		run_end = 17,
 		punch_start = 3,
 		punch_end = 16,
 	},
