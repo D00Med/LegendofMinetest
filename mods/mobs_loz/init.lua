@@ -23,4 +23,5 @@ dofile(path.."/madscrub.lua")
 dofile(path.."/mimic.lua") 
 dofile(path.."/zol.lua") 
 dofile(path.."/moldorm.lua") 
+dofile(path.."/leever.lua")
 end
