@@ -331,6 +331,22 @@ function check_for_death(self)
 	-- drop items when dead
 	local obj
 	local pos = self.object:getpos()
+	local part = minetest.add_particlespawner(
+			15, --amount
+			0.5, --time
+			{x=pos.x-0.5, y=pos.y, z=pos.z-0.5}, --minpos
+			{x=pos.x+0.5, y=pos.y+1, z=pos.z+0.5}, --maxpos
+			{x=0, y=0, z=0}, --minvel
+			{x=0, y=1.2, z=0}, --maxvel
+			{x=0,y=3,z=0}, --minacc
+			{x=0,y=4,z=0}, --maxacc
+			0.3, --minexptime
+			0.7, --maxexptime
+			3, --minsize
+			5, --maxsize
+			false, --collisiondetection
+			"mobs_sparkle.png" --texture
+		)
 
 	for n = 1, #self.drops do
 
@@ -372,7 +388,7 @@ function check_for_death(self)
 
 	-- default death function
 	self.object:remove()
-
+	
 	effect(pos, 20, "tnt_smoke.png")
 
 	return true

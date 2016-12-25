@@ -69,7 +69,7 @@ minetest.register_globalstep(function(dtime)
 							size = math.random()+0.5,
 							collisiondetection = true,
 							vertical = false,
-							texture = "sprint_particle.png",
+							texture = "default_dirt.png",
 						})
 					end
 				end

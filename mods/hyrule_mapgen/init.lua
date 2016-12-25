@@ -810,6 +810,83 @@ minetest.register_abm({
 	end
 })
 
+minetest.register_node("hyrule_mapgen:leaves_with_gale", {
+	description = "Leaves with Gale seed",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"default_leaves.png^hyrule_mapgen_galeseed.png"
+	},
+	drop = "default:leaves",
+	on_rightclick = function(pos, node, clicker, itemstack)
+		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
+		local item = clicker:get_wielded_item()
+		itemstack:take_item()
+		minetest.env:add_item(pos, "hyruletools:seed_gale")
+		minetest.env:set_node(pos, {name="default:leaves"})
+		end
+	end,
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+})
+
+minetest.register_node("hyrule_mapgen:leaves_with_ember", {
+	description = "Leaves with Ember seed",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"default_pine_needles.png^hyrule_mapgen_emberseed.png"
+	},
+	drop = "default:pine_needles",
+	on_rightclick = function(pos, node, clicker, itemstack)
+		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
+		local item = clicker:get_wielded_item()
+		itemstack:take_item()
+		minetest.env:add_item(pos, "hyruletools:seed_ember")
+		minetest.env:set_node(pos, {name="default:pine_needles"})
+		end
+	end,
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+})
+
+minetest.register_node("hyrule_mapgen:leaves_with_pegasus", {
+	description = "Leaves with Pegasus seed",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"default_jungleleaves.png^hyrule_mapgen_pegasusseed.png"
+	},
+	drop = "default:jungleleaves",
+	on_rightclick = function(pos, node, clicker, itemstack)
+		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
+		local item = clicker:get_wielded_item()
+		itemstack:take_item()
+		minetest.env:add_item(pos, "hyruletools:seed_pegasus")
+		minetest.env:set_node(pos, {name="default:jungleleaves"})
+		end
+	end,
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+})
+
+minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
+	description = "Leaves with Mystery seed",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"default_aspen_leaves.png^hyrule_mapgen_mysteryseed.png"
+	},
+	drop = "default:aspen_leaves",
+	on_rightclick = function(pos, node, clicker, itemstack)
+		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
+		local item = clicker:get_wielded_item()
+		itemstack:take_item()
+		minetest.env:add_item(pos, "hyruletools:seed_mystery")
+		minetest.env:set_node(pos, {name="default:aspen_leaves"})
+		end
+	end,
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+})
+
+
 
 minetest.register_node("hyrule_mapgen:sandstone", {
 	description = "Dungeon Sandstone",

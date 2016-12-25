@@ -43,7 +43,7 @@ minetest.register_node("default:torch", {
 	wield_image = "default_torch_on_floor.png",
 	tiles = {{
 		    name = "default_torch_on_floor_animated.png",
-		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1}
 	}},
 	paramtype = "light",
 	paramtype2 = "wallmounted",
@@ -91,7 +91,7 @@ minetest.register_node("default:torch_wall", {
 	mesh = "torch_wall.obj",
 	tiles = {{
 		    name = "default_torch_on_floor_animated.png",
-		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1}
 	}},
 	paramtype = "light",
 	paramtype2 = "wallmounted",
@@ -112,7 +112,7 @@ minetest.register_node("default:torch_ceiling", {
 	mesh = "torch_ceiling.obj",
 	tiles = {{
 		    name = "default_torch_on_floor_animated.png",
-		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1}
 	}},
 	paramtype = "light",
 	paramtype2 = "wallmounted",

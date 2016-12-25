@@ -21,4 +21,6 @@ dofile(path.."/octorock.lua")
 dofile(path.."/poe.lua") 
 dofile(path.."/madscrub.lua") 
 dofile(path.."/mimic.lua") 
+dofile(path.."/zol.lua") 
+dofile(path.."/moldorm.lua") 
 end

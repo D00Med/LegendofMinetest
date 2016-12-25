@@ -47,6 +47,24 @@ local text1 = player:hud_add({
 end)
 --]]
 
+--[[
+minetest.register_globalstep(function()
+	for _, player in ipairs(minetest.get_connected_players()) do	
+		local playername = player:get_player_name()
+		local inv = minetest.get_inventory({type="player", name=playername});
+		if inv:contains_item("main", "hyruletools:green_rupee") then
+		for num=1,10,1 do
+		local stack = inv:get_stack("main", num)
+		if stack:get_name() == "hyruletools:green_rupee" then
+			number = stack:get_count()
+		end
+		end
+		minetest.chat_send_all(number)
+		end
+	end
+end)
+]]
+
 --player effects
 
 playereffects.register_effect_type("potion_speed_lv1", "High speed", nil, {"speed"}, 
@@ -75,11 +93,12 @@ playereffects.register_effect_type("potion_antigrav_lvx", "Light weight", nil, {
 	false
 )
 
---shields
-
+--shields (currently disabled since there is no way to detect if there is 3rd person view or not)
+--[[
 minetest.register_globalstep(function()
-	for _, player in ipairs(minetest.get_connected_players()) do	
+	for _, player in ipairs(minetest.get_connected_players()) do
 		local playername = player:get_player_name()
+		if not default.player_attached[playername] then
 		local inv = minetest.get_inventory({type="player", name=playername});
 		if inv:contains_item("armor", "shields:shield_steel") and fr2 == nil or inv:contains_item("armor", "shields:shield_admin") and fr2 == nil or inv:contains_item("armor", "shields:shield_bronze") and fr2 == nil then
 			local timeoday = minetest.get_timeofday()
@@ -192,13 +211,16 @@ minetest.register_globalstep(function()
 			player:set_armor_groups({fleshy=player_armor-5})
 		end
 		end
+		end
 	end
 end)
+]]
 
 --added height in 3rd person
 
 minetest.register_on_joinplayer(function(player)
 	player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+	minetest.after(0, player.hud_set_hotbar_itemcount, player, 6)
 end)
 
 
@@ -247,6 +269,7 @@ minetest.register_tool("hyruletools:magglv_n", {
 		if ctrl.sneak then
 		itemstack:replace("hyruletools:magglv_s")
 		else
+		if pointed_thing.type == "node" then
 		local pos = pointed_thing.under
 		local dir = placer:get_look_dir()
 		if minetest.get_item_group(minetest.get_node(pos).name, "magnetic") ~= 0 and minetest.get_node_or_nil(pos) ~= nil then
@@ -262,6 +285,7 @@ minetest.register_tool("hyruletools:magglv_n", {
 		end)
 		end
 		end
+		end
 		return itemstack
 	end,
 })
@@ -275,6 +299,7 @@ minetest.register_tool("hyruletools:magglv_s", {
 		if ctrl.sneak then
 		itemstack:replace("hyruletools:magglv_n")
 		else
+		if pointed_thing.type == "node" then
 		local pos = pointed_thing.under
 		local dir = placer:get_look_dir()
 		if minetest.get_item_group(minetest.get_node(pos).name, "magnetic") ~= 0 and minetest.get_node_or_nil(pos) ~= nil then
@@ -288,6 +313,7 @@ minetest.register_tool("hyruletools:magglv_s", {
 		obj:remove()
 		minetest.set_node(pos2, {name=node})
 		end)
+		end
 		end
 		end
 		return itemstack

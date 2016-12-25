@@ -657,7 +657,20 @@ minetest.register_decoration({
 	place_on = {"default:dirt_with_grass", "default:dirt"},
 	sidelen = 80,
 	fill_ratio = 0.09,
-	biomes = {"rainforest", "rainforest_swamp"},
+	biomes = {"rainforest"},
+	y_min = 0,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/jungletree.mts",
+	flags = "place_center_x, place_center_z",
+	rotation = "random",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:dirt_with_grass", "default:dirt"},
+	sidelen = 80,
+	fill_ratio = 0.09,
+	biomes = {"rainforest_swamp"},
 	y_min = 0,
 	y_max = 31000,
 	schematic = minetest.get_modpath("default").."/schematics/jungle_tree.mts",
@@ -1006,6 +1019,92 @@ minetest.register_ore({
 	y_max          = -66,
 })
 
+--rupees
+
+minetest.register_node("hyrule_mapgen:stone_with_redrupee", {
+	description = "Buried red rupee",
+	tiles = {"default_stone.png^hyruletools_redrupee.png"},
+	groups = {cracky = 2, xp = 1},
+	drop = 'hyruletools:red_rupee',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("hyrule_mapgen:stone_with_bluerupee", {
+	description = "Buried blue rupee",
+	tiles = {"default_stone.png^hyruletools_bluerupee.png"},
+	groups = {cracky = 2, xp = 1},
+	drop = 'hyruletools:blue_rupee',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("hyrule_mapgen:stone_with_greenrupee", {
+	description = "Buried green rupee",
+	tiles = {"default_stone.png^hyruletools_greenrupee.png"},
+	groups = {cracky = 2, xp = 1},
+	drop = 'hyruletools:green_rupee',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:stone_with_redrupee",
+	wherein        = "default:stone",
+	clust_scarcity = 12 * 12 * 12,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	y_min          = -115,
+	y_max          = 30,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:stone_with_redrupee",
+	wherein        = "default:stone",
+	clust_scarcity = 9 * 9 * 9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	y_min          = -163,
+	y_max          = -46,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:stone_with_greenrupee",
+	wherein        = "default:stone",
+	clust_scarcity = 12 * 12 * 12,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	y_min          = -15,
+	y_max          = 2,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:stone_with_greenrupee",
+	wherein        = "default:stone",
+	clust_scarcity = 9 * 9 * 9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	y_min          = -63,
+	y_max          = -16,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:stone_with_bluerupee",
+	wherein        = "default:stone",
+	clust_scarcity = 12 * 12 * 12,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	y_min          = -150,
+	y_max          = 20,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:stone_with_bluerupee",
+	wherein        = "default:stone",
+	clust_scarcity = 9 * 9 * 9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	y_min          = -630,
+	y_max          = -26,
+})
+
 
 moreplants.mapgen()
 
@@ -1087,6 +1186,7 @@ minetest.register_on_newplayer(function(player)
 		minetest.after(2, function()
 		local pos = player:getpos()
 		minetest.place_schematic({x=pos.x, y=pos.y-1, z=pos.z}, minetest.get_modpath("hyrule_mapgen").."/schematics/village.mts", 0, {}, true)
+		minetest.env:add_entity({x=pos.x+14, y=pos.y+2, z=pos.z+24}, "mobs_npc:trader")
 		end)
 		end
 	end
