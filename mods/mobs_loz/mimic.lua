@@ -2,7 +2,7 @@
 -- edit of Dirt Monster by PilzAdam
 
 mobs:register_mob("mobs_loz:mimic", {
-	type = "monster",
+	type = "animal",
 	passive = false,
 	attack_type = "dogfight",
 	reach = 2,
@@ -21,9 +21,9 @@ mobs:register_mob("mobs_loz:mimic", {
 	sounds = {
 		random = "mobs_dirtmonster",
 	},
-	view_range = 2.5,
+	view_range = 3.5,
 	walk_velocity = 0.01,
-	run_velocity = 1,
+	run_velocity = 2,
 	jump = false,
 	jump_height = 0,
 	drops = {
@@ -38,7 +38,7 @@ mobs:register_mob("mobs_loz:mimic", {
 		minetest.env:add_entity(pos, "experience:orb")
 	end,
 	on_rightclick = function(self, clicker)
-		self.type = monster
+		self.type = "monster"
 	end,
 	water_damage = 1,
 	lava_damage = 5,

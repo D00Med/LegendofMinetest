@@ -368,7 +368,11 @@ function doors.register(name, def)
 	}
 
 	def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+		if minetest.get_node(pos).name ~= "doors:door_boss_locked_a" and minetest.get_node(pos).name ~= "doors:door_boss_locked_b" then
 		_doors.door_toggle(pos, node, clicker)
+		elseif clicker:get_wielded_item():get_name() == "hyruletools:key_boss" then
+		_doors.door_toggle(pos, node, clicker)
+		end
 		return itemstack
 	end
 	def.after_dig_node = function(pos, node, meta, digger)
@@ -458,6 +462,30 @@ doors.register("door_wood_2", {
 			{"default:junglewood", "default:junglewood"},
 			{"default:junglewood", "default:junglewood"},
 			{"default:junglewood", "default:junglewood"},
+		}
+})
+
+doors.register("door_boss", {
+		tiles = {{ name = "doors_door_boss.png", backface_culling = true }},
+		description = "Boss Door (unlocked)",
+		inventory_image = "doors_item_boss.png",
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+		recipe = {
+			{"default:junglewood", "default:junglewood"},
+			{"default:steel_ingot", "default:steel_ingot"},
+			{"default:junglewood", "default:junglewood"},
+		}
+})
+
+doors.register("door_boss_locked", {
+		tiles = {{ name = "doors_door_boss_locked.png", backface_culling = true }},
+		description = "Boss Door (locked)",
+		inventory_image = "doors_item_boss_locked.png",
+		groups = {choppy = 3, flammable = 2},
+		recipe = {
+			{"default:steel_ingot", "default:steel_ingot"},
+			{"default:junglewood", "default:junglewood"},
+			{"default:steel_ingot", "default:steel_ingot"},
 		}
 })
 
