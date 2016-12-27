@@ -348,6 +348,55 @@ minetest.register_entity("hyrule_mapgen:dragonfly", {
 
 --overrides
 
+minetest.override_item("flowers:waterlily", {
+	drawtype = "mesh",
+	tiles = {"waterlily.png"},
+	mesh = "waterlily.b3d",
+	paramtype = "light",
+	visual_scale = 0.5,
+})
+
+if minetest.setting_get("leaves_style") == "fancy" then
+minetest.override_item("default:leaves", {
+	drawtype = "mesh",
+	mesh = "leaf.b3d",
+	tiles = {"hyrule_mapgen_default_leaves.png"},
+	paramtype = "light",
+	visual_scale = 0.5,
+})
+
+minetest.override_item("default:aspen_leaves", {
+	drawtype = "mesh",
+	mesh = "leaf.b3d",
+	tiles = {"hyrule_mapgen_aspen_leaves.png"},
+	paramtype = "light",
+	visual_scale = 0.5,
+})
+minetest.override_item("default:jungleleaves", {
+	drawtype = "mesh",
+	mesh = "leaf.b3d",
+	tiles = {"hyrule_mapgen_jungleleaves.png"},
+	paramtype = "light",
+	visual_scale = 0.5,
+})
+end
+
+minetest.override_item("default:cactus", {
+	drawtype = "mesh",
+	mesh = "cactus.b3d",
+	tiles = {"cactus.png"},
+	paramtype = "light",
+	visual_scale = 0.5,
+	selection_box = {
+	type = "fixed",
+	fixed = {-0.4, -0.5, -0.4, 0.4, 0.5, 0.4},
+	},
+	collision_box = {
+	type = "fixed",
+	fixed = {-0.4, -0.5, -0.4, 0.4, 0.5, 0.4},
+	},
+})
+
 minetest.override_item("default:grass_1", {
 	on_destruct = function(pos, oldnode)
 		local num = math.random(3,5)
@@ -530,6 +579,48 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:spikes", {
+	description = "Spikes",
+	drawtype = "firelike",
+	tiles = {
+		"hyrule_mapgen_spikes.png"
+	},
+	wield_image = "hyrule_mapgen_spikes.png",
+	inventory_image = "hyrule_mapgen_spikes.png",
+	groups = {cracky=3},
+	paramtype = "light",
+	walkable = false,
+	damage_per_second = 3,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.3, 0.5}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.2, 0.5}
+	}
+})
+
+minetest.register_node("hyrule_mapgen:sinkingsand", {
+	description = "Sinkin Sand",
+	drawtype = "liquid",
+	tiles = {{
+		name = "hyrule_mapgen_sinkingsand.png",
+		animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
+	}},
+	inventory_image = "hyrule_mapgen_sinkingsand_inv.png",
+	groups = {liquid=1, water=1},
+	pointable = false,
+	buildable_to = true,
+	liquid_viscosity = 8,
+	liquid_range = 0,
+	liquidtype = "source",
+	liquid_alternative_flowing = "hyrule_mapgen:sinkingsand",
+	liquid_alternative_source = "hyrule_mapgen:sinkingsand",
+	damage_per_second = 3,
+	walkable = false
+})
+
 chest_items = {
 	{"hyruletools:clawshot"},
 	{"hyruletools:eye"},
@@ -578,6 +669,30 @@ minetest.register_node("hyrule_mapgen:chest", {
 			minetest.env:add_item(pos, item)
 			minetest.env:remove_node(pos)
 		end
+	end,
+})
+
+minetest.register_node("hyrule_mapgen:chest_key", {
+	description = "Dungeon Chest (key)",
+	tiles = {"hyrule_mapgen_chest_top.png", "hyrule_mapgen_chest_top.png", "hyrule_mapgen_chest_side.png",
+		"hyrule_mapgen_chest_side.png", "hyrule_mapgen_chest_side.png", "hyrule_mapgen_chest.png"},
+	paramtype2 = "facedir",
+	paramtype = "light",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	},
+	groups = {cracky = 2, oddly_breakable_by_hand = 1},
+	is_ground_content = false,
+	on_rightclick = function(pos, node, clicker, item, _)
+			minetest.env:add_item(pos, "hyruletoools:key")
+			minetest.env:remove_node(pos)
 	end,
 })
 
@@ -1017,6 +1132,42 @@ minetest.register_node("hyrule_mapgen:railblock", {
 	groups = {cracky=1, magnetic=0}
 })
 
+minetest.register_node("hyrule_mapgen:floortile", {
+	description = "Floor Tile",
+	tiles = {
+		"hyrule_mapgen_floortile.png"
+	},
+	groups = {cracky=1, magnetic=1}
+})
+
+minetest.register_node("hyrule_mapgen:floorbrick", {
+	description = "Floor Brick",
+	tiles = {
+		"hyrule_mapgen_brick.png"
+	},
+	groups = {cracky=1}
+})
+
+
+minetest.register_node("hyrule_mapgen:carpet", {
+	description = "Carpet Block",
+	tiles = {
+		"hyrule_mapgen_carpet.png"
+	},
+	groups = {fleshy=1, dig_immediate=3, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:carpet_trap", {
+	description = "Carpet Trap",
+	tiles = {
+		"hyrule_mapgen_carpet.png"
+	},
+	walkable = false,
+	damage_per_second = 3,
+	groups = {fleshy=1, dig_immediate=3, oddly_breakable_by_hand=1}
+})
+
+
 minetest.register_node("hyrule_mapgen:magnblock", {
 	description = "Magnetic Block (almost unbreakeable)",
 	tiles = {
@@ -1042,6 +1193,162 @@ minetest.register_craft({
 		{'', 'default:steel_ingot', ''},
 		{'default:steel_ingot', 'default:steel_ingot', ''},
 		{'', 'default:steel_ingot', ''},
+	}
+})
+
+local function open_door(pos, player)
+		if doors.get then
+				local pos1 = {x=pos.x+1, y=pos.y, z=pos.z+1}
+				local pos2 = {x=pos.x+1, y=pos.y, z=pos.z-1}
+				local pos3 = {x=pos.x-1, y=pos.y, z=pos.z+1}
+				local pos4 = {x=pos.x-1, y=pos.y, z=pos.z-1}
+				local door1 = doors.get(pos1)
+				if door1 ~= nil then
+				door1:toggle(player)
+				end
+				local door2 = doors.get(pos2)
+				if door2 ~= nil then
+				door2:toggle(player)
+				end
+				local door3 = doors.get(pos3)
+				if door3 ~= nil then
+				door3:toggle(player)
+				end
+				local door4 = doors.get(pos4)
+				if door4 ~= nil then
+				door4:toggle(player)
+				end
+		end
+end
+
+minetest.register_node("hyrule_mapgen:lamp", {
+	description = "Floor Lamp",
+	tiles = {
+		"hyrule_mapgen_lamptop.png",
+		"hyrule_mapgen_lamptop.png",
+		"hyrule_mapgen_lampside.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.375, -0.5, 0.375, 0.5, 0, 0.5}, -- NodeBox1
+			{0.375, -0.5, -0.5, 0.5, 0, -0.375}, -- NodeBox2
+			{-0.5, -0.5, -0.5, -0.375, 0, -0.375}, -- NodeBox3
+			{-0.5, -0.5, 0.375, -0.375, 0, 0.5}, -- NodeBox4
+			{-0.375, -0.5, -0.375, 0.375, -0.1875, 0.375}, -- NodeBox5
+			{-0.375, -0.375, -0.4375, 0.375, 0.1875, -0.3125}, -- NodeBox6
+			{-0.375, -0.375, 0.3125, 0.375, 0.1875, 0.4375}, -- NodeBox7
+			{0.3125, -0.375, -0.375, 0.4375, 0.1875, 0.375}, -- NodeBox8
+			{-0.4375, -0.375, -0.375, -0.3125, 0.1875, 0.375}, -- NodeBox9
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.0625, 0.1875}, -- NodeBox10
+			{-0.4375, -0.5, -0.4375, 0.4375, 0.0625, 0.4375}, -- NodeBox11
+		}
+	},
+	on_rightclick = function(pos, node, clicker, itemstack)
+		if clicker:get_wielded_item():get_name() == "hyruletools:lantern" then
+			minetest.set_node(pos, {name="hyrule_mapgen:lamp_lit"})
+			open_door(pos, clicker)
+		end
+	end,
+	groups = {cracky=1, falling_node=1},
+})
+
+minetest.register_node("hyrule_mapgen:lamp_lit", {
+	description = "Floor Lamp",
+	tiles = {
+		"hyrule_mapgen_lamptop.png",
+		"hyrule_mapgen_lamptop.png",
+		"hyrule_mapgen_lampside.png",
+	},
+	drawtype = "nodebox",
+	light_source = 10,
+	sunlight_propagates = false,
+	paramtype = "light",
+	drop = "hyrule_mapgen:lamp",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.375, -0.5, 0.375, 0.5, 0, 0.5}, -- NodeBox1
+			{0.375, -0.5, -0.5, 0.5, 0, -0.375}, -- NodeBox2
+			{-0.5, -0.5, -0.5, -0.375, 0, -0.375}, -- NodeBox3
+			{-0.5, -0.5, 0.375, -0.375, 0, 0.5}, -- NodeBox4
+			{-0.375, -0.5, -0.375, 0.375, -0.1875, 0.375}, -- NodeBox5
+			{-0.375, -0.375, -0.4375, 0.375, 0.1875, -0.3125}, -- NodeBox6
+			{-0.375, -0.375, 0.3125, 0.375, 0.1875, 0.4375}, -- NodeBox7
+			{0.3125, -0.375, -0.375, 0.4375, 0.1875, 0.375}, -- NodeBox8
+			{-0.4375, -0.375, -0.375, -0.3125, 0.1875, 0.375}, -- NodeBox9
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.0625, 0.1875}, -- NodeBox10
+			{-0.4375, -0.5, -0.4375, 0.4375, 0.0625, 0.4375}, -- NodeBox11
+		}
+	},
+	groups = {cracky=1, falling_node=1, not_in_creative_inventory=1},
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:lamp_lit"},
+	interval = 1,
+	chance = 1,
+	action = function(pos, node)
+		local part = minetest.add_particlespawner(
+			5, --amount
+			1, --time
+			{x=pos.x-0.1, y=pos.y, z=pos.z-0.1}, --minpos
+			{x=pos.x+0.1, y=pos.y+0.2, z=pos.z+0.1}, --maxpos
+			{x=-0, y=0.5, z=-0}, --minvel
+			{x=0, y=1, z=0}, --maxvel
+			{x=0,y=0.5,z=0}, --minacc
+			{x=0.5,y=0.5,z=0.5}, --maxacc
+			0.2, --minexptime
+			0.5, --maxexptime
+			4, --minsize
+			8, --maxsize
+			false, --collisiondetection
+			"hyrule_mapgen_flame.png" --texture
+		)
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:lamp_lit"},
+	interval = 30,
+	chance = 1,
+	action = function(pos, node)
+		minetest.set_node(pos, {name="hyrule_mapgen:lamp"})
+	end
+})
+
+minetest.register_node("hyrule_mapgen:rock", {
+	description = "Rock",
+	tiles = {
+		"hyrule_mapgen_rock.png",
+		"hyrule_mapgen_rock.png",
+		"hyrule_mapgen_rock.png",
+		"hyrule_mapgen_rock.png",
+		"hyrule_mapgen_rock.png",
+		"hyrule_mapgen_rock.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=1, falling_node=1},
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,5)
+		if num == 5 then
+		minetest.env:add_item({x=pos.x, y=pos.y+0.5, z=pos.z}, "hyruletools:green_rupee")
+		end
+	end,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.3125, -0.4375, 0.3125}, -- NodeBox1
+			{-0.4375, -0.4375, -0.3125, 0.375, -0.125, 0.25}, -- NodeBox2
+			{-0.3125, -0.125, -0.375, 0.25, -0.0625, 0.3125}, -- NodeBox3
+			{-0.3125, -0.4375, -0.4375, 0.25, -0.125, 0.375}, -- NodeBox4
+			{-0.375, -0.4375, -0.375, 0.3125, -0.125, 0.3125}, -- NodeBox5
+			{-0.25, -0.0625, -0.3125, 0.1875, 0, 0.25}, -- NodeBox6
+			{-0.375, -0.125, -0.25, 0.3125, -0.0625, 0.1875}, -- NodeBox7
+		}
 	}
 })
 
@@ -1116,6 +1423,30 @@ minetest.register_node("hyrule_mapgen:dungeon_brick", {
 	description = "Dungeon Brick",
 	tiles = {
 		"hyrule_mapgen_dungeon_brick.png",
+	},
+	groups = {cracky=3},
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_barrier2", {
+	description = "Dungeon Barrier 2",
+	tiles = {
+		"hyrule_mapgen_dungeon_barrier2.png",
+	},
+	groups = {cracky=3},
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_tile2", {
+	description = "Dungeon Tile 2",
+	tiles = {
+		"hyrule_mapgen_dungeon_tile2.png",
+	},
+	groups = {cracky=3},
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_brick2", {
+	description = "Dungeon Brick 2",
+	tiles = {
+		"hyrule_mapgen_dungeon_brick2.png",
 	},
 	groups = {cracky=3},
 })
@@ -1559,6 +1890,16 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 	paramtype = "light",
 })
 
+if minetest.setting_get("leaves_style") == "fancy" then
+minetest.override_item("hyrule_mapgen:magic_leaves", {
+	drawtype = "mesh",
+	mesh = "leaf.b3d",
+	tiles = {"hyrule_mapgen_magic_leaves2.png"},
+	paramtype = "light",
+	visual_scale = 0.5,
+})
+end
+
 minetest.register_node("hyrule_mapgen:canopy_leaves", {
 	description = "canopy leaves",
 	drawtype = "allfaces_optional",
@@ -1642,6 +1983,16 @@ minetest.register_node("hyrule_mapgen:wild_leaves", {
 	groups = {snappy=3, flammable=1, oddly_breakable_by_hand = 1, leafdecay=3, leaves=1, not_in_creative_inventory=1},
 	paramtype = "light",
 })
+
+if minetest.setting_get("leaves_style") == "fancy" then
+minetest.override_item("hyrule_mapgen:wild_leaves", {
+	drawtype = "mesh",
+	mesh = "leaf.b3d",
+	tiles = {"hyrule_mapgen_wild_leaves2.png"},
+	paramtype = "light",
+	visual_scale = 0.5,
+})
+end
 
 minetest.register_craft({
 	output = "default:wood 4",

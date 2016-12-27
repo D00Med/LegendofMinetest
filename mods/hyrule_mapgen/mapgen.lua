@@ -1107,6 +1107,7 @@ minetest.register_ore({
 
 
 moreplants.mapgen()
+farming.register_mgv7_decorations()
 
 local frequency = 5
 

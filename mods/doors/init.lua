@@ -369,9 +369,15 @@ function doors.register(name, def)
 
 	def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		if minetest.get_node(pos).name ~= "doors:door_boss_locked_a" and minetest.get_node(pos).name ~= "doors:door_boss_locked_b" then
-		_doors.door_toggle(pos, node, clicker)
+			if minetest.get_node(pos).name ~= "doors:door_locked_a" and minetest.get_node(pos).name ~= "doors:door_locked_b" then
+			_doors.door_toggle(pos, node, clicker)
+			elseif clicker:get_wielded_item():get_name() == "hyruletools:key" then
+			_doors.door_toggle(pos, node, clicker)
+			itemstack:take_item()
+			end
 		elseif clicker:get_wielded_item():get_name() == "hyruletools:key_boss" then
 		_doors.door_toggle(pos, node, clicker)
+			itemstack:take_item()
 		end
 		return itemstack
 	end
@@ -474,6 +480,18 @@ doors.register("door_boss", {
 			{"default:junglewood", "default:junglewood"},
 			{"default:steel_ingot", "default:steel_ingot"},
 			{"default:junglewood", "default:junglewood"},
+		}
+})
+
+doors.register("door_locked", {
+		tiles = {{ name = "doors_door_locked.png", backface_culling = true }},
+		description = "Locked Door",
+		inventory_image = "doors_item_boss.png",
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+		recipe = {
+			{"default:wood", "default:wood"},
+			{"default:steel_ingot", "default:steel_ingot"},
+			{"default:wood", "default:wood"},
 		}
 })
 

@@ -220,7 +220,7 @@ end)
 
 minetest.register_on_joinplayer(function(player)
 	player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
-	minetest.after(0, player.hud_set_hotbar_itemcount, player, 6)
+	minetest.after(0, player.hud_set_hotbar_itemcount, player, 8)
 end)
 
 
@@ -496,34 +496,6 @@ minetest.register_craftitem("hyruletools:magic_powder", {
 			"hyruletools_powder4.png" --texture
 		)
 	end,
-})
-
-minetest.register_node("hyruletools:rock", {
-	description = "Rock",
-	tiles = {
-		"default_stone.png",
-		"default_stone.png",
-		"default_stone.png",
-		"default_stone.png",
-		"default_stone.png",
-		"default_stone.png"
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	groups = {cracky=1, falling_node=1},
-	drop = "hyruletools:green_rupee",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.375, 0.3125, -0.4375, 0.3125}, -- NodeBox1
-			{-0.4375, -0.4375, -0.3125, 0.375, -0.125, 0.25}, -- NodeBox2
-			{-0.3125, -0.125, -0.375, 0.25, -0.0625, 0.3125}, -- NodeBox3
-			{-0.3125, -0.4375, -0.4375, 0.25, -0.125, 0.375}, -- NodeBox4
-			{-0.375, -0.4375, -0.375, 0.3125, -0.125, 0.3125}, -- NodeBox5
-			{-0.25, -0.0625, -0.3125, 0.1875, 0, 0.25}, -- NodeBox6
-			{-0.375, -0.125, -0.25, 0.3125, -0.0625, 0.1875}, -- NodeBox7
-		}
-	}
 })
 
 minetest.register_craft({
@@ -2591,6 +2563,8 @@ minetest.register_node("hyruletools:swordstand", {
 		},
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	groups = {cracky=1},
@@ -2653,6 +2627,8 @@ minetest.register_node("hyruletools:swordstand_used", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2682,6 +2658,8 @@ minetest.register_node("hyruletools:swordstand_mese", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2711,6 +2689,8 @@ minetest.register_node("hyruletools:swordstand_diamond", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2740,6 +2720,8 @@ minetest.register_node("hyruletools:swordstand_steel", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2769,6 +2751,8 @@ minetest.register_node("hyruletools:swordstand_bronze", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2798,6 +2782,8 @@ minetest.register_node("hyruletools:swordstand_stone", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2827,6 +2813,8 @@ minetest.register_node("hyruletools:swordstand_wood", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2856,6 +2844,8 @@ minetest.register_node("hyruletools:swordstand_ruby", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2885,6 +2875,8 @@ minetest.register_node("hyruletools:swordstand_sapphire", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
@@ -2914,6 +2906,8 @@ minetest.register_node("hyruletools:swordstand_emerald", {
 	drawtype = "nodebox",
 	tiles = {
 	"hyruletools_stand.png",
+	"hyruletools_stand.png",
+	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
 	node_box = {
