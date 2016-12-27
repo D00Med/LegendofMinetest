@@ -354,6 +354,7 @@ minetest.override_item("flowers:waterlily", {
 	mesh = "waterlily.b3d",
 	paramtype = "light",
 	visual_scale = 0.5,
+	walkable = true,
 })
 
 if minetest.setting_get("leaves_style") == "fancy" then
@@ -363,6 +364,7 @@ minetest.override_item("default:leaves", {
 	tiles = {"hyrule_mapgen_default_leaves.png"},
 	paramtype = "light",
 	visual_scale = 0.5,
+	walkable = false,
 })
 
 minetest.override_item("default:aspen_leaves", {
@@ -371,6 +373,7 @@ minetest.override_item("default:aspen_leaves", {
 	tiles = {"hyrule_mapgen_aspen_leaves.png"},
 	paramtype = "light",
 	visual_scale = 0.5,
+	walkable = false,
 })
 minetest.override_item("default:jungleleaves", {
 	drawtype = "mesh",
@@ -378,6 +381,7 @@ minetest.override_item("default:jungleleaves", {
 	tiles = {"hyrule_mapgen_jungleleaves.png"},
 	paramtype = "light",
 	visual_scale = 0.5,
+	walkable = false,
 })
 end
 
@@ -666,7 +670,7 @@ minetest.register_node("hyrule_mapgen:chest", {
 			item:take_item()
 			local meta = minetest.get_meta(pos)
 			local item = meta:get_string("item")
-			minetest.env:add_item(pos, item)
+			minetest:add_item(pos, {name = item})
 			minetest.env:remove_node(pos)
 		end
 	end,
@@ -690,9 +694,10 @@ minetest.register_node("hyrule_mapgen:chest_key", {
 	},
 	groups = {cracky = 2, oddly_breakable_by_hand = 1},
 	is_ground_content = false,
-	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.env:add_item(pos, "hyruletoools:key")
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+			minetest:add_item(pos, {name = "hyruletoools:key"})
 			minetest.env:remove_node(pos)
+			return itemstack
 	end,
 })
 
@@ -941,6 +946,7 @@ minetest.register_node("hyrule_mapgen:leaves_with_gale", {
 		minetest.env:set_node(pos, {name="default:leaves"})
 		end
 	end,
+	walkable = false,
 	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
 })
 
@@ -960,6 +966,7 @@ minetest.register_node("hyrule_mapgen:leaves_with_ember", {
 		minetest.env:set_node(pos, {name="default:pine_needles"})
 		end
 	end,
+	walkable = false,
 	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
 })
 
@@ -979,6 +986,7 @@ minetest.register_node("hyrule_mapgen:leaves_with_pegasus", {
 		minetest.env:set_node(pos, {name="default:jungleleaves"})
 		end
 	end,
+	walkable = false,
 	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
 })
 
@@ -998,6 +1006,7 @@ minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
 		minetest.env:set_node(pos, {name="default:aspen_leaves"})
 		end
 	end,
+	walkable = false,
 	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
 })
 
@@ -1888,6 +1897,7 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 	},
 	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1, not_in_creative_inventory=1},
 	paramtype = "light",
+	walkable = false,
 })
 
 if minetest.setting_get("leaves_style") == "fancy" then
@@ -1908,6 +1918,7 @@ minetest.register_node("hyrule_mapgen:canopy_leaves", {
 	},
 	groups = {snappy=3, flammable=1, leaves=1, oddly_breakable_by_hand = 1, not_in_creative_inventory=1},
 	paramtype = "light",
+	walkable = false,
 })
 
 minetest.register_node("hyrule_mapgen:palm_tree", {
@@ -1982,6 +1993,7 @@ minetest.register_node("hyrule_mapgen:wild_leaves", {
 	inventory_image = "hyrule_mapgen_wild_leaves.png",
 	groups = {snappy=3, flammable=1, oddly_breakable_by_hand = 1, leafdecay=3, leaves=1, not_in_creative_inventory=1},
 	paramtype = "light",
+	walkable = false,
 })
 
 if minetest.setting_get("leaves_style") == "fancy" then

@@ -34,8 +34,9 @@ local revertsky = function()
 		return
 	end
 
-	for i = 1, table.getn(ps) do
-		ps[i].p:set_sky(ps[i].sky.bgcolor, ps[i].sky.type, ps[i].sky.textures)
+	for key, entry in pairs(ps) do
+		local sky = entry.sky
+		entry.p:set_sky(sky.bgcolor, sky.type, sky.textures)
 	end
 
 	ps = {}
@@ -130,11 +131,18 @@ lightning.strike = function(pos)
 
 	local playerlist = minetest.get_connected_players()
 	for i = 1, #playerlist do
+		local player = playerlist[i]
 		local sky = {}
-		sky.bgcolor, sky.type, sky.textures = playerlist[i]:get_sky()
-		table.insert(ps, { p = playerlist[i], sky = sky})
-		playerlist[i]:set_sky(0xffffff, "plain", {})
+
+		sky.bgcolor, sky.type, sky.textures = player:get_sky()
+
+		local name = player:get_player_name()
+		if ps[name] == nil then
+			ps[name] = {p = player, sky = sky}
+			player:set_sky(0xffffff, "plain", {})
+		end
 	end
+
 	-- trigger revert of skybox
 	ttl = 5
 
@@ -192,7 +200,7 @@ minetest.register_node("lightning:dying_flame", {
 	buildable_to = true,
 	sunlight_propagates = true,
 	damage_per_second = 4,
-	groups = {dig_immediate = 3, not_in_creative_inventory=1},
+	groups = {dig_immediate = 3},
 	on_timer = function(pos)
 		minetest.remove_node(pos)
 	end,
@@ -200,7 +208,9 @@ minetest.register_node("lightning:dying_flame", {
 
 	on_construct = function(pos)
 		minetest.get_node_timer(pos):start(rng:next(20, 40))
-		minetest.after(0.5, fire.on_flame_add_at, pos)
+		if fire and fire.on_flame_add_at then
+			minetest.after(0.5, fire.on_flame_add_at, pos)
+		end
 	end,
 })
 

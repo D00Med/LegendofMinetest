@@ -2,4 +2,5 @@ default
 doors
 tnt
 moreplants
+hyruletools
 farming

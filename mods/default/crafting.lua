@@ -316,41 +316,41 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	output = 'default:sword_steel',
-	recipe = {
-		{'default:steel_ingot'},
-		{'default:steel_ingot'},
-		{'group:stick'},
-	}
-})
+-- minetest.register_craft({
+	-- output = 'default:sword_steel',
+	-- recipe = {
+		-- {'default:steel_ingot'},
+		-- {'default:steel_ingot'},
+		-- {'group:stick'},
+	-- }
+-- })
 
-minetest.register_craft({
-	output = 'default:sword_bronze',
-	recipe = {
-		{'default:bronze_ingot'},
-		{'default:bronze_ingot'},
-		{'group:stick'},
-	}
-})
+-- minetest.register_craft({
+	-- output = 'default:sword_bronze',
+	-- recipe = {
+		-- {'default:bronze_ingot'},
+		-- {'default:bronze_ingot'},
+		-- {'group:stick'},
+	-- }
+-- })
 
-minetest.register_craft({
-	output = 'default:sword_mese',
-	recipe = {
-		{'default:mese_crystal'},
-		{'default:mese_crystal'},
-		{'group:stick'},
-	}
-})
+-- minetest.register_craft({
+	-- output = 'default:sword_mese',
+	-- recipe = {
+		-- {'default:mese_crystal'},
+		-- {'default:mese_crystal'},
+		-- {'group:stick'},
+	-- }
+-- })
 
-minetest.register_craft({
-	output = 'default:sword_diamond',
-	recipe = {
-		{'default:diamond'},
-		{'default:diamond'},
-		{'group:stick'},
-	}
-})
+-- minetest.register_craft({
+	-- output = 'default:sword_diamond',
+	-- recipe = {
+		-- {'default:diamond'},
+		-- {'default:diamond'},
+		-- {'group:stick'},
+	-- }
+-- })
 
 minetest.register_craft({
 	output = 'default:skeleton_key',

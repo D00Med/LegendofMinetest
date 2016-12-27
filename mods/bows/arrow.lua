@@ -3,15 +3,16 @@ bows.nothing=function(self,target,hp,user,lastpos)
 end
 
 bows.on_hit_object=function(self,target,hp,user,lastpos)
-	target:set_hp(target:get_hp()-hp)
-	target:punch(user,1, "default:sword_wood", nil)
-	if target:get_hp()>0 then
+	local hp2=target:get_hp()-hp
+	target:set_hp(hp2)
+	target:punch(user,1,{full_punch_interval=1,damage_groups={fleshy=4}},nil)
+	if hp2>0 then
 		local pos=self.object:getpos()
 		local opos=target:getpos()
 		local dir = user:get_look_dir()
 		self.object:set_attach(target, "", {x=(opos.x-pos.x)*4,y=(pos.y-opos.y)*4,z=(pos.z-opos.z)*4},{x=0,y=-90,z=0})
 	else
-		bows.arrow_remove(self)
+	bows.arrow_remove(self)
 	end
 	return self
 end
@@ -45,9 +46,9 @@ end
 
 bows.arrow_remove=function(self)
 	if self.object:get_attach() then self.object:set_detach() end
-	if self.target then self.target:punch(self.object, {full_punch_interval=1,damage_groups={fleshy=4}}, "default:bronze_pick", nil) end
+	if self.target then self.target:punch(self.object, 1,{full_punch_interval=1,damage_groups={fleshy=4}}, nil) end
 	self.object:set_hp(0)
-	self.object:punch(self.object, {full_punch_interval=1.0,damage_groups={fleshy=4}}, "bows:bow_wood", nil)
+	self.object:punch(self.object, 1,{full_punch_interval=1.0,damage_groups={fleshy=4}}, nil)
 	return self
 end
 
