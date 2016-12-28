@@ -3,7 +3,7 @@ mobs:register_mob("mobs_loz:tingle", {
 	hp_min = 13,
 	hp_max = 27,
 	armor = 90,
-	collisionbox = {-0.4, -0, -0.4, 0.4, 1.3, 0.4},
+	collisionbox = {-0.2, -0, -0.2, 0.2, 1.3, 0.2},
 	--visual_size = {x=1.5, y=1.5},
 	visual = "mesh",
 	mesh = "tingle.b3d",
