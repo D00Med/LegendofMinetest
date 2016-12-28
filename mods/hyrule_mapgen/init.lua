@@ -1207,26 +1207,15 @@ minetest.register_craft({
 
 local function open_door(pos, player)
 		if doors.get then
-				local pos1 = {x=pos.x+1, y=pos.y, z=pos.z+1}
-				local pos2 = {x=pos.x+1, y=pos.y, z=pos.z-1}
-				local pos3 = {x=pos.x-1, y=pos.y, z=pos.z+1}
-				local pos4 = {x=pos.x-1, y=pos.y, z=pos.z-1}
-				local door1 = doors.get(pos1)
-				if door1 ~= nil then
-				door1:toggle(player)
-				end
-				local door2 = doors.get(pos2)
-				if door2 ~= nil then
-				door2:toggle(player)
-				end
-				local door3 = doors.get(pos3)
-				if door3 ~= nil then
-				door3:toggle(player)
-				end
-				local door4 = doors.get(pos4)
-				if door4 ~= nil then
-				door4:toggle(player)
-				end
+				    local minp = {x=pos.x-5, y=pos.y, z=pos.z-5}
+    local maxp = {x=pos.x+5, y=pos.y, z=pos.z+5}
+    local doorss = minetest.find_nodes_in_area(minp, maxp, "group:door")
+    for i = 1, #doorss do
+       local dpos = {x=doorss[i].x, y=doorss[i].y, z=doorss[i].z}
+       local door = doors.get(dpos)
+       door:toggle(player)
+    end
+
 		end
 end
 
