@@ -1192,3 +1192,19 @@ minetest.register_on_newplayer(function(player)
 		end
 	end
 end)
+
+--dungeons
+--below ground
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y > -500 then
+		return
+	end
+	local stone = minetest.find_nodes_in_area(minp, maxp,
+		{"default:stone"})
+	for n = 1, #stone do
+		if math.random(1, 500000) == 1 then
+			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon_retro.mts", random, {}, true)
+		end
+	end
+end)

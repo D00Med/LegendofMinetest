@@ -3293,3 +3293,10 @@ minetest.register_craft({
 		{'default:paper', 'default:paper'},
 	}
 })
+
+
+minetest.register_craftitem("hyruletools:gameboy", {
+	description = "Gameboy",
+	inventory_image = "hyruletools_gameboy.png",
+	groups = {not_in_creative_inventory=1}
+})

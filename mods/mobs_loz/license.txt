@@ -23,9 +23,9 @@ License for Textures, Models
 
 CC-BY-SA 3.0 UNPORTED. Created by D00Med
 
-midna.b3d, subrosian.b3d, poe.b3d, octorock.b3d,  redead.png, armos.b3d, peahat.b3d CC-BY-SA 3.0 UNPORTED Created by toby109tt(aka tobyplowy) and D00Med(animation and textures)
+midna.b3d, subrosian.b3d, poe.b3d, octorock.b3d,  redead.png, armos.b3d, peahat.b3d, wolfos.b3d, tektite.b3d CC-BY-SA 3.0 UNPORTED Created by toby109tt(aka tobyplowy) and D00Med(animation and textures)
 
-mobs_subrosian.png, mobs_subrosian2.png, mobs_armos*.png, mobs_subrosian3.png - CC-BY-SA 3.0 UNPORTED Created by toby109tt(aka tobyplowy)
+mobs_subrosian.png, mobs_subrosian2.png, mobs_armos*.png, mobs_subrosian3.png, mobs_tektite.png, mobs_tektite2.png - CC-BY-SA 3.0 UNPORTED Created by toby109tt(aka tobyplowy)
 
 mobs_pig_angry_slow - 
 --From Warthog by KrupnoPavel, see license for mobs_animal and mobs_redo

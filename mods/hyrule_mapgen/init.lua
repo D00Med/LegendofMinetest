@@ -1036,6 +1036,67 @@ minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
 
 
 
+minetest.register_node("hyrule_mapgen:grupee", {
+	description = "Green Rupee Block",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"hyrule_mapgen_grupee.png"
+	},
+	use_texture_alpha = true,
+	groups = {cracky=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:rrupee", {
+	description = "Red Rupee Block",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"hyrule_mapgen_rrupee.png"
+	},
+	use_texture_alpha = true,
+	groups = {cracky=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:brupee", {
+	description = "Blue Rupee Block",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"hyrule_mapgen_brupee.png"
+	},
+	use_texture_alpha = true,
+	groups = {cracky=1, oddly_breakable_by_hand=1}
+})
+
+
+minetest.register_craft({
+	output = 'hyrule_mapgen:grupee',
+	recipe = {
+		{'hyruletools:green_rupee', 'hyruletools:green_rupee', 'hyruletools:green_rupee'},
+		{'hyruletools:green_rupee', 'hyruletools:green_rupee', 'hyruletools:green_rupee'},
+		{'hyruletools:green_rupee', 'hyruletools:green_rupee', 'hyruletools:green_rupee'},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyrule_mapgen:rrupee',
+	recipe = {
+		{'hyruletools:red_rupee', 'hyruletools:red_rupee', 'hyruletools:red_rupee'},
+		{'hyruletools:red_rupee', 'hyruletools:red_rupee', 'hyruletools:red_rupee'},
+		{'hyruletools:red_rupee', 'hyruletools:red_rupee', 'hyruletools:red_rupee'},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyrule_mapgen:brupee',
+	recipe = {
+		{'hyruletools:blue_rupee', 'hyruletools:blue_rupee', 'hyruletools:blue_rupee'},
+		{'hyruletools:blue_rupee', 'hyruletools:blue_rupee', 'hyruletools:blue_rupee'},
+		{'hyruletools:blue_rupee', 'hyruletools:blue_rupee', 'hyruletools:blue_rupee'},
+	}
+})
+
 minetest.register_node("hyrule_mapgen:sandstone", {
 	description = "Dungeon Sandstone",
 	tiles = {
