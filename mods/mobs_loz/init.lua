@@ -28,4 +28,5 @@ dofile(path.."/leever.lua")
 dofile(path.."/armos.lua")
 dofile(path.."/wolfos.lua")
 dofile(path.."/darknut.lua")
+dofile(path.."/tektite.lua")
 end

@@ -9,7 +9,7 @@ mobs:register_mob("mobs_loz:peahat", {
 	hp_min = 7,
 	hp_max = 12,
 	armor = 130,
-	collisionbox = {-0.3, 0, -0.3, 0.3, 0.5, 0.3},
+	collisionbox = {-0.4, 0, -0.4, 0.4, 1.2, 0.4},
 	visual = "mesh",
 	mesh = "peahat.b3d",
 	textures = {

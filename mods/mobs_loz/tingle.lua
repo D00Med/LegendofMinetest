@@ -1,5 +1,6 @@
 mobs:register_mob("mobs_loz:tingle", {
 	type = "animal",
+	passive = true,
 	hp_min = 13,
 	hp_max = 27,
 	armor = 90,
@@ -14,8 +15,9 @@ mobs:register_mob("mobs_loz:tingle", {
 	makes_footstep_sound = true,
 	view_range = 5,
 	walk_velocity = 1,
-	run_velocity = 4,
+	run_velocity = 6,
 	runaway = true,
+	runaway_timer = 30,
 	jump = false,
 	drops = {
 		{name = "hyruletools:nyan_rupee",
@@ -57,7 +59,7 @@ mobs:register_mob("mobs_loz:tingle", {
 	fear_height = 10,
 	animation = {
 		speed_normal = 12,
-		speed_run = 14,
+		speed_run = 24,
 		punch_start = 1,
 		punch_end = 20,
 		stand_start = 50,

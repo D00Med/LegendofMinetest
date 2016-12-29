@@ -121,7 +121,7 @@ minetest.register_abm({
 		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 		local above2 = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name
-		if above == "default:water_flowing" and below ~= "default:water_flowing" and above2 == "default:water_flowing" then
+		if above == "default:water_flowing" and below ~= "default:water_flowing" and above2 == "default:water_flowing" and minetest.find_nodes_in_area({x=pos.x-2, y=pos.y, z=pos.z-2}, {x=pos.x+2, y=pos.x+3, z=pos.z+2}, {"default:water_source"}) ~= nil then
 		minetest.add_particlespawner({
 			amount = 9,
 			time = 1,
@@ -357,7 +357,7 @@ minetest.override_item("flowers:waterlily", {
 	walkable = true,
 })
 
-if minetest.setting_get("leaves_style") == "fancy" then
+if minetest.setting_getbool("3d_leaves") then
 minetest.override_item("default:leaves", {
 	drawtype = "mesh",
 	mesh = "leaf.b3d",
@@ -407,7 +407,11 @@ minetest.override_item("default:grass_1", {
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
+		if num == 4 then
+		minetest.env:add_item(pos, "farming:seed_wheat")
+		end
 	end,
+	drop = "",
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
@@ -420,12 +424,17 @@ minetest.override_item("default:grass_2", {
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
+		if num == 4 then
+		minetest.env:add_item(pos, "farming:seed_wheat")
+		end
 	end,
+	drop = "",
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
 	},
 })
+
 
 minetest.override_item("default:grass_3", {
 	on_destruct = function(pos, oldnode)
@@ -433,7 +442,11 @@ minetest.override_item("default:grass_3", {
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
+		if num == 4 then
+		minetest.env:add_item(pos, "farming:seed_wheat")
+		end
 	end,
+	drop = "",
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
@@ -446,7 +459,11 @@ minetest.override_item("default:grass_4", {
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
+		if num == 4 then
+		minetest.env:add_item(pos, "farming:seed_wheat")
+		end
 	end,
+	drop = "",
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
@@ -459,12 +476,17 @@ minetest.override_item("default:grass_5", {
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
+		if num == 4 then
+		minetest.env:add_item(pos, "farming:seed_wheat")
+		end
 	end,
+	drop = "",
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
 	},
 })
+
 
 minetest.override_item("default:ice", {
 	drawtype = "glasslike",
@@ -625,6 +647,8 @@ minetest.register_node("hyrule_mapgen:sinkingsand", {
 	walkable = false
 })
 
+
+--used for testing
 chest_items = {
 	{"hyruletools:clawshot"},
 	{"hyruletools:eye"},
@@ -670,7 +694,7 @@ minetest.register_node("hyrule_mapgen:chest", {
 			item:take_item()
 			local meta = minetest.get_meta(pos)
 			local item = meta:get_string("item")
-			minetest:add_item(pos, {name = item})
+			minetest.env:add_item(pos, item)
 			minetest.env:remove_node(pos)
 		end
 	end,
@@ -695,7 +719,7 @@ minetest.register_node("hyrule_mapgen:chest_key", {
 	groups = {cracky = 2, oddly_breakable_by_hand = 1},
 	is_ground_content = false,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-			minetest:add_item(pos, {name = "hyruletoools:key"})
+			minetest.env:add_item(pos, "hyruletools:key")
 			minetest.env:remove_node(pos)
 			return itemstack
 	end,
@@ -1402,7 +1426,7 @@ minetest.register_node("hyrule_mapgen:stone_with_greenrupee", {
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_barrier", {
-	description = "Dungeon Barrier",
+	description = "Retro Dungeon Barrier",
 	tiles = {
 		"hyrule_mapgen_dungeon_barrier.png",
 	},
@@ -1410,7 +1434,7 @@ minetest.register_node("hyrule_mapgen:dungeon_barrier", {
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_tile", {
-	description = "Dungeon Tile",
+	description = "Retro Dungeon Tile",
 	tiles = {
 		"hyrule_mapgen_dungeon_tile.png",
 	},
@@ -1418,7 +1442,7 @@ minetest.register_node("hyrule_mapgen:dungeon_tile", {
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_brick", {
-	description = "Dungeon Brick",
+	description = "Retro Dungeon Brick",
 	tiles = {
 		"hyrule_mapgen_dungeon_brick.png",
 	},
@@ -1426,7 +1450,7 @@ minetest.register_node("hyrule_mapgen:dungeon_brick", {
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_barrier2", {
-	description = "Dungeon Barrier 2",
+	description = "Retro Dungeon Barrier 2",
 	tiles = {
 		"hyrule_mapgen_dungeon_barrier2.png",
 	},
@@ -1434,7 +1458,7 @@ minetest.register_node("hyrule_mapgen:dungeon_barrier2", {
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_tile2", {
-	description = "Dungeon Tile 2",
+	description = "Retro Dungeon Tile 2",
 	tiles = {
 		"hyrule_mapgen_dungeon_tile2.png",
 	},
@@ -1442,7 +1466,7 @@ minetest.register_node("hyrule_mapgen:dungeon_tile2", {
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_brick2", {
-	description = "Dungeon Brick 2",
+	description = "Retro Dungeon Brick 2",
 	tiles = {
 		"hyrule_mapgen_dungeon_brick2.png",
 	},
@@ -1889,7 +1913,7 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 	walkable = false,
 })
 
-if minetest.setting_get("leaves_style") == "fancy" then
+if minetest.setting_getbool("3d_leaves") then
 minetest.override_item("hyrule_mapgen:magic_leaves", {
 	drawtype = "mesh",
 	mesh = "leaf.b3d",
@@ -1985,7 +2009,7 @@ minetest.register_node("hyrule_mapgen:wild_leaves", {
 	walkable = false,
 })
 
-if minetest.setting_get("leaves_style") == "fancy" then
+if minetest.setting_getbool("3d_leaves") then
 minetest.override_item("hyrule_mapgen:wild_leaves", {
 	drawtype = "mesh",
 	mesh = "leaf.b3d",

@@ -98,7 +98,7 @@ mobs:register_mob("mobs_loz:octorock_boss", {
 	hp_max = 35,
 	armor = 80,
 	collisionbox = {-1, 0, -1, 1, 2, 1},
-	visual_size = {x=3.5, y=3.5},
+	visual_size = {x=3.6, y=3.6},
 	visual = "mesh",
 	mesh = "octorock.b3d",
 	textures = {
@@ -143,4 +143,4 @@ mobs:register_mob("mobs_loz:octorock_boss", {
 
 --mobs:register_spawn("mobs_loz:octorock_boss", {"default:sand", "default:dirt_with_grass3", "default:desert_sand"}, 20, 10, 15000, 2, 31000)
 
-mobs:register_egg("mobs_loz:octorock_boss", "Giant Octorock", "default_sand.png", 1)
+mobs:register_egg("mobs_loz:octorock_boss", "Big Octorock", "default_sand.png", 1)
