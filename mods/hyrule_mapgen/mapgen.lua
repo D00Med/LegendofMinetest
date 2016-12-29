@@ -1048,7 +1048,7 @@ minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "hyrule_mapgen:stone_with_redrupee",
 	wherein        = "default:stone",
-	clust_scarcity = 12 * 12 * 12,
+	clust_scarcity = 24 * 24 * 24,
 	clust_num_ores = 3,
 	clust_size     = 2,
 	y_min          = -115,
@@ -1058,7 +1058,7 @@ minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "hyrule_mapgen:stone_with_redrupee",
 	wherein        = "default:stone",
-	clust_scarcity = 9 * 9 * 9,
+	clust_scarcity = 16 * 16 * 16,
 	clust_num_ores = 5,
 	clust_size     = 3,
 	y_min          = -163,
@@ -1068,7 +1068,7 @@ minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "hyrule_mapgen:stone_with_greenrupee",
 	wherein        = "default:stone",
-	clust_scarcity = 12 * 12 * 12,
+	clust_scarcity = 24 * 24 * 24,
 	clust_num_ores = 3,
 	clust_size     = 2,
 	y_min          = -15,
@@ -1078,7 +1078,7 @@ minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "hyrule_mapgen:stone_with_greenrupee",
 	wherein        = "default:stone",
-	clust_scarcity = 9 * 9 * 9,
+	clust_scarcity = 16 * 16 * 16,
 	clust_num_ores = 5,
 	clust_size     = 3,
 	y_min          = -63,
@@ -1088,7 +1088,7 @@ minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "hyrule_mapgen:stone_with_bluerupee",
 	wherein        = "default:stone",
-	clust_scarcity = 12 * 12 * 12,
+	clust_scarcity = 24 * 24 * 24,
 	clust_num_ores = 3,
 	clust_size     = 2,
 	y_min          = -150,
@@ -1098,7 +1098,7 @@ minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "hyrule_mapgen:stone_with_bluerupee",
 	wherein        = "default:stone",
-	clust_scarcity = 9 * 9 * 9,
+	clust_scarcity = 16 * 16 * 16,
 	clust_num_ores = 5,
 	clust_size     = 3,
 	y_min          = -630,
@@ -1195,6 +1195,9 @@ end)
 
 --dungeons
 --below ground
+
+local dungeon_rarity = 5000000
+
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y > -500 then
 		return
@@ -1202,9 +1205,10 @@ minetest.register_on_generated(function(minp, maxp)
 	local stone = minetest.find_nodes_in_area(minp, maxp,
 		{"default:stone"})
 	for n = 1, #stone do
-		if math.random(1, 500000) == 1 then
+		if math.random(1, dungeon_rarity) == 1 then
 			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon_retro.mts", random, {}, true)
+				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
 		end
 	end
 end)

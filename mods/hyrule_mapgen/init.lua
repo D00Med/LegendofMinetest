@@ -650,9 +650,12 @@ minetest.register_node("hyrule_mapgen:sinkingsand", {
 
 --used for testing
 chest_items = {
-	{"hyruletools:clawshot"},
-	{"hyruletools:eye"},
-	{"hyruletools:boomerang"},
+	{"hyruletools:clawshot", 20},
+	{"hyruletools:eye", 20},
+	{"hyruletools:boomerang", 20},
+	{"hyruletools:green_rupee 5", 10},
+	{"hyruletools:blue_rupee 2", 10},
+	{"hyruletools:red_rupee", 10},
 }
 
 minetest.register_node("hyrule_mapgen:chest", {
@@ -678,8 +681,11 @@ minetest.register_node("hyrule_mapgen:chest", {
 		local inv = meta:get_inventory()
 		for _, row in ipairs(chest_items) do
 		local item = row[1]
-		if math.random(1,5) == 1 then
+		local rarity = row[2]
+		if math.random(1,rarity) == 1 then
 			meta:set_string("item", item)
+			else
+			meta:set_string("item", "hyruletools:green_rupee")
 		end
 		end
 		inv:set_size("main", 1*1)
