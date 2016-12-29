@@ -851,11 +851,28 @@ playereffects.register_effect_type("float", "", nil, {"gravity"},
 	false
 )
 
+minetest.register_node("hyrule_mapgen:fallen_leaves", {
+	description = "Fallen Leaves",
+	tiles = {
+		"hyrule_mapgen_leaves.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	place_param2 = random,
+	groups = {snappy=2, oddly_breakable_by_hand=1, dig_immediate=3},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.45, 0.5},
+		}
+	}
+})
+
 minetest.register_node("hyrule_mapgen:deku_flower", {
 	description = "Deku Flower",
 	drawtype = "mesh",
 	mesh = "flatnode.b3d",
-	visual_size = {x=1.3, y=1.3},
 	tiles = {"hyrule_mapgen_dekuflower.png"},
 	inventory_image = "hyrule_mapgen_dekuflower.png",
 	paramtype = "light",
