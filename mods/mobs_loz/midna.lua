@@ -64,7 +64,7 @@ mobs:register_mob("mobs_loz:midna", {
 		local player = clicker:get_player_name()
 			if self.order == "follow" then
 				self.order = "stand"
-				minetest.chat_send_player(player, "I will stay here")
+				minetest.chat_send_player(player, "Midna is following")
 			else
 				self.order = "follow"
 				minetest.chat_send_player(player, "Midna is wandering")

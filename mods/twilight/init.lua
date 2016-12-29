@@ -230,6 +230,7 @@ minetest.register_craftitem("twilight:crystal", {
 	local obj = minetest.env:add_entity({x=pos.x, y=pos.y+2, z=pos.z}, "mobs_loz:midna")
 	local midna = obj:get_luaentity()
 	midna.owner = placer
+	midna.tamed = true
 	midna_spawned = true
 	end
 	return itemstack
