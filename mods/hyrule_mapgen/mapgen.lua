@@ -1193,6 +1193,26 @@ minetest.register_on_newplayer(function(player)
 	end
 end)
 
+--villages
+
+local village_rarity = 50000
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -1 or maxp.y > 31000 then
+		return
+	end
+	local grass = minetest.find_nodes_in_area(minp, maxp,
+		{"hyrule_mapgen:dirt_with_grass2"})
+	for n = 1, #grass do
+		if math.random(1, village_rarity) == 1 then
+			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
+				if minetest.get_node({x=pos.x+2, y=pos.y, z=pos.z+5}) == "hyrule_mapgen:dirt_with_grass2" then
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/pine_village.mts", random, {}, true)
+				end
+		end
+	end
+end)
+
 --dungeons
 --below ground
 

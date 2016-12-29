@@ -1441,6 +1441,23 @@ minetest.register_node("hyrule_mapgen:rock", {
 	}
 })
 
+minetest.register_node("hyrule_mapgen:packed_dirt", {
+	description = "Packed Dirt",
+	tiles = {
+		"default_dirt.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	drop = "default:dirt",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.4, 0.5},
+		}
+	}
+})
+
 minetest.register_node("hyrule_mapgen:wallring", {
 	description = "Wall Ring",
 	tiles = {

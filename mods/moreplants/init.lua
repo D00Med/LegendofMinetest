@@ -907,23 +907,41 @@ minetest.register_node("moreplants:junglevine", {
 	sunlight_propagates = false,
 	walkable = false,
 	climbable = true,
+	drop = "moreplants:junglevine2",
 	node_box = {
 		type = "fixed",
 		fixed = {{-0.5, -0.5, -0.5, 0.5, 0.5, -0.4}}
 	},
+	groups = {cracky=3, dig_immediate=3, oddly_breakeable_by_hand=1, not_in_creative_inventory=1},
+})
+
+minetest.register_node("moreplants:junglevine2", {
+	description = "Junglevines",
+	drawtype = "nodebox",
+	tiles = {"moreplants_junglevine.png"},
+	inventory_image = "moreplants_junglevine.png",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = false,
+	walkable = false,
+	climbable = true,
+	node_box = {
+		type = "fixed",
+		fixed = {{-0.5, -0.5, 0.4, 0.5, 0.5, 0.5}}
+	},
 	groups = {cracky=3, dig_immediate=3, oddly_breakeable_by_hand=1},
 })
 
-minetest.register_abm({
-	nodenames = {"moreplants:junglevine"},
-	interval = 10,
-	chance = 10,
-	action = function(pos, node)
-		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
-			minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z}, {name="moreplants:junglevine", param2=node.param2})
-		end
-	end
-})
+-- minetest.register_abm({
+	-- nodenames = {"moreplants:junglevine"},
+	-- interval = 10,
+	-- chance = 10,
+	-- action = function(pos, node)
+		-- if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+			-- minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z}, {name="moreplants:junglevine", param2=node.param2})
+		-- end
+	-- end
+-- })
 
 --craftitems
 minetest.register_craftitem("moreplants:curlyfruit", {
@@ -1316,5 +1334,20 @@ minetest.register_on_generated(function(minp, maxp)
 					end
 				end
 		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < 1 then
+		return
+	end
+	local vine = minetest.find_nodes_in_area(minp, maxp,
+		{"moreplants:junglevine"})
+	for n = 1, #vine do
+			local pos = {x = vine[n].x, y = vine[n].y, z = vine[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" and minetest.get_node({x=pos.x, y=pos.y+6, z=pos.z}).name ~= "moreplants:junglevine" and math.random(1,2) == 1 then
+					local node = minetest.get_node(pos)
+					minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "moreplants:junglevine", param2=node.param2})
+				end
 	end
 end)
