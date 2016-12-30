@@ -74,8 +74,8 @@ minetest.register_biome({
 	--node_river_water = "",
 	y_min = 9,
 	y_max = 21000,
-	heat_point = 45,
-	humidity_point = 25,
+	heat_point = 46,
+	humidity_point = 26,
 })
 
 minetest.register_biome({
@@ -314,6 +314,24 @@ minetest.register_biome({
 })
 
 minetest.register_biome({
+	name = "swamp",
+	--node_dust = "",
+	node_top = "hyrule_mapgen:swamp_mud",
+	depth_top = 2,
+	node_filler = "default:dirt",
+	depth_filler = 6,
+	--node_stone = "",
+	node_water_top = "default:river_water_source",
+	depth_water_top = 1,
+	--node_water = "",
+	--node_river_water = "",
+	y_min = 1,
+	y_max = 31000,
+	heat_point = 24,
+	humidity_point = 76,
+})
+
+minetest.register_biome({
 	name = "deciduous_forest_ocean",
 	--node_dust = "",
 	node_top = "default:sand",
@@ -533,6 +551,44 @@ end
 
 minetest.clear_registered_decorations()
 
+--swamp grass
+
+minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"hyrule_mapgen:swamp_mud",},
+		sidelen = 16,
+		noise_params = {
+			offset = 0.02,
+			scale = 0.02,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"swamp"},
+		y_min = 1,
+		y_max = 31000,
+		decoration = "hyrule_mapgen:swamp_grass",
+	})
+	
+minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"default:water_source",},
+		sidelen = 26,
+		noise_params = {
+			offset = 0,
+			scale = 0.001,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"swamp", "rainforest_swamp"},
+		y_min = 1,
+		y_max = 31000,
+		decoration = "hyrule_mapgen:biglily",
+	})
+
 -- Apple tree
 minetest.register_decoration({
 	deco_type = "schematic",
@@ -577,7 +633,7 @@ minetest.register_decoration({
 -- Big tree
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = {"default:dirt_with_grass", "dirt_with_grass2"},
+	place_on = {"default:dirt_with_grass", "default:dirt_with_grass2"},
 	sidelen = 16,
 	noise_params = {
 		offset = 0.03,
@@ -593,6 +649,26 @@ minetest.register_decoration({
 	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/big_tree.mts",
 	flags = "place_center_x, place_center_z",
 })
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"hyrule_mapgen:swamp_mud",},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.002,
+		scale = 0.001,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 2,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"swamp"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/big_tree.mts",
+	flags = "place_center_x, place_center_z",
+})
+
 
 minetest.register_decoration({
 	deco_type = "schematic",
@@ -822,7 +898,7 @@ minetest.register_decoration({
 -- palm tree
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = {"default:sand"},
+	place_on = {"default:sand", "hyrule_mapgen:swamp_mud"},
 	sidelen = 16,
 	noise_params = {
 		offset = 0.004,
@@ -832,7 +908,7 @@ minetest.register_decoration({
 		octaves = 3,
 		persist = 0.66
 	},
-	biomes = {"sandstone_grassland_ocean", "stone_grassland_ocean", "deciduous_forest_ocean"},
+	biomes = {"sandstone_grassland_ocean", "stone_grassland_ocean", "deciduous_forest_ocean", "swamp"},
 	y_min = 1,
 	y_max = 31000,
 	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/palmtree.mts",
@@ -946,10 +1022,10 @@ minetest.register_decoration({
 minetest.register_decoration({
 	deco_type = "simple",
 	place_on = {"default:snowblock", "default:ice"},
-	sidelen = 80,
+	sidelen = 16,
 	noise_params = {
 		offset = 0.002,
-		scale = 0.002,
+		scale = 0.02,
 		spread = {x = 200, y = 200, z = 200},
 		seed = 230,
 		octaves = 3,

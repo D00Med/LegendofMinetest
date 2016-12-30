@@ -403,7 +403,7 @@ minetest.override_item("default:cactus", {
 
 minetest.override_item("default:grass_1", {
 	on_destruct = function(pos, oldnode)
-		local num = math.random(3,5)
+		local num = math.random(3,7)
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
@@ -420,7 +420,7 @@ minetest.override_item("default:grass_1", {
 
 minetest.override_item("default:grass_2", {
 	on_destruct = function(pos, oldnode)
-		local num = math.random(3,5)
+		local num = math.random(3,7)
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
@@ -438,7 +438,7 @@ minetest.override_item("default:grass_2", {
 
 minetest.override_item("default:grass_3", {
 	on_destruct = function(pos, oldnode)
-		local num = math.random(3,5)
+		local num = math.random(3,7)
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
@@ -455,7 +455,7 @@ minetest.override_item("default:grass_3", {
 
 minetest.override_item("default:grass_4", {
 	on_destruct = function(pos, oldnode)
-		local num = math.random(3,5)
+		local num = math.random(3,7)
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
@@ -472,7 +472,7 @@ minetest.override_item("default:grass_4", {
 
 minetest.override_item("default:grass_5", {
 	on_destruct = function(pos, oldnode)
-		local num = math.random(3,5)
+		local num = math.random(3,7)
 		if num == 5 then
 		minetest.env:add_item(pos, "hyruletools:green_rupee")
 		end
@@ -878,7 +878,7 @@ minetest.register_node("hyrule_mapgen:bridge2", {
 minetest.register_node("hyrule_mapgen:swamp_flower", {
 	description = "Swamp Flower",
 	drawtype = "mesh",
-	mesh = "flatnode.b3d",
+	mesh = "lilypad.b3d",
 	tiles = {"hyrule_mapgen_swampflower.png"},
 	inventory_image = "hyrule_mapgen_swampflower.png",
 	paramtype = "light",
@@ -888,6 +888,10 @@ minetest.register_node("hyrule_mapgen:swamp_flower", {
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-1, -0.5, -1, 1, -0.4, 1}
 	},
 	groups = {cracky=3,dig_immediate=3},
 })
@@ -923,6 +927,52 @@ minetest.register_node("hyrule_mapgen:fallen_leaves", {
 	}
 })
 
+minetest.register_node("hyrule_mapgen:biglily", {
+	description = "Big Waterlily",
+	drawtype = "mesh",
+	mesh = "lilypad.b3d",
+	tiles = {"hyrule_mapgen_biglily.png"},
+	inventory_image = "hyrule_mapgen_biglily.png",
+	paramtype = "light",
+	sunlight_propagates = false,	
+	walkable = true,
+	is_ground_content = true,
+	liquids_pointable = true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-1, -0.5, -1, 1, -0.4, 1}
+	},
+	--on_place from flowers waterlily Originally by Ironzorg (MIT) and VanessaE (MIT)
+    --Various Minetest developers and contributors.
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local node = minetest.get_node(pointed_thing.under).name
+		local def = minetest.registered_nodes[node]
+		local player_name = placer:get_player_name()
+
+		if def and def.liquidtype == "source" and
+				minetest.get_item_group(node, "water") > 0 then
+			if not minetest.is_protected(pos, player_name) then
+				minetest.set_node(pos, {name = "hyrule_mapgen:biglily",
+					param2 = math.random(0, 3)})
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:take_item()
+				end
+			else
+				minetest.chat_send_player(player_name, "Node is protected")
+				minetest.record_protection_violation(pos, player_name)
+			end
+		end
+
+		return itemstack
+	end,
+	groups = {snappy=1, dig_immediate=3,},
+})
+
 minetest.register_node("hyrule_mapgen:deku_flower", {
 	description = "Deku Flower",
 	drawtype = "mesh",
@@ -937,7 +987,7 @@ minetest.register_node("hyrule_mapgen:deku_flower", {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5}
 	},
-	groups = {snappy=1, dig_immediate=3, bouncy=2},
+	groups = {snappy=1, dig_immediate=3,},
 })
 
 minetest.register_node("hyrule_mapgen:healwater_src", {
@@ -1111,7 +1161,41 @@ minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
 	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
 })
 
+minetest.register_node("hyrule_mapgen:swamp_mud", {
+	description = "Swamp Mud",
+	tiles = {
+		"hyrule_mapgen_swampmud.png"
+	},
+	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_dirt_defaults()
+})
 
+minetest.register_node("hyrule_mapgen:swamp_grass", {
+	description = "Swamp Grass",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_swampgrass.png"},
+	inventory_image = "hyrule_mapgen_swampgrass.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	walkable = false,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.5, -0.3, 0.3, 0.4, 0.3}}
+	},
+	groups = {snappy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_leaves_defaults(),
+	on_destruct = function(pos, oldnode)
+		local num = math.random(3,7)
+		if num == 5 then
+		minetest.env:add_item(pos, "hyruletools:green_rupee")
+		end
+		if num == 4 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+	end,
+	drop = "",
+})
 
 minetest.register_node("hyrule_mapgen:grupee", {
 	description = "Green Rupee Block",
@@ -1741,6 +1825,7 @@ minetest.register_node("hyrule_mapgen:stalagtite", {
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:stalagtite1", {
@@ -1771,6 +1856,7 @@ minetest.register_node("hyrule_mapgen:stalagtite2", {
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:stalagtite3", {
@@ -1786,6 +1872,7 @@ minetest.register_node("hyrule_mapgen:stalagtite3", {
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:stalagmite0", {
@@ -1801,6 +1888,7 @@ minetest.register_node("hyrule_mapgen:stalagmite0", {
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:stalagmite1", {
@@ -1817,6 +1905,7 @@ minetest.register_node("hyrule_mapgen:stalagmite1", {
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:stalagmite2", {
@@ -1833,6 +1922,7 @@ minetest.register_node("hyrule_mapgen:stalagmite2", {
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:roots", {
