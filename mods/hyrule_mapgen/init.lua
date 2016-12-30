@@ -605,6 +605,60 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:ice_brick", {
+	description = "Ice Brick",
+	tiles = {"hyrule_mapgen_ice_brick.png"},
+	groups = {cracky = 3, cools_lava = 1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_craft({
+	output = 'hyrule_mapgen:ice_brick',
+	recipe = {
+		{'default:ice', 'default:ice', ''},
+		{'default:ice', '', ''},
+		{'default:ice', '', ''},
+	}
+})
+
+stairs.register_stair_and_slab(
+	"ice_brick",
+	"hyrule_mapgen:ice_brick",
+	{cracky = 3, cools_lava = 1},
+	{"hyrule_mapgen_ice_brick.png"},
+	"Ice brick Stair",
+	"Ice brick Slab",
+	default.node_sound_glass_defaults()
+)
+
+minetest.register_node("hyrule_mapgen:icicle", {
+	description = "Icicle",
+	tiles = {
+		"default_ice.png",
+	},
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, 0.5, 0.25}, -- NodeBox1
+			{-0.1875, 0.4375, -0.1875, 0.1875, 1.1875, 0.1875}, -- NodeBox2
+			{-0.125, 1.1875, -0.125, 0.125, 1.6875, 0.125}, -- NodeBox3
+			{-0.0625, 1.6875, -0.0625, 0.0625, 2.0625, 0.0625}, -- NodeBox4
+		}
+	},
+	groups = {cracky=3, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "",
+	on_destruct = function(pos)
+		minetest.env:add_item({x=pos.x-0.3, y=pos.y+0.5, z=pos.z-0.3}, "hyruletools:ice_fragment")
+		minetest.env:add_item({x=pos.x-0.3, y=pos.y+0.5, z=pos.z+0.3}, "hyruletools:ice_fragment")
+		minetest.env:add_item({x=pos.x+0.3, y=pos.y+0.5, z=pos.z-0.3}, "hyruletools:ice_fragment")
+		minetest.env:add_item({x=pos.x+0.3, y=pos.y+0.5, z=pos.z+0.3}, "hyruletools:ice_fragment")
+	end,
+})
+
 minetest.register_node("hyrule_mapgen:spikes", {
 	description = "Spikes",
 	drawtype = "firelike",
@@ -1092,6 +1146,17 @@ minetest.register_node("hyrule_mapgen:brupee", {
 	groups = {cracky=1, oddly_breakable_by_hand=1}
 })
 
+minetest.register_node("hyrule_mapgen:nrupee", {
+	description = "Nyan Rupee Block",
+	drawtype = "allfaces",
+	paramtype = "light",
+	tiles = {
+		"hyrule_mapgen_nrupee.png"
+	},
+	use_texture_alpha = true,
+	groups = {cracky=1, oddly_breakable_by_hand=1}
+})
+
 
 minetest.register_craft({
 	output = 'hyrule_mapgen:grupee',
@@ -1117,6 +1182,15 @@ minetest.register_craft({
 		{'hyruletools:blue_rupee', 'hyruletools:blue_rupee', 'hyruletools:blue_rupee'},
 		{'hyruletools:blue_rupee', 'hyruletools:blue_rupee', 'hyruletools:blue_rupee'},
 		{'hyruletools:blue_rupee', 'hyruletools:blue_rupee', 'hyruletools:blue_rupee'},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyrule_mapgen:brupee',
+	recipe = {
+		{'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee'},
+		{'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee'},
+		{'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee'},
 	}
 })
 
