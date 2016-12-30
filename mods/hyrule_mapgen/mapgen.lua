@@ -1,7 +1,45 @@
 
 minetest.clear_registered_biomes()
 
+-- Icesheet
 
+	minetest.register_biome({
+		name = "icesheet",
+		--node_dust = "default:snowblock",
+		node_top = "default:snowblock",
+		depth_top = 2,
+		node_filler = "default:ice",
+		depth_filler = 6,
+		node_stone = "default:stone",
+		node_water_top = "default:ice",
+		depth_water_top = 10,
+		--node_water = "",
+		node_river_water = "default:ice",
+		node_riverbed = "default:gravel",
+		depth_riverbed = 2,
+		y_min = -8,
+		y_max = 31000,
+		heat_point = 0,
+		humidity_point = 73,
+	})
+
+	minetest.register_biome({
+		name = "icesheet_ocean",
+		node_dust = "default:snowblock",
+		node_top = "default:sand",
+		depth_top = 1,
+		node_filler = "default:sand",
+		depth_filler = 3,
+		--node_stone = "",
+		node_water_top = "default:ice",
+		depth_water_top = 10,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -112,
+		y_max = -9,
+		heat_point = 0,
+		humidity_point = 73,
+	})
 
 minetest.register_biome({
 	name = "lavabiome",
@@ -805,10 +843,10 @@ minetest.register_decoration({
 minetest.register_decoration({
 	deco_type = "schematic",
 	place_on = {"hyrule_mapgen:lavabiome_dirt"},
-	sidelen = 16,
+	sidelen = 36,
 	noise_params = {
-			offset = 0.004,
-			scale = 0.006,
+			offset = 0.002,
+			scale = 0.003,
 			spread = {x = 100, y = 100, z = 100},
 			seed = 329,
 			octaves = 3,
@@ -818,6 +856,25 @@ minetest.register_decoration({
 	y_min = 1,
 	y_max = 1000,
 	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/goronhut.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:snowblock"},
+	sidelen = 36,
+	noise_params = {
+			offset = 0.001,
+			scale = 0.001,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+	biomes = {"icesheet"},
+	y_min = 1,
+	y_max = 1000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/igloo.mts",
 	flags = "place_center_x, place_center_z",
 })
 
@@ -882,6 +939,28 @@ minetest.register_decoration({
 	decoration = "default:cactus",
 	height = 2,
 	height_max = 5,
+})
+
+--icicle
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:snowblock", "default:ice"},
+	sidelen = 80,
+	noise_params = {
+		offset = 0.002,
+		scale = 0.002,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {"icesheet"},
+	y_min = 5,
+	y_max = 31000,
+	decoration = "hyrule_mapgen:icicle",
+	height = 1,
+	height_max = 1,
 })
 
 -- statue
@@ -1112,7 +1191,7 @@ farming.register_mgv7_decorations()
 local frequency = 5
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -5 then
+	if maxp.y < -5 or maxp.y > 50 then
 		return
 	end
 	local dirt = minetest.find_nodes_in_area(minp, maxp,
@@ -1132,7 +1211,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -50 then
+	if maxp.y < -50 or maxp.y > 10 then
 		return
 	end
 	local dirt = minetest.find_nodes_in_area(minp, maxp,
@@ -1156,7 +1235,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -100 then
+	if maxp.y < -100 or maxp.y > 20 then
 		return
 	end
 	local dirt = minetest.find_nodes_in_area(minp, maxp,
@@ -1198,7 +1277,7 @@ end)
 local village_rarity = 50000
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -1 or maxp.y > 31000 then
+	if maxp.y < -1 or maxp.y > 21000 then
 		return
 	end
 	local grass = minetest.find_nodes_in_area(minp, maxp,
@@ -1206,8 +1285,24 @@ minetest.register_on_generated(function(minp, maxp)
 	for n = 1, #grass do
 		if math.random(1, village_rarity) == 1 then
 			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
-				if minetest.get_node({x=pos.x+2, y=pos.y, z=pos.z+5}) == "hyrule_mapgen:dirt_with_grass2" then
+				if minetest.get_node({x=pos.x+2, y=pos.y, z=pos.z+2}).name == "hyrule_mapgen:dirt_with_grass2" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/pine_village.mts", random, {}, true)
+				end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -1 or maxp.y > 11000 then
+		return
+	end
+	local grass = minetest.find_nodes_in_area(minp, maxp,
+		{"default:snowblock"})
+	for n = 1, #grass do
+		if math.random(1, village_rarity) == 1 then
+			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/icecastle.mts", random, {}, true)
 				end
 		end
 	end
@@ -1219,7 +1314,7 @@ end)
 local dungeon_rarity = 5000000
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y > -500 then
+	if maxp.y > -500 or maxp.y < -3000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
