@@ -172,65 +172,6 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"default:river_water_flowing"},
-	interval = 1.0,
-	chance = 1,
-	action = function(pos, node, active_object_count, active_object_count_wider)
-		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
-		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-		local above2 = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name
-		if above == "default:river_water_flowing" and below ~= "default:river_water_flowing" and above2 == "default:river_water_flowing" then
-		minetest.add_particlespawner({
-			amount = 9,
-			time = 1,
-			minpos = {x=pos.x-0.9, y=pos.y+0.3, z=pos.z-0.9},
-			maxpos = {x=pos.x+0.9, y=pos.y+0.9, z=pos.z+0.9},
-			minvel = {x=0, y=0.1, z=0},
-			maxvel = {x=0.1, y=0.3, z=0.1},
-			minacc = {x=0, y=0.1, z=0},
-			maxacc = {x=0.2, y=0.2, z=0.2},
-			minexptime = 0.5,
-			maxexptime = 1,
-			minsize = 8,
-			maxsize = 12,
-			collisiondetection = false,
-			vertical = false,
-			texture = "hyrule_mapgen_mist.png",
-		})
-		minetest.add_particlespawner({
-			amount = 9,
-			time = 1,
-			minpos = {x=pos.x-0.8, y=pos.y+0.7, z=pos.z-0.8},
-			maxpos = {x=pos.x+0.8, y=pos.y+0.8, z=pos.z+0.8},
-			minvel = {x=0, y=0.1, z=0},
-			maxvel = {x=0.1, y=0.3, z=0.1},
-			minacc = {x=0, y=0.5, z=0},
-			maxacc = {x=0.1, y=0.9, z=0.1},
-			minexptime = 0.2,
-			maxexptime = 0.3,
-			minsize = 7,
-			maxsize = 9,
-			collisiondetection = false,
-			vertical = false,
-			texture = "hyrule_mapgen_splash.png",
-		})
-		if not sound then
-		minetest.sound_play("waterfall", {
-			pos = pos,
-			gain = 1.0,
-			max_hear_distance = 3,
-		})
-		sound = true
-		minetest.after(12, function()
-			sound = false
-		end)
-		end
-		end
-	end
-})
-
-
-minetest.register_abm({
 	nodenames = {"fire:basic_flame"},
 	interval = 1.0,
 	chance = 2,

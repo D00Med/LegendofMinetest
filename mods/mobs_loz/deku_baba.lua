@@ -26,7 +26,7 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	run_velocity = 0.05,
 	jump = false,
 	drops = {
-		{name = "hyruletools:red_rupee",
+		{name = "mobs_loz:deku_nut",
 		chance = 1, min = 1, max = 3},
 	},
 	on_die = function(self)

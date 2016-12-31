@@ -82,6 +82,19 @@ mobs:register_mob("mobs_loz:mimic", {
 		end
 		minetest.env:add_entity(pos, "experience:orb")
 	end,
+	do_custom = function(self)
+		if self.state ~= "attack" then
+			minetest.after(3, function()
+			if self.state ~= "attack" and self.object ~= nil then
+			local pos = self.object:getpos()
+			if pos ~= nil then
+			minetest.set_node(pos, {name="mobs_loz:mimic_chest", param2=1})
+			self.object:remove()
+			end
+			end
+			end)
+		end
+	end,
 	water_damage = 1,
 	lava_damage = 5,
 	light_damage = 0,
@@ -134,6 +147,19 @@ mobs:register_mob("mobs_loz:mimic2", {
 		minetest.env:add_entity(pos, "hyruletools:heart_entity")
 		end
 		minetest.env:add_entity(pos, "experience:orb")
+	end,
+	do_custom = function(self)
+		if self.state ~= "attack" then
+			minetest.after(3, function()
+			if self.state ~= "attack" and self.object ~= nil then
+			local pos = self.object:getpos()
+			if pos ~= nil then
+			minetest.set_node(pos, {name="mobs_loz:mimic_chest2", param2=1})
+			self.object:remove()
+			end
+			end
+			end)
+		end
 	end,
 	water_damage = 1,
 	lava_damage = 5,
