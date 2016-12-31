@@ -553,6 +553,11 @@ minetest.register_craftitem("hyruletools:key", {
 	inventory_image = "hyruletools_key.png",
 })
 
+minetest.register_craftitem("hyruletools:retro_key", {
+	description = "Retro Dungeon Key",
+	inventory_image = "hyruletools_key_retro.png",
+})
+
 minetest.register_craftitem("hyruletools:key_boss", {
 	description = "Boss Key",
 	inventory_image = "hyruletools_boss_key.png",

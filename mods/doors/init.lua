@@ -370,7 +370,12 @@ function doors.register(name, def)
 	def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		if minetest.get_node(pos).name ~= "doors:door_boss_locked_a" and minetest.get_node(pos).name ~= "doors:door_boss_locked_b" then
 			if minetest.get_node(pos).name ~= "doors:door_locked_a" and minetest.get_node(pos).name ~= "doors:door_locked_b" then
-			_doors.door_toggle(pos, node, clicker)
+				if minetest.get_node(pos).name ~= "doors:door_retro_a" and minetest.get_node(pos).name ~= "doors:door_retro_b" then
+				_doors.door_toggle(pos, node, clicker)
+				elseif clicker:get_wielded_item():get_name() == "hyruletools:retro_key" then
+				_doors.door_toggle(pos, node, clicker)
+				itemstack:take_item()
+				end
 			elseif clicker:get_wielded_item():get_name() == "hyruletools:key" then
 			_doors.door_toggle(pos, node, clicker)
 			itemstack:take_item()
@@ -487,7 +492,7 @@ doors.register("door_locked", {
 		tiles = {{ name = "doors_door_locked.png", backface_culling = true }},
 		description = "Locked Door",
 		inventory_image = "doors_item_boss.png",
-		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+		groups = {cracky = 3, flammable = 2},
 		recipe = {
 			{"default:wood", "default:wood"},
 			{"default:steel_ingot", "default:steel_ingot"},
@@ -495,11 +500,23 @@ doors.register("door_locked", {
 		}
 })
 
+doors.register("door_retro", {
+		tiles = {{ name = "doors_door_retro.png", backface_culling = true }},
+		description = "Retro Door",
+		inventory_image = "doors_item_retro.png",
+		groups = {cracky = 2, flammable = 2},
+		recipe = {
+			{"default:copper_ingot", "default:copper_ingot"},
+			{"default:copper_ingot", "default:copper_ingot"},
+			{"default:copper_ingot", "default:copper_ingot"},
+		}
+})
+
 doors.register("door_boss_locked", {
 		tiles = {{ name = "doors_door_boss_locked.png", backface_culling = true }},
 		description = "Boss Door (locked)",
 		inventory_image = "doors_item_boss_locked.png",
-		groups = {choppy = 3, flammable = 2},
+		groups = {cracky = 3, flammable = 2},
 		recipe = {
 			{"default:steel_ingot", "default:steel_ingot"},
 			{"default:junglewood", "default:junglewood"},
