@@ -22,6 +22,7 @@ local bones_formspec =
 	default.get_hotbar_bg(0,4.85)
 
 local share_bones_time = tonumber(minetest.setting_get("share_bones_time")) or 1200
+local delete_bones_time = 2500
 local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_early")) or share_bones_time / 4
 
 minetest.register_node("bones:bones", {
@@ -113,6 +114,8 @@ minetest.register_node("bones:bones", {
 		if time >= share_bones_time then
 			meta:set_string("infotext", meta:get_string("owner") .. "'s old bones")
 			meta:set_string("owner", "")
+		elseif time >= delete_bones_time then
+			minetest.env:remove_node(pos)
 		else
 			meta:set_int("time", time)
 			return true
