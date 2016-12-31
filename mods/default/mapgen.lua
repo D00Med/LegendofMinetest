@@ -31,9 +31,9 @@ minetest.register_alias("mapgen_pine_needles", "default:pine_needles")
 
 -- Dungeons
 
-minetest.register_alias("mapgen_cobble", "hyrule_mapgen:dungeon_brick")
+minetest.register_alias("mapgen_cobble", "default:cobble")
 minetest.register_alias("mapgen_stair_cobble", "stairs:stair_cobble")
-minetest.register_alias("mapgen_mossycobble", "hyrule_mapgen:dungeon_brick")
+minetest.register_alias("mapgen_mossycobble", "default:mossycobble")
 minetest.register_alias("mapgen_sandstonebrick", "default:sandstonebrick")
 minetest.register_alias("mapgen_stair_sandstonebrick", "stairs:stair_sandstonebrick")
 

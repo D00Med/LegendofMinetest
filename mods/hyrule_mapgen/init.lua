@@ -720,7 +720,7 @@ minetest.register_node("hyrule_mapgen:chest_key", {
 	groups = {cracky = 2, oddly_breakable_by_hand = 1},
 	is_ground_content = false,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-		if not minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "hyrule_mapgen:dungeon_brick" and not minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "hyrule_mapgen:dungeon_tile" not minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "hyrule_mapgen:dungeon_brick2" and not minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "hyrule_mapgen:dungeon_tile2" then
+		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name ~= "hyrule_mapgen:dungeon_brick" and minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name ~= "hyrule_mapgen:dungeon_tile" and minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name ~= "hyrule_mapgen:dungeon_brick2" and minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name ~= "hyrule_mapgen:dungeon_tile2" then
 			minetest.env:add_item(pos, "hyruletools:key")
 		else
 			minetest.env:add_item(pos, "hyruletools:retro_key")
