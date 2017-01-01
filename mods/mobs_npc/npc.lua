@@ -206,3 +206,70 @@ mobs:register_mob("mobs_npc:npc_quest", {
 --mobs:spawn_specific("mobs:npc", {"default:brick"}, {"air"}, 0, 15, 1, 1, 1, 0, 200, true)
 
 mobs:register_egg("mobs_npc:npc_quest", "Npc (quest)", "hyrule_mapgen_chest.png", 1)
+
+
+mobs:register_mob("mobs_npc:npc_custom", {
+	type = "npc",
+	passive = false,
+	damage = 3,
+	reach = 4,
+	attack_type = "dogfight",
+	attacks_monsters = false,
+	pathfinding = true,
+	hp_min = 50,
+	hp_max = 60,
+	armor = 90,
+	collisionbox = {-0.35,-1.0,-0.35, 0.35,0.8,0.35},
+	visual = "mesh",
+	mesh = "character.b3d",
+	drawtype = "front",
+	textures = {
+		{"mobs_npc_doomed.png"},
+		{"mobs_npc_toby109tt.png"},
+		{"mobs_npc.png"},
+		{"mobs_npc2.png"}, -- female by nuttmeg20
+	},
+	makes_footstep_sound = true,
+	sounds = {},
+	walk_velocity = 0.00001,
+	run_velocity = 5,
+	jump = false,
+	jumpheight = 0,
+	water_damage = 0,
+	lava_damage = 0,
+	light_damage = 0,
+	view_range = 15,
+	owner = "",
+	order = "stand",
+	fear_height = 3,
+	animation = {
+		speed_normal = 30,
+		speed_run = 30,
+		stand_start = 0,
+		stand_end = 79,
+		walk_start = 168,
+		walk_end = 187,
+		run_start = 168,
+		run_end = 187,
+		punch_start = 200,
+		punch_end = 219,
+	},
+	on_activate = function(self)
+		self.order = "stand"
+	end,
+	on_rightclick = function(self, clicker)
+		local pos = self.object:getpos()
+		if self.item ~= nil and not self.inactive then
+			local xdir = self.xdir or 0
+			local zdir = self.zdir or 0
+			minetest.env:add_item({x=pos.x+xdir, y=pos.y, z=pos.z+zdir}, self.item)
+			self.inactive = true
+		end
+		if self.text ~= nil and not self.spoken then
+			minetest.chat_send_player(clicker:get_player_name(), self.text)
+			self.spoken = true
+		elseif self.text ~= nil then
+			minetest.chat_send_player(clicker:get_player_name(), self.text.."... I've said that already")
+		end
+	end,
+})

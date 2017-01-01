@@ -26,5 +26,5 @@ CC-BY-SA 3.0 UNPORTED. Created by D00Med
 
 hyruletools_bomb.b3d, hyruletools_medallion*.png, hyruletools_bombflower.png, hyruletools_bomb.png, hyruletools_bombflower_plant.png, hyruletools_boomer_*.png -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy) and D00Med
 
-hyruletools_ocarina_*.png, hyruletools_gameboy.png, hyruletools_letter_inv_*.png -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
+hyruletools_ocarina_*.png, hyruletools_gameboy.png, hyruletools_letter_inv_*.png, hyruletools_bluerupee_ore.png, hyruletools_redrupee_ore.png, hyruletools_greenrupee_ore.png -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
 

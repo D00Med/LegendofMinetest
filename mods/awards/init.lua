@@ -291,6 +291,16 @@ awards.register_achievement("award_marchand_de_sable",{
 })
 
 -- Join
+awards.register_achievement("award_welcome",{
+	title = S("Welcome!"),
+	description = ("To spawn a village, find somewhere flat and place the spawner (+X, +Z)"),
+	trigger = {
+		type = "join",
+		target = 1
+	},
+	secret = false
+})
+
 awards.register_achievement("award_join2",{
 	title = S("Frequent Visitor"),
 	description = S("Connect to the server 50 times."),

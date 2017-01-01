@@ -1418,10 +1418,14 @@ minetest.register_on_newplayer(function(player)
 	if not village_spawned and minetest.get_day_count() == 0 then
 		local name = player:get_player_name()
 		if name == "singleplayer" then
-		minetest.after(2, function()
+		minetest.after(1, function()
 		local pos = player:getpos()
-		minetest.place_schematic({x=pos.x, y=pos.y-1, z=pos.z}, minetest.get_modpath("hyrule_mapgen").."/schematics/village.mts", 0, {}, true)
-		minetest.env:add_entity({x=pos.x+14, y=pos.y+2, z=pos.z+24}, "mobs_npc:trader")
+		minetest.place_schematic({x=pos.x-6, y=pos.y-1, z=pos.z-4}, minetest.get_modpath("hyrule_mapgen").."/schematics/cave.mts", 0, {}, true)
+		local obj = minetest.env:add_entity({x=pos.x-2, y=pos.y+1, z=pos.z}, "mobs_npc:npc_custom")
+		local npc = obj:get_luaentity()
+		npc.xdir = 1
+		npc.item = "default:sword_wood"
+		npc.text = "It's dangerous to go alone, take this!"
 		end)
 		end
 	end

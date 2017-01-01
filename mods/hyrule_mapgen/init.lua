@@ -5,6 +5,20 @@ if mg_name ~= "v6" then
 dofile(minetest.get_modpath("hyrule_mapgen").."/mapgen.lua")
 end
 
+--village spawner
+
+minetest.register_craftitem("hyrule_mapgen:village_spawner", {
+	description = "Village Spawner",
+	inventory_image = "hyrule_mapgen_spawner.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		minetest.place_schematic({x=pos.x, y=pos.y-1, z=pos.z}, minetest.get_modpath("hyrule_mapgen").."/schematics/village.mts", 0, {}, true)
+		local obj = minetest.env:add_entity({x=pos.x+14, y=pos.y+2, z=pos.z+24}, "mobs_npc:trader")
+		itemstack:take_item()
+		return itemstack
+	end,
+})
+
 --functions
 hyrule_mapgen = {}
 
