@@ -26,19 +26,30 @@ local delete_bones_time = 2500
 local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_early")) or share_bones_time / 4
 
 minetest.register_node("bones:bones", {
-	description = "Bones",
+	description = "Tombstone",
 	tiles = {
-		"bones_top.png^[transform2",
+		"bones_top.png",
 		"bones_bottom.png",
 		"bones_side.png",
-		"bones_side.png",
+		"bones_side.png^[transform4",
 		"bones_rear.png",
 		"bones_front.png"
 	},
 	paramtype2 = "facedir",
 	groups = {dig_immediate = 2},
 	sounds = default.node_sound_gravel_defaults(),
-
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5}, -- NodeBox1
+			{-0.5, -0.5, -0.125, 0.5, 0.3125, 0.375}, -- NodeBox2
+			{-0.375, 0.4375, -0.125, 0.375, 0.5, 0.375}, -- NodeBox3
+			{-0.4375, -0.5, -0.125, 0.4375, 0.4375, 0.375}, -- NodeBox4
+		}
+	},
+	
 	can_dig = function(pos, player)
 		local inv = minetest.get_meta(pos):get_inventory()
 		local name = ""
@@ -112,7 +123,7 @@ minetest.register_node("bones:bones", {
 		local meta = minetest.get_meta(pos)
 		local time = meta:get_int("time") + elapsed
 		if time >= share_bones_time then
-			meta:set_string("infotext", meta:get_string("owner") .. "'s old bones")
+			meta:set_string("infotext", meta:get_string("owner") .. "'s tomb")
 			meta:set_string("owner", "")
 		elseif time >= delete_bones_time then
 			minetest.env:remove_node(pos)
@@ -236,7 +247,7 @@ minetest.register_on_dieplayer(function(player)
 	meta:set_string("owner", player_name)
 
 	if share_bones_time ~= 0 then
-		meta:set_string("infotext", player_name .. "'s fresh bones")
+		meta:set_string("infotext", player_name .. "'s new tomb")
 
 		if share_bones_time_early == 0 or not minetest.is_protected(pos, player_name) then
 			meta:set_int("time", 0)
