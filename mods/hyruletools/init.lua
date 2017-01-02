@@ -809,6 +809,7 @@ minetest.register_tool("hyruletools:lantern", {
 	},
 	on_use = function(itemstack, user, pointed_thing)
 		local player = user:get_player_name()
+		if mana.subtract(player, 15) then
 		if pointed_thing.type == "node" and
 				minetest.get_node(pointed_thing.above).name == "air" then
 			if not minetest.is_protected(pointed_thing.above, player) then
@@ -817,8 +818,9 @@ minetest.register_tool("hyruletools:lantern", {
 				minetest.chat_send_player(player, "This area is protected.")
 			end
 		end
+		end
 
-		itemstack:add_wear(1000)
+		--itemstack:add_wear(1000)
 		return itemstack
 	end
 })
@@ -833,9 +835,10 @@ minetest.register_tool("hyruletools:mirror", {
 	},
 	on_use = function(itemstack, user, pointed_thing)
 		local player = user:get_player_name()
+		if mana.subtract(player, 100) then
 		local pos = math.random(1-900)
 		user:setpos({x= pos,y= 5,z= pos})
-		itemstack:add_wear(1000)
+		end
 		return itemstack
 end
 })
@@ -881,95 +884,59 @@ minetest.register_entity("hyruletools:spark", {
 	textures = {"hyruletools_spark.png"},
 	velocity = 15,
 	on_activate = function(self)
+		minetest.after(1, function()
+			self.activated = true
+		end)
 		minetest.after(10, function()
 			self.object:remove()
 			end)
 	end,
 	on_step = function (self, pos, node, dtime)
-				local pos = self.object:getpos()
-					local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
-                for k, obj in pairs(objs) do
-                    if obj:is_player() then
-                        return
-                    else
-                    obj:set_hp(obj:get_hp()-20)					
-				    if obj:get_entity_name() ~= "hyruletools:spark" then
-						if obj:get_hp()<=0 then 
-							obj:remove()
-						end
-						--self.object:remove() 
-					end						
+		local pos = self.object:getpos()
+		local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
+            for k, obj in pairs(objs) do
+                if obj:is_player() == nil and obj:get_luaentity() ~= nil and obj:get_luaentity().name ~= "__builtin:item" then
+					obj:punch(self.object, 1.0, {
+						full_punch_interval=1.0,
+						damage_groups={fleshy=9},
+					}, nil)
+				self.object:remove()
 				end
             end
-
+				if self.activated then
 					for dx=-1,1 do
 						for dy=-1,1 do
 							for dz=-1,1 do
 								local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 								local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 								local n = minetest.env:get_node(p).name
-								if n ~= "hyruletools:spark_entity" and n ~="default:stone" and n ~="default:desert_stone"  then	
-									if minetest.registered_nodes[n].groups.liquid --[[or math.random(1, 100) <= 1]] then
+								if n ~= "hyruletools:spark2_entity" and minetest.registered_nodes[n].groups.flammable or n ~= "hyruletools:spark2_entity" and math.random(1,4) == 3 then
 										minetest.env:set_node(t, {name="default:ice"})
-									else 
-										minetest.env:set_node(t, {name="air"})
-									end
-								elseif n == "default:stone" or n =="default:desert_stone" then
-									self.hit_node(self, pos, node)
+								elseif n ~= "hyruletools:spark2_entity" and n ~="air" and  n~= "default:ice" then
 									self.object:remove()
 									return
 								end
 							end
 						end
 					end
-	end,
-	
-	
-	hit_node = function(self, pos, node)
---	local pos = self.object:getpos()
-		for dx=-4,4 do
-			for dy=-4,4 do
-				for dz=-4,4 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(pos).name
-					if math.random(1, 50) <= 35 then
-						minetest.env:remove_node(p)
-					end
-					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <=5 then
-										minetest.env:set_node(t, {name="default:ice"})
-					end
-					local objects = minetest.env:get_objects_inside_radius(pos, 4)
-											for _,obj in ipairs(objects) do
-												if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
-													local obj_p = obj:getpos()
-													local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-													local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-													local damage = (80*0.5^dist)*2
-													obj:punch(obj, 1.0, {
-													full_punch_interval=1.0,
-													damage_groups={fleshy=damage},
-													}, vec)
-												end
-										end
 				end
-			end
-		end
-	end
+	end,
 })
 
 minetest.register_tool("hyruletools:medallion", {
 	description = "ether medallion",
 	inventory_image = "hyruletools_medallion.png",
 	on_use = function(itemstack, placer, pointed_thing)
+			local player = placer:get_player_name()
+			if mana.subtract(player, 100) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:spark")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
+			end
 		return itemstack
 	end,
-	light_source = 12,
 })
 
 minetest.register_craft({
@@ -986,95 +953,60 @@ minetest.register_entity("hyruletools:spark2", {
 	textures = {"hyruletools_spark2.png"},
 	velocity = 15,
 	on_activate = function(self)
+		minetest.after(1, function()
+			self.activated = true
+		end)
 		minetest.after(10, function()
-			self.object:remove()
-			end)
+			--self.object:remove()
+		end)
 	end,
 	on_step = function (self, pos, node, dtime)
-				local pos = self.object:getpos()
-					local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
-                for k, obj in pairs(objs) do
-                    if obj:is_player() then
-                        return
-                    else
-                    obj:set_hp(obj:get_hp()-20)					
-				    if obj:get_entity_name() ~= "hyruletools:spark2" then
-						if obj:get_hp()<=0 then 
-							obj:remove()
-						end
-						--self.object:remove() 
-					end						
+		local pos = self.object:getpos()
+		local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
+            for k, obj in pairs(objs) do
+                if obj:is_player() == nil and obj:get_luaentity() ~= nil and obj:get_luaentity().name ~= "__builtin:item" then
+					obj:punch(self.object, 1.0, {
+						full_punch_interval=1.0,
+						damage_groups={fleshy=9},
+					}, nil)
+				self.object:remove()
 				end
             end
-
+			if self.activated then
 					for dx=-1,1 do
 						for dy=-1,1 do
 							for dz=-1,1 do
 								local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 								local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 								local n = minetest.env:get_node(p).name
-								if n ~= "hyruletools:spark2_entity" and n ~="default:stone" and n ~="default:desert_stone"  then	
-									if minetest.registered_nodes[n].groups.flammable --[[or math.random(1, 100) <= 1]] then
-										minetest.env:set_node(t, {name="default:clay"})
-									else 
-										minetest.env:set_node(t, {name="dirt"})
-									end
-								elseif n == "default:stone" or n =="default:desert_stone" then
-									self.hit_node(self, pos, node)
+								if n ~= "hyruletools:spark2_entity" and minetest.registered_nodes[n].groups.flammable or n ~= "hyruletools:spark2_entity" and math.random(1,10) == 3 then
+										minetest.env:set_node(t, {name="hyrule_mapgen:lavabiome_dirt"})
+								elseif n ~= "hyruletools:spark2_entity" and n ~="air" and  n~= "hyrule_mapgen:lavabiome_dirt" then
 									self.object:remove()
 									return
 								end
 							end
 						end
 					end
-	end,
-	
-	
-	hit_node = function(self, pos, node)
---	local pos = self.object:getpos()
-		for dx=-4,4 do
-			for dy=-4,4 do
-				for dz=-4,4 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(pos).name
-					if math.random(1, 50) <= 35 then
-						minetest.env:remove_node(p)
-					end
-					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <=5 then
-										minetest.env:set_node(t, {name="lavabiome:dirt"})
-					end
-					local objects = minetest.env:get_objects_inside_radius(pos, 4)
-											for _,obj in ipairs(objects) do
-												if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
-													local obj_p = obj:getpos()
-													local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-													local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-													local damage = (80*0.5^dist)*2
-													obj:punch(obj, 1.0, {
-													full_punch_interval=1.0,
-													damage_groups={fleshy=damage},
-													}, vec)
-												end
-										end
-				end
 			end
-		end
-	end
+	end,
 })
+
 --DO NOT point at the sky, make sure there is stone in the path of the spark or it will continue forever
 minetest.register_tool("hyruletools:medallion2", {
 	description = "quake medallion",
 	inventory_image = "hyruletools_medallion2.png",
 	on_use = function(itemstack, placer, pointed_thing)
+			local player = placer:get_player_name()
+			if mana.subtract(player, 100) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:spark2")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
+			end
 		return itemstack
 	end,
-	light_source = 12,
 })
 
 minetest.register_craft({
@@ -1091,96 +1023,60 @@ minetest.register_entity("hyruletools:spark3", {
 	textures = {"hyruletools_spark3.png"},
 	velocity = 15,
 	on_activate = function(self)
+		minetest.after(1, function()
+			self.activated = true
+		end)
 		minetest.after(10, function()
 			self.object:remove()
-			end)
+		end)
 	end,
 	on_step = function (self, pos, node, dtime)
-				local pos = self.object:getpos()
-					local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
-                for k, obj in pairs(objs) do
-                    if obj:is_player() then
-                        return
-                    else
-                    obj:set_hp(obj:get_hp()-20)					
-				    if obj:get_entity_name() ~= "hyruletools:spark3" then
-						if obj:get_hp()<=0 then 
-							obj:remove()
-						end
-						--self.object:remove() 
-					end						
+		local pos = self.object:getpos()
+		local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
+            for k, obj in pairs(objs) do
+                if obj:is_player() == nil and obj:get_luaentity() ~= nil and obj:get_luaentity().name ~= "__builtin:item" then
+					obj:punch(self.object, 1.0, {
+						full_punch_interval=1.0,
+						damage_groups={fleshy=9},
+					}, nil)
+				self.object:remove()
 				end
             end
-
+			if self.activated then
 					for dx=-1,1 do
 						for dy=-1,1 do
 							for dz=-1,1 do
 								local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 								local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 								local n = minetest.env:get_node(p).name
-								if n ~= "hyruletools:spark3_entity" and n ~="default:dirt_with_grass" and n ~="default:dirt_with_dry_grass" and n ~="default:stone"  then	
-									if minetest.registered_nodes[n].groups.flammable --[[or math.random(1, 100) <= 1]] then
+								if n ~= "hyruletools:spark2_entity" and minetest.registered_nodes[n].groups.flammable or n ~= "hyruletools:spark2_entity" and math.random(1,10) == 3 then
 										minetest.env:set_node(t, {name="fire:basic_flame"})
-									else 
-										minetest.env:set_node(t, {name="air"})
-									end
-								elseif n == "default:stone" or n =="default:desert_stone" or n =="default:dirt_with_grass" or n =="default:dirt_with_dry_grass" then
-									self.hit_node(self, pos, node)
+								elseif n ~= "hyruletools:spark2_entity" and n ~="air" and  n~= "fire:basic_flame" then
+									tnt.boom(pos, {damage_radius=5,radius=3,ignore_protection=false})
 									self.object:remove()
 									return
 								end
 							end
 						end
 					end
-	end,
-	
-	
-	hit_node = function(self, pos, node)
---	local pos = self.object:getpos()
-		for dx=-4,4 do
-			for dy=-4,4 do
-				for dz=-4,4 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(pos).name
-					if math.random(1, 50) <= 35 then
-						minetest.env:remove_node(p)
-					end
-					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <=5 then
-										minetest.env:set_node(t, {name="fire:basic_flame"})
-					end
-					local objects = minetest.env:get_objects_inside_radius(pos, 4)
-											for _,obj in ipairs(objects) do
-												if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
-													local obj_p = obj:getpos()
-													local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-													local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-													local damage = (80*0.5^dist)*2
-													obj:punch(obj, 1.0, {
-													full_punch_interval=1.0,
-													damage_groups={fleshy=damage},
-													}, vec)
-												end
-										end
-                        
 				end
-			end
-		end
-	end
+	end,
 })
 
 minetest.register_tool("hyruletools:medallion3", {
 	description = "bombos medallion",
 	inventory_image = "hyruletools_medallion3.png",
 	on_use = function(itemstack, placer, pointed_thing)
+			local player = placer:get_player_name()
+			if mana.subtract(player, 100) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:spark3")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
+			end
 		return itemstack
 	end,
-	light_source = 12,
 })
 
 minetest.register_craft({
@@ -1329,12 +1225,14 @@ minetest.register_tool("hyruletools:sword", {
 		damage_groups = {fleshy=4},
 	},
 	on_use = function(itemstack, placer, pointed_thing)
+			local name = placer:get_player_name()
+			if mana.subtract(name, 5) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
-			itemstack:add_wear(1000)
+			end
 		return itemstack
 	end,
 })
@@ -1397,11 +1295,14 @@ minetest.register_tool("hyruletools:sword_light", {
 		damage_groups = {fleshy=5},
 	},
 	on_use = function(itemstack, placer, pointed_thing)
+			local name = placer:get_player_name()
+			if mana.subtract(name, 10) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark_light")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
+			end
 		return itemstack
 	end,
 })
@@ -1452,13 +1353,15 @@ minetest.register_tool("hyruletools:classic_sword", {
 		damage_groups = {fleshy=4},
 	},
 	on_use = function(itemstack, placer, pointed_thing)
+			local player = placer:get_player_name()
+			if mana.subtract(player, 10) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.2+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark_classic")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
 			obj:setyaw(placer:get_look_yaw() - math.pi / 2)
-			itemstack:add_wear(1000)
+			end
 		return itemstack
 	end,
 })
@@ -1541,12 +1444,14 @@ minetest.register_tool("hyruletools:flame_rod", {
 		damage_groups = {fleshy=4},
 	},
 	on_use = function(itemstack, placer, pointed_thing)
+		local player = placer:get_player_name()
+		if mana.subtract(player, 30) then
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:fireball")
 			local vec = {x=dir.x*16,y=dir.y*16,z=dir.z*16}
 			obj:setvelocity(vec)
-			itemstack:add_wear(2000)
+		end
 		return itemstack
 	end,
 })
@@ -1986,6 +1891,8 @@ minetest.register_tool("hyruletools:gboomerang", {
 		damage_groups = {fleshy=1},
 	},
 	on_use = function(item, placer, pointed_thing)
+		local name = placer:get_player_name()
+		if mana.subtract(name, 15) then
 			local add = minetest.after(3, function()
 			local pos = placer:getpos()
 			minetest.add_item(pos, {name = "hyruletools:gboomerang"})
@@ -2001,6 +1908,7 @@ minetest.register_tool("hyruletools:gboomerang", {
 			object.thrower = placer
 				item:take_item()
 			return item
+		end
 	end,
 })
 
@@ -3087,6 +2995,8 @@ minetest.register_tool("hyruletools:wand", {
 	on_use = function(item, placer, pointed_thing)
 	local pos = placer:getpos()
 	if pointed_thing ~= nil then
+		local name = placer:get_player_name()
+		if mana.subtract(name, 30) then
 		local dir = placer:get_look_dir()
 		local obj =  minetest.env:add_entity({x=pos.x+dir.x, y=pos.y+dir.y+0.5, z=pos.z+dir.z}, "hyruletools:block_dummy")
 		obj:setvelocity({x=dir.x*8, y=dir.y*8, z=dir.z*8})
@@ -3097,6 +3007,7 @@ minetest.register_tool("hyruletools:wand", {
 		obj:remove()
 		minetest.set_node(pos2, {name="default:ice"})
 		end)
+		end
 	 end
 end
 })

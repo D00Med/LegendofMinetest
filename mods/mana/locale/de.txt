@@ -1,0 +1,2 @@
+Mana = Mana
+Mana: @1/@2 = Mana: @1/@2

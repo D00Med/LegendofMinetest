@@ -23,7 +23,75 @@ mobs.human = {
 	}
 }
 
+mobs.shopkeeper = {
+	items = {
+		--{item for sale, price, chance of appearing in trader's inventory}
+		{"hyruletools:heart 5", "hyruletools:green_rupee 20", 10},
+		{"bows:arrow_steel 10", "hyruletools:green_rupee 40", 5},
+		{"shields:shield_wood 1", "hyruletools:green_rupee 60", 12},
+		{"shields:shield_steel 1", "hyruletools:green_rupee 200", 17},
+		{"hyruletools:goron_tunic 1", "hyruletools:red_rupee 60", 17},
+		{"hyruletools:zora_tunic 1", "hyruletools:blue_rupee 60", 50},
+		{"default:diamond 1", "hyruletools:green_rupee 5", 40},
+		{"hyruletools:letter 5", "hyruletools:green_rupee 10", 17},
+		{"tnt:tnt 10", "hyruletools:blue_rupee 30", 20},
+		{"mobs_fairy:fairy 1", "hyruletools:red_rupee 50", 17},
+		{"mobs:bucket_milk 1", "hyruletools:green_rupee 30", 27},
+		{"default:papyrus 5", "hyruletools:green_rupee 30", 7},
+		{"default:pick_steel 1", "hyruletools:blue_rupee 100", 7},
+		{"default:sword_steel 1", "hyruletools:red_rupee 200", 17},
+		{"default:shovel_steel 1", "hyruletools:green_rupee 100", 17},
+	},
+	names = {
+		"Bruce", "Bruce", "Bruce", "Bruce", "Bruce", "Bruce", "Bruce"
+	}
+}
+
 -- Trader ( same as NPC but with right-click shop )
+
+mobs:register_mob("mobs_npc:shopkeeper", {
+	type = "npc",
+	passive = false,
+	damage = 3,
+	attack_type = "dogfight",
+	attacks_monsters = false,
+	pathfinding = false,
+	hp_min = 10,
+	hp_max = 20,
+	armor = 100,
+	collisionbox = {-0.4,0,-0.4, 0.4,1.8,0.4},
+	visual = "mesh",
+	mesh = "shopkeeper.b3d",
+	textures = {
+		{"mobs_shopkeeper.png"}, 
+	},
+	makes_footstep_sound = false,
+	sounds = {},
+	walk_velocity = 0.001,
+	run_velocity = 3,
+	jump = false,
+	drops = {},
+	water_damage = 0,
+	lava_damage = 4,
+	light_damage = 0,
+	view_range = 15,
+	owner = "",
+	order = "stand",
+	fear_height = 3,
+	animation = {
+		speed_normal = 12,
+		speed_run = 15,
+		stand_start = 1,
+		stand_end = 20,
+		walk_start = 50,
+		walk_end = 70,
+		run_start = 50,
+		run_end = 70,
+	},
+	on_rightclick = function(self, clicker)
+		mobs_trader(self, clicker, entity, mobs.shopkeeper)
+	end,
+})
 
 mobs:register_mob("mobs_npc:trader", {
 	type = "npc",

@@ -165,9 +165,20 @@ chest.description = nil
 chest.legacy_facedir_simple = nil
 chest.after_place_node = nil
 chest.on_receive_fields = nil
-chest.tiles = {top_texture, top_texture, "default_obsidian_glass.png",
-	"default_chest_side.png", side_texture.."^[transformFX", side_texture.."^connected_chests_front.png"}
+chest.tiles = {"default_chest_top_connected_right.png", "default_chest_top_connected_right.png", "default_obsidian_glass.png",
+	"default_chest_side.png", side_texture.."^[transformFX", "default_chest_front_connected.png"}
 chest.drop = "default:chest 2"
+chest.drawtype = "nodebox"
+chest.paramtype = "light"
+chest.node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	}
 chest.selection_box = {
 	type = "fixed",
 	fixed = {
@@ -200,9 +211,20 @@ chest_locked.legacy_facedir_simple = nil
 chest_locked.after_place_node = nil
 chest_locked.on_construct = nil
 chest_locked.on_receive_fields = nil
-chest_locked.tiles = {top_texture, top_texture, "default_obsidian_glass.png",
-	"default_chest_side.png", side_texture.."^[transformFX", side_texture.."^connected_chests_front.png^connected_chests_lock.png"}
+chest_locked.tiles = {"default_chest_top_connected_right.png", "default_chest_top_connected.png", "default_obsidian_glass.png",
+	"default_chest_side.png", side_texture.."^[transformFX", "default_chest_front_connected.png^connected_chests_lock.png"}
 chest_locked.drop = "default:chest_locked 2"
+chest_locked.drawtype = "nodebox"
+chest_locked.paramtype = "light"
+chest_locked.node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5}, -- NodeBox1
+			{-0.5, 0.375, -0.375, 0.5, 0.4375, 0.375}, -- NodeBox2
+			{-0.5, 0.25, -0.4375, 0.5, 0.375, 0.4375}, -- NodeBox3
+			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
+		}
+	}
 chest_locked.selection_box = {
 	type = "fixed",
 	fixed = {
@@ -263,8 +285,8 @@ else
 end
 
 minetest.register_node("connected_chests:chest_right", {
-	tiles = {top_texture.."^[transformFX", top_texture.."^[transformFX", "default_chest_side.png",
-		"default_obsidian_glass.png", side_texture, side_texture.."^connected_chests_front.png^[transformFX"},
+	tiles = {"default_chest_top_connected.png", "default_chest_top_connected_right.png", "default_chest_side.png",
+		"default_obsidian_glass.png", side_texture, "default_chest_front_connected_right.png"},
 	paramtype2 = "facedir",
 	drop = "",
 	pointable = false,
@@ -317,8 +339,8 @@ minetest.register_node("connected_chests:chest_right", {
 })
 
 minetest.register_node("connected_chests:chest_locked_right", {
-	tiles = {top_texture.."^[transformFX", top_texture.."^[transformFX", "default_chest_side.png",
-		"default_obsidian_glass.png", side_texture, side_texture.."^connected_chests_front.png^connected_chests_lock.png^[transformFX"},
+	tiles = {"default_chest_top_connected.png", "default_chest_top_connected_right.png", "default_chest_side.png",
+		"default_obsidian_glass.png", side_texture, "default_chest_front_connected.png^connected_chests_lock.png^[transformFX"},
 	paramtype2 = "facedir",
 	drop = "",
 	pointable = false,

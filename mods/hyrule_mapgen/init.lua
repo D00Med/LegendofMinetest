@@ -13,7 +13,7 @@ minetest.register_craftitem("hyrule_mapgen:village_spawner", {
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos = pointed_thing.above
 		minetest.place_schematic({x=pos.x, y=pos.y-1, z=pos.z}, minetest.get_modpath("hyrule_mapgen").."/schematics/village.mts", 0, {}, true)
-		local obj = minetest.env:add_entity({x=pos.x+14, y=pos.y+2, z=pos.z+24}, "mobs_npc:trader")
+		local obj = minetest.env:add_entity({x=pos.x+14, y=pos.y+2, z=pos.z+24}, "mobs_npc:shopkeeper")
 		itemstack:take_item()
 		return itemstack
 	end,
