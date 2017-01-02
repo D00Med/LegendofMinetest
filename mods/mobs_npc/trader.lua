@@ -52,6 +52,7 @@ mobs.shopkeeper = {
 mobs:register_mob("mobs_npc:shopkeeper", {
 	type = "npc",
 	passive = false,
+	reach = 2,
 	damage = 3,
 	attack_type = "dogfight",
 	attacks_monsters = false,
@@ -89,7 +90,14 @@ mobs:register_mob("mobs_npc:shopkeeper", {
 		run_end = 70,
 	},
 	on_rightclick = function(self, clicker)
+		if clicker:get_wielded_item():get_name() ~= "hyruletools:eye" then
 		mobs_trader(self, clicker, entity, mobs.shopkeeper)
+		else
+			self.object:set_animation({x=20, y=40}, 12, 0)
+			minetest.after(1, function()
+				self.object:set_animation({x=30, y=30}, 12, 0)
+			end)
+		end
 	end,
 })
 
