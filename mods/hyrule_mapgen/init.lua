@@ -560,6 +560,84 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:crystal_1", {
+	description = "Cave Crystal",
+	tiles = {
+		"hyrule_mapgen_crystal1.png",
+	},
+	groups = {cracky=1},
+	drawtype = "nodebox",
+	use_texture_alpha = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	light_source = 6,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.0625, 0.1875, 0.4375, 0.25}, -- NodeBox6
+			{0, -0.5, -0.3125, 0.1875, 0.1875, -0.125}, -- NodeBox7
+			{-0.3125, -0.5, -0.1875, -0.0625, -0.0625, 0.0625}, -- NodeBox8
+			{0.1875, -0.5, 0.0625, 0.3125, 0, 0.1875}, -- NodeBox9
+			{-0.25, -0.5, 0.125, 0, 0.0625, 0.375}, -- NodeBox10
+		}
+	},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:crystal_3", {
+	description = "Cave Crystal",
+	tiles = {
+		"hyrule_mapgen_crystal3.png",
+	},
+	groups = {cracky=1},
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	light_source = 6,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.25, 0, 0.1875, -0.0625}, -- NodeBox16
+			{0, -0.5, 0.0625, 0.25, 0.5, 0.3125}, -- NodeBox19
+			{-0.375, -0.5, 0.0625, -0.1875, -0.0625, 0.25}, -- NodeBox20
+		}
+	},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:crystal_2", {
+	description = "Cave Crystal",
+	tiles = {
+		"hyrule_mapgen_crystal2.png",
+	},
+	groups = {cracky=1},
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	light_source = 6,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.1875, 0.125, 0.4375, 0.125}, -- NodeBox11
+			{0.0625, -0.5, 0.1875, 0.25, 0.1875, 0.375}, -- NodeBox12
+			{-0.375, -0.5, -0.25, -0.1875, -0.0625, -0.0625}, -- NodeBox13
+			{-0.3125, -0.5, 0.0625, -0.0625, 0.125, 0.3125}, -- NodeBox14
+			{0.0625, -0.5, -0.3125, 0.25, 0.25, -0.125}, -- NodeBox15
+		}
+	},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:dungeon_seed", {
+	description = "Dungeon Seed",
+	tiles = {"default_stone.png"},
+	groups = {cracky = 3, not_in_creative_inventory=1},
+	sounds = default.node_sound_stone_defaults(),
+	drop = "default:stone"
+})
+
 minetest.register_node("hyrule_mapgen:ice_brick", {
 	description = "Ice Brick",
 	tiles = {"hyrule_mapgen_ice_brick.png"},
@@ -705,12 +783,15 @@ minetest.register_node("hyrule_mapgen:chest", {
 		return inv:is_empty("main")
 	end,
 	on_rightclick = function(pos, node, clicker, item, _)
+		local name = clicker:get_player_name()
 		if clicker:get_wielded_item():get_name() == "hyruletools:key" then
 			item:take_item()
 			local meta = minetest.get_meta(pos)
 			local item = meta:get_string("item")
 			minetest.env:add_item(pos, item)
 			minetest.env:remove_node(pos)
+		else
+		minetest.chat_send_player(name, "It is locked, you need a key!")
 		end
 	end,
 })
@@ -768,10 +849,13 @@ minetest.register_node("hyrule_mapgen:chest_bosskey", {
 		return inv:is_empty("main")
 	end,
 	on_rightclick = function(pos, node, clicker, item, _)
+		local name = clicker:get_player_name()
 		if clicker:get_wielded_item():get_name() == "hyruletools:key" then
 			item:take_item()
 			minetest.env:add_item(pos, "hyruletools:key_boss")
 			minetest.env:remove_node(pos)
+		else
+		minetest.chat_send_player(name, "It's locked, you need a key!")
 		end
 	end,
 })

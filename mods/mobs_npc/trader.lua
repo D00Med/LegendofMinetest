@@ -60,7 +60,7 @@ mobs:register_mob("mobs_npc:shopkeeper", {
 	hp_min = 10,
 	hp_max = 20,
 	armor = 100,
-	collisionbox = {-0.4,0,-0.4, 0.4,1.8,0.4},
+	collisionbox = {-0.4, -0.01,-0.4, 0.4,1.8,0.4},
 	visual = "mesh",
 	mesh = "shopkeeper.b3d",
 	textures = {

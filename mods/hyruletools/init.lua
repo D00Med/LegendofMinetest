@@ -957,7 +957,7 @@ minetest.register_entity("hyruletools:spark2", {
 			self.activated = true
 		end)
 		minetest.after(10, function()
-			--self.object:remove()
+			self.object:remove()
 		end)
 	end,
 	on_step = function (self, pos, node, dtime)

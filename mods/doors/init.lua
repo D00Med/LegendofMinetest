@@ -431,7 +431,7 @@ function doors.register(name, def)
 	def.on_destruct = function(pos)
 		minetest.remove_node({x = pos.x, y = pos.y + 1, z = pos.z})
 	end
-
+	
 	def.drawtype = "mesh"
 	def.paramtype = "light"
 	def.paramtype2 = "facedir"
@@ -521,6 +521,23 @@ doors.register("door_boss_locked", {
 			{"default:steel_ingot", "default:steel_ingot"},
 			{"default:junglewood", "default:junglewood"},
 			{"default:steel_ingot", "default:steel_ingot"},
+		}
+})
+
+doors.register("door_ice", {
+		tiles = {{name = "doors_door_ice.png", backface_culling = true}},
+		description = "Ice Door",
+		inventory_image = "doors_item_ice.png",
+		protected = true,
+		use_texture_alpha = true,
+		groups = {cracky = 1, level = 2},
+		sounds = default.node_sound_metal_defaults(),
+		sound_open = "doors_door_open",
+		sound_close = "doors_door_close",
+		recipe = {
+			{"default:ice", "default:ice"},
+			{"default:ice", "default:ice"},
+			{"default:ice", "default:ice"},
 		}
 })
 

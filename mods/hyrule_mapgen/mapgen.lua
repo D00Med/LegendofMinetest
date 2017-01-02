@@ -1017,9 +1017,9 @@ minetest.register_decoration({
 minetest.register_decoration({
 	deco_type = "schematic",
 	place_on = {"default:snowblock"},
-	sidelen = 36,
+	sidelen = 46,
 	noise_params = {
-			offset = 0.001,
+			offset = 0,
 			scale = 0.001,
 			spread = {x = 100, y = 100, z = 100},
 			seed = 329,
@@ -1253,6 +1253,17 @@ minetest.register_ore({
 	y_max          = -66,
 })
 
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "hyrule_mapgen:dungeon_seed",
+	wherein        = "default:stone",
+	clust_scarcity = 22 * 22 * 22,
+	clust_num_ores = 1,
+	clust_size     = 2,
+	y_min          = -9113,
+	y_max          = -66,
+})
+
 --rupees
 
 minetest.register_node("hyrule_mapgen:stone_with_redrupee", {
@@ -1390,7 +1401,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -100 or maxp.y > 20 then
+	if maxp.y < -150 or maxp.y > 20 then
 		return
 	end
 	local dirt = minetest.find_nodes_in_area(minp, maxp,
@@ -1398,13 +1409,21 @@ minetest.register_on_generated(function(minp, maxp)
 	for n = 1, #dirt do
 		if math.random(1, 50) == 1 then
 			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
-				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" and pos.y >= -100 then
 					if math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagmite0"})
 					elseif math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagmite1"})
 					else
 					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:stalagmite2"})
+					end
+				elseif minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:crystal_1"})
+					elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:crystal_2"})
+					else
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:crystal_3"})
 					end
 				end
 		end
@@ -1433,7 +1452,7 @@ end)
 
 --villages
 
-local village_rarity = 50000
+local village_rarity = 100000
 
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 21000 then
@@ -1470,19 +1489,26 @@ end)
 --dungeons
 --below ground
 
-local dungeon_rarity = 5000000
+local dungeon_rarity = 500
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y > -500 or maxp.y < -3000 then
+	if maxp.y > -60 or maxp.y < -30000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
-		{"default:stone"})
+		{"hyrule_mapgen:dungeon_seed"})
 	for n = 1, #stone do
 		if math.random(1, dungeon_rarity) == 1 then
 			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
-				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon_retro.mts", random, {}, true)
+			if pos.y <= -500 then
+			local number = math.random(1,2)
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon_retro"..number..".mts", random, {}, true)
 				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
+			else
+			local number = math.random(1,2)
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon"..number..".mts", random, {}, true)
+				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
+			end
 		end
 	end
 end)
