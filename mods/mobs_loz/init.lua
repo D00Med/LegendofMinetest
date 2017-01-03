@@ -2,7 +2,7 @@ local path = minetest.get_modpath("mobs_loz")
 
 --optional mobs(loz mode)
 if minetest.setting_getbool("loz_mode") then
-dofile(path.."/deku.lua") -- D00Med
+dofile(path.."/deku_scrub.lua") -- D00Med
 dofile(path.."/goron.lua") -- D00Med
 dofile(path.."/zora.lua") -- D00Med
 dofile(path.."/scrub.lua") -- D00Med
