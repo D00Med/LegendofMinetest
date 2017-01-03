@@ -1053,7 +1053,51 @@ minetest.register_decoration({
 	flags = "place_center_x, place_center_z",
 })
 
+-- Coral reef
 
+	minetest.register_decoration({
+		deco_type = "schematic",
+		place_on = {"default:sand"},
+		noise_params = {
+			offset = -0.1,
+			scale = 0.1,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 7013,
+			octaves = 3,
+			persist = 1,
+		},
+		biomes = {
+			"desert_ocean",
+			"savanna_ocean",
+			"rainforest_ocean",
+		},
+		y_min = -8,
+		y_max = -2,
+		schematic = minetest.get_modpath("default") .. "/schematics/corals.mts",
+		flags = "place_center_x, place_center_z",
+		rotation = "random",
+	})
+end
+
+--shrub
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:dirt_with_grass2"},
+	sidelen = 26,
+	noise_params = {
+		offset = 0.001,
+		scale = 0.002,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 2,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"coniferous_forest"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/shrub.mts",
+	flags = "place_center_x, place_center_z",
+})
 
 -- wild tree
 minetest.register_decoration({
@@ -1137,6 +1181,26 @@ minetest.register_decoration({
 	y_min = 5,
 	y_max = 31000,
 	decoration = "hyrule_mapgen:icicle",
+	height = 1,
+	height_max = 1,
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"hyrule_mapgen:lavabiome_dirt",},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.006,
+		scale = 0.04,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {"lavabiome"},
+	y_min = 5,
+	y_max = 31000,
+	decoration = "hyrule_mapgen:obsidian_spike",
 	height = 1,
 	height_max = 1,
 })

@@ -630,6 +630,16 @@ minetest.register_node("hyrule_mapgen:crystal_2", {
 	sounds = default.node_sound_glass_defaults()
 })
 
+minetest.register_node("hyrule_mapgen:bush_leaves", {
+	description = "Shrub Leaves",
+	tiles = {"hyrule_mapgen_bushleaves.png"},
+	drawtype = "allfaces",
+	paramtype = "light",
+	walkable = false,
+	groups = {snappy=1, oddly_breakable_by_hand=1, leaves=1},
+	sounds = default.node_sound_leaves_defaults(),
+})
+
 minetest.register_node("hyrule_mapgen:dungeon_seed", {
 	description = "Dungeon Seed",
 	tiles = {"default_stone.png"},
