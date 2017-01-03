@@ -27,7 +27,7 @@ for _, col in pairs(all_colours) do
 		hp_min = 8,
 		hp_max = 10,
 		armor = 200,
-		collisionbox = {-0.5, -1, -0.5, 0.5, 0.3, 0.5},
+		collisionbox = {-0.4, 0, -0.4, 0.4, 1.3, 0.4},
 		visual = "mesh",
 		mesh = "mobs_sheep.b3d",
 		textures = {
@@ -117,7 +117,7 @@ for _, col in pairs(all_colours) do
 
 				self.object:set_properties({
 					textures = {"mobs_sheep_shaved.png"},
-					mesh = "mobs_sheep_shaved.b3d",
+					mesh = "mobs_sheep.b3d",
 				})
 
 				return
