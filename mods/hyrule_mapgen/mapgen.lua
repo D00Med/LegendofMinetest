@@ -1488,6 +1488,14 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/pine_village.mts", random, {}, true)
+				local obj = minetest.env:add_entity({x=pos.x+4, y=pos.y+7, z=pos.z+5}, "mobs_npc:shopkeeper")
+				local obj = minetest.env:add_entity({x=pos.x+6, y=pos.y+3, z=pos.z+18}, "mobs_npc:npc_custom")
+				local npc = obj:get_luaentity()
+				npc.text = "I'll give you something nice if you find me a 'red potion'"
+				npc.reward_text = "*slurp* Here you go"
+				npc.item = "bucket:bucket_empty"
+				npc.reward_item = "witchcraft:potion_red"
+				npc.zdir = -1
 				end
 		end
 	end

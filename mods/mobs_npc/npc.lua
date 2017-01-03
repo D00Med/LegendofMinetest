@@ -259,11 +259,19 @@ mobs:register_mob("mobs_npc:npc_custom", {
 	end,
 	on_rightclick = function(self, clicker)
 		local pos = self.object:getpos()
+		if self.reward_item ~= nil and clicker:get_wielded_item():get_name() == self.reward_item then
+			self.item_ready = true
+		end
 		if self.item ~= nil and not self.inactive then
 			local xdir = self.xdir or 0
 			local zdir = self.zdir or 0
+			if self.item_ready then
 			minetest.env:add_item({x=pos.x+xdir, y=pos.y, z=pos.z+zdir}, self.item)
 			self.inactive = true
+			if self.reward_text ~= nil then
+			minetest.chat_send_player(clicker:get_player_name(), self.reward_text)
+			end
+			end
 		end
 		if self.text ~= nil and not self.spoken then
 			minetest.chat_send_player(clicker:get_player_name(), self.text)
