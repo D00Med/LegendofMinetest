@@ -1096,6 +1096,29 @@ minetest.register_decoration({
 	height_max = 5,
 })
 
+
+--bomb flower
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"hyrule_mapgen:swamp_mud",},
+	sidelen = 36,
+	noise_params = {
+		offset = 0.001,
+		scale = 0.005,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {"swamp"},
+	y_min = 5,
+	y_max = 31000,
+	decoration = "hyruletools:bomb_flower",
+	height = 1,
+	height_max = 1,
+})
+
 --icicle
 
 minetest.register_decoration({
@@ -1103,8 +1126,8 @@ minetest.register_decoration({
 	place_on = {"default:snowblock", "default:ice"},
 	sidelen = 16,
 	noise_params = {
-		offset = 0.002,
-		scale = 0.02,
+		offset = 0.006,
+		scale = 0.04,
 		spread = {x = 200, y = 200, z = 200},
 		seed = 230,
 		octaves = 3,
@@ -1459,11 +1482,11 @@ minetest.register_on_generated(function(minp, maxp)
 		return
 	end
 	local grass = minetest.find_nodes_in_area(minp, maxp,
-		{"hyrule_mapgen:dirt_with_grass2"})
+		{"default:dirt_with_grass2"})
 	for n = 1, #grass do
 		if math.random(1, village_rarity) == 1 then
 			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
-				if minetest.get_node({x=pos.x+2, y=pos.y, z=pos.z+2}).name == "hyrule_mapgen:dirt_with_grass2" then
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/pine_village.mts", random, {}, true)
 				end
 		end
