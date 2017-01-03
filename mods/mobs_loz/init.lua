@@ -5,7 +5,6 @@ if minetest.setting_getbool("loz_mode") then
 dofile(path.."/deku_scrub.lua") -- D00Med
 dofile(path.."/goron.lua") -- D00Med
 dofile(path.."/zora.lua") -- D00Med
-dofile(path.."/scrub.lua") -- D00Med
 dofile(path.."/chuchu.lua") -- D00Med
 dofile(path.."/deku_baba.lua") -- D00Med
 dofile(path.."/dodongo.lua") -- D00Med
