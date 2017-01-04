@@ -221,6 +221,134 @@ end)
 minetest.register_on_joinplayer(function(player)
 	player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
 	minetest.after(0, player.hud_set_hotbar_itemcount, player, 8)
+	player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_vignette.png"
+  })
+  
+  local o1 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  local o2 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  local o3 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  local o4 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+   local o5 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  local o6 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  local o7 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  local o8 = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.5, y = 0.5},
+    scale = {
+      x = -100,
+      y = -100
+    },
+    text = "hyruletools_dark.png"
+  })
+  
+  minetest.after(1.2, function()
+  player:hud_remove(o1)
+  end)
+  
+  
+  minetest.after(1.4, function()
+  player:hud_remove(o2)
+  end)
+  
+  
+  minetest.after(1.8, function()
+  player:hud_remove(o3)
+  end)
+  
+  
+  minetest.after(2, function()
+  player:hud_remove(o4)
+  end)
+  
+  minetest.after(2.2, function()
+  player:hud_remove(o5)
+  end)
+  
+  
+  minetest.after(2.4, function()
+  player:hud_remove(o6)
+  end)
+  
+  
+  minetest.after(2.6, function()
+  player:hud_remove(o7)
+  end)
+  
+  
+  minetest.after(2.8, function()
+  player:hud_remove(o8)
+  end)
+  
 end)
 
 
@@ -233,7 +361,29 @@ minetest.register_entity("hyruletools:block_dummy", {
 	textures = {"hyrule_mapgen_magnblock.png"},
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual_size = {x=3.5, y=3.5},
-	physical = true
+	physical = true,
+	on_step = function(self)
+		if self.particles then
+			local vec = self.object:getvelocity()
+			local apos = self.object:getpos()
+			local part = minetest.add_particlespawner(
+			5, --amount
+			1, --time
+			{x=apos.x-0.1, y=apos.y+0.3, z=apos.z-0.1}, --minpos
+			{x=apos.x+0.1, y=apos.y+0.4, z=apos.z+0.1}, --maxpos
+			{x=-0, y=-0, z=-0}, --minvel
+			{x=0, y=0, z=0}, --maxvel
+			{x=0,y=0,z=0}, --minacc
+			{x=-vec.x,y=0,z=-vec.z}, --maxacc
+			0.5, --minexptime
+			1, --maxexptime
+			5, --minsize
+			9, --maxsize
+			false, --collisiondetection
+			self.particletex --texture
+		)
+		end
+	end
 })
 
 minetest.register_entity("hyruletools:heart_entity", {
@@ -501,9 +651,9 @@ minetest.register_craftitem("hyruletools:magic_powder", {
 minetest.register_craft({
 	output = "hyruletools:magic_powder 1",
 	recipe = {
-		{"icetools:ice_fragment", "default:diamond", "icetools:ice_fragment"},
+		{"hyruletools:ice_fragment", "default:diamond", "hyruletools:ice_fragment"},
 		{"default:diamond", "default:mese_crystal", "default:diamond"},
-		{"icetools:ice_fragment", "default:diamond",  "icetools:ice_fragment"}
+		{"hyruletools:ice_fragment", "default:diamond",  "hyruletools:ice_fragment"}
 	}
 })
 
@@ -3002,6 +3152,9 @@ minetest.register_tool("hyruletools:wand", {
 		obj:setvelocity({x=dir.x*8, y=dir.y*8, z=dir.z*8})
 		obj:set_properties({textures = {"default_ice.png"},})
 		obj:setacceleration({x=-dir.x*2, y=-8, z=-dir.z*2})
+		local ice = obj:get_luaentity()
+		ice.particles = true
+		ice.particletex = "hyruletools_ice_effect.png"
 		minetest.after(1, function()
 		local pos2 = obj:getpos()
 		obj:remove()

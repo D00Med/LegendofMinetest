@@ -261,6 +261,9 @@ mobs:register_mob("mobs_npc:npc_custom", {
 		local pos = self.object:getpos()
 		if self.reward_item ~= nil and clicker:get_wielded_item():get_name() == self.reward_item then
 			self.item_ready = true
+			self.rewarding = true
+		elseif self.reward_item == nil then
+			self.item_ready = true
 		end
 		if self.item ~= nil and not self.inactive then
 			local xdir = self.xdir or 0
@@ -276,7 +279,7 @@ mobs:register_mob("mobs_npc:npc_custom", {
 		if self.text ~= nil and not self.spoken then
 			minetest.chat_send_player(clicker:get_player_name(), self.text)
 			self.spoken = true
-		elseif self.text ~= nil then
+		elseif self.text ~= nil and not self.rewarding then
 			minetest.chat_send_player(clicker:get_player_name(), self.text.."... I've said that already")
 		end
 	end,

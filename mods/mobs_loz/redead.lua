@@ -38,8 +38,8 @@ mobs:register_mob("mobs_loz:redead", {
 		minetest.env:add_entity(pos, "experience:orb")
 	end,
 	makes_footstep_sound = true,
-	walk_velocity = 0.2,
-	run_velocity = 0.3,
+	walk_velocity = 0.6,
+	run_velocity = 0.7,
 	water_damage = 1,
 	lava_damage = 2,
 	light_damage = 5,
