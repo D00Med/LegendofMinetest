@@ -73,7 +73,7 @@ function object_detach(entity, player, offset)
 	default.player_attached[player:get_player_name()] = false
 	default.player_set_animation(player, "stand" , 30)
 	player:set_properties({visual_size = {x=1, y=1}})
-	player:set_eye_offset({x=0, y=0, z=0}, {x=0, y=0, z=0})
+	player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
 	local pos = player:getpos()
 	pos = {x = pos.x + offset.x, y = pos.y + 0.2 + offset.y, z = pos.z + offset.z}
 	minetest.after(0.1, function()
