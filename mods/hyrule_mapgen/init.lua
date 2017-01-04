@@ -247,6 +247,18 @@ minetest.register_abm({
 
 --entities
 
+minetest.register_entity("hyrule_mapgen:windmill", {
+	visual = "mesh",
+	mesh = "windmill.b3d",
+	textures = {"hyrule_mapgen_windmill.png"},
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	visual_size = {x=1, y=1},
+	physical = true,
+	on_activate = function(self)
+		self.object:set_animation({x=1, y=40}, 5, 0)
+	end
+})
+
 minetest.register_entity("hyrule_mapgen:butterfly", {
 	visual = "mesh",
 	mesh = "butterfly.b3d",
@@ -560,6 +572,38 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:big_table", {
+	description = "Big Table",
+	tiles = {
+		"hyrule_mapgen_bigtable_top.png",
+		"hyrule_mapgen_bigtable.png",
+		"hyrule_mapgen_bigtable.png",
+		"hyrule_mapgen_bigtable.png",
+		"hyrule_mapgen_bigtable.png",
+		"hyrule_mapgen_bigtable.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0.375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox1
+			{-0.5, -0.5, 0.1875, -0.1875, 0.375, 0.5}, -- NodeBox2
+		}
+	},
+	groups = {choppy=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_craft( {
+	output = "hyrule_mapgen:big_table 1",
+	recipe = {
+		{ "default:wood", "default:wood", "default:wood" },
+		{ "default:wood", "", "" },
+		{ "default:wood", "", "" }
+	}
+})
+
 minetest.register_node("hyrule_mapgen:crystal_1", {
 	description = "Cave Crystal",
 	tiles = {
@@ -638,6 +682,19 @@ minetest.register_node("hyrule_mapgen:bush_leaves", {
 	walkable = false,
 	groups = {snappy=1, oddly_breakable_by_hand=1, leaves=1},
 	sounds = default.node_sound_leaves_defaults(),
+})
+
+minetest.register_node("hyrule_mapgen:windmill_node", {
+	description = "Windmill",
+	drawtype = "airlike",
+	tiles = {"hyrule_mapgen_trans.png"},
+	wield_image = "hyrule_mapgen_windmill_inv.png",
+	inventory_image = "hyrule_mapgen_windmill_inv.png",
+	groups = {choppy = 1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_wood_defaults(),
+	on_construct = function(pos, node)
+		minetest.env:add_entity({x=pos.x, y=pos.y+1, z=pos.z}, "hyrule_mapgen:windmill")
+	end,
 })
 
 minetest.register_node("hyrule_mapgen:dungeon_seed", {

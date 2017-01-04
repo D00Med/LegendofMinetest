@@ -65,3 +65,30 @@ mobs:register_mob("mobs_loz:mad_scrub", {
 mobs:register_spawn("mobs_loz:mad_scrub", {"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"}, 20, 10, 15000, 2, 31000)
 
 mobs:register_egg("mobs_loz:mad_scrub", "Mad Scrub", "default_leaves.png", 1)
+
+mobs:register_arrow("mobs_loz:deku_nut", {
+	visual = "sprite",
+	visual_size = {x = 0.5, y = 0.5},
+	textures = {"mobs_nut.png"},
+	velocity = 6,
+   tail = 0, -- enable tail
+   tail_texture = "default_dirt.png",
+   
+	hit_player = function(self, player)
+      player:punch(self.object, 1.0, {
+         full_punch_interval = 1.0,
+         damage_groups = {fleshy = 1},
+      }, nil)
+   end,
+   
+   hit_mob = function(self, player)
+      player:punch(self.object, 1.0, {
+         full_punch_interval = 1.0,
+         damage_groups = {fleshy = 1},
+      }, nil)
+   end,
+
+   hit_node = function(self, pos, node)
+      self.object:remove()
+   end,
+})
