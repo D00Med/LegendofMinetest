@@ -1,4 +1,4 @@
-License of source code
+﻿License of source code
 ----------------------
 
 GNU Lesser General Public License, version 2.1
@@ -90,6 +90,12 @@ default_jungletree.png default_tree_top.png
   default_river_water_source_animated.png
   default_river_water_flowing_animated.png
 
+by D00Med and toby109tt(aka tobyplowy) (CC BY-SA 3.0):
+  default_clay.png
+  default_dirt.png
+
+toby109tt(aka tobyplowy) (CC BY-SA 3.0):
+  default_stone.png
 
 Original textures:
 -----------------------------------------------
