@@ -260,8 +260,15 @@ mobs:register_mob("mobs_npc:npc_custom", {
 	on_rightclick = function(self, clicker)
 		local pos = self.object:getpos()
 		if self.reward_item ~= nil and clicker:get_wielded_item():get_name() == self.reward_item then
+			if self.item_count == nil then
 			self.item_ready = true
 			self.rewarding = true
+			clicker:get_wielded_item():take_item()
+			elseif clicker:get_wielded_item():get_count() == self.item_count then
+			self.item_ready = true
+			self.rewarding = true
+			clicker:get_wielded_item():take_item()
+			end
 		elseif self.reward_item == nil then
 			self.item_ready = true
 		end

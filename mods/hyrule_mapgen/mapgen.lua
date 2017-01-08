@@ -1569,6 +1569,32 @@ minetest.register_on_generated(function(minp, maxp)
 		return
 	end
 	local grass = minetest.find_nodes_in_area(minp, maxp,
+		{"default:dirt_with_dry_grass"})
+	for n = 1, #grass do
+		if math.random(1, village_rarity) == 1 then
+			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/savanna_village.mts", random, {}, true)
+				local shopkeeper = minetest.env:add_entity({x=pos.x+6, y=pos.y+6, z=pos.z+2}, "mobs_npc:shopkeeper")
+				local windmill = minetest.env:add_entity({x=pos.x+23, y=pos.y+13, z=pos.z+29}, "hyrule_mapgen:windmill")
+				local obj = minetest.env:add_entity({x=pos.x+9, y=pos.y+9, z=pos.z+33}, "mobs_npc:npc_custom")
+				local npc = obj:get_luaentity()
+				npc.text = "I'll make you something nice for 500 green rupees"
+				npc.reward_text = "Here you go"
+				npc.item = "default:sword_bronze"
+				npc.reward_item = "hyruletools:green_rupee"
+				npc.item_count = 500
+				npc.zdir = -1
+				end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -1 or maxp.y > 11000 then
+		return
+	end
+	local grass = minetest.find_nodes_in_area(minp, maxp,
 		{"default:snowblock"})
 	for n = 1, #grass do
 		if math.random(1, village_rarity) == 1 then

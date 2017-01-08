@@ -256,7 +256,13 @@ minetest.register_entity("hyrule_mapgen:windmill", {
 	physical = true,
 	on_activate = function(self)
 		self.object:set_animation({x=1, y=40}, 5, 0)
-	end
+	end,
+	on_step = function(self)
+		local pos = self.object:getpos()
+		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name ~= "hyrule_mapgen:windmill_node" then
+		self.object:remove()
+		end
+	end,
 })
 
 minetest.register_entity("hyrule_mapgen:butterfly", {
