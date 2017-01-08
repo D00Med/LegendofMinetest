@@ -14,5 +14,5 @@ dofile(modpath.."/rope.lua")
 dofile(modpath.."/nodes.lua")
 dofile(modpath.."/sitting.lua")
 dofile(modpath.."/worktable.lua")
-dofile(modpath.."/xwall.lua")
+--dofile(modpath.."/xwall.lua")
 
