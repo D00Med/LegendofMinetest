@@ -28,7 +28,7 @@ local chest_stuff = {
 	{name="maptools:nyan_coin", max = 5},
 	{name="twilight:crystal", max = 1},
 	{name="hyruletools:triforce_shard", max = 1},
-	{name="hyruletools:steel_boomerang", max = 1},
+	{name="hyruletools:boomerang_steel", max = 1},
 	{name="default:ice", max = 3}
 }
 
