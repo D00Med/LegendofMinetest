@@ -1523,6 +1523,55 @@ minetest.register_node("hyrule_mapgen:railblock", {
 	groups = {cracky=1, magnetic=0}
 })
 
+minetest.register_node("hyrule_mapgen:greentile", {
+	description = "Green Dungeon Tile",
+	tiles = {
+		"hyrule_mapgen_greentile.png"
+	},
+	groups = {cracky=1,},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:stained_glass", {
+	description = "Stained Glass",
+	drawtype = "glasslike",
+	tiles = {
+		"hyrule_mapgen_stainedglass.png"
+	},
+	use_texture_alpha = true,
+	paramtype = "light",
+	light_source = 10,
+	sunlight_propagates = true,
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate = 3},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:ganon_sphere", {
+	description = "Ganon Sphere",
+	tiles = {
+		"hyrule_mapgen_ganonsphere.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	light_source = 10,
+	groups = {cracky=4, oddly_breakable_by_hand=1},
+	walkable = false,
+	sounds = default.node_sound_glass_defaults(),
+	use_texture_alpha = true,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.1875, -0.1875, 0.375, 0.1875, 0.1875}, -- NodeBox5
+			{-0.1875, -0.375, -0.1875, 0.1875, 0.375, 0.1875}, -- NodeBox6
+			{-0.3125, -0.25, -0.25, 0.3125, 0.25, 0.25}, -- NodeBox7
+			{-0.25, -0.25, -0.3125, 0.25, 0.25, 0.3125}, -- NodeBox8
+			{-0.25, -0.3125, -0.25, 0.25, 0.3125, 0.25}, -- NodeBox9
+			{-0.1875, -0.1875, -0.375, 0.1875, 0.1875, 0.375}, -- NodeBox12
+		}
+	},
+	drop = ""
+})
+
 minetest.register_node("hyrule_mapgen:floortile", {
 	description = "Floor Tile",
 	tiles = {
@@ -2191,8 +2240,9 @@ minetest.register_node("hyrule_mapgen:ganon_spawn", {
 	light_source = 10,
 	sounds = default.node_sound_glass_defaults(),
 	on_construct = function(pos)
+	minetest.place_schematic({x=pos.x-6, y=pos.y-1, z=pos.z-6}, minetest.get_modpath("hyrule_mapgen").."/schematics/ganon_dungeon.mts", random, {}, true)
 	minetest.after(5, function()
-	minetest.add_entity({x=pos.x, y=pos.y+1, z=pos.z}, "mobs_loz:ganon")
+	minetest.add_entity({x=pos.x+3, y=pos.y+1, z=pos.z+3}, "mobs_loz:ganon")
 	end)
 	end,
 })

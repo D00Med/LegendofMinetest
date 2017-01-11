@@ -25,7 +25,7 @@ mobs:register_arrow("mobs_loz:swdbm", {
    end,
 
    hit_node = function(self, pos, node)
-		minetest.set_node(pos, {name="fire:basic_flame"})
+		--minetest.set_node(pos, {name="fire:basic_flame"})
       self.object:remove()
    end,
 })
@@ -44,7 +44,7 @@ mobs:register_mob("mobs_loz:ganon", {
 	damage = 3,
 	hp_min = 202,
 	hp_max = 225,
-	armor = 200,
+	armor = 80,
 	collisionbox = {-1, -1.5, -1, 1, 1.5, 1},
 	visual = "mesh",
 	mesh = "ganon.b3d",
@@ -109,6 +109,30 @@ mobs:register_mob("mobs_loz:ganon", {
 			"mobs_loz_light.png" --texture
 		)
 	end,
+	do_custom = function(self)
+		local pos = self.object:getpos()
+		if minetest.find_node_near(pos, 10, {"hyrule_mapgen:ganon_sphere"}) then
+			if self.health <= 100 then
+			self.health = 200
+			minetest.add_particlespawner(
+			10, --amount
+			1, --time
+			{x=pos.x-1, y=pos.y-1, z=pos.z-1}, --minpos
+			{x=pos.x+1, y=pos.y-1, z=pos.z+1}, --maxpos
+			{x=-0, y=-0, z=-0}, --minvel
+			{x=0, y=0, z=0}, --maxvel
+			{x=-0.5,y=1,z=-0.5}, --minacc
+			{x=0.5,y=1,z=0.5}, --maxacc
+			1, --minexptime
+			1.5, --maxexptime
+			20, --minsize
+			25, --maxsize
+			false, --collisiondetection
+			"mobs_loz_light.png^[colorize:red:100" --texture
+			)
+			end
+		end
+	end
 })
 
 --mobs:register_spawn("mobs_loz:dodongo_boss", {"hyrule_mapgen:dodongo_spawn"}, 20, 0, 7000, 1, 31000)
