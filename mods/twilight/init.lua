@@ -127,7 +127,7 @@ if weather.reg_weathers.twilight == nil then
 end
 
 twilight_mode = false
-
+--[[
 default.player_register_model("wolfplayer.b3d", {
 	animation_speed = 20,
 	textures = {"wolfplayer.png"},
@@ -146,6 +146,8 @@ default.player_register_model("wolfplayer.b3d", {
 
 local models = default.registered_player_models
 model = false
+--]]
+local hud_changed = false
 
 minetest.register_globalstep(function(dtime)
 if twilight_mode == true then 
@@ -159,7 +161,7 @@ if twilight_mode == true then
 			local remov = inv:remove_item("main", "hyruletools:sword")
 			local add = inv:add_item("main", "hyruletools:sword_light")
 	end
-	if model == false then
+	if hud_changed == false then
 	glow = player:hud_add({
     hud_elem_type = "image",
     position = {x = 0.5, y = 0.5},
@@ -169,19 +171,19 @@ if twilight_mode == true then
     },
     text = "twilight_hud.png"
   })
-	model = true
-	player:set_properties({mesh = "wolfplayer.b3d", textures = {"wolfplayer.png"}})
-	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=3,z=-3})
-	player:set_local_animation({x=0, y=9}, {x=28, y=44}, {x=11, y=26}, {x=11, y=26}, 20)
-	player:set_physics_override({
+	hud_changed = true
+	--player:set_properties({mesh = "wolfplayer.b3d", textures = {"wolfplayer.png"}})
+	--player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=3,z=-3})
+	--player:set_local_animation({x=0, y=9}, {x=28, y=44}, {x=11, y=26}, {x=11, y=26}, 20)
+	--player:set_physics_override({
 
-		speed = 1.6, -- multiplier to default value
-		jump = 1.6, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
+	--	speed = 1.6, -- multiplier to default value
+	--	jump = 1.6, -- multiplier to default value
+	--	gravity = 1.0, -- multiplier to default value
+	--	sneak = true, -- whether player can sneak
+	--	sneak_glitch = false, -- whether player can use the sneak glitch 
 
-		})
+	--	})
 	end
 end
 else
@@ -197,7 +199,7 @@ else
 			local remov = inv:remove_item("main", "hyruletools:sword_light")
 			local add = inv:add_item("main", "hyruletools:sword")
 	end
-	if model == true then
+	--[[ model == true then
 	model = false
 	player:set_properties({mesh = "character.b3d", textures = {"character.png"}})
 	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=10,z=-4})
@@ -211,8 +213,9 @@ else
 		sneak_glitch = false, -- whether player can use the sneak glitch 
 
 		})
-	end
+	end--]]
 	player:hud_remove(glow)
+	hud_changed = false
 	end
 end
 end)
