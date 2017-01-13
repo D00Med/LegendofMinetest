@@ -765,6 +765,28 @@ minetest.register_node("hyrule_mapgen:icicle", {
 	end,
 })
 
+minetest.register_node("hyrule_mapgen:obsidian_spike", {
+	description = "Obsidian spike",
+	tiles = {
+		"default_obsidian.png",
+	},
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, 0.5, 0.25}, -- NodeBox1
+			{-0.1875, 0.4375, -0.1875, 0.1875, 1.1875, 0.1875}, -- NodeBox2
+			{-0.125, 1.1875, -0.125, 0.125, 1.6875, 0.125}, -- NodeBox3
+			{-0.0625, 1.6875, -0.0625, 0.0625, 2.0625, 0.0625}, -- NodeBox4
+		}
+	},
+	groups = {cracky=1,},
+	sounds = default.node_sound_stone_defaults(),
+	drop = "default:obsidian",
+})
+
 minetest.register_node("hyrule_mapgen:spikes", {
 	description = "Spikes",
 	drawtype = "firelike",

@@ -1027,7 +1027,7 @@ minetest.register_decoration({
 			persist = 0.6
 		},
 	biomes = {"icesheet"},
-	y_min = 1,
+	y_min = -8,
 	y_max = 1000,
 	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/igloo.mts",
 	flags = "place_center_x, place_center_z",
@@ -1169,20 +1169,81 @@ minetest.register_decoration({
 	place_on = {"default:snowblock", "default:ice"},
 	sidelen = 16,
 	noise_params = {
-		offset = 0.006,
-		scale = 0.04,
+		offset = 0.008,
+		scale = 0.06,
 		spread = {x = 200, y = 200, z = 200},
 		seed = 230,
 		octaves = 3,
 		persist = 0.6
 	},
 	biomes = {"icesheet"},
-	y_min = 5,
+	y_min = -8,
 	y_max = 31000,
 	decoration = "hyrule_mapgen:icicle",
 	height = 1,
 	height_max = 1,
 })
+
+--desert rocks
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:desert_sand",},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.002,
+		scale = 0.01,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {"desert"},
+	y_min = -500,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/desertrock.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:desert_sand",},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.002,
+		scale = 0.01,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {"desert"},
+	y_min = -500,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/desertrock2.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:desert_sand",},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.002,
+		scale = 0.01,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {"desert"},
+	y_min = -500,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/desertrock3.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+--obsidian spike
 
 minetest.register_decoration({
 	deco_type = "simple",

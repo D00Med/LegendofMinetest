@@ -23,6 +23,26 @@ minetest.register_node("moreplants:tallgrass", {
 	walkable = false,
 })
 
+minetest.register_node("moreplants:grass", {
+	description = "Thin Grass",
+	drawtype = "plantlike",
+	tiles = {"moreplants_grass.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	buildable_to = true, 
+	sunlight_propagates = true,
+	inventory_image = "moreplants_grass.png",
+	visual_scale = 1.1,
+	wield_scale = {x=0.5, y=0.5, z=0.5},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
+	},
+	walkable = false,
+})
+
 minetest.register_node("moreplants:pinkflower2", {
 	description = "Pink Bell Flower",
 	drawtype = "plantlike",
@@ -990,9 +1010,18 @@ minetest.register_decoration({
 	deco_type = "simple",
 	place_on = {"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"},
 	sidelen = 16,
-	fill_ratio = 0.01,
+	fill_ratio = 0.04,
 	biomes = {"stone_grassland", "sandstone_grassland"},
 	decoration = "moreplants:tallgrass",
+	height = 1,
+})
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:dirt_with_grass", "default:dirt_with_dry_grass", "default:dirt_with_grass3", "hyrule_mapgen:swamp_mud"},
+	sidelen = 16,
+	fill_ratio = 0.07,
+	biomes = {"magic_forest", "deciduous_forest", "wild_forest", "swamp"},
+	decoration = "moreplants:grass",
 	height = 1,
 })
 minetest.register_decoration({
