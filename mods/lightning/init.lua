@@ -24,6 +24,7 @@ local rng = PcgRandom(32321123312123)
 
 local ps = {}
 local ttl = 1
+local sky_set = false
 
 local revertsky = function()
 	if ttl == 0 then
@@ -35,8 +36,11 @@ local revertsky = function()
 	end
 
 	for key, entry in pairs(ps) do
+		if not sky_set then
 		local sky = entry.sky
 		entry.p:set_sky(sky.bgcolor, sky.type, sky.textures)
+		sky_set = true
+		end
 	end
 
 	ps = {}
@@ -135,7 +139,7 @@ lightning.strike = function(pos)
 		local sky = {}
 
 		sky.bgcolor, sky.type, sky.textures = player:get_sky()
-
+		sky_set = false
 		local name = player:get_player_name()
 		if ps[name] == nil then
 			ps[name] = {p = player, sky = sky}

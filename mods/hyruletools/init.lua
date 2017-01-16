@@ -837,7 +837,7 @@ minetest.register_craftitem("hyruletools:ocarina2", {
 		local dir = placer:get_look_dir();
 		local player = placer:get_player_name()
 		if minetest.setting_getbool("enable_weather") then	
-		weather.state = "rain"
+		weather.state = "thunder"
 		else
 		minetest.chat_send_player(player, "weather not enabled!")
 		end
@@ -916,7 +916,7 @@ minetest.register_craftitem("hyruletools:ocarina4", {
 		)
 		local playerpos = placer:getpos();
 		local dir = placer:get_look_dir();
-		local obj = minetest.env:add_entity({x=playerpos.x+1+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+1+dir.z}, "mobs:deku")
+		local obj = minetest.env:add_entity({x=playerpos.x+1+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+1+dir.z}, "mobs_loz:business_scrub_passive")
 	end
 })
 
@@ -2234,7 +2234,7 @@ minetest.register_node("hyruletools:bomb_plant", {
 		"hyruletools_bombflower_plant.png",
 	},
 	paramtype = "light",
-	groups = {cracky=1},
+	groups = {snappy=1, oddly_breakable_by_hand=1},
 	collision_box = {
 	type = "fixed",
 	fixed = { -0.5, -0.5, -0.5, 0.5, -0.5, 0.5 }

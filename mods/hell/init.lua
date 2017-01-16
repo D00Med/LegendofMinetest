@@ -8,6 +8,7 @@ hell.player_teleporting = {}
 -- 0 for huge caves
 -- 0.5 for smaller caves
 local TCAVE = 0
+local regular_sky = false
 
 local BLEND = 128 -- Cave blend distance near YMIN, YMAX
 
@@ -138,11 +139,17 @@ minetest.register_globalstep(function(dtime)
 		for i, player in pairs(minetest.get_connected_players()) do
 			local pos = player:getpos().y
 			if pos < YMAX and pos > YMIN then
+				if regular_sky then
 				print("set player to hell color")
 				player:set_sky({r=66, g=0, b=0},"plain",{})
+				regular_sky = false
+				end
 			else
 				--if not in hell, change back to default sky
+				if not regular_sky then
 				player:set_sky({r=0, g=0, b=0},"regular",{})
+				regular_sky = true
+				end
 			end
 		end
 		hell.sky_color_timer = 0
