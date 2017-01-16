@@ -48,7 +48,7 @@ mobs:register_mob("mobs_loz:tektite", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:tektite", {"default:sand", "default:river_water_source", "default:dirt_with_grass2"}, 7, 0, 7000, 2, 31000)
+mobs:register_spawn("mobs_loz:tektite", {"default:sand", "default:river_water_source", "hyrule_mapgen:swamp_mud"}, 7, 0, 7000, 2, 31000)
 
 mobs:register_egg("mobs_loz:tektite", "Blue Tektite", "wool_cyan.png", 1)
 
