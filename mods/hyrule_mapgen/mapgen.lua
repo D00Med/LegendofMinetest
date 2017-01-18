@@ -1268,7 +1268,7 @@ minetest.register_decoration({
 -- statue
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:desert_sand", "default:dirt_with_dry_grass", "default:dirt_with_grass2", "default:dirt_with_grass", "default:snowblock", "default:dirt_with_grass3"},
+	place_on = {"default:desert_sand", "default:dirt_with_dry_grass", "default:dirt_with_grass2", "default:dirt_with_grass", "default:snowblock", "default:dirt_with_grass3", "hyrule_mapgen:swamp_mud"},
 	sidelen = 200,
 	noise_params = {
 		offset = -0.0005,
@@ -1281,6 +1281,23 @@ minetest.register_decoration({
 	y_min = 5,
 	y_max = 31000,
 	decoration = "hyrule_mapgen:statue",
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"hyrule_mapgen:swamp_mud",},
+	sidelen = 200,
+	noise_params = {
+		offset = -0.0005,
+		scale = 0.0015,
+		spread = {x = 200, y = 200, z = 200},
+		seed = 230,
+		octaves = 3,
+		persist = 0.6
+	},
+	y_min = 5,
+	y_max = 31000,
+	decoration = "hyrule_mapgen:bigmush",
 })
 
 -- Papyrus
@@ -1411,6 +1428,27 @@ minetest.register_ore({
 	y_max          = -66,
 })
 
+--ice caves
+minetest.register_ore({
+		ore_type        = "blob",
+		ore             = "air",
+		wherein         = {"default:ice"},
+		clust_scarcity  = 16 * 16 * 16,
+		clust_size      = 12,
+		y_min           = -31000,
+		y_max           = 31000,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.2,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 766,
+			octaves = 1,
+			persist = 0.0
+		},
+	})
+	
+	
 --rupees
 
 minetest.register_node("hyrule_mapgen:stone_with_redrupee", {
@@ -1577,6 +1615,31 @@ minetest.register_on_generated(function(minp, maxp)
 	end
 end)
 
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -50 or maxp.y > 30000 then
+		return
+	end
+	local dirt = minetest.find_nodes_in_area(minp, maxp,
+		{"default:ice"})
+	for n = 1, #dirt do
+		if math.random(1, 25) == 1 then
+			local pos = {x = dirt[n].x, y = dirt[n].y, z = dirt[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:cicicle"})
+					else
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:cicicle2"})
+					end
+				end
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+					if math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "hyrule_mapgen:icicle"})
+					end
+				end
+		end
+	end
+end)
+
 --place a village on singleplayer spawn on day 1
 
 
@@ -1600,6 +1663,31 @@ end)
 --villages
 
 local village_rarity = 100000
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y < -1 or maxp.y > 21000 then
+		return
+	end
+	local grass = minetest.find_nodes_in_area(minp, maxp,
+		{"hyrule_mapgen:swamp_mud"})
+	for n = 1, #grass do
+		if math.random(1, village_rarity) == 1 then
+			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/witch_hut.mts", random, {}, true)
+				local obj = minetest.env:add_entity({x=pos.x+7, y=pos.y+7, z=pos.z+4}, "mobs_npc:npc_custom")
+				local npc = obj:get_luaentity()
+				npc.text = "I'll give you something nice if you find me a 'big mushroom'"
+				npc.reward_text = "Eeehaha! Thanks!"
+				npc.item = "witchcraft:potion_red"
+				npc.reward_item = "hyrule_mapgen:bigmush"
+				npc.xdir = -1
+				npc.skin = "mobs_witch.png"
+				npc.object:set_properties({textures = {"mobs_witch.png"}})
+				end
+		end
+	end
+end)
 
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 21000 then

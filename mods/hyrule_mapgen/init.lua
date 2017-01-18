@@ -578,6 +578,24 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:bigmush", {
+	description = "Big Mushroom",
+	drawtype = "plantlike",
+	tiles = {
+		"hyrule_mapgen_bigmush.png"
+	},
+	wield_image = "hyrule_mapgen_bigmush.png",
+	inventory_image = "hyrule_mapgen_bigmush.png",
+	groups = {snappy=1, flammable=1, oddly_breakable_by_hand = 1,},
+	paramtype = "light",
+	walkable = false,
+	selection_box = {
+	type = "fixed",
+	fixed = {-0.3, -0.5, -0.3, 0.3, 0.2, 0.3}
+	},
+	on_use = minetest.item_eat(-2)
+})
+
 minetest.register_node("hyrule_mapgen:big_table", {
 	description = "Big Table",
 	tiles = {
@@ -2110,6 +2128,40 @@ minetest.register_node("hyrule_mapgen:stalagmite2", {
 	},
 	groups = {crumbly=1, oddly_breakable_by_hand=1},
 	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:cicicle", {
+	description = "Ceiling Icicle",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_icicle.png"},
+	inventory_image = "hyrule_mapgen_icicle.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	use_texture_alpha = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:cicicle2", {
+	description = "Ceiling Icicle 2",
+	drawtype = "plantlike",
+	tiles = {"hyrule_mapgen_icicle2.png"},
+	inventory_image = "hyrule_mapgen_icicle2.png",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	use_texture_alpha = true,
+	paramtype = "light",
+	selection_box = {
+	type = "fixed",
+	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_glass_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:roots", {

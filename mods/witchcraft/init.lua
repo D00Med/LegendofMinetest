@@ -185,7 +185,7 @@ minetest.register_node("witchcraft:pot", {
 local witchcraft = {}
 
 witchcraft.pot = {
-	{"blue", "red", "doomshrooms:mini", "redbrown", "flowers:mushroom_brown"},
+	{"blue", "red", "hyrule_mapgen:bigmush", "redbrown", "flowers:mushroom_brown"},
 	{"blue2", "", "", "", ""},
 	{"green", "blue2", "default:diamond", "", ""},
 	{"orange", "", "", "", ""},
@@ -259,7 +259,7 @@ end
 
 --pot effects
 minetest.register_abm({
-	nodenames = {"witchcraft:pot_water", "witchcraft:pot_red", "witchcraft:pot_redbrown", "witchcraft:pot_blue2", "witchcraft:pot_green", "witchcraft:pot_orange"},
+	nodenames = {"witchcraft:pot_blue", "witchcraft:pot_red", "witchcraft:pot_redbrown", "witchcraft:pot_blue2", "witchcraft:pot_green", "witchcraft:pot_orange"},
 	interval = 0.5,
 	chance = 1,
 	action = function(pos, node)

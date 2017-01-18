@@ -257,6 +257,11 @@ mobs:register_mob("mobs_npc:npc_custom", {
 	on_activate = function(self)
 		self.order = "stand"
 	end,
+	do_custom = function(self)
+		if self.skin ~= nil then
+			self.object:set_properties({textures = {self.skin}})
+		end
+	end,
 	on_rightclick = function(self, clicker)
 		local pos = self.object:getpos()
 		if self.reward_item ~= nil and clicker:get_wielded_item():get_name() == self.reward_item then
