@@ -691,6 +691,32 @@ minetest.register_node("moreplants:clover", {
 	},
 })
 
+minetest.register_node("moreplants:mushcluster", {
+	description = "Mushroom Cluster",
+	drawtype = "firelike",
+	tiles = {
+		"moreplants_mushcluster.png",
+		"moreplants_trans.png",
+		"moreplants_trans.png",
+		"moreplants_mushcluster.png",
+		"moreplants_mushcluster.png",
+		"moreplants_mushcluster.png"
+	},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	sounds = default.node_sound_leaves_defaults(),
+	is_ground_content=true,
+	buildable_to = true, 
+	sunlight_propagates = true,
+	walkable = false,
+	inventory_image = "moreplants_mushcluster.png",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.1, 0.5}
+	},
+})
+
+
 minetest.register_node("moreplants:groundfung", {
 	description = "Ground fungus",
 	drawtype = "firelike",
