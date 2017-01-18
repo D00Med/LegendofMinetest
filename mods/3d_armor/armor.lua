@@ -58,6 +58,7 @@ armor = {
 	physics = {"jump","speed","gravity"},
 	formspec = "size[8,8.5]image[2,0.75;2,4;armor_preview]"
 		.."background[5,5;1,1;gui_formbg.png;true]"
+		.."image[6,2;1,1;gui_furnace_arrow_bg.png^[transformR270]"
 		.."list[current_player;main;0,4.5;8,4;]"
 		.."list[current_player;craft;4,1;2,2;]"
 		.."list[current_player;craftpreview;7,2;1,1;]"
