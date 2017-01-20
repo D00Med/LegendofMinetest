@@ -1152,7 +1152,7 @@ minetest.register_decoration({
 	place_on = {"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"},
 	sidelen = 26,
 	fill_ratio = 0.005,
-	biomes = {"deciduous_forest"},
+	biomes = {"deciduous_forest", "lost_woods"},
 	decoration = "moreplants:curly",
 	height = 1,
 })
