@@ -37,7 +37,15 @@ minetest.register_entity("vehicles:horse", {
 	end,
 	on_step = function(self, dtime)
 	if self.driver then
-		object_drive(self, dtime, 13, 0.5, false, nil, nil, {x=75, y=100}, {x=25, y=25}, "jump", {x=25, y=75}, {}, 0, 1.57)
+		object_drive(self, dtime, {
+			speed = 13,
+			decell = 0.5,
+			moving_anim = {x=75, y=100},
+			stand_anim = {x=25, y=25},
+			jump_type = "jump",
+			jump_anim = {x=25, y=50},
+			extra_yaw = 1.57
+		})
 		return false
 		end
 		return true
@@ -79,7 +87,14 @@ minetest.register_entity("vehicles:spinner", {
 	end,
 	on_step = function(self, dtime)
 	if self.driver then
-		object_drive(self, dtime, 12, 0.6, false, nil, nil, {x=3, y=18}, {x=1, y=1}, "jump", {x=3, y=18}, {}, 0, 0)
+		object_drive(self, dtime, {
+			speed = 12,
+			decell = 0.6,
+			moving_anim = {x=3, y=18},
+			stand_anim = {x=1, y=1},
+			jump_type = "jump",
+			jump_anim = {x=3, y=18}
+		})
 		return false
 		end
 		return true

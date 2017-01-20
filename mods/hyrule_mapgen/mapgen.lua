@@ -326,9 +326,9 @@ minetest.register_biome({
 	--node_water = "",
 	--node_river_water = "",
 	y_min = 1,
-	y_max = 31000,
-	heat_point = 24,
-	humidity_point = 77,
+	y_max = 2000,
+	heat_point = 40,
+	humidity_point = 0,
 })
 
 minetest.register_biome({
