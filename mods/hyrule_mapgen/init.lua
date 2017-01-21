@@ -850,7 +850,7 @@ minetest.register_node("hyrule_mapgen:sinkingsand", {
 
 --used for testing
 chest_items = {
-	{"hyruletools:clawshot", 20},
+	{"clawshot:clawshot", 20},
 	{"hyruletools:eye", 20},
 	{"hyruletools:boomerang", 20},
 	{"hyruletools:green_rupee 5", 10},
