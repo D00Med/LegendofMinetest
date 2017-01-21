@@ -2254,7 +2254,7 @@ minetest.register_abm({
 	end
 })
 
-
+--[[
 minetest.register_entity("hyruletools:chain", {
 	textures = {"hyruletools_hook.png"},
 	velocity = 15,
@@ -2424,7 +2424,7 @@ minetest.register_tool("hyruletools:hookshot_2", {
 			return item
 	end,
 })
-
+]]
 
 
 --Modified from enchanting table (xdecor) Copyright (c) 2015-2016 kilbith GPLv3
