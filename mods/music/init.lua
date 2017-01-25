@@ -1,6 +1,4 @@
 
-
-
 local music = false
 local music_playing = false
 local music_name = ""
