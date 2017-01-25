@@ -1,6 +1,11 @@
 -- Wolfos by D00Med
 -- edit of Dirt Monster by PilzAdam
 
+minetest.register_craftitem("mobs_loz:wolfos_tear", {
+	description = "Wolfos Tear",
+	inventory_image = "mobs_wolfostear.png",
+})
+
 mobs:register_mob("mobs_loz:wolfos", {
 	type = "monster",
 	passive = false,
@@ -24,6 +29,8 @@ mobs:register_mob("mobs_loz:wolfos", {
 	drops = {
 		{name = "hyruletools:green_rupee",
 		chance = 5, min = 1, max = 3},
+		{name = "mobs_loz:wolfos_tear",
+		chance = 50, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
@@ -77,6 +84,8 @@ mobs:register_mob("mobs_loz:wolfos2", {
 	drops = {
 		{name = "hyruletools:blue_rupee",
 		chance = 5, min = 1, max = 3},
+		{name = "mobs_loz:wolfos_tear",
+		chance = 50, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()

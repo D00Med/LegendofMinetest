@@ -2426,6 +2426,7 @@ minetest.register_node("hyrule_mapgen:volvagia_spawn", {
 	on_construct = function(pos)
 	minetest.after(5, function()
 	minetest.add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "mobs_loz:volvagia")
+	minetest.sound_play("BrassFleece", {gain=0.3})
 	end)
 	end,
 	on_rightclick = function(pos, node, clicker, item, _)

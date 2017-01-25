@@ -285,6 +285,24 @@ minetest.register_abm({
 
 --potions
 
+minetest.register_node("witchcraft:potion_herbal", {
+	description = "Herbal Potion",
+	drawtype = "plantlike",
+	tiles = {"witchcraft_potion_herbal.png"},
+	wield_image = "witchcraft_potion_herbal.png",
+	paramtype = "light",
+	stack_max = 1,
+	is_ground_content = false,
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1, potion=1},
+	sounds = default.node_sound_glass_defaults(),
+	inventory_image = "witchcraft_potion_herbal.png",
+})
+
 minetest.register_node("witchcraft:potion_redbrown", {
 	description = "Basic Soup",
 	drawtype = "plantlike",

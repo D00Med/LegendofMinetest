@@ -1655,6 +1655,7 @@ minetest.register_on_newplayer(function(player)
 		npc.xdir = 1
 		npc.item = "default:sword_wood"
 		npc.text = "It's dangerous to go alone, take this!"
+		npc.skin = "mobs_npc_old.png"
 		end)
 		end
 	end
@@ -1703,11 +1704,20 @@ minetest.register_on_generated(function(minp, maxp)
 				local obj = minetest.env:add_entity({x=pos.x+4, y=pos.y+7, z=pos.z+5}, "mobs_npc:shopkeeper")
 				local obj = minetest.env:add_entity({x=pos.x+6, y=pos.y+3, z=pos.z+18}, "mobs_npc:npc_custom")
 				local npc = obj:get_luaentity()
-				npc.text = "I'll give you something nice if you find me a 'red potion'"
-				npc.reward_text = "*slurp* Here you go"
+				npc.text = "I'll give you something nice if you find me a 'herbal potion'"
+				npc.reward_text = "*slurp* Oh Thankyou!"
 				npc.item = "bucket:bucket_empty"
-				npc.reward_item = "witchcraft:potion_red"
+				npc.reward_item = "witchcraft:potion_herbal"
 				npc.zdir = -1
+				
+				local obj2 = minetest.env:add_entity({x=pos.x+3, y=pos.y+3, z=pos.z+10}, "mobs_npc:npc_custom")
+				local npc2 = obj2:get_luaentity()
+				npc2.text = "If I had a wolfos' tear, I could make a 'herbal potion'"
+				npc2.reward_text = "That's it!, here you go"
+				npc2.item = "sword:sword_diamond"
+				npc2.reward_item = "witchcraft:potion_herbal"
+				npc2.skin = "mobs_witch.png"
+				npc2.zdir = -1
 				end
 		end
 	end
