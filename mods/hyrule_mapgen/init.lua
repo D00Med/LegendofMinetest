@@ -2147,6 +2147,7 @@ minetest.register_node("hyrule_mapgen:stalagtite", {
 	inventory_image = "hyrule_mapgen_stalagmite0.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	paramtype = "light",
 	selection_box = {
 	type = "fixed",
@@ -2163,6 +2164,7 @@ minetest.register_node("hyrule_mapgen:stalagtite1", {
 	inventory_image = "hyrule_mapgen_stalagmite1.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	paramtype = "light",
 	selection_box = {
 	type = "fixed",
@@ -2178,6 +2180,7 @@ minetest.register_node("hyrule_mapgen:stalagtite2", {
 	inventory_image = "hyrule_mapgen_stalagmite2.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	paramtype = "light",
 	selection_box = {
 	type = "fixed",
@@ -2194,6 +2197,7 @@ minetest.register_node("hyrule_mapgen:stalagtite3", {
 	inventory_image = "hyrule_mapgen_stalagmite3.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	paramtype = "light",
 	selection_box = {
 	type = "fixed",
@@ -2211,6 +2215,7 @@ minetest.register_node("hyrule_mapgen:stalagmite0", {
 	is_ground_content = false,
 	sunlight_propagates = true,
 	paramtype = "light",
+	walkable = false,
 	selection_box = {
 	type = "fixed",
 	fixed = {{-0.3, -0.2, -0.3, 0.3, 0.5, 0.3}}
@@ -2227,6 +2232,7 @@ minetest.register_node("hyrule_mapgen:stalagmite1", {
 	inventory_image = "hyrule_mapgen_stalagmite3.png^[transformFY",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	paramtype = "light",
 	selection_box = {
 	type = "fixed",
@@ -2244,6 +2250,7 @@ minetest.register_node("hyrule_mapgen:stalagmite2", {
 	inventory_image = "hyrule_mapgen_stalagmite2.png^[transformFY",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	paramtype = "light",
 	selection_box = {
 	type = "fixed",
@@ -2260,6 +2267,7 @@ minetest.register_node("hyrule_mapgen:cicicle", {
 	inventory_image = "hyrule_mapgen_icicle.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	use_texture_alpha = true,
 	paramtype = "light",
 	selection_box = {
@@ -2277,6 +2285,7 @@ minetest.register_node("hyrule_mapgen:cicicle2", {
 	inventory_image = "hyrule_mapgen_icicle2.png",
 	is_ground_content = false,
 	sunlight_propagates = true,
+	walkable = false,
 	use_texture_alpha = true,
 	paramtype = "light",
 	selection_box = {
