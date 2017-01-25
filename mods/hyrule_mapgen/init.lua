@@ -805,6 +805,113 @@ minetest.register_node("hyrule_mapgen:obsidian_spike", {
 	drop = "default:obsidian",
 })
 
+minetest.register_entity("hyrule_mapgen:laser", {
+	visual = "cube",
+	textures = {
+	"hyrule_mapgen_laser.png",
+	"hyrule_mapgen_laser.png",
+	"hyrule_mapgen_laser.png",
+	"hyrule_mapgen_laser.png",
+	"hyrule_mapgen_laser.png",
+	"hyrule_mapgen_laser.png",
+	},
+	visual_size={x=0.1,y=0.1},
+	collisionbox = {0, 0, 0, 0, 0, 0},
+	physical = false,
+	automatic_rotate = true,
+	automatic_face_movement_dir = 0,
+	on_activate = function(self)
+		minetest.after(3, function()
+			self.object:remove()
+		end)
+	end,
+	on_step = function(self, dtime)
+		local pos = self.object:getpos()
+		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y-0.5,z=pos.z}, 0.5)	
+			for k, obj in pairs(objs) do
+				if obj:is_player() then
+					obj:punch(self.object, 1.0, {
+							full_punch_interval=1.0,
+							damage_groups={fleshy=1},
+						}, nil)
+						self.object:remove()
+				end
+				if obj:get_luaentity() ~= nil then
+					if obj:get_luaentity().name ~= "hyrule_mapgen:laser" and obj:get_luaentity().name ~= "__builtin:item" then
+						obj:punch(self.object, 1.0, {
+							full_punch_interval=1.0,
+							damage_groups={fleshy=1},
+						}, nil)
+						self.object:remove()
+					end
+				end
+			end
+	end
+})
+
+minetest.register_node("hyrule_mapgen:beamos", {
+	description = "Beamos",
+	tiles = {
+		"hyrule_mapgen_beamos_top.png",
+		"hyrule_mapgen_beamos_bottom.png",
+		"hyrule_mapgen_beamos_sides.png",
+		"hyrule_mapgen_beamos_sides.png",
+		"hyrule_mapgen_beamos_sides.png",
+		"hyrule_mapgen_beamos_front.png",
+	},
+	groups = {cracky = 3,},
+	paramtype2 = "facedir",
+})
+
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:beamos"},
+	interval = 1,
+	chance = 1,
+	action = function(pos, node)
+		local x = 0
+		local z = 0
+		if node.param2 == 0 then
+			z = -1
+		elseif node.param2 == 2 then
+			z = 1
+		elseif node.param2 == 1 then
+			x = -1
+		elseif node.param2 == 3 then
+			x = 1
+		end
+		--minetest.chat_send_all(node.param2)
+		local numbers = {
+		{1},
+		{2},
+		{3},
+		{4},
+		}
+		for _, number in ipairs(numbers) do
+		local num = number[1]
+		local objs = minetest.get_objects_inside_radius({x=pos.x+x*num, y=pos.y, z=pos.z+z*num}, 1)
+		for _, obj in ipairs(objs) do
+			if obj:is_player() then
+				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
+				ent:setvelocity({x=7*x, y=0, z=7*z})
+				minetest.after(0.1, function()
+				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
+				ent:setvelocity({x=7*x, y=0, z=7*z})
+				end)
+				minetest.after(0.2, function()
+				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
+				ent:setvelocity({x=7*x, y=0, z=7*z})
+				end)
+				minetest.after(0.3, function()
+				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
+				ent:setvelocity({x=7*x, y=0, z=7*z})
+				end)
+			end
+		end
+		end
+	end
+})
+
 minetest.register_node("hyrule_mapgen:spikes", {
 	description = "Spikes",
 	drawtype = "firelike",
@@ -1553,6 +1660,22 @@ minetest.register_node("hyrule_mapgen:pillar_top", {
 			{-0.25, -0.5, -0.25, 0.25, 0.1875, 0.25}, -- NodeBox4
 		}
 	}
+})
+
+minetest.register_node("hyrule_mapgen:greenwall", {
+	description = "Green Tile",
+	tiles = {
+		"hyrule_mapgen_green_wall.png"
+	},
+	groups = {cracky=1, magnetic=0}
+})
+
+minetest.register_node("hyrule_mapgen:beamoswall", {
+	description = "Beamos Block",
+	tiles = {
+		"hyrule_mapgen_beamos_wall.png"
+	},
+	groups = {cracky=1, magnetic=0}
 })
 
 minetest.register_node("hyrule_mapgen:railblock", {

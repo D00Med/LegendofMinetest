@@ -1737,6 +1737,17 @@ minetest.register_on_generated(function(minp, maxp)
 				end
 		end
 	end
+	
+	local grass2 = minetest.find_nodes_in_area(minp, maxp,
+		{"default:dirt_with_grass"})
+	for n = 1, #grass2 do
+		if math.random(1, village_rarity) == 1 then
+			local pos = {x = grass2[n].x, y = grass2[n].y, z = grass2[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/grass_dungeon.mts", random, {}, true)
+				end
+		end
+	end
 end)
 
 minetest.register_on_generated(function(minp, maxp)
