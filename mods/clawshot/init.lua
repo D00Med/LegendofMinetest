@@ -1,4 +1,4 @@
-
+local ready = true
 
 local function register_clawshot(name, desc, texture, texture2, speed, accel, timeout, time2)
 	
@@ -49,6 +49,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 		
 			if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x+1, y=pos.y, z=pos.z})
@@ -56,6 +58,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 				end)
 			elseif minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x-1, y=pos.y, z=pos.z})
@@ -64,6 +68,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 				end)
 			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z+1})
@@ -72,6 +78,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 				end)
 			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z-1})
@@ -142,6 +150,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 		
 			if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x+1, y=pos.y, z=pos.z})
@@ -149,6 +159,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 				end)
 			elseif minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x-1, y=pos.y, z=pos.z})
@@ -157,6 +169,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 				end)
 			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z+1})
@@ -165,6 +179,8 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 				end)
 			elseif minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name == "air" then
 				attach_obj:setvelocity(vec)
+				local name = player:get_player_name()
+				minetest.sound_play("chain", {to_player=name, gain=0.7})
 				minetest.after(time2, function()
 				attach_obj:remove()
 				--self.launcher:setpos({x=pos.x, y=pos.y, z=pos.z-1})
@@ -212,6 +228,7 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 			local playerpos = placer:getpos();
 			local ctrl = placer:get_player_control()
 			local obj = {}
+			if ready then
 			if not ctrl.sneak then
 			obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+1.4+dir.y,z=playerpos.z+0+dir.z}, "clawshot:"..name.."_chain")
 			else
@@ -226,8 +243,15 @@ local function register_clawshot(name, desc, texture, texture2, speed, accel, ti
 			local object = obj:get_luaentity()
 			object.launcher = placer
 			object.ready = true
+			ready = false
+			local player = placer:get_player_name()
+			minetest.sound_play("chain", {to_player=player, gain=0.7})
+			minetest.after(timeout*2, function()
+			ready = true
+			end)
 			item:add_wear(300)
 			return item
+			end
 	end,
 	
 })

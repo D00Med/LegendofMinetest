@@ -11,7 +11,7 @@ minetest.register_globalstep(function()
 		local pos = player:getpos()
 		local village_nodes = minetest.find_nodes_in_area({x=pos.x-5, y=pos.y-3, z=pos.z-5}, {x=pos.x+5, y=pos.y+5, z=pos.z+5}, {"stairs:slab_red", "stairs:slab_blue", "farming:straw"})
 		local boss_nodes = minetest.find_nodes_in_area({x=pos.x-5, y=pos.y-3, z=pos.z-5}, {x=pos.x+5, y=pos.y+5, z=pos.z+5}, {"hyrule_mapgen:volvagia_spawn", "hyrule_mapgen:ganon_spawn", "hyrule_mapgen:bongo_spawn", "hyrule_mapgen:dodongo_spawn"})
-		minetest.chat_send_all("boss_nodes:"..#boss_nodes.." village_nodes:"..#village_nodes)
+		--minetest.chat_send_all("boss_nodes:"..#boss_nodes.." village_nodes:"..#village_nodes)
 		
 		if #boss_nodes ~= nil and #village_nodes ~= nil then
 		if #boss_nodes > 0 then
@@ -19,12 +19,12 @@ minetest.register_globalstep(function()
 			music_name = "BrassFleece"
 			duration = 105
 			gain = 0.8
-		elseif #village_nodes > 5 and math.random(1, 50) == 1 then
+		elseif #village_nodes > 5 and math.random(1, 1000) == 1 then
 			music = true
 			music_name = "Villageforest"
 			duration = 93
 			gain = 1
-		elseif math.random(1, 200) == 1 then
+		elseif math.random(1, 2000) == 1 then
 			music = true
 			music_name = "Downtime"
 			duration = 75

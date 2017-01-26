@@ -1601,6 +1601,7 @@ minetest.register_tool("hyruletools:flame_rod", {
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:fireball")
 			local vec = {x=dir.x*16,y=dir.y*16,z=dir.z*16}
 			obj:setvelocity(vec)
+			minetest.sound_play("flamearrow", {to_player=player, gain=0.7})
 		end
 		return itemstack
 	end,
