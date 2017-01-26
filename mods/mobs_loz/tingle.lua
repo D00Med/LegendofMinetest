@@ -71,6 +71,4 @@ mobs:register_mob("mobs_loz:tingle", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:tingle", {"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"}, 7, 0, 90000, 2, 31000)
-
 --mobs:register_egg("mobs_loz:tingle", "tingle", "hyruletools_spark.png", 1)

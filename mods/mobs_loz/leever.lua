@@ -79,7 +79,4 @@ mobs:register_mob("mobs_loz:leever", {
 	},
 })
 
-
-mobs:register_spawn("mobs_loz:leever", {"default:sand"}, 7, 0, 700, 2, 31000)
-
 mobs:register_egg("mobs_loz:leever", "Leever", "default_sand.png", 1)

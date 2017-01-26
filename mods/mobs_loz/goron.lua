@@ -94,6 +94,4 @@ mobs:register_mob("mobs_loz:goron", {
 		end,
 })
 
-mobs:register_spawn("mobs_loz:goron", {"default:stone", "hyrule_mapgen:dirt"}, 20, 10, 15000, 2, 31000)
-
 mobs:register_egg("mobs_loz:goron", "goron", "hyrule_mapgen_dirt.png", 1)

@@ -62,8 +62,6 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	end,
 })
 
-mobs:register_spawn("mobs_loz:bdodongo", {"default:stone"}, 7, 0, 7000, 2, 0)
-
 mobs:register_egg("mobs_loz:bdodongo", "Baby Dodongo", "default_lava.png", 1)
 
 
@@ -128,8 +126,6 @@ mobs:register_mob("mobs_loz:dodongo", {
 		minetest.set_node(pos, {name = "fire:basic_flame"})
 	end,
 })
-
-mobs:register_spawn("mobs_loz:dodongo", {"default:stone"}, 7, 0, 7000, 2, 0)
 
 mobs:register_egg("mobs_loz:dodongo", "Dodongo", "default_lava.png", 1)
 

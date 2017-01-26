@@ -54,6 +54,4 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:deku_baba", {"default:dirt_with_grass", "ethereal:gray_dirt", "default:dirt_with_grass3", "default:dirt_with_grass2"}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:deku_baba", "Deku_Baba", "default_dry_grass.png", 1)

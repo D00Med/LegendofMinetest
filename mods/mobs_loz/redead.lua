@@ -67,6 +67,4 @@ mobs:register_mob("mobs_loz:redead", {
 	end
 })
 
-mobs:register_spawn("mobs_loz:redead", {"default:stone"}, 20, 0, 7000, 1, 31000)
-
 mobs:register_egg("mobs_loz:redead", "Redead", "default_dirt.png", 1)

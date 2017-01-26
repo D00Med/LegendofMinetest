@@ -73,7 +73,7 @@ mobs:register_mob("mobs_loz:mimic", {
 	jump_height = 0,
 	drops = {
 		{name = "hyruletools:red_rupee",
-		chance = 1, min = 1, max = 3},
+		chance = 4, min = 1, max = 3},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
@@ -139,7 +139,7 @@ mobs:register_mob("mobs_loz:mimic2", {
 	jump_height = 0,
 	drops = {
 		{name = "hyruletools:red_rupee",
-		chance = 1, min = 1, max = 3},
+		chance = 4, min = 1, max = 3},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()

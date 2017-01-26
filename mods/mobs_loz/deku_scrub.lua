@@ -51,8 +51,6 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:deku_scrub", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 15000, 2, 31000)
-
 mobs:register_egg("mobs_loz:deku_scrub", "Deku Scrub", "default_leaves.png", 1)
 
 

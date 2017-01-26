@@ -47,6 +47,4 @@ mobs:register_mob("mobs_loz:peahat", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:peahat", {"default:dirt_with_dry_grass","default:dirt_with_grass3",}, 5, 0, 7000, 1, 31000)
-
 mobs:register_egg("mobs_loz:peahat", "Peahat", "default_dry_grass.png", 1)

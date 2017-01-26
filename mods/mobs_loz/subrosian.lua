@@ -72,6 +72,4 @@ mobs:register_mob("mobs_loz:subrosian", {
 		end,
 })
 
---mobs:register_spawn("mobs_loz:subrosian", {"hyrule_mapgen:subrosian_tile", "hyrule_mapgen:subrosian_sand"}, 20, 0, 15000, -20000, 31000)
-
 mobs:register_egg("mobs_loz:subrosian", "Subrosian", "hyrule_mapgen_subrosianstone.png", 1)

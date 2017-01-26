@@ -52,6 +52,4 @@ mobs:register_mob("mobs_loz:chuchu", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:chuchu", {"default:dirt_with_grass", "default:dirt_with_dry_grass", "default:dirt_with_grass3"}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:chuchu", "chuchu", "hyruletools_spark.png", 1)

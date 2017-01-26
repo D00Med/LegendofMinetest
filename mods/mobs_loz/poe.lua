@@ -47,8 +47,6 @@ mobs:register_mob("mobs_loz:poe", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:poe", {"default:dirt_with_grass","default:dirt_with_grass3","default:dirt_with_grass2"}, 5, 0, 7000, 1, 31000)
-
 mobs:register_egg("mobs_loz:poe", "Poe", "mobs_poe_soul.png", 1)
 
 minetest.register_craftitem("mobs_loz:soul", {

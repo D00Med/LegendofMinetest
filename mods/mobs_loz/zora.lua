@@ -68,8 +68,6 @@ mobs:register_mob("mobs_loz:zora", {
 	end,
 })
 
-mobs:register_spawn("mobs_loz:zora", {"default:water_source",}, 20, 10, 15000, 2, 11000)
-
 mobs:register_egg("mobs_loz:zora", "Zora", "default_ice.png", 1)
 
 playereffects.register_effect_type("potion_swim_lv1", "Fast Swim", nil, {"swim"}, 

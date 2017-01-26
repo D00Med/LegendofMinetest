@@ -57,8 +57,6 @@ mobs:register_mob("mobs_loz:wolfos", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:wolfos", {"default:dirt_with_grass2"}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:wolfos", "Wolfos", "wool_grey.png", 1)
 
 mobs:register_mob("mobs_loz:wolfos2", {
@@ -111,7 +109,5 @@ mobs:register_mob("mobs_loz:wolfos2", {
 		punch_end = 40,
 	},
 })
-
-mobs:register_spawn("mobs_loz:wolfos2", {"default:snowblock", "default:snow",}, 7, 0, 7000, 2, 31000)
 
 mobs:register_egg("mobs_loz:wolfos2", "White Wolfos", "wool_cyan.png", 1)

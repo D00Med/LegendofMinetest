@@ -50,6 +50,4 @@ mobs:register_mob("mobs_loz:moldorm", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:moldorm", {"default:mossy_cobblestone", "default:dirt_with_dry_grass", "default:dirt_with_grass3", "hyrule_mapgen:dungeon_brick"}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:moldorm", "Moldorm", "mobs_zol.png", 1)

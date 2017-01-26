@@ -56,6 +56,4 @@ mobs:register_mob("mobs_loz:biri", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:biri", {"default:water_source",}, 20, 10, 15000, 2, 11000)
-
 mobs:register_egg("mobs_loz:biri", "Biri", "wool_magenta.png", 1)

@@ -83,8 +83,6 @@ mobs:register_arrow("mobs_loz:octorock_rock", {
    end,
 })
 
-mobs:register_spawn("mobs_loz:octorock", {"default:sand", "default:dirt_with_grass3", "default:desert_sand"}, 20, 10, 15000, 2, 31000)
-
 mobs:register_egg("mobs_loz:octorock", "Octorock", "default_sand.png", 1)
 
 mobs:register_mob("mobs_loz:octorock_boss", {

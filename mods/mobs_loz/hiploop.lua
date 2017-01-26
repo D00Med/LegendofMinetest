@@ -46,6 +46,4 @@ mobs:register_mob("mobs_loz:hiploop", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:hiploop", {"hyrule_mapgen:swamp_mud",}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:hiploop", "Hiploop", "hyrule_mapgen_swampmud.png", 1)

@@ -48,8 +48,6 @@ mobs:register_mob("mobs_loz:tektite", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:tektite", {"default:sand", "default:river_water_source", "hyrule_mapgen:swamp_mud"}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:tektite", "Blue Tektite", "wool_cyan.png", 1)
 
 mobs:register_mob("mobs_loz:tektite2", {
@@ -101,7 +99,5 @@ mobs:register_mob("mobs_loz:tektite2", {
 		punch_end = 20,
 	},
 })
-
-mobs:register_spawn("mobs_loz:tektite2", {"hyrule_mapgen:dirt", "default:desert_sand", "default:stone"}, 7, 0, 7000, 2, 31000)
 
 mobs:register_egg("mobs_loz:tektite2", "Red Tektite", "wool_orange.png", 1)

@@ -51,8 +51,6 @@ mobs:register_mob("mobs_loz:business_scrub", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:business_scrub", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 15000, 2, 31000)
-
 mobs:register_egg("mobs_loz:business_scrub", "Business Scrub", "default_leaves.png", 1)
 
 
@@ -241,9 +239,6 @@ mobs:register_mob("mobs_loz:business_scrub_passive", {
 			end
 		end,
 })
-
-
-mobs:register_spawn("mobs_loz:business_scrub_passive", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 15000, 2, 31000)
 
 mobs:register_egg("mobs_loz:business_scrub_passive", "Business Scrub (passive)", "default_leaves.png", 1)
 

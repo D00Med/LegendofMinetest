@@ -50,6 +50,4 @@ mobs:register_mob("mobs_loz:darknut", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:darknut", {"default:mossycobble", "default:sandstone_brick", "default:dirt_with_grass2", "hyrule_mapgen:dungeon_brick"}, 7, 0, 7000, 2, 31000)
-
 mobs:register_egg("mobs_loz:darknut", "Darknut", "default_stone.png", 1)

@@ -52,6 +52,4 @@ mobs:register_mob("mobs_loz:keese", {
 	},
 })
 
-mobs:register_spawn("mobs_loz:keese", {"default:stone",}, 12, 0, 15000, 2, 11000)
-
 mobs:register_egg("mobs_loz:keese", "Keese", "default_obsidian.png", 1)
