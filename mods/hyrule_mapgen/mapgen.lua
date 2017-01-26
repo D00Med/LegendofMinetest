@@ -1753,8 +1753,19 @@ minetest.register_on_generated(function(minp, maxp)
 	for n = 1, #grass2 do
 		if math.random(1, village_rarity) == 1 then
 			local pos = {x = grass2[n].x, y = grass2[n].y, z = grass2[n].z }
+			local num = math.random(1,3)
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
-				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/grass_dungeon.mts", random, {}, true)
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/world"..num..".mts", random, {}, true)
+				if num == 2 then
+				local obj = minetest.env:add_entity({x=pos.x+5, y=pos.y+1, z=pos.z+4}, "mobs_npc:npc_custom")
+				local npc = obj:get_luaentity()
+				npc.text = "Deku Scrubs have been scaring my animals..."
+				npc.reward_text = "You killed the Deku Scrubs? Thanks, you can have this"
+				npc.item = "mobs_animal:bucket_milk"
+				npc.reward_item = "mobs_loz:deku_nut"
+				npc.item_count = 10
+				npc.zdir = -1
+				end
 				end
 		end
 	end

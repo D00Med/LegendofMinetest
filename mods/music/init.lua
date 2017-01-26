@@ -19,12 +19,12 @@ minetest.register_globalstep(function()
 			music_name = "BrassFleece"
 			duration = 105
 			gain = 0.8
-		elseif #village_nodes > 5 and math.random(1, 1000) == 1 then
+		elseif #village_nodes > 5 and math.random(1, 5000) == 1 then
 			music = true
 			music_name = "Villageforest"
 			duration = 93
 			gain = 1
-		elseif math.random(1, 2000) == 1 then
+		elseif math.random(1, 10000) == 1 then
 			music = true
 			music_name = "Downtime"
 			duration = 75

@@ -2438,7 +2438,12 @@ minetest.register_entity("hyruletools:swordent", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
 
+		
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_used" then
 			self.object:remove()
 		end
@@ -2456,7 +2461,12 @@ minetest.register_entity("hyruletools:ruby", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
 
+		
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_ruby" then
 			self.object:remove()
 		end
@@ -2474,6 +2484,11 @@ minetest.register_entity("hyruletools:sapphire", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_sapphire" then
 			self.object:remove()
@@ -2492,6 +2507,11 @@ minetest.register_entity("hyruletools:emerald", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_emerald" then
 			self.object:remove()
@@ -2511,6 +2531,10 @@ minetest.register_entity("hyruletools:swordent_mese", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_mese" then
 			self.object:remove()
@@ -2530,6 +2554,11 @@ minetest.register_entity("hyruletools:swordent_bronze", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_bronze" then
 			self.object:remove()
@@ -2549,6 +2578,11 @@ minetest.register_entity("hyruletools:swordent_diamond", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_diamond" then
 			self.object:remove()
@@ -2568,6 +2602,11 @@ minetest.register_entity("hyruletools:swordent_steel", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_steel" then
 			self.object:remove()
@@ -2587,6 +2626,11 @@ minetest.register_entity("hyruletools:swordent_stone", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_stone" then
 			self.object:remove()
@@ -2606,6 +2650,11 @@ minetest.register_entity("hyruletools:swordent_wood", {
 	on_activate = function(self)
 		local pos = self.object:getpos()
 		local pos_under = {x=pos.x, y=pos.y-0.6, z=pos.z}
+		local facedir = minetest.get_node(pos_under).param2
+		local dir = minetest.facedir_to_dir(facedir)
+		local yaw = math.atan(dir.x/dir.z)
+		self.object:setyaw(yaw)
+
 
 		if minetest.get_node(pos_under).name ~= "hyruletools:swordstand_wood" then
 			self.object:remove()
@@ -2631,6 +2680,7 @@ minetest.register_node("hyruletools:swordstand", {
 	"hyruletools_stand_side.png",
 	},
 	paramtype = "light",
+	paramtype2 = "facedir",
 	groups = {cracky=1},
 	on_rightclick = function(pos, node, clicker, item, _)
 		local wield_item = clicker:get_wielded_item():get_name()
