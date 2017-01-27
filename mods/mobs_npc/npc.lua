@@ -207,7 +207,6 @@ mobs:register_mob("mobs_npc:npc_quest", {
 
 mobs:register_egg("mobs_npc:npc_quest", "Npc (quest)", "hyrule_mapgen_chest.png", 1)
 
-
 mobs:register_mob("mobs_npc:npc_custom", {
 	type = "npc",
 	passive = false,
@@ -256,10 +255,12 @@ mobs:register_mob("mobs_npc:npc_custom", {
 	},
 	on_activate = function(self)
 		self.order = "stand"
+		skin_set = false
 	end,
 	do_custom = function(self)
-		if self.skin ~= nil then
+		if self.skin ~= nil and not skin_set then
 			self.object:set_properties({textures = {self.skin}})
+			skin_set = true
 		end
 	end,
 	on_rightclick = function(self, clicker)

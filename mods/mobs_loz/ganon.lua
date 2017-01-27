@@ -45,11 +45,12 @@ mobs:register_mob("mobs_loz:ganon", {
 	hp_min = 202,
 	hp_max = 225,
 	armor = 80,
-	collisionbox = {-1, -1.5, -1, 1, 1.5, 1},
+	collisionbox = {-1, 0, -1, 1, 2.5, 1},
+	visual_size = {x=1.3, y=1.3},
 	visual = "mesh",
 	mesh = "ganon.b3d",
 	textures = {
-		{"ganon.png"}
+		{"mobs_ganon.png"}
 	},
 	visual_size = {x=2, y=2},
 	makes_footstep_sound = true,
@@ -76,20 +77,18 @@ mobs:register_mob("mobs_loz:ganon", {
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
-		speed_normal = 18,
-		speed_run = 25,
-		stand_start = 21,
-		stand_end = 46,
-		walk_start = 49,
-		walk_end = 88,
-		run_start = 49,
-		run_end = 88,
+		speed_normal = 16,
+		speed_run = 19,
+		stand_start = 36,
+		stand_end = 56,
+		walk_start = 60,
+		walk_end = 80,
+		run_start = 60,
+		run_end = 80,
 		punch_start = 1,
-		punch_end = 21,
-		punch2_start = 21,
-		punch2_end = 46,
-		shoot_start = 1, 
-		shoot_end = 21,
+		punch_end = 20,
+		shoot_start = 20, 
+		shoot_end = 36,
 	},
 	on_die = function(self, pos)
 		minetest.add_particlespawner(
@@ -130,6 +129,7 @@ mobs:register_mob("mobs_loz:ganon", {
 			false, --collisiondetection
 			"mobs_loz_light.png^[colorize:red:100" --texture
 			)
+			self.object:set_animation({x=85, y=105}, 12, 0)
 			end
 		end
 	end

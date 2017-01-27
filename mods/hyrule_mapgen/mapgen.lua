@@ -1663,7 +1663,7 @@ end)
 
 --villages
 
-local village_rarity = 5000
+local village_rarity = 10000
 
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 21000 then
@@ -1754,7 +1754,7 @@ minetest.register_on_generated(function(minp, maxp)
 		if math.random(1, village_rarity) == 1 then
 			local pos = {x = grass2[n].x, y = grass2[n].y, z = grass2[n].z }
 			local num = math.random(1,6)
-			minetest.chat_send_all(""..num)
+			--minetest.chat_send_all(""..num)
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/world"..num..".mts", random, {}, true)
 				if num == 1 then
