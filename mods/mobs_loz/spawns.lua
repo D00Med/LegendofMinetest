@@ -3,6 +3,7 @@
 mobs:register_spawn("mobs_loz:zora", {"default:water_source",}, 20, 10, 15000, 2, 11000)
 mobs:register_spawn("mobs_loz:biri", {"default:water_source",}, 20, 10, 15000, 2, 11000)
 mobs:register_spawn("mobs_loz:business_scrub_passive", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 15000, 2, 31000)
+mobs:register_spawn("mobs_loz:business_scrub_passive2", {"default:dirt_with_grass", "default:dirt_with_grass2"}, 20, 10, 500000, 2, 31000)
 mobs:register_spawn("mobs_loz:goron", {"default:stone", "hyrule_mapgen:dirt"}, 20, 10, 15000, 2, 31000)
 mobs:register_spawn("mobs_loz:deku_scrub", {"default:dirt_with_grass"}, 20, 10, 15000, 2, 31000)
 mobs:register_spawn("mobs_loz:subrosian", {"hyrule_mapgen:subrosian_tile", "hyrule_mapgen:subrosian_sand"}, 20, 0, 15000, -20000, 31000)

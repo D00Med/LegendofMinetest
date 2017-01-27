@@ -986,8 +986,15 @@ minetest.register_tool("hyruletools:mirror", {
 	on_use = function(itemstack, user, pointed_thing)
 		local player = user:get_player_name()
 		if mana.subtract(player, 100) then
-		local pos = math.random(1-900)
-		user:setpos({x= pos,y= 5,z= pos})
+		local pos1 = user:getpos()
+		local pos = math.random(1,50)
+		local vertical = 0
+		if pos1.y <= -20000 then
+		vertical = 5
+		else
+		vertical = -21000
+		end
+		user:setpos({x= pos,y=vertical,z= pos})
 		end
 		return itemstack
 end

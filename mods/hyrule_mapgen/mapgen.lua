@@ -1663,7 +1663,7 @@ end)
 
 --villages
 
-local village_rarity = 100000
+local village_rarity = 5000
 
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 21000 then
@@ -1753,18 +1753,29 @@ minetest.register_on_generated(function(minp, maxp)
 	for n = 1, #grass2 do
 		if math.random(1, village_rarity) == 1 then
 			local pos = {x = grass2[n].x, y = grass2[n].y, z = grass2[n].z }
-			local num = math.random(1,3)
+			local num = math.random(1,6)
+			minetest.chat_send_all(""..num)
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/world"..num..".mts", random, {}, true)
-				if num == 2 then
-				local obj = minetest.env:add_entity({x=pos.x+5, y=pos.y+1, z=pos.z+4}, "mobs_npc:npc_custom")
+				if num == 1 then
+				local obj = minetest.env:add_entity({x=pos.x+5, y=pos.y+3, z=pos.z+4}, "mobs_npc:npc_custom")
 				local npc = obj:get_luaentity()
 				npc.text = "Deku Scrubs have been scaring my animals..."
 				npc.reward_text = "You killed the Deku Scrubs? Thanks, you can have this"
 				npc.item = "mobs_animal:bucket_milk"
 				npc.reward_item = "mobs_loz:deku_nut"
+				npc.skin = "mobs_farmer.png"
 				npc.item_count = 10
 				npc.zdir = -1
+				end
+				
+				if num == 5 then
+				local obj = minetest.env:add_entity({x=pos.x+3, y=pos.y+3, z=pos.z+3}, "mobs_npc:npc_custom")
+				local npc = obj:get_luaentity()
+				npc.skin = "mobs_npc_old.png"
+				npc.text = "It's dangerous to travel in darkness"
+				npc.item = "hyruletools:lantern"
+				npc.xdir = 1
 				end
 				end
 		end

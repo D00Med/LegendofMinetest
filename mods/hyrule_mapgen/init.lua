@@ -14,6 +14,24 @@ minetest.register_craftitem("hyrule_mapgen:village_spawner", {
 		local pos = pointed_thing.above
 		minetest.place_schematic({x=pos.x, y=pos.y-1, z=pos.z}, minetest.get_modpath("hyrule_mapgen").."/schematics/village.mts", 0, {}, true)
 		local obj = minetest.env:add_entity({x=pos.x+14, y=pos.y+2, z=pos.z+24}, "mobs_npc:shopkeeper")
+		
+			local obj2 = minetest.env:add_entity({x=pos.x+3, y=pos.y+3, z=pos.z+9}, "mobs_npc:npc_custom")
+			local npc2 = obj2:get_luaentity()
+			npc2.text = "I'll trade you something cool for a 'weird beard'"
+			npc2.reward_text = "Thanks!'"
+			npc2.item = "hyruletools:gameboy"
+			npc2.reward_item = "mobs_loz:weird_beard"
+			npc2.skin = "mobs_npc_toby109tt.png"
+			npc2.zdir = -1
+			
+			local obj3 = minetest.env:add_entity({x=pos.x+13, y=pos.y+3, z=pos.z+7}, "mobs_npc:npc_custom")
+			local npc3 = obj3:get_luaentity()
+			npc3.text = "I heard there is a strange land deep underground..."
+			npc3.skin = "mobs_npc_old.png"
+			
+			local obj4 = minetest.env:add_entity({x=pos.x+17, y=pos.y+3, z=pos.z+5}, "mobs_npc:npc")
+			local obj5 = minetest.env:add_entity({x=pos.x+7, y=pos.y+3, z=pos.z+12}, "mobs_npc:npc")
+		
 		itemstack:take_item()
 		return itemstack
 	end,
@@ -577,6 +595,34 @@ minetest.override_item("default:stone_with_gold", {
 })
 
 --new nodes
+
+minetest.register_node("hyrule_mapgen:logpile", {
+	description = "Log Pile",
+	tiles = {
+		"default_tree.png^[transformR90",
+		"default_tree.png^[transformR90",
+		"default_tree.png^[transformR90",
+		"default_tree.png^[transformR90",
+		"default_tree_top.png",
+		"default_tree_top.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.4375, -0.5, -0.0625, -0.125, 0.5}, -- NodeBox1
+			{0.0625, -0.4375, -0.5, 0.5, -0.125, 0.5}, -- NodeBox2
+			{0.125, -0.5, -0.5, 0.4375, -0.0625, 0.5}, -- NodeBox3
+			{-0.4375, -0.5, -0.5, -0.125, -0.0625, 0.5}, -- NodeBox4
+			{-0.125, -0.0625, -0.5, 0.1875, 0.375, 0.5}, -- NodeBox5
+			{-0.1875, 0, -0.5, 0.25, 0.3125, 0.5}, -- NodeBox6
+		}
+	},
+	groups = {choppy=3, oddly_breakable_by_hand=1, flammable=1, falling_node=1},
+	drop = "default:tree 3",
+})
 
 minetest.register_node("hyrule_mapgen:bigmush", {
 	description = "Big Mushroom",
@@ -1780,6 +1826,15 @@ minetest.register_node("hyrule_mapgen:magnblock", {
 	},
 	groups = {cracky=7, magnetic=1}
 })
+
+minetest.register_node("hyrule_mapgen:flameblock", {
+	description = "Flame Block (almost unbreakeable)",
+	tiles = {
+		"hyrule_mapgen_flameblock.png"
+	},
+	groups = {cracky=7, flammable=1}
+})
+
 
 minetest.register_node("hyrule_mapgen:subrosian_stone", {
 	description = "Subrosian Stone",
