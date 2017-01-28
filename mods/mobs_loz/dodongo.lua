@@ -77,11 +77,11 @@ mobs:register_mob("mobs_loz:dodongo", {
 	hp_min = 22,
 	hp_max = 35,
 	armor = 100,
-	collisionbox = {-0.3, -0.3, -0.3, 0.3, 0.4, 0.4},
+	collisionbox = {-0.7, 0, -0.7, 0.7, 1.2, 0.7},
 	visual = "mesh",
 	mesh = "dodongo.b3d",
 	textures = {
-		{"dodongo2.png"}
+		{"mobs_dodongo.png"}
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -89,20 +89,20 @@ mobs:register_mob("mobs_loz:dodongo", {
 	},
 	walk_velocity = 0.5,
 	run_velocity = 1,
-	jump = false,
+	jump = 0,
 	floats = 0,
-	view_range = 5,
+	view_range = 13,
 	drops = {
 		{name = "hyruletools:blue_rupee",
-		chance = 2, min = 3, max = 5},
+		chance = 5, min = 3, max = 5},
 		{name = "default:copper_lump",
-		chance=5, min=1, max=2},
+		chance=10, min=1, max=2},
 		{name = "default:coal_lump",
-		chance=3, min=1, max=3},
+		chance=10, min=1, max=3},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
-		if math.random(1,2) == 2 then
+		if math.random(1,5) == 2 then
 		minetest.env:add_entity(pos, "hyruletools:heart_entity")
 		end
 		minetest.env:add_entity(pos, "experience:orb")
@@ -111,16 +111,18 @@ mobs:register_mob("mobs_loz:dodongo", {
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
-		speed_normal = 10,
-		speed_run = 15,
-		stand_start = 21,
-		stand_end = 30,
+		speed_normal = 14,
+		speed_run = 18,
+		stand_start = 25,
+		stand_end = 45,
 		walk_start = 1,
 		walk_end = 20,
 		run_start = 1,
 		run_end = 20,
-		punch_start = 21,
-		punch_end = 30,
+		punch_start = 45,
+		punch_end = 65,
+		shoot_start = 45,
+		shoot_end = 65,
 	},
 	on_die = function(self, pos)
 		minetest.set_node(pos, {name = "fire:basic_flame"})
@@ -165,21 +167,21 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 	damage = 3,
 	hp_min = 82,
 	hp_max = 125,
-	armor = 200,
-	collisionbox = {-2, -1.5, -2, 1.5, 1.5, 2},
+	armor = 60,
+	collisionbox = {-2, 0, -2, 1.5, 4.5, 2},
 	visual = "mesh",
 	mesh = "dodongo.b3d",
 	textures = {
-		{"dodongo2.png"}
+		{"mobs_dodongo_boss.png"}
 	},
-	visual_size = {x=4, y=4},
+	visual_size = {x=2.5, y=2.5},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_stonemonster",
 	},
 	walk_velocity = 1,
-	run_velocity = 2,
-	jump = false,
+	run_velocity = 2.5,
+	jump = 0,
 	floats = 0,
 	view_range = 14,
 	drops = {
@@ -199,16 +201,18 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
-		speed_normal = 10,
+		speed_normal = 12,
 		speed_run = 15,
-		stand_start = 21,
-		stand_end = 30,
+		stand_start = 25,
+		stand_end = 45,
 		walk_start = 1,
 		walk_end = 20,
 		run_start = 1,
 		run_end = 20,
-		punch_start = 21,
-		punch_end = 30,
+		punch_start = 45,
+		punch_end = 65,
+		shoot_start = 45,
+		shoot_end = 65,
 	},
 	on_die = function(self, pos)
 		minetest.set_node(pos, {name = "fire:basic_flame"})
