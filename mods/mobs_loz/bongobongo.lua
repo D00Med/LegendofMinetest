@@ -45,11 +45,11 @@ mobs:register_mob("mobs_loz:bongobongo", {
 	hp_min = 102,
 	hp_max = 125,
 	armor = 200,
-	collisionbox = {-2, -1.5, -2, 1.5, 1.5, 2},
+	collisionbox = {-2, 0, -2, 1.5, 3.5, 2},
 	visual = "mesh",
 	mesh = "bongobongo.b3d",
 	textures = {
-		{"bongobongo_invis.png"}
+		{"mobs_bongobongo_invisible.png"}
 	},
 	visual_size = {x=1.5, y=1.5},
 	makes_footstep_sound = false,
@@ -81,16 +81,16 @@ mobs:register_mob("mobs_loz:bongobongo", {
 	animation = {
 		speed_normal = 10,
 		speed_run = 15,
-		stand_start = 75,
-		stand_end = 95,
-		walk_start = 1,
-		walk_end = 20,
-		run_start = 1,
-		run_end = 20,
-		punch_start = 21,
-		punch_end = 50,
-		shoot_start = 50, 
-		shoot_end = 75,
+		stand_start = 70,
+		stand_end = 90,
+		walk_start = 25,
+		walk_end = 45,
+		run_start = 25,
+		run_end = 45,
+		punch_start = 45,
+		punch_end = 65,
+		shoot_start = 1, 
+		shoot_end = 25,
 	},
 	on_die = function(self, pos)
 		minetest.add_particlespawner(
@@ -115,7 +115,7 @@ mobs:register_mob("mobs_loz:bongobongo", {
 	local inv = clicker:get_inventory()
 		if clicker:get_wielded_item():get_name() == "hyruletools:eye" then
 		self.object:set_properties({
-				textures = {"bongobongo.png"},
+				textures = {"mobs_bongobongo.png"},
 			})
 		end
 	end,

@@ -18,6 +18,7 @@ mobs:register_spawn("mobs_loz:deku_scrub", {"default:dirt_with_grass", "default:
 mobs:register_spawn("mobs_loz:moldorm", {"default:mossy_cobblestone", "default:dirt_with_dry_grass", "default:dirt_with_grass3", "hyrule_mapgen:dungeon_brick"}, 7, 0, 7000, 2, 31000)
 mobs:register_spawn("mobs_loz:bdodongo", {"default:stone"}, 7, 0, 7000, 2, 0)
 mobs:register_spawn("mobs_loz:dodongo", {"default:stone", "default:cobblestone", "hyrule_mapgen:dungeon_tile"}, 7, 0, 7000, 2, 0)
+mobs:register_spawn("mobs_loz:skulltula", {"default:stone", "default:cobblestone", "hyrule_mapgen:dungeon_tile"}, 7, 0, 7000, 2, 0)
 mobs:register_spawn("mobs_loz:hiploop", {"hyrule_mapgen:swamp_mud",}, 7, 0, 7000, 2, 31000)
 mobs:register_spawn("mobs_loz:keese", {"default:stone", "default:sandstone_brick", "hyrule_mapgen:greenwall", "hyrule_mapgen:floorbrick"}, 12, 0, 15000, 2, 11000)
 mobs:register_spawn("mobs_loz:leever", {"default:sand", "default:sandstone"}, 7, 0, 700, 2, 31000)
