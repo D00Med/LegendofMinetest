@@ -1316,7 +1316,7 @@ minetest.register_node("hyrule_mapgen:healwater_src", {
 		},
 	},
 	alpha = 160,
-	light_source = 15,
+	light_source = 14,
 	paramtype = "light",
 	walkable = false,
 	pointable = false,
@@ -2129,7 +2129,7 @@ minetest.register_node("hyrule_mapgen:dungeon_torch", {
 	inventory_image = "hyrule_mapgen_torch_inv.png",
 	wield_image = "hyrule_mapgen_torch_inv.png",
 	paramtype = "light",
-	light_source = 20,
+	light_source = 14,
 	use_texture_alpha = true,
 	groups = {choppy=1},
 	selection_box = {
@@ -2467,7 +2467,7 @@ minetest.register_node("hyrule_mapgen:glowstone", {
 	use_texture_alpha = true,
 	groups = {snappy=3, oddly_breakable_by_hand = 1},
 	paramtype = "light",
-	light_source = 30,
+	light_source = 14,
 	sounds = default.node_sound_glass_defaults(),
 })
 

@@ -1,9 +1,6 @@
 --baby dodongo by D00Med
 -- edit of Stone Monster by PilzAdam
 
-local l_skins = {
-		{"dodongo.png"},
-	}
 
 mobs:register_mob("mobs_loz:bdodongo", {
 	type = "monster",
@@ -14,22 +11,24 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	hp_min = 12,
 	hp_max = 25,
 	armor = 80,
-	collisionbox = {-0.2, -0.2, -0.2, 0.2, 0.4, 0.4},
+	collisionbox = {-0.2, 0, -0.2, 0.2, 0.4, 0.4},
 	visual = "mesh",
-	mesh = "babydodongo.b3d",
-	textures = l_skins,
-	makes_footstep_sound = true,
+	mesh = "bdodongo.b3d",
+	textures = {
+	{"mobs_bdodongo.png"},
+	},
+	makes_footstep_sound = false,
 	sounds = {
 		random = "mobs_stonemonster",
 	},
 	walk_velocity = 0.5,
 	run_velocity = 1,
-	jump = false,
+	jump = 0,
 	floats = 0,
 	view_range = 5,
 	drops = {
 		{name = "hyruletools:blue_rupee",
-		chance = 2, min = 3, max = 5},
+		chance = 3, min = 3, max = 5},
 		{name = "default:iron_lump",
 		chance=5, min=1, max=2},
 		{name = "default:coal_lump",
@@ -37,7 +36,7 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
-		if math.random(1,2) == 2 then
+		if math.random(1,4) == 2 then
 		minetest.env:add_entity(pos, "hyruletools:heart_entity")
 		end
 		minetest.env:add_entity(pos, "experience:orb")
@@ -48,14 +47,14 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	animation = {
 		speed_normal = 10,
 		speed_run = 15,
-		stand_start = 0,
-		stand_end = 0,
-		walk_start = 0,
-		walk_end = 30,
-		run_start = 0,
-		run_end = 30,
-		punch_start = 0,
-		punch_end = 30,
+		stand_start = 3,
+		stand_end = 3,
+		walk_start = 3,
+		walk_end = 21,
+		run_start = 3,
+		run_end = 21,
+		punch_start = 3,
+		punch_end = 21,
 	},
 	on_die = function(self, pos)
 		minetest.set_node(pos, {name = "fire:basic_flame"})

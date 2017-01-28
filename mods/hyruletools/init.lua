@@ -934,7 +934,7 @@ minetest.register_node("hyruletools:fire", {
 	drawtype = "plantlike",
 	sunlight_propagates = true,
 	paramtype = "light",
-	light_source = 50,
+	light_source = 14,
 	walkable = false,
 	damage_per_second = 2,
 	tiles = {{

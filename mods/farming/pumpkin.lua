@@ -75,7 +75,7 @@ minetest.register_node("farming:jackolantern_on", {
 		"farming_pumpkin_side.png",
 		"farming_pumpkin_face_on.png"
 	},
-	light_source = 20,
+	light_source = 14,
 	paramtype2 = "facedir",
 	groups = {choppy = 1, oddly_breakable_by_hand = 1, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),

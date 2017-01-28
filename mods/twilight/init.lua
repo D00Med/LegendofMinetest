@@ -148,6 +148,7 @@ local models = default.registered_player_models
 model = false
 --]]
 local hud_changed = false
+local glow = nil
 
 minetest.register_globalstep(function(dtime)
 if twilight_mode == true then 

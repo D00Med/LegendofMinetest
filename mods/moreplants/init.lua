@@ -579,7 +579,7 @@ minetest.register_node("moreplants:glowfung", {
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
-	light_source = 19,
+	light_source = 14,
 	legacy_wallmounted = true,
 	selection_box = {
 		type = "wallmounted",

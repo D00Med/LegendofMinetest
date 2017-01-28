@@ -216,7 +216,7 @@ minetest.register_on_shutdown(function()
 	minetest.log("action", "[mana] Server shuts down. Rescuing data into mana.mt")
 	mana.save_to_file()
 end)
-
+local mana_hud = nil
 minetest.register_on_joinplayer(function(player)
 	local playername = player:get_player_name()
 	
