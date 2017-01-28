@@ -24,10 +24,15 @@ mobs_loz
 moreplants
 kblocks
 twilight
+vehicles_loz
+witchcraft
+music
+masks
+clawshot
 
 For other mods see license.txt in the folder of each mod.
-License of code: GNU GPL v3 (C) 2016 D00Med
-License of textures: CC BY-SA 3.0 (C) 2016 D00Med
+License of code: GNU GPL v3 (C) 2016-2017 D00Med
+License of textures: CC BY-SA 3.0 (C) 2016-2017 D00Med and tobyplowy(aka toby109tt)
 
 An edit of Minetest Game all code licensed as shown below unless otherwise stated.
 see readme below;
