@@ -844,6 +844,44 @@ minetest.register_decoration({
 	y_max = 50,
 })
 
+--boulders and snow boulders
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"hyrule_mapgen:lavabiome_dirt", "default:dirt_with_dry_grass", "default:desert_sand"},
+	sidelen = 80,
+	noise_params = {
+			offset = 0.002,
+			scale = 0.003,
+			spread = {x = 50, y = 50, z = 50},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+	biomes = {"lavabiome", "desert", "savanna"},
+	decoration = "hyrule_mapgen:boulder",
+	y_min = 0,
+	y_max = 50,
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:snow", "default:dirt_with_snow"},
+	sidelen = 80,
+	noise_params = {
+			offset = 0.002,
+			scale = 0.003,
+			spread = {x = 50, y = 50, z = 50},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+	biomes = {"icesheet", "taiga"},
+	decoration = "hyrule_mapgen:snowball",
+	y_min = 0,
+	y_max = 50,
+})
+
 -- Jungle tree
 minetest.register_decoration({
 	deco_type = "schematic",

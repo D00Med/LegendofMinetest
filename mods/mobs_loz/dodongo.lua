@@ -87,7 +87,7 @@ mobs:register_mob("mobs_loz:dodongo", {
 	},
 	makes_footstep_sound = true,
 	sounds = {
-		random = "mobs_stonemonster",
+		random = "dinosaur_roar",
 	},
 	walk_velocity = 0.5,
 	run_velocity = 1,
@@ -179,7 +179,7 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 	visual_size = {x=2.5, y=2.5},
 	makes_footstep_sound = true,
 	sounds = {
-		random = "mobs_stonemonster",
+		random = "dinosaur_roar",
 	},
 	walk_velocity = 2,
 	run_velocity = 3.5,

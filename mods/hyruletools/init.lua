@@ -1,7 +1,54 @@
 if minetest.setting_getbool("loz_mode") then
 
 --hud (rupee counter)
---[[
+--
+local count = 0
+local count2 = 0
+local count3 = 0
+local counter1 = nil
+local counter2 = nil
+local counter3 = nil
+
+minetest.register_globalstep(function()
+	for _, player in ipairs(minetest.get_connected_players()) do
+		count = 0
+		count2 = 0
+		count3 = 0
+		local number = 0
+		local number2 = 0
+		local number3 = 0
+		local playername = player:get_player_name()
+		local inv = minetest.get_inventory({type="player", name=playername});
+		for num=1,32,1 do
+		local stack = inv:get_stack("main", num)
+		if stack:get_name() == "hyruletools:green_rupee" then
+			number = stack:get_count()
+			count = count+number
+		end
+		if stack:get_name() == "hyruletools:blue_rupee" then
+			number = stack:get_count()
+			count = count+number*2
+		end
+		if stack:get_name() == "hyruletools:red_rupee" then
+			number = stack:get_count()
+			count = count+number*3
+		end
+		if stack:get_name() == "tnt:tnt" then
+			number2 = stack:get_count()
+			count2 = count2+number2
+		end
+		if stack:get_name() == "hyruletools:key" then
+			number3 = stack:get_count()
+			count3 = count3+number3
+		end
+		end
+		player:hud_change(counter1, "text", count)
+		player:hud_change(counter2, "text", count2)
+		player:hud_change(counter3, "text", count3)
+		return count
+		end
+end)
+
 minetest.register_on_joinplayer(function(player)
 local rupee = player:hud_add({
     hud_elem_type = "image",
@@ -13,19 +60,28 @@ local rupee = player:hud_add({
     text = "hyruletools_green_rupee.png"
 	})
 	
-local arrow = player:hud_add({
+local bomb = player:hud_add({
     hud_elem_type = "image",
-    position = {x = 0.05, y = 0.8},
+    position = {x = 0.05, y = 0.825},
     scale = {
       x = 3,
       y = 3
     },
-    text = "bows_arrow_wood.png"
+    text = "hyruletools_bombico.png"
+	})
+local key = player:hud_add({
+    hud_elem_type = "image",
+    position = {x = 0.05, y = 0.75},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "hyruletools_key.png"
 	})
 	
 local text1 = player:hud_add({
     hud_elem_type = "text",
-    position = {x = 0.1, y = 0.8},
+    position = {x = 0.075, y = 0.825},
     scale = {
       x = 3,
       y = 3
@@ -35,35 +91,57 @@ local text1 = player:hud_add({
 	})
 	
 local text1 = player:hud_add({
+    hud_elem_type = "text",
+    position = {x = 0.075, y = 0.9},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "x ",
+	number = 0xFFFFFF
+	})
+local text1 = player:hud_add({
+    hud_elem_type = "text",
+    position = {x = 0.075, y = 0.75},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = "x ",
+	number = 0xFFFFFF
+	})
+counter1 = player:hud_add({
     hud_elem_type = "text",
     position = {x = 0.09, y = 0.9},
     scale = {
       x = 3,
       y = 3
     },
-    text = "x ",
+    text = count,
+	number = 0xFFFFFF
+	})
+counter2 = player:hud_add({
+    hud_elem_type = "text",
+    position = {x = 0.09, y = 0.825},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = count2,
+	number = 0xFFFFFF
+	})
+counter3 = player:hud_add({
+    hud_elem_type = "text",
+    position = {x = 0.09, y = 0.75},
+    scale = {
+      x = 3,
+      y = 3
+    },
+    text = count3,
 	number = 0xFFFFFF
 	})
 end)
---]]
-
---[[
-minetest.register_globalstep(function()
-	for _, player in ipairs(minetest.get_connected_players()) do	
-		local playername = player:get_player_name()
-		local inv = minetest.get_inventory({type="player", name=playername});
-		if inv:contains_item("main", "hyruletools:green_rupee") then
-		for num=1,10,1 do
-		local stack = inv:get_stack("main", num)
-		if stack:get_name() == "hyruletools:green_rupee" then
-			number = stack:get_count()
-		end
-		end
-		minetest.chat_send_all(number)
-		end
-	end
-end)
-]]
+--
 
 --player effects
 
@@ -717,24 +795,28 @@ minetest.register_craftitem("hyruletools:red_rupee", {
 	description = "Red Rupee",
 	inventory_image = "hyruletools_red_rupee.png",
 	stack_max = 1000,
+	groups = {rupee = 1}
 })
 
 minetest.register_craftitem("hyruletools:green_rupee", {
 	description = "Green Rupee",
 	inventory_image = "hyruletools_green_rupee.png",
 	stack_max = 1000,
+	groups = {rupee = 1}
 })
 
 minetest.register_craftitem("hyruletools:blue_rupee", {
 	description = "Blue Rupee",
 	inventory_image = "hyruletools_blue_rupee.png",
 	stack_max = 1000,
+	groups = {rupee = 1}
 })
 
 minetest.register_craftitem("hyruletools:nyan_rupee", {
 	description = "Nyan Rupee",
 	inventory_image = "hyruletools_nyan_rupee.png",
 	stack_max = 1000,
+	groups = {rupee = 1}
 })
 
 minetest.register_craftitem("hyruletools:red_ore", {

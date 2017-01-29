@@ -515,6 +515,48 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_entity("tnt:tnt_object", {
+	visual = "mesh",
+	mesh = "hyruletools_bomb.b3d",
+	textures = {"hyruletools_bomb.png",},
+	visual_size = {x=10, y=10},
+	collision_box = {-0.1, 0, -0.1, 0.1, 0.2, 0.1},
+	physical = true,
+	on_activate = function(self)
+		minetest.after(3, function()
+			if self.object ~= nil then
+			local pos = self.object:getpos()
+			tnt.boom(pos, {damage_radius=3, radius=3})
+			end
+		end)
+	end,
+	on_step = function(self)
+		local velo = self.object:getvelocity()
+		if velo ~= nil then
+		self.object:setvelocity({x=velo.x*0.95, y=velo.y, z=velo.z*0.95})
+		end
+		local pos = self.object:getpos()
+		if pos ~= nil then
+		minetest.add_particlespawner({
+			amount = 5,
+			time = 0.2,
+			minpos = {x=pos.x, y=pos.y+0.4, z=pos.z},
+			maxpos = {x=pos.x, y=pos.y+0.5, z=pos.z},
+			minvel = {x=-0.5, y=-0.5, z=0.5},
+			maxvel = {x=1, y=1, z=1},
+			minacc = {x=-0.2, y=0, z=-0.2},
+			maxacc = {x=0.2, y=0, z=0.2},
+			minexptime = 0.5,
+			maxexptime = 1,
+			minsize = 1,
+			maxsize = 2,
+			collisiondetection = false,
+			texture = "hyruletools_yellowstar.png"
+		})
+		end
+	end,
+})
+
 function tnt.register_tnt(def)
 	local name = ""
 	if not def.name:find(':') then
@@ -545,6 +587,17 @@ function tnt.register_tnt(def)
 		on_punch = function(pos, node, puncher)
 			if puncher:get_wielded_item():get_name() == "default:torch" then
 				minetest.set_node(pos, {name = name .. "_burning"})
+			end
+		end,
+		on_use = function(item, clicker)
+			if clicker:get_wielded_item():get_name() == "tnt:tnt" then
+			local pos = clicker:getpos()
+			local dir = clicker:get_look_dir()
+			local obj = minetest.env:add_entity({x=pos.x+dir.x*1, y=pos.y+1, z=pos.z+dir.z*1}, "tnt:tnt_object")
+			obj:setvelocity({x=dir.x*8, y=dir.y*13, z=dir.z*8})
+			obj:setacceleration({x=0, y=-12, z=0})
+			item:take_item()
+			return item
 			end
 		end,
 		selection_box = def.selection_box,

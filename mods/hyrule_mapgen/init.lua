@@ -2582,6 +2582,72 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_node("hyrule_mapgen:boulder", {
+	description = "Boulder",
+	tiles = {
+		"default_stone.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 1.0625, 0.5}, -- NodeBox1
+			{-0.5, -0.375, -0.625, 0.5, 0.9375, 0.625}, -- NodeBox2
+			{-0.625, -0.375, -0.5, 0.625, 0.9375, 0.5}, -- NodeBox3
+			{-0.5, -0.25, -0.6875, 0.5, 0.8125, 0.6875}, -- NodeBox4
+			{-0.6875, -0.25, -0.5, 0.6875, 0.8125, 0.5}, -- NodeBox5
+			{-0.5625, -0.25, -0.5625, 0.5625, 0.8125, 0.5625}, -- NodeBox6
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 1.0625, 0.5}, -- NodeBox1
+			{-0.5, -0.375, -0.625, 0.5, 0.9375, 0.625}, -- NodeBox2
+			{-0.625, -0.375, -0.5, 0.625, 0.9375, 0.5}, -- NodeBox3
+			{-0.5, -0.25, -0.6875, 0.5, 0.8125, 0.6875}, -- NodeBox4
+			{-0.6875, -0.25, -0.5, 0.6875, 0.8125, 0.5}, -- NodeBox5
+			{-0.5625, -0.25, -0.5625, 0.5625, 0.8125, 0.5625}, -- NodeBox6
+		}
+	},
+	groups = {explody=1},
+	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:snowball", {
+	description = "Snow Boulder",
+	tiles = {
+		"default_snow.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 1.0625, 0.5}, -- NodeBox1
+			{-0.5, -0.375, -0.625, 0.5, 0.9375, 0.625}, -- NodeBox2
+			{-0.625, -0.375, -0.5, 0.625, 0.9375, 0.5}, -- NodeBox3
+			{-0.5, -0.25, -0.6875, 0.5, 0.8125, 0.6875}, -- NodeBox4
+			{-0.6875, -0.25, -0.5, 0.6875, 0.8125, 0.5}, -- NodeBox5
+			{-0.5625, -0.25, -0.5625, 0.5625, 0.8125, 0.5625}, -- NodeBox6
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 1.0625, 0.5}, -- NodeBox1
+			{-0.5, -0.375, -0.625, 0.5, 0.9375, 0.625}, -- NodeBox2
+			{-0.625, -0.375, -0.5, 0.625, 0.9375, 0.5}, -- NodeBox3
+			{-0.5, -0.25, -0.6875, 0.5, 0.8125, 0.6875}, -- NodeBox4
+			{-0.6875, -0.25, -0.5, 0.6875, 0.8125, 0.5}, -- NodeBox5
+			{-0.5625, -0.25, -0.5625, 0.5625, 0.8125, 0.5625}, -- NodeBox6
+		}
+	},
+	groups = {explody=1},
+	sounds = default.node_sound_dirt_defaults()
+})
+
 minetest.register_node("hyrule_mapgen:magic_tree", {
 	description = "magic tree trunk",
 	tiles = {
