@@ -11,6 +11,9 @@ local counter3 = nil
 
 minetest.register_globalstep(function()
 	for _, player in ipairs(minetest.get_connected_players()) do
+		if player:get_player_name() ~= "singleplayer" then
+		return
+		end
 		count = 0
 		count2 = 0
 		count3 = 0
@@ -50,6 +53,9 @@ minetest.register_globalstep(function()
 end)
 
 minetest.register_on_joinplayer(function(player)
+if player:get_player_name() ~= "singleplayer" then
+return
+end
 local rupee = player:hud_add({
     hud_elem_type = "image",
     position = {x = 0.05, y = 0.9},
@@ -971,6 +977,19 @@ minetest.register_craft({
 		{"", "dye:yellow", ""},
 		{"", "hyruletools:ocarina",  ""}
 	}
+})
+
+minetest.register_craftitem("hyruletools:doompick", {
+	description = "Pickaxe of Doom",
+	inventory_image = "hyruletools_doompick.png",
+	liquids_pointable = true,
+	on_use = function(item, placer, pointed_thing)
+		if pointed_thing.under == nil then
+		return end
+		if minetest.get_node(pointed_thing.under) ~= nil then
+			minetest.remove_node(pointed_thing.under)
+		end
+	end,
 })
 
 minetest.register_craftitem("hyruletools:ocarina4", {

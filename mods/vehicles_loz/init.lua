@@ -22,12 +22,12 @@ minetest.register_entity("vehicles:horse", {
 		end
 	end,
 	on_punch = function(self, puncher)
-		if not self.driver then
-		local name = self.object:get_luaentity().name
-		local pos = self.object:getpos()
-		minetest.env:add_item(pos, name.."_spawner")
-		self.object:remove()
-		end
+		--if not self.driver then
+		--local name = self.object:get_luaentity().name
+		--local pos = self.object:getpos()
+		--minetest.env:add_item(pos, name.."_spawner")
+		--self.object:remove()
+		--end
 		if self.object:get_hp() == 0 then
 		if self.driver then
 		object_detach(self, self.driver, {x=1, y=0, z=1})
@@ -52,7 +52,7 @@ minetest.register_entity("vehicles:horse", {
 	end,
 })
 
-register_vehicle_spawner("vehicles:horse", "Horse", "vehicles_horse_inv.png")
+--register_vehicle_spawner("vehicles:horse", "Horse", "vehicles_horse_inv.png")
 
 minetest.register_entity("vehicles:spinner", {
 	visual = "mesh",

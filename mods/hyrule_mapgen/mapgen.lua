@@ -1855,9 +1855,14 @@ minetest.register_on_generated(function(minp, maxp)
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon_retro"..number..".mts", random, {}, true)
 				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
 			else
-			local number = math.random(1,2)
+			local number = math.random(1,5)
+				if math.random(1,5) == 1 then
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon"..number..".mts", random, {{["hyrule_mapgen:chest"] = "hyrule_mapgen:chest_key",}}, true)
+				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
+				else
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon"..number..".mts", random, {}, true)
 				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
+				end
 			end
 		end
 	end
