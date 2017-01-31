@@ -142,14 +142,14 @@ local function calc_velocity(pos1, pos2, old_vel, power)
 	return vel
 end
 
-local function entity_physics(pos, radius, drops)
+local function entity_physics(pos, radius, drops, disable_playerdamage)
 	local objs = minetest.get_objects_inside_radius(pos, radius)
 	for _, obj in pairs(objs) do
 		local obj_pos = obj:getpos()
 		local dist = math.max(1, vector.distance(pos, obj_pos))
 
 		local damage = (4 / dist) * radius
-		if obj:is_player() then
+		if obj:is_player() and not disable_playerdamage then
 			-- currently the engine has no method to set
 			-- player velocity. See #2960
 			-- instead, we knock the player back 1.0 node, and slightly upwards
@@ -160,7 +160,7 @@ local function entity_physics(pos, radius, drops)
 			obj:setpos(newpos)
 
 			obj:set_hp(obj:get_hp() - damage)
-		else
+		elseif not obj:is_player() then
 			local do_damage = true
 			local do_knockback = true
 			local entity_drops = {}
@@ -363,13 +363,14 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast)
 end
 
 function tnt.boom(pos, def)
-	minetest.sound_play("tnt_explode", {pos = pos, gain = 1.5, max_hear_distance = 2*64})
+	local disable_playerdamage = def.disable_playerdamage or false
+	minetest.sound_play("tnt_explode", {pos = pos, gain = 1.2, max_hear_distance = 2*64})
 	minetest.set_node(pos, {name = "tnt:boom"})
 	local drops, radius = tnt_explode(pos, def.radius, def.ignore_protection,
 			def.ignore_on_blast)
 	-- append entity drops
 	local damage_radius = (radius / def.radius) * def.damage_radius
-	entity_physics(pos, damage_radius, drops)
+	entity_physics(pos, damage_radius, drops, disable_playerdamage)
 	if not def.disable_drops then
 		eject_drops(drops, pos, radius)
 	end
