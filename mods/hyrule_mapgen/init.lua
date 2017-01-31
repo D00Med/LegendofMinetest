@@ -1061,6 +1061,17 @@ minetest.register_node("hyrule_mapgen:chest", {
 			item:take_item()
 			local meta = minetest.get_meta(pos)
 			local item = meta:get_string("item")
+			if item == nil then
+				for _, row in ipairs(chest_items) do
+				local item = row[1]
+				local rarity = row[2]
+				if math.random(1,rarity) == 1 then
+					meta:set_string("item", item)
+					else
+					meta:set_string("item", "hyruletools:green_rupee")
+				end
+				end
+			end
 			minetest.env:add_item(pos, item)
 			minetest.env:remove_node(pos)
 		else
