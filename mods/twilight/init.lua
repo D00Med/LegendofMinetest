@@ -211,7 +211,7 @@ else
 		jump = 1.0, -- multiplier to default value
 		gravity = 1.0, -- multiplier to default value
 		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
+		sneak_glitch = true, -- whether player can use the sneak glitch
 
 		})
 	end--]]

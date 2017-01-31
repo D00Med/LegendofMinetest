@@ -27,11 +27,12 @@ local chest_stuff = {
 	{name="default:diamond", max = 5},
 	{name="hyruletools:nyan_rupee", max = 5},
 	{name="twilight:crystal", max = 1},
-	{name="hyruletools:steel_boomerang", max = 1},
-	{name="hyruletools:hookshot", max = 1},
+	{name="clawshot:clawshot", max = 1},
 	{name="binoculars:binoculars", max = 1},
 	{name="hyruletools:classic_sword", max = 1},
-	{name="hyruletools:hookshot_gold", max = 1},
+	{name="clawshot:clawshot_gold", max = 1},
+	{name="hyruletools:triforce_shard", max = 1},
+	{name="hyruletools:boomerang_steel", max = 1},
 	{name="default:ice", max = 3}
 }
 
