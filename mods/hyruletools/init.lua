@@ -1276,12 +1276,12 @@ minetest.register_tool("hyruletools:medallion2", {
 			minetest.sound_play("earthquake", {pos = playerpos, gain = 0.5, max_hear_distance = 32})
 			--particles
 			minetest.add_particlespawner(
-			12, --amount
-			2.5, --time
-			{x=playerpos.x-4, y=playerpos.y+1, z=playerpos.z-4},
-			{x=playerpos.x+4, y=playerpos.y+1.2, z=playerpos.z+4},
-			{x=0, y=1, z=0}, --minvel
-			{x=0, y=4, z=0}, --maxvel
+			24, --amount
+			3, --time
+			{x=playerpos.x-4, y=playerpos.y+0.8, z=playerpos.z-4},
+			{x=playerpos.x+4, y=playerpos.y+1, z=playerpos.z+4},
+			{x=-1, y=1, z=-1}, --minvel
+			{x=1, y=4, z=1}, --maxvel
 			{x=0,y=1,z=0}, --minacc
 			{x=0,y=1,z=0}, --maxacc
 			0.1, --minexptime
@@ -1296,20 +1296,20 @@ minetest.register_tool("hyruletools:medallion2", {
 			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+4,z=playerpos.z+0}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+6,z=playerpos.z+0}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+5,z=playerpos.z+3}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+7,z=playerpos.z+3}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
 			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+4,z=playerpos.z-4}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+5,z=playerpos.z-4}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z+4}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z+0}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
 			minetest.after(0.5, function()
@@ -1319,29 +1319,51 @@ minetest.register_tool("hyruletools:medallion2", {
 			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+6,z=playerpos.z+3}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+4,z=playerpos.z+0}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
 			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+4,z=playerpos.z+3}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+5,z=playerpos.z+3}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+5,z=playerpos.z-3}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z-3}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z+0}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
 			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+4,z=playerpos.z+4}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-4,y=playerpos.y+5,z=playerpos.z-4}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x-4,y=playerpos.y+6,z=playerpos.z-4}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+6,z=playerpos.z+0}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
+			minetest.after(0.5, function()
+			local obj = minetest.env:add_entity({x=playerpos.x+2,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
+			local vec = {x=0,y=-13,z=0}
+			obj:setvelocity(vec)
+			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z}, "hyruletools:stone")
+			local vec = {x=0,y=-13,z=0}
+			obj:setvelocity(vec)
+			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+7,z=playerpos.z+3}, "hyruletools:stone")
+			local vec = {x=0,y=-13,z=0}
+			obj:setvelocity(vec)
+			minetest.after(0.5, function()
+			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+5,z=playerpos.z-4}, "hyruletools:stone")
+			local vec = {x=0,y=-13,z=0}
+			obj:setvelocity(vec)
+			local obj = minetest.env:add_entity({x=playerpos.x,y=playerpos.y+6,z=playerpos.z+3}, "hyruletools:stone")
+			local vec = {x=0,y=-13,z=0}
+			obj:setvelocity(vec)
+			local obj = minetest.env:add_entity({x=playerpos.x-4,y=playerpos.y+7,z=playerpos.z+4}, "hyruletools:stone")
+			local vec = {x=0,y=-13,z=0}
+			obj:setvelocity(vec)
+			end)
+			end)
 			end)
 			end)
 			end)

@@ -342,6 +342,7 @@ minetest.register_craftitem("mobs_loz:nut", {
 minetest.register_craftitem("mobs_loz:weird_beard", {
 	description = "Weird Beard",
 	inventory_image = "mobs_weird_beard.png",
+	groups = {not_in_creative_inventory=1}
 })
 
 
