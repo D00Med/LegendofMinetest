@@ -1003,14 +1003,19 @@ minetest.register_node("hyrule_mapgen:sinkingsand", {
 })
 
 
---used for testing
 chest_items = {
 	{"clawshot:clawshot", 20},
 	{"hyruletools:eye", 20},
 	{"hyruletools:boomerang", 20},
+	{"hyruletools:flame_rod", 50},
+	{"hyruletools:wand", 50},
+	{"hyruletools:medallion", 50},
+	{"hyruletools:medallion2", 50},
+	{"hyruletools:medallion3", 50},
 	{"hyruletools:green_rupee 5", 10},
 	{"hyruletools:blue_rupee 2", 10},
 	{"hyruletools:red_rupee", 10},
+	{"hyruletools:nyan_rupee", 50},
 }
 
 minetest.register_node("hyrule_mapgen:chest", {
