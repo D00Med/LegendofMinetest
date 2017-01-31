@@ -6,7 +6,10 @@
 | |___|  __/ (_| |  __/ | | | (_| | (_) | | | |  | | | | | |  __/ ||  __/\__ \ |_ 
 \_____/\___|\__, |\___|_| |_|\__,_|\___/|_| \_|  |_/_|_| |_|\___|\__\___||___/\__|
              __/ |                                                                
-            |___/                                                                 
+            |___/                                                          
+Created by D00Med, but with a lot of help from tobyplowy (aka toby109tt),
+and also help from Noah K.(aka WinkingBaby)(https://www.youtube.com/channel/UCu8MTAFrihYO9PxKm-pk_xw), Mastersyfodiaz, and Sam Labbato(https://soundcloud.com/sam-labbato)
+
 Gameplay information:
 In addition to the usual mining and building objectives of the game, there are now bosses and the triforce as objectives.
 The triforce can be obtained either by mining mese, searching dungeons, or by defeating Ganon. Scattered throughout the dungeons are triforce shards, and magic pendants. 
