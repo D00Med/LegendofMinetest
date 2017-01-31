@@ -16,7 +16,7 @@ mobs:register_mob("mobs_loz:volvagia", {
 	damage = 2,
 	hp_min = 100,
 	hp_max = 127,
-	armor = 100,
+	armor = 70,
 	collisionbox = {-1, -2, -1, 1, 2, 1},
 	visual_size = {x=3, y=3},
 	visual = "mesh",

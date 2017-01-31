@@ -44,7 +44,7 @@ mobs:register_mob("mobs_loz:bongobongo", {
 	damage = 3,
 	hp_min = 102,
 	hp_max = 125,
-	armor = 200,
+	armor = 90,
 	collisionbox = {-2, 0, -2, 1.5, 3.5, 2},
 	visual = "mesh",
 	mesh = "bongobongo.b3d",
