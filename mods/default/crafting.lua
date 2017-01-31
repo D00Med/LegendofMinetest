@@ -8,13 +8,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:aspen_wood 4',
-	recipe = {
-		{'default:aspen_tree'},
-	}
-})
-
-minetest.register_craft({
 	output = 'default:junglewood 4',
 	recipe = {
 		{'default:jungletree'},
@@ -36,6 +29,27 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:aspen_wood 4',
+	recipe = {
+		{'default:aspen_tree'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:wood',
+	recipe = {
+		{'default:bush_stem'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:acacia_wood',
+	recipe = {
+		{'default:acacia_bush_stem'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:stick 4',
 	recipe = {
 		{'group:wood'},
@@ -43,15 +57,16 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:fence_wood 6',
+	output = 'default:sign_wall_steel 3',
 	recipe = {
-		{'group:stick', 'group:stick', 'group:stick'},
-		{'group:stick', 'group:stick', 'group:stick'},
+		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'', 'group:stick', ''},
 	}
 })
 
 minetest.register_craft({
-	output = 'default:sign_wall 2',
+	output = 'default:sign_wall_wood 3',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
 		{'group:wood', 'group:wood', 'group:wood'},
@@ -62,7 +77,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'default:torch 4',
 	recipe = {
-		{'group:coal'},
+		{'default:coal_lump'},
 		{'group:stick'},
 	}
 })
@@ -203,15 +218,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:axe_obsidian',
-	recipe = {
-		{'default:obsidian', 'default:obsidian'},
-		{'default:obsidian', 'group:stick'},
-		{'', 'group:stick'},
-	}
-})
-
-minetest.register_craft({
 	output = 'default:axe_bronze',
 	recipe = {
 		{'default:bronze_ingot', 'default:bronze_ingot'},
@@ -310,48 +316,46 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	output = 'default:sword_steel',
-	recipe = {
-		{'default:steel_ingot'},
-		{'default:steel_ingot'},
-		{'group:stick'},
-	}
-})
+-- minetest.register_craft({
+	-- output = 'default:sword_steel',
+	-- recipe = {
+		-- {'default:steel_ingot'},
+		-- {'default:steel_ingot'},
+		-- {'group:stick'},
+	-- }
+-- })
+
+-- minetest.register_craft({
+	-- output = 'default:sword_bronze',
+	-- recipe = {
+		-- {'default:bronze_ingot'},
+		-- {'default:bronze_ingot'},
+		-- {'group:stick'},
+	-- }
+-- })
+
+-- minetest.register_craft({
+	-- output = 'default:sword_mese',
+	-- recipe = {
+		-- {'default:mese_crystal'},
+		-- {'default:mese_crystal'},
+		-- {'group:stick'},
+	-- }
+-- })
+
+-- minetest.register_craft({
+	-- output = 'default:sword_diamond',
+	-- recipe = {
+		-- {'default:diamond'},
+		-- {'default:diamond'},
+		-- {'group:stick'},
+	-- }
+-- })
 
 minetest.register_craft({
-	output = 'default:sword_bronze',
+	output = 'default:skeleton_key',
 	recipe = {
-		{'default:bronze_ingot'},
-		{'default:bronze_ingot'},
-		{'group:stick'},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:sword_mese',
-	recipe = {
-		{'default:mese_crystal'},
-		{'default:mese_crystal'},
-		{'group:stick'},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:sword_diamond',
-	recipe = {
-		{'default:diamond'},
-		{'default:diamond'},
-		{'group:stick'},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:rail 24',
-	recipe = {
-		{'default:steel_ingot', '', 'default:steel_ingot'},
-		{'default:steel_ingot', 'group:stick', 'default:steel_ingot'},
-		{'default:steel_ingot', '', 'default:steel_ingot'},
+		{'default:gold_ingot'},
 	}
 })
 
@@ -371,6 +375,12 @@ minetest.register_craft({
 		{'group:wood', 'default:steel_ingot', 'group:wood'},
 		{'group:wood', 'group:wood', 'group:wood'},
 	}
+})
+
+minetest.register_craft( {
+	type = "shapeless",
+	output = "default:chest_locked",
+	recipe = {"default:chest", "default:steel_ingot"},
 })
 
 minetest.register_craft({
@@ -508,10 +518,26 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:sandstone_block 9',
+	recipe = {
+		{'default:sandstone', 'default:sandstone', 'default:sandstone'},
+		{'default:sandstone', 'default:sandstone', 'default:sandstone'},
+		{'default:sandstone', 'default:sandstone', 'default:sandstone'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:clay',
 	recipe = {
 		{'default:clay_lump', 'default:clay_lump'},
 		{'default:clay_lump', 'default:clay_lump'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:clay_lump 4',
+	recipe = {
+		{'default:clay'},
 	}
 })
 
@@ -556,11 +582,20 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:ladder 5',
+	output = 'default:ladder_wood 3',
 	recipe = {
 		{'group:stick', '', 'group:stick'},
 		{'group:stick', 'group:stick', 'group:stick'},
 		{'group:stick', '', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:ladder_steel 15',
+	recipe = {
+		{'default:steel_ingot', '', 'default:steel_ingot'},
+		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'default:steel_ingot', '', 'default:steel_ingot'},
 	}
 })
 
@@ -584,6 +619,15 @@ minetest.register_craft({
 	output = 'default:mese_crystal_fragment 9',
 	recipe = {
 		{'default:mese_crystal'},
+	}
+})
+
+minetest.register_craft({
+	output = "default:mese_crystal",
+	recipe = {
+		{"default:mese_crystal_fragment", "default:mese_crystal_fragment", "default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment", "default:mese_crystal_fragment", "default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment", "default:mese_crystal_fragment", "default:mese_crystal_fragment"},
 	}
 })
 
@@ -620,6 +664,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:obsidian_block 9',
+	recipe = {
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:stonebrick 4',
 	recipe = {
 		{'default:stone', 'default:stone'},
@@ -628,10 +681,28 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:stone_block 9',
+	recipe = {
+		{'default:stone', 'default:stone', 'default:stone'},
+		{'default:stone', 'default:stone', 'default:stone'},
+		{'default:stone', 'default:stone', 'default:stone'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:desert_stonebrick 4',
 	recipe = {
 		{'default:desert_stone', 'default:desert_stone'},
 		{'default:desert_stone', 'default:desert_stone'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:desert_stone_block 9',
+	recipe = {
+		{'default:desert_stone', 'default:desert_stone', 'default:desert_stone'},
+		{'default:desert_stone', 'default:desert_stone', 'default:desert_stone'},
+		{'default:desert_stone', 'default:desert_stone', 'default:desert_stone'},
 	}
 })
 
@@ -718,7 +789,325 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	type = "cooking",
-	output = "default:charcoal",
+	type = 'cooking',
+	output = 'default:gold_ingot',
+	recipe = 'default:skeleton_key',
+	cooktime = 5,
+})
+
+minetest.register_craft({
+	type = 'cooking',
+	output = 'default:gold_ingot',
+	recipe = 'default:key',
+	cooktime = 5,
+})
+
+--
+-- Fuels
+--
+
+-- Support use of group:tree
+minetest.register_craft({
+	type = "fuel",
 	recipe = "group:tree",
+	burntime = 30,
+})
+
+-- Burn time for all woods are in order of wood density,
+-- which is also the order of wood colour darkness:
+-- aspen, pine, apple, acacia, jungle
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:aspen_tree",
+	burntime = 22,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:pine_tree",
+	burntime = 26,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:tree",
+	burntime = 30,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:acacia_tree",
+	burntime = 34,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:jungletree",
+	burntime = 38,
+})
+
+
+-- Support use of group:wood
+minetest.register_craft({
+	type = "fuel",
+	recipe = "group:wood",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:aspen_wood",
+	burntime = 5,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:pine_wood",
+	burntime = 6,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:wood",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:acacia_wood",
+	burntime = 8,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:junglewood",
+	burntime = 9,
+})
+
+
+-- Support use of group:sapling
+minetest.register_craft({
+	type = "fuel",
+	recipe = "group:sapling",
+	burntime = 10,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:aspen_sapling",
+	burntime = 8,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:pine_sapling",
+	burntime = 9,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:sapling",
+	burntime = 10,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:acacia_sapling",
+	burntime = 11,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:junglesapling",
+	burntime = 12,
+})
+
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:fence_aspen_wood",
+	burntime = 5,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:fence_pine_wood",
+	burntime = 6,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:fence_wood",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:fence_acacia_wood",
+	burntime = 8,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:fence_junglewood",
+	burntime = 9,
+})
+
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:bush_stem",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:acacia_bush_stem",
+	burntime = 8,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:junglegrass",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "group:leaves",
+	burntime = 1,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:cactus",
+	burntime = 15,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:papyrus",
+	burntime = 1,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:bookshelf",
+	burntime = 30,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:ladder_wood",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:lava_source",
+	burntime = 60,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:torch",
+	burntime = 4,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:sign_wall_wood",
+	burntime = 10,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:chest",
+	burntime = 30,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:chest_locked",
+	burntime = 30,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:apple",
+	burntime = 3,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:coal_lump",
+	burntime = 40,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:coalblock",
+	burntime = 370,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:grass_1",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:dry_grass_1",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:paper",
+	burntime = 1,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:book",
+	burntime = 3,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:dry_shrub",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "group:stick",
+	burntime = 1,
+})
+
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:pick_wood",
+	burntime = 6,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:shovel_wood",
+	burntime = 4,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:axe_wood",
+	burntime = 6,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:sword_wood",
+	burntime = 5,
 })

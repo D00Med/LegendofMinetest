@@ -142,14 +142,14 @@ local function calc_velocity(pos1, pos2, old_vel, power)
 	return vel
 end
 
-local function entity_physics(pos, radius, drops)
+local function entity_physics(pos, radius, drops, disable_playerdamage)
 	local objs = minetest.get_objects_inside_radius(pos, radius)
 	for _, obj in pairs(objs) do
 		local obj_pos = obj:getpos()
 		local dist = math.max(1, vector.distance(pos, obj_pos))
 
 		local damage = (4 / dist) * radius
-		if obj:is_player() then
+		if obj:is_player() and not disable_playerdamage then
 			-- currently the engine has no method to set
 			-- player velocity. See #2960
 			-- instead, we knock the player back 1.0 node, and slightly upwards
@@ -160,7 +160,7 @@ local function entity_physics(pos, radius, drops)
 			obj:setpos(newpos)
 
 			obj:set_hp(obj:get_hp() - damage)
-		else
+		elseif not obj:is_player() then
 			local do_damage = true
 			local do_knockback = true
 			local entity_drops = {}
@@ -363,13 +363,14 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast)
 end
 
 function tnt.boom(pos, def)
-	minetest.sound_play("tnt_explode", {pos = pos, gain = 1.5, max_hear_distance = 2*64})
+	local disable_playerdamage = def.disable_playerdamage or false
+	minetest.sound_play("tnt_explode", {pos = pos, gain = 1.2, max_hear_distance = 2*64})
 	minetest.set_node(pos, {name = "tnt:boom"})
 	local drops, radius = tnt_explode(pos, def.radius, def.ignore_protection,
 			def.ignore_on_blast)
 	-- append entity drops
 	local damage_radius = (radius / def.radius) * def.damage_radius
-	entity_physics(pos, damage_radius, drops)
+	entity_physics(pos, damage_radius, drops, disable_playerdamage)
 	if not def.disable_drops then
 		eject_drops(drops, pos, radius)
 	end
@@ -515,6 +516,48 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_entity("tnt:tnt_object", {
+	visual = "mesh",
+	mesh = "hyruletools_bomb.b3d",
+	textures = {"hyruletools_bomb.png",},
+	visual_size = {x=10, y=10},
+	collision_box = {-0.1, 0, -0.1, 0.1, 0.2, 0.1},
+	physical = true,
+	on_activate = function(self)
+		minetest.after(3, function()
+			if self.object ~= nil then
+			local pos = self.object:getpos()
+			tnt.boom(pos, {damage_radius=3, radius=3})
+			end
+		end)
+	end,
+	on_step = function(self)
+		local velo = self.object:getvelocity()
+		if velo ~= nil then
+		self.object:setvelocity({x=velo.x*0.95, y=velo.y, z=velo.z*0.95})
+		end
+		local pos = self.object:getpos()
+		if pos ~= nil then
+		minetest.add_particlespawner({
+			amount = 5,
+			time = 0.2,
+			minpos = {x=pos.x, y=pos.y+0.4, z=pos.z},
+			maxpos = {x=pos.x, y=pos.y+0.5, z=pos.z},
+			minvel = {x=-0.5, y=-0.5, z=0.5},
+			maxvel = {x=1, y=1, z=1},
+			minacc = {x=-0.2, y=0, z=-0.2},
+			maxacc = {x=0.2, y=0, z=0.2},
+			minexptime = 0.5,
+			maxexptime = 1,
+			minsize = 1,
+			maxsize = 2,
+			collisiondetection = false,
+			texture = "hyruletools_yellowstar.png"
+		})
+		end
+	end,
+})
+
 function tnt.register_tnt(def)
 	local name = ""
 	if not def.name:find(':') then
@@ -532,18 +575,34 @@ function tnt.register_tnt(def)
 
 	minetest.register_node(":" .. name, {
 		description = def.description,
-		drawtype = "mesh",
-		mesh = "hyruletools_bomb.b3d",
-		tiles = {"hyruletools_bomb.png"},
+		drawtype = def.drawtype,
+		mesh = def.mesh,
+		tiles = def.tiles,
 		paramtype = "light",
+		paramtype2 = "facedir",
 		is_ground_content = false,
 		groups = {dig_immediate = 2, mesecon = 2, tnt = 1},
 		sounds = default.node_sound_wood_defaults(),
+		on_construct = def.on_construct or nil,
+		on_rightclick = def.on_rightclick or nil,
 		on_punch = function(pos, node, puncher)
 			if puncher:get_wielded_item():get_name() == "default:torch" then
 				minetest.set_node(pos, {name = name .. "_burning"})
 			end
 		end,
+		on_use = function(item, clicker)
+			if clicker:get_wielded_item():get_name() == "tnt:tnt" then
+			local pos = clicker:getpos()
+			local dir = clicker:get_look_dir()
+			local obj = minetest.env:add_entity({x=pos.x+dir.x*1, y=pos.y+1, z=pos.z+dir.z*1}, "tnt:tnt_object")
+			obj:setvelocity({x=dir.x*8, y=dir.y*13, z=dir.z*8})
+			obj:setacceleration({x=0, y=-12, z=0})
+			item:take_item()
+			return item
+			end
+		end,
+		selection_box = def.selection_box,
+		collision_box = def.selection_box,
 		on_blast = function(pos, intensity)
 			minetest.after(0.1, function()
 				tnt.boom(pos, def)
@@ -559,11 +618,9 @@ function tnt.register_tnt(def)
 	})
 
 	minetest.register_node(":" .. name .. "_burning", {
-		drawtype = "mesh",
-		mesh = "hyruletools_bomb.b3d",
-		tiles = {
-			"hyruletools_bomb.png"
-		},
+		drawtype = def.drawtype,
+		mesh = def.mesh,
+		tiles = def.tiles,
 		light_source = 5,
 		paramtype = "light",
 		drop = "",
@@ -614,9 +671,13 @@ tnt.register_tnt({
 	tiles = {
 		"hyruletools_bomb.png",
 	},
-	collisionbox = {
+	collision_box = {
 	type = "fixed",
-	fixed = { -0.2, -0.2, -0.2, 0, 0, 0 }
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
+	},
+	selection_box = {
+	type = "fixed",
+	fixed = { -0.3, -0.5, -0.3, 0.3, 0.2, 0.3 }
 	},
 	radius = radius,
 })

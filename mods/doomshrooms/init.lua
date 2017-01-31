@@ -19,7 +19,7 @@ minetest.register_node("doomshrooms:mini2",{
 	description = "mini glowing mushroom",
 	drawtype = "plantlike",
 	sunlight_propagates = true,
-	light_source = 20,
+	light_source = 14,
 	alpha = 100,	tiles = {"doomshrooms_mini2.png"},
 	inventory_image = "doomshrooms_mini2.png",
 	wield_image = "doomshrooms_mini2.png",
@@ -71,24 +71,24 @@ minetest.register_node("doomshrooms:tall",{
 
 minetest.register_node("doomshrooms:stalk2", {
 	description = "glowing mushroom stalk",
-	tile_images = {"doomshrooms_stalk_base2.png","doomshrooms_stalk_base2.png","doomshrooms_stalk2.png","doomshrooms_stalk2.png"},	
+	tiles = {"doomshrooms_stalk_base2.png","doomshrooms_stalk_base2.png","doomshrooms_stalk2.png","doomshrooms_stalk2.png"},	
 	groups = {choppy=1},	
 	sunlight_propagates = true,
-	light_source = 20,
+	light_source = 14,
 })
 
 minetest.register_node("doomshrooms:cap", {
 	description = "mushroom cap",
-	tile_images = {"doomshrooms_cap_top.png","doomshrooms_cap_bottom.png","doomshrooms_cap_top.png","doomshrooms_cap_top.png"},
+	tiles = {"doomshrooms_cap_top.png","doomshrooms_cap_bottom.png","doomshrooms_cap_top.png","doomshrooms_cap_top.png"},
 	groups = {choppy=1}, 
 })
 
 minetest.register_node("doomshrooms:cap2", {
 	description = "glowing mushroom cap",
-	tile_images = {"doomshrooms_cap_top2.png","doomshrooms_cap_bottom2.png","doomshrooms_cap_top2.png","doomshrooms_cap_top2.png"},	
+	tiles = {"doomshrooms_cap_top2.png","doomshrooms_cap_bottom2.png","doomshrooms_cap_top2.png","doomshrooms_cap_top2.png"},	
 	groups = {choppy=1},	
 	sunlight_propagates = true,
-	light_source = 20,
+	light_source = 14,
 })
 
 minetest.register_node("doomshrooms:tall2",{

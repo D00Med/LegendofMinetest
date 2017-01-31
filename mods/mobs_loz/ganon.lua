@@ -25,7 +25,7 @@ mobs:register_arrow("mobs_loz:swdbm", {
    end,
 
    hit_node = function(self, pos, node)
-		minetest.set_node(pos, {name="fire:basic_flame"})
+		--minetest.set_node(pos, {name="fire:basic_flame"})
       self.object:remove()
    end,
 })
@@ -44,12 +44,13 @@ mobs:register_mob("mobs_loz:ganon", {
 	damage = 3,
 	hp_min = 202,
 	hp_max = 225,
-	armor = 200,
-	collisionbox = {-1, -1.5, -1, 1, 1.5, 1},
+	armor = 80,
+	collisionbox = {-1, 0, -1, 1, 2.5, 1},
+	visual_size = {x=1.3, y=1.3},
 	visual = "mesh",
 	mesh = "ganon.b3d",
 	textures = {
-		{"ganon.png"}
+		{"mobs_ganon.png"}
 	},
 	visual_size = {x=2, y=2},
 	makes_footstep_sound = true,
@@ -65,24 +66,29 @@ mobs:register_mob("mobs_loz:ganon", {
 		{name = "hyruletools:triforce",
 		chance = 1, min = 1, max = 1},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 0,
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
-		speed_normal = 18,
-		speed_run = 25,
-		stand_start = 21,
-		stand_end = 46,
-		walk_start = 49,
-		walk_end = 88,
-		run_start = 49,
-		run_end = 88,
+		speed_normal = 16,
+		speed_run = 19,
+		stand_start = 36,
+		stand_end = 56,
+		walk_start = 60,
+		walk_end = 80,
+		run_start = 60,
+		run_end = 80,
 		punch_start = 1,
-		punch_end = 21,
-		punch2_start = 21,
-		punch2_end = 46,
-		shoot_start = 1, 
-		shoot_end = 21,
+		punch_end = 20,
+		shoot_start = 20, 
+		shoot_end = 36,
 	},
 	on_die = function(self, pos)
 		minetest.add_particlespawner(
@@ -102,6 +108,31 @@ mobs:register_mob("mobs_loz:ganon", {
 			"mobs_loz_light.png" --texture
 		)
 	end,
+	do_custom = function(self)
+		local pos = self.object:getpos()
+		if minetest.find_node_near(pos, 10, {"hyrule_mapgen:ganon_sphere"}) then
+			if self.health <= 100 then
+			self.health = 200
+			minetest.add_particlespawner(
+			10, --amount
+			1, --time
+			{x=pos.x-1, y=pos.y-1, z=pos.z-1}, --minpos
+			{x=pos.x+1, y=pos.y-1, z=pos.z+1}, --maxpos
+			{x=-0, y=-0, z=-0}, --minvel
+			{x=0, y=0, z=0}, --maxvel
+			{x=-0.5,y=1,z=-0.5}, --minacc
+			{x=0.5,y=1,z=0.5}, --maxacc
+			1, --minexptime
+			1.5, --maxexptime
+			20, --minsize
+			25, --maxsize
+			false, --collisiondetection
+			"mobs_loz_light.png^[colorize:red:100" --texture
+			)
+			self.object:set_animation({x=85, y=105}, 12, 0)
+			end
+		end
+	end
 })
 
 --mobs:register_spawn("mobs_loz:dodongo_boss", {"hyrule_mapgen:dodongo_spawn"}, 20, 0, 7000, 1, 31000)

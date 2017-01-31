@@ -1,36 +1,21 @@
-This mod is part of Minetest NeXt
-==================================
+Minetest Game mod: xpanes
+=========================
+See license.txt for license information.
 
-License of source code:
------------------------
-Copyright (C) 2012 xyz
-Copyright (C) 2014 BlockMen
+Authors of source code
+----------------------
+Originally by xyz (MIT)
+BlockMen (MIT)
+sofar (MIT)
+Various Minetest developers and contributors (MIT)
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-at your option) any later version.
+Authors of media (textures)
+---------------------------
+xyz (CC BY-SA 3.0):
+  All textures not mentioned below.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Gambit (CC BY-SA 3.0):
+  xpanes_bar.png
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-License of media (textures, sounds, meshes):
---------------------------------------------
-(by Authors)
-
-xyz (WTFPL):
-   xpanes_white.png
-   xpanes_space.png
-   xpanes_pane_half.png
-
-BlockMen (WTFPL):
-   xpanes_grey.png
-
-Gambit (WTFPL):
-   xpanes_bar.png
+paramat (CC BY-SA 3.0):
+  xpanes_bar_top.png

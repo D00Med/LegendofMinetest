@@ -7,14 +7,14 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	attack_type = "dogfight",
 	reach = 2,
 	damage = 2,
-	hp_min = 3,
+	hp_min = 10,
 	hp_max = 27,
-	armor = 100,
-	collisionbox = {-0.3, -1, -0.2, 0.2, 0.2, 0.2},
+	armor = 95,
+	collisionbox = {-0.3, 0, -0.2, 0.2, 1.2, 0.2},
 	visual = "mesh",
-	mesh = "deku_baba.b3d",
+	mesh = "dekubaba.b3d",
 	textures = {
-		{"dekubaba.png"},
+		{"mobs_dekubaba.png"},
 	},
 	blood_texture = "default_dry_grass.png",
 	makes_footstep_sound = false,
@@ -26,29 +26,32 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	run_velocity = 0.05,
 	jump = false,
 	drops = {
-		{name = "hyruletools:heart",
-		chance = 1, min = 3, max = 5},
-		{name = "maptools:gold_coin",
+		{name = "mobs_loz:deku_nut",
 		chance = 1, min = 1, max = 3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = -1,
 	lava_damage = 5,
 	light_damage = 0,
 	fear_height = 3,
 	animation = {
-		speed_normal = 15,
+		speed_normal = 12,
 		speed_run = 15,
 		stand_start = 1,
-		stand_end = 13,
+		stand_end = 19,
 		walk_start = 1,
-		walk_end = 13,
-		run_start = 1,
-		run_end = 13,
-		punch_start = 13,
-		punch_end = 33,
+		walk_end = 19,
+		run_start = 35,
+		run_end = 55,
+		punch_start = 20,
+		punch_end = 35,
 	},
 })
-
-mobs:register_spawn("mobs_loz:deku_baba", {"default:dirt_with_grass", "ethereal:gray_dirt", "default:dirt_with_grass3", "default:dirt_with_grass2"}, 7, 0, 7000, 2, 31000)
 
 mobs:register_egg("mobs_loz:deku_baba", "Deku_Baba", "default_dry_grass.png", 1)

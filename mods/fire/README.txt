@@ -1,35 +1,32 @@
-This mod is part of Minetest NeXt
-=================================
+Minetest Game mod: fire
+=======================
+See license.txt for license information.
 
-License of source code:
------------------------
-Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>
+Authors of source code
+----------------------
+Originally by Perttu Ahola (celeron55) <celeron55@gmail.com> (LGPL 2.1)
+Various Minetest developers and contributors (LGPL 2.1)
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-at your option) any later version.
+Authors of media (textures and sounds)
+--------------------------------------
+Everything not listed in here:
+Copyright (C) 2012 Perttu Ahola (celeron55) <celeron55@gmail.com> (CC BY-SA 3.0)
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+fire_flint_steel.png
+  Gambit (CC BY-SA 3.0)
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+fire_small.ogg sampled from:
+  http://www.freesound.org/people/dobroide/sounds/4211/ (CC BY 3.0)
 
+fire_large.ogg sampled from:
+  http://www.freesound.org/people/Dynamicell/sounds/17548/ (CC BY 3.0)
 
-License of media (textures, sounds, meshes):
---------------------------------------------
-(by Authors)
-
-dobroide (CC BY-SA 3.0):
-  fire_small.ogg (http://www.freesound.org)
- 
-Dynamicell (CC BY-SA 3.0):
-  fire_large.ogg (http://www.freesound.org)
- D00Med (CC BY-SA 3.0):
+fire_flint_and_steel.ogg
+  https://www.freesound.org/people/Benboncan/sounds/66457/ (CC BY 3.0)
+D00Med (CC BY-SA 3.0):
   fire_basic_flame_animated.png
  
 D00Med (CC BY-SA 3.0):
   fire_basic_flame.png
+
+

@@ -1,8 +1,8 @@
 -- Mode by UjEdwin
 
 bows={
-	pvp=minetest.setting_getbool("enable_pvp"),
-	tnt=minetest.setting_getbool("enable_tnt") and minetest.get_modpath("tnt"),
+	pvp=minetest.setting_getbool("enable_pvp") or nil,
+	tnt=minetest.get_modpath("tnt")~=nil,
 	creative=minetest.setting_getbool("creative_mode"),
 	mesecons=minetest.get_modpath("mesecons"),
 	registed_arrows={},

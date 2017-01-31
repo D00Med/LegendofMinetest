@@ -10,17 +10,19 @@ mobs:register_mob("mobs_loz:zora", {
 	hp_min = 10,
 	hp_max = 25,
 	armor = 80,
-	collisionbox = {-0.4, -0.5, -0.4, 0.4, 0.5, 0.4},
+	collisionbox = {-0.4, -0, -0.4, 0.4, 1, 0.4},
 	visual = "mesh",
 	mesh = "zora.b3d",
 	textures = {
 		{"mobs_zora.png"},
 	},
-	blood_texture = "icetools_shard.png",
+	blood_texture = "hyruletools_ice_shard.png",
 	makes_footstep_sound = true,
 	view_range = 5,
-	walk_velocity = 1,
-	run_velocity = 2,
+	walk_velocity = 2,
+	run_velocity = 6,
+	runaway = true,
+	runaway_timer = 40,
 	jump = false,
 		stepheight = 1.5,
 		fly = true,
@@ -29,30 +31,35 @@ mobs:register_mob("mobs_loz:zora", {
 	fall_damage = 0,
 	fall_speed = -6,
 	drops = {
-		{name = "icetools:ice_shard",
+		{name = "hyruletools:ice_fragment",
 		chance = 9, min = 1, max = 3},
-		{name = "maptools:copper_coin",
-		chance = 1, min = 1, max = 2},
+		{name = "hyruletools:green_rupee",
+		chance = 5, min = 1, max = 2},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,7) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 0,
 	lava_damage = 1,
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,
 		speed_run = 20,
-		stand_start = 0,
-		stand_end = 40,
-		walk_start = 50,
-		walk_end = 68,
-		run_start = 50,
-		run_end = 68,
-		punch_start = 50,
-		punch_end = 68,
+		stand_start = 1,
+		stand_end = 20,
+		walk_start = 25,
+		walk_end = 45,
+		run_start = 25,
+		run_end = 45,
 	},
 	do_custom = function(self)
 
 		if not self.child
-		and math.random(1, 100) == 1 then
+		and math.random(1, 250) == 1 then
 
 			local pos = self.object:getpos()
 
@@ -61,14 +68,20 @@ mobs:register_mob("mobs_loz:zora", {
 	end,
 })
 
-mobs:register_spawn("mobs_loz:zora", {"default:water_source", "default:water_flowing"}, 20, 10, 15000, 2, 11000)
+mobs:register_egg("mobs_loz:zora", "Zora", "default_ice.png", 1)
 
-mobs:register_egg("mobs_loz:zora", "zora", "default_ice.png", 1)
-
-for _, player in ipairs(minetest.get_connected_players()) do
-local name = minetest.get_player_name()
-local pos = player:getpos()
-end
+playereffects.register_effect_type("potion_swim_lv1", "Fast Swim", nil, {"swim"}, 
+	function(player)
+		player:set_physics_override(4,nil,nil)
+		physics_overriden = true
+	end,
+	
+	function(effect, player)
+		player:set_physics_override(1,nil,nil)
+		physics_overriden = false
+	end,
+	false
+)
 
 minetest.register_craftitem("mobs_loz:scale", {
 	description = "Zora scale",
@@ -77,26 +90,7 @@ minetest.register_craftitem("mobs_loz:scale", {
 		local player = user:get_player_name()
 		local breath = user:get_breath()
 	if breath <= 10 then
-		local spd = user:set_physics_override({
-
-		speed = 4, -- multiplier to default value
-		jump = 1.0, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
+		playereffects.apply_effect_type("potion_swim_lv1", 10, user)
 	end
-		local reset = minetest.after(50, function()
-			user:set_physics_override({
-
-		speed = 1.5, -- multiplier to default value
-		jump = 1.0, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
-
-		})
-		end)
-	end
+	end,
 })

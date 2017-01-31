@@ -1,32 +1,15 @@
-This mod is part of Minetest NeXt
-=================================
+Minetest Game mod: boats
+========================
+See license.txt for license information.
 
-License of source code:
------------------------
-Copyright (c) 2012 PilzAdam
-Copyright (c) 2014 BlockMen
-Copyright (c) 2014 paramat
+Authors of source code
+----------------------
+Originally by PilzAdam (MIT)
+Various Minetest developers and contributors (MIT)
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-License of media (textures, sounds, meshes):
---------------------------------------------
-(by Authors)
-
-Zeg9 (WTFPL):
-  boat_*.png
-
-thetoon, Zeg9, PavelS (WTFPL):
-  boat.obj
+Authors of media (textures and model)
+-------------------------------------
+Textures: Zeg9 (CC BY-SA 3.0)
+Model: thetoon and Zeg9 (CC BY-SA 3.0),
+  modified by PavelS(SokolovPavel) (CC BY-SA 3.0),
+  modified by sofar (CC BY-SA 3.0)

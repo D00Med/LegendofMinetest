@@ -1,3 +1,7 @@
+local experience = nil
+local expe = nil
+local xp = nil
+
 --License dwtfywt jordan4ibanez
 
 level1 = 50
@@ -52,7 +56,7 @@ minetest.register_on_dieplayer(function(player)
 	file:write("0")
 	file:close()
 end)
-
+local xp_hud = nil
 --hudbar by D00Med
 minetest.register_on_joinplayer(function(player)
 xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "r")
@@ -236,4 +240,3 @@ minetest.register_entity("experience:orb", {
 		end
 	end,
 })
-

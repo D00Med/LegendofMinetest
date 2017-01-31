@@ -8,13 +8,13 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	reach = 1,
 	damage = 2,
 	attack_type = "shoot",
-	shoot_interval = 2.5,
+	shoot_interval = 1.7,
 	arrow = "mobs_loz:deku_nut",
-	shoot_offset = 1,
+	shoot_offset = 1.5,
 	hp_min = 10,
 	hp_max = 25,
 	armor = 80,
-	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+	collisionbox = {-0.3, -0.5, -0.3, 0.3, 0, 0.3},
 	visual = "mesh",
 	mesh = "scrub2.b3d",
 	textures = {
@@ -35,25 +35,30 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	fall_speed = -6,
 	stepheight = 3,
 	drops = {
-		{name = "maptools:silver_coin",
-		chance = 5, min = 5, max = 15},
-		{name = "hyruletools:heart",
-		chance = 1, min = 1, max = 9},
+		{name = "hyruletools:blue_rupee",
+		chance = 5, min = 5, max = 3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 1,
 	lava_damage = 1,
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,
-		speed_run = 15,
+		speed_run = 25,
 		stand_start = 123,
 		stand_end = 146,
 		walk_start = 123,
 		walk_end = 146,
 		run_start = 123,
 		run_end = 146,
-		punch_start = 60,
-		punch_end = 88,
+		shoot_start = 60,
+		shoot_end = 88,
 	},
 })
 
@@ -62,15 +67,18 @@ mobs:register_arrow("mobs_loz:deku_nut", {
 	visual = "sprite",
 	visual_size = {x = 0.5, y = 0.5},
 	textures = {"mobs_nut.png"},
-	velocity = 6,
+	velocity = 8,
    tail = 0, -- enable tail
    tail_texture = "default_dirt.png",
    
 	hit_player = function(self, player)
+	local item = player:get_wielded_item():get_name()
+	if item ~= "shields:shield_steel" and item ~= "shields:shield_admin" and item ~= "shields:shield_bronze" and item ~= "shields:shield_wood" and item ~= "shields:shield_cactus" and item ~= "shields:shield_wood_enhanced" and item ~= "shields:shield_cactus_enhanced" then
       player:punch(self.object, 1.0, {
          full_punch_interval = 1.0,
          damage_groups = {fleshy = 1},
       }, nil)
+	  end
    end,
    
    hit_mob = function(self, player)
@@ -84,8 +92,6 @@ mobs:register_arrow("mobs_loz:deku_nut", {
       self.object:remove()
    end,
 })
-
-mobs:register_spawn("mobs_loz:deku_scrub", {"default:dirt_with_grass"}, 20, 10, 15000, 2, 31000)
 
 mobs:register_egg("mobs_loz:deku_scrub", "deku_scrub", "default_leaves.png", 1)
 

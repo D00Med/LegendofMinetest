@@ -1,9 +1,6 @@
 --baby dodongo by D00Med
 -- edit of Stone Monster by PilzAdam
 
-local l_skins = {
-		{"dodongo.png"},
-	}
 
 mobs:register_mob("mobs_loz:bdodongo", {
 	type = "monster",
@@ -14,48 +11,55 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	hp_min = 12,
 	hp_max = 25,
 	armor = 80,
-	collisionbox = {-0.2, -0.2, -0.2, 0.2, 0.4, 0.4},
+	collisionbox = {-0.2, 0, -0.2, 0.2, 0.4, 0.4},
 	visual = "mesh",
-	mesh = "babydodongo.b3d",
-	textures = l_skins,
-	makes_footstep_sound = true,
+	mesh = "bdodongo.b3d",
+	textures = {
+	{"mobs_bdodongo.png"},
+	},
+	makes_footstep_sound = false,
 	sounds = {
 		random = "mobs_stonemonster",
 	},
 	walk_velocity = 0.5,
 	run_velocity = 1,
-	jump = false,
+	jump = 0,
 	floats = 0,
 	view_range = 5,
 	drops = {
-		{name = "maptools:silver_coin",
-		chance = 2, min = 3, max = 5},
+		{name = "hyruletools:blue_rupee",
+		chance = 3, min = 3, max = 5},
 		{name = "default:iron_lump",
 		chance=5, min=1, max=2},
 		{name = "default:coal_lump",
 		chance=3, min=1, max=3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,4) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
 		speed_normal = 10,
 		speed_run = 15,
-		stand_start = 0,
-		stand_end = 0,
-		walk_start = 0,
-		walk_end = 30,
-		run_start = 0,
-		run_end = 30,
-		punch_start = 0,
-		punch_end = 30,
+		stand_start = 3,
+		stand_end = 3,
+		walk_start = 3,
+		walk_end = 21,
+		run_start = 3,
+		run_end = 21,
+		punch_start = 3,
+		punch_end = 21,
 	},
 	on_die = function(self, pos)
 		minetest.set_node(pos, {name = "fire:basic_flame"})
 	end,
 })
-
-mobs:register_spawn("mobs_loz:bdodongo", {"default:stone"}, 7, 0, 7000, 2, 0)
 
 mobs:register_egg("mobs_loz:bdodongo", "Baby Dodongo", "default_lava.png", 1)
 
@@ -63,59 +67,69 @@ mobs:register_egg("mobs_loz:bdodongo", "Baby Dodongo", "default_lava.png", 1)
 mobs:register_mob("mobs_loz:dodongo", {
 	type = "monster",
 	passive = false,
-	attack_type = "shoot",
+	attack_type = "dogshoot",
 	shoot_interval = 2.5,
 	arrow = "mobs_loz:fire",
 	shoot_offset = 2,
-	reach = 1,
+	reach = 2,
 	damage = 2,
+	dogshoot_switch = 2,
+	dogshoot_count = 0,
+	dogshoot_count_max =5,
 	hp_min = 22,
 	hp_max = 35,
 	armor = 100,
-	collisionbox = {-0.3, -0.3, -0.3, 0.3, 0.4, 0.4},
+	collisionbox = {-0.7, 0, -0.7, 0.7, 1.2, 0.7},
 	visual = "mesh",
 	mesh = "dodongo.b3d",
 	textures = {
-		{"dodongo2.png"}
+		{"mobs_dodongo.png"}
 	},
 	makes_footstep_sound = true,
 	sounds = {
-		random = "mobs_stonemonster",
+		random = "dinosaur_roar",
 	},
 	walk_velocity = 0.5,
 	run_velocity = 1,
-	jump = false,
+	jump = 0,
 	floats = 0,
-	view_range = 5,
+	view_range = 13,
 	drops = {
-		{name = "maptools:silver_coin",
-		chance = 2, min = 3, max = 5},
+		{name = "hyruletools:blue_rupee",
+		chance = 5, min = 3, max = 5},
 		{name = "default:copper_lump",
-		chance=5, min=1, max=2},
+		chance=10, min=1, max=2},
 		{name = "default:coal_lump",
-		chance=3, min=1, max=3},
+		chance=10, min=1, max=3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,5) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
-		speed_normal = 10,
-		speed_run = 15,
-		stand_start = 21,
-		stand_end = 30,
+		speed_normal = 14,
+		speed_run = 18,
+		stand_start = 25,
+		stand_end = 45,
 		walk_start = 1,
 		walk_end = 20,
 		run_start = 1,
 		run_end = 20,
-		punch_start = 21,
-		punch_end = 30,
+		punch_start = 45,
+		punch_end = 65,
+		shoot_start = 45,
+		shoot_end = 65,
 	},
 	on_die = function(self, pos)
 		minetest.set_node(pos, {name = "fire:basic_flame"})
 	end,
 })
-
-mobs:register_spawn("mobs_loz:dodongo", {"default:stone"}, 7, 0, 7000, 2, 0)
 
 mobs:register_egg("mobs_loz:dodongo", "Dodongo", "default_lava.png", 1)
 
@@ -155,41 +169,52 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 	damage = 3,
 	hp_min = 82,
 	hp_max = 125,
-	armor = 200,
-	collisionbox = {-2, -1.5, -2, 1.5, 1.5, 2},
+	armor = 60,
+	collisionbox = {-2, 0, -2, 1.5, 4.5, 2},
 	visual = "mesh",
 	mesh = "dodongo.b3d",
 	textures = {
-		{"dodongo2.png"}
+		{"mobs_dodongo_boss.png"}
 	},
-	visual_size = {x=4, y=4},
+	visual_size = {x=2.5, y=2.5},
 	makes_footstep_sound = true,
 	sounds = {
-		random = "mobs_stonemonster",
+		random = "dinosaur_roar",
 	},
-	walk_velocity = 1,
-	run_velocity = 2,
-	jump = false,
+	walk_velocity = 2,
+	run_velocity = 3.5,
+	jump = 0,
 	floats = 0,
 	view_range = 14,
 	drops = {
 		{name = "hyruletools:foreststone",
 		chance = 1, min = 1, max = 1},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,2) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 0,
 	animation = {
-		speed_normal = 10,
+		speed_normal = 12,
 		speed_run = 15,
-		stand_start = 21,
-		stand_end = 30,
+		stand_start = 25,
+		stand_end = 45,
 		walk_start = 1,
 		walk_end = 20,
 		run_start = 1,
 		run_end = 20,
-		punch_start = 21,
-		punch_end = 30,
+		punch_start = 45,
+		punch_end = 65,
+		shoot_start = 45,
+		shoot_end = 65,
 	},
 	on_die = function(self, pos)
 		minetest.set_node(pos, {name = "fire:basic_flame"})

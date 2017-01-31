@@ -22,3 +22,4 @@ License for Textures, Models and Sounds
 ---------------------------------------
 
 CC-BY-SA 3.0 UNPORTED. Created by DOOmed
+moreplants_palmtree_top.png, moreplants_cavefung.png(32x), moreplants_eye.png(32x) -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy) and D00Med

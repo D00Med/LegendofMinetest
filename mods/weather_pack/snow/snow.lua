@@ -1,6 +1,6 @@
 snow = {}
 
-snow.particles_count = 25
+snow.particles_count = 35
 
 -- calculates coordinates and draw particles for snow weather 
 snow.add_rain_particles = function(player, dtime)
@@ -15,7 +15,7 @@ snow.add_rain_particles = function(player, dtime)
         velocity = {x = math.random(-1,-0.5), y = math.random(-2,-1), z = math.random(-1,-0.5)},
         acceleration = {x = math.random(-1,-0.5), y=-0.5, z = math.random(-1,-0.5)},
         expirationtime = 0.6,
-        size = math.random(0.5, 1),
+        size = math.random(0.2, 1),
         collisiondetection = true,
         vertical = true,
         texture = snow.get_texture(),

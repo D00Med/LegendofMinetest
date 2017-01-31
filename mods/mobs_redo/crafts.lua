@@ -40,7 +40,7 @@ minetest.register_craft({
 	cooktime = 5,
 })
 
--- golden lasso
+-- magic lasso
 minetest.register_tool("mobs:magic_lasso", {
 	description = S("Magic Lasso (right-click animal to put in inventory)"),
 	inventory_image = "mobs_magic_lasso.png",
@@ -81,5 +81,35 @@ minetest.register_craft({
 	recipe = {
 		{'', 'default:steel_ingot', ''},
 		{'', 'group:stick', 'default:steel_ingot'},
+	}
+})
+
+-- protection rune
+minetest.register_craftitem("mobs:protector", {
+	description = S("Mob Protection Rune"),
+	inventory_image = "mobs_protector.png",
+})
+
+minetest.register_craft({
+	output = "mobs:protector",
+	recipe = {
+		{"default:stone", "default:stone", "default:stone"},
+		{"default:stone", "default:goldblock", "default:stone"},
+		{"default:stone", "default:stone", "default:stone"},
+	}
+})
+
+-- saddle
+minetest.register_craftitem("mobs:saddle", {
+	description = "Saddle",
+	inventory_image = "mobs_saddle.png"
+})
+
+minetest.register_craft({
+	output = "mobs:saddle",
+	recipe = {
+		{"mobs:leather", "mobs:leather", "mobs:leather"},
+		{"mobs:leather", "default:steel_ingot", "mobs:leather"},
+		{"mobs:leather", "default:steel_ingot", "mobs:leather"},
 	}
 })

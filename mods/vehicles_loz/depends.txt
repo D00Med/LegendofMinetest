@@ -1,0 +1,5 @@
+default
+tnt
+dye
+mobs?
+stairs?

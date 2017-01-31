@@ -10,9 +10,10 @@ mobs:register_mob("mobs_loz:chuchu", {
 	hp_min = 3,
 	hp_max = 27,
 	armor = 100,
-	collisionbox = {-0.2, -0.2, -0.2, 0.2, 0.2, 0.2},
+	collisionbox = {-0.2, -0, -0.2, 0.2, 0.7, 0.2},
+	visual_size = {x=1.5, y=1.5},
 	visual = "mesh",
-	mesh = "mobs_chuchu.b3d",
+	mesh = "chuchu.b3d",
 	textures = {
 		{"mobs_chuchu.png"},
 	},
@@ -23,29 +24,32 @@ mobs:register_mob("mobs_loz:chuchu", {
 	run_velocity = 1,
 	jump = false,
 	drops = {
-		{name = "hyruletools:heart",
-		chance = 1, min = 3, max = 5},
-		{name = "maptools:silver_coin",
-		chance = 1, min = 1, max = 3},
+		{name = "hyruletools:blue_rupee",
+		chance = 10, min = 1, max = 3},
 	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,4) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
 	water_damage = -1,
 	lava_damage = 5,
 	light_damage = 0,
 	fear_height = 3,
 	animation = {
-		speed_normal = 15,
+		speed_normal = 12,
 		speed_run = 15,
-		stand_start = 3,
-		stand_end = 22,
-		walk_start = 3,
-		walk_end = 22,
-		run_start = 3,
-		run_end = 22,
-		punch_start = 25,
-		punch_end = 42,
+		stand_start = 1,
+		stand_end = 20,
+		walk_start = 52,
+		walk_end = 72,
+		run_start = 52,
+		run_end = 72,
+		punch_start = 30,
+		punch_end = 50,
 	},
 })
-
-mobs:register_spawn("mobs_loz:chuchu", {"default:dirt_with_grass", "default:dirt_with_dry_grass", "default:dirt_with_grass3"}, 7, 0, 7000, 2, 31000)
 
 mobs:register_egg("mobs_loz:chuchu", "chuchu", "hyruletools_spark.png", 1)

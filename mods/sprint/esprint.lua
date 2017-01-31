@@ -69,7 +69,7 @@ minetest.register_globalstep(function(dtime)
 							size = math.random()+0.5,
 							collisiondetection = true,
 							vertical = false,
-							texture = "sprint_particle.png",
+							texture = "default_dirt.png",
 						})
 					end
 				end
@@ -118,7 +118,7 @@ function setSprinting(playerName, sprinting) --Sets the state of a player (0=sto
 		players[playerName]["sprinting"] = sprinting
 		if sprinting == true and breath >= 10 then
 			player:set_physics_override({speed=SPRINT_SPEED,jump=SPRINT_JUMP})
-		elseif sprinting == false and breath >= 10 then
+		elseif sprinting == false and not physics_overriden then
 			player:set_physics_override({speed=1.0,jump=1.0})
 		end
 		return true

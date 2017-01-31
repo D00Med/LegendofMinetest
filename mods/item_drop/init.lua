@@ -6,10 +6,16 @@ minetest.register_globalstep(function(dtime)
 			
 			for _,object in ipairs(minetest.get_objects_inside_radius(pos, 0.75)) do
 				if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "__builtin:item" then
-					if inv and inv:room_for_item("main", ItemStack(object:get_luaentity().itemstring)) then
-						inv:add_item("main", ItemStack(object:get_luaentity().itemstring))
-						if object:get_luaentity().itemstring ~= "" then
+							local itemstring = object:get_luaentity().itemstring
+					if inv and inv:room_for_item("main", ItemStack(itemstring)) then
+						inv:add_item("main", ItemStack(itemstring))
+						if itemstring ~= "" then
+							local itemname = ItemStack(itemstring):to_table().name
+							if minetest.get_item_group(itemname, "rupee") ~= 0 then
+							minetest.sound_play("rupee", {pos = pos, gain = 0.3, max_hear_distance = 16})
+							else
 							minetest.sound_play("item_drop_pickup", {pos = pos, gain = 0.3, max_hear_distance = 16})
+							end
 						end
 						object:get_luaentity().itemstring = ""
 						object:remove()
@@ -42,7 +48,11 @@ minetest.register_globalstep(function(dtime)
 								if inv:room_for_item("main", ItemStack(object:get_luaentity().itemstring)) then
 									inv:add_item("main", ItemStack(object:get_luaentity().itemstring))
 									if object:get_luaentity().itemstring ~= "" then
+										if minetest.get_item_group(object:get_luaentity().itemstring, "rupee") ~= 0 then
+										minetest.sound_play("rupee", {pos = pos, gain = 0.3, max_hear_distance = 16})
+										else
 										minetest.sound_play("item_drop_pickup", {pos = pos, gain = 0.3, max_hear_distance = 16})
+										end
 									end
 									object:get_luaentity().itemstring = ""
 									object:remove()

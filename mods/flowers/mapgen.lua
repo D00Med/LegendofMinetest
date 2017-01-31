@@ -87,8 +87,8 @@ local function register_flower(seed, name)
 		place_on = {"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"},
 		sidelen = 16,
 		noise_params = {
-			offset = -0.02,
-			scale = 0.03,
+			offset = -0.015,
+			scale = 0.025,
 			spread = {x = 200, y = 200, z = 200},
 			seed = seed,
 			octaves = 3,
@@ -152,8 +152,8 @@ function flowers.register_decorations()
 	register_flower(73133,   "dandelion_white")
 	register_flower(436,     "dandelion_flat")
 
-	register_mushroom("mushroom_fertile_brown")
-	register_mushroom("mushroom_fertile_red")
+	register_mushroom("mushroom_brown")
+	register_mushroom("mushroom_red")
 
 	register_waterlily()
 end
@@ -166,9 +166,9 @@ end
 -- Mods using singlenode mapgen can call these functions to enable
 -- the use of minetest.generate_ores or minetest.generate_decorations
 
-local mg_params = minetest.get_mapgen_params()
-if mg_params.mgname == "v6" then
+local mg_name = minetest.get_mapgen_setting("mg_name")
+if mg_name == "v6" then
 	flowers.register_mgv6_decorations()
-elseif mg_params.mgname ~= "singlenode" then
+elseif mg_name ~= "singlenode" then
 	flowers.register_decorations()
 end

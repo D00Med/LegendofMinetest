@@ -127,7 +127,7 @@ if weather.reg_weathers.twilight == nil then
 end
 
 twilight_mode = false
-
+--[[
 default.player_register_model("wolfplayer.b3d", {
 	animation_speed = 20,
 	textures = {"wolfplayer.png"},
@@ -146,6 +146,9 @@ default.player_register_model("wolfplayer.b3d", {
 
 local models = default.registered_player_models
 model = false
+--]]
+local hud_changed = false
+local glow = nil
 
 minetest.register_globalstep(function(dtime)
 if twilight_mode == true then 
@@ -159,7 +162,7 @@ if twilight_mode == true then
 			local remov = inv:remove_item("main", "hyruletools:sword")
 			local add = inv:add_item("main", "hyruletools:sword_light")
 	end
-	if model == false then
+	if hud_changed == false then
 	glow = player:hud_add({
     hud_elem_type = "image",
     position = {x = 0.5, y = 0.5},
@@ -169,39 +172,37 @@ if twilight_mode == true then
     },
     text = "twilight_hud.png"
   })
-	model = true
-	default.player_set_model(player, "wolfplayer.b3d")
-	default.player_set_skin(player, "wolfplayer.png")
-	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=3,z=-3})
-	player:set_local_animation({x=0, y=9}, {x=28, y=44}, {x=11, y=26}, {x=11, y=26}, 20)
-	player:set_physics_override({
+	hud_changed = true
+	--player:set_properties({mesh = "wolfplayer.b3d", textures = {"wolfplayer.png"}})
+	--player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=3,z=-3})
+	--player:set_local_animation({x=0, y=9}, {x=28, y=44}, {x=11, y=26}, {x=11, y=26}, 20)
+	--player:set_physics_override({
 
-		speed = 1.6, -- multiplier to default value
-		jump = 1.6, -- multiplier to default value
-		gravity = 1.0, -- multiplier to default value
-		sneak = true, -- whether player can sneak
-		sneak_glitch = false, -- whether player can use the sneak glitch 
+	--	speed = 1.6, -- multiplier to default value
+	--	jump = 1.6, -- multiplier to default value
+	--	gravity = 1.0, -- multiplier to default value
+	--	sneak = true, -- whether player can sneak
+	--	sneak_glitch = false, -- whether player can use the sneak glitch 
 
-		})
+	--	})
 	end
 end
 else
-	if weather.state == "twilight" then
-	weather.state = "none"
-	end
 	for _, player in ipairs(minetest.get_connected_players()) do
+	if weather.state == "twilight" then
 	player:set_sky({}, "regular", {}) -- Sets skybox
 	player:override_day_night_ratio(nil)
+	weather.state = "none"
+	end
 			local pname = player:get_player_name();
 	local inv = minetest.get_inventory({type="player", name=pname});
 			if inv:contains_item("main", "hyruletools:sword_light") then
 			local remov = inv:remove_item("main", "hyruletools:sword_light")
 			local add = inv:add_item("main", "hyruletools:sword")
 	end
-	if model == true then
+	--[[ model == true then
 	model = false
-	default.player_set_model(player, "character.b3d")
-	default.player_set_skin(player, "character.png")
+	player:set_properties({mesh = "character.b3d", textures = {"character.png"}})
 	player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=10,z=-4})
 	player:set_local_animation({x=0, y=79}, {x=168, y=187}, {x=189, y=198}, {x=200, y=219}, 30)
 	player:set_physics_override({
@@ -213,8 +214,9 @@ else
 		sneak_glitch = true, -- whether player can use the sneak glitch
 
 		})
-	end
+	end--]]
 	player:hud_remove(glow)
+	hud_changed = false
 	end
 end
 end)
@@ -222,11 +224,19 @@ end)
 minetest.register_craftitem("twilight:crystal", {
 	description = "Shadow crystal",
 	inventory_image = "twilight_crystal.png",
-	on_use =  function(itemstack)
+	on_use =  function(itemstack, placer)
 	if twilight_mode == true then
 	twilight_mode = false
 	elseif twilight_mode == false then
 	twilight_mode = true
+	if not midna_spawned then
+	local pos = placer:getpos()
+	local obj = minetest.env:add_entity({x=pos.x, y=pos.y+2, z=pos.z}, "mobs_loz:midna")
+	local midna = obj:get_luaentity()
+	midna.owner = placer
+	midna.tamed = true
+	midna_spawned = true
+	end
 	return itemstack
 	end
 	end

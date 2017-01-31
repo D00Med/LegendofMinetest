@@ -370,25 +370,37 @@ xdecor.register("packed_ice", {
 	sounds = default.node_sound_glass_defaults()
 })
 
-local flowers = {"dandelion_white", "dandelion_yellow", "geranium", "rose",
-		"tulip", "viola"}
+local flowers = {
+		{"dandelion_white"},
+		{"dandelion_yellow"},
+		{"geranium"},
+		{"rose"},
+		{"tulip"},
+		{"viola"}
+		}
 
 for _, f in pairs(flowers) do
-	xdecor.register("potted_"..f, {
-		description = string.gsub("Potted Flowers ("..f..")", "_", " "),
-		walkable = false,
+	local name = f[1]
+	xdecor.register("potted_"..name, {
+		description = string.gsub("Potted Flowers ("..name..")", "_", " "),
+		drawtype = "mesh",
+		mesh = "flowerpot.b3d",
+		visual_scale = 0.5,
+		wield_scale = {x=0.5, y=0.5, z=0.5},
 		groups = {dig_immediate=3, flammable=3, plant=1, flower=1},
-		tiles = {"xdecor_"..f.."_pot.png"},
-		inventory_image = "xdecor_"..f.."_pot.png",
-		drawtype = "plantlike",
+		tiles = {"flowerpot.png^xdecor_"..name..".png"},
+		inventory_image = "xdecor_"..name.."_pot.png",
 		sounds = default.node_sound_leaves_defaults(),
-		selection_box = xdecor.nodebox.slab_y(0.3)
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.4, -0.5, -0.4, 0.4, -0.1, 0.4},
+		}
 	})
 
 	minetest.register_craft({
-		output = "xdecor:potted_"..f,
+		output = "xdecor:potted_"..name,
 		recipe = {
-			{"default:clay_brick", "flowers:"..f, "default:clay_brick"},
+			{"default:clay_brick", "flowers:"..name, "default:clay_brick"},
 			{"", "default:clay_brick", ""}
 		}
 	})
@@ -551,7 +563,7 @@ xdecor.register("tatami", {
 xdecor.register("tv", {
 	description = "Television",
 	light_source = 11,
-	groups = {snappy=3},
+	groups = {snappy=3, not_in_creative_inventory=1},
 	on_rotate = screwdriver.rotate_simple,
 	tiles = {
 		"xdecor_television_left.png^[transformR270",

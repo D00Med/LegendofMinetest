@@ -2,7 +2,7 @@ hunger = {}
 hunger.players = {}
 hunger.food = {}
 
-HUNGER_TICK = 800			-- time in seconds after that 1 hunger point is taken
+HUNGER_TICK = 400			-- time in seconds after that 1 hunger point is taken
 HUNGER_HEALTH_TICK = 4		-- time in seconds after player gets healed/damaged
 HUNGER_MOVE_TICK = 0.5		-- time in seconds after the movement is checked
 
