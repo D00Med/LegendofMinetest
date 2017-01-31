@@ -1,0 +1,104 @@
+Changelog:
+V1>V2:
+
+>minetest_game is now used as a base instead of MinetestNeXt
+>New dungeon nodes
+>Bombs now use a 3d model and can the thrown by left clicking
+>Bomb flowers have been added, right click to harvest bombs
+>boomerangs now use a 3d model and return to the player.
+>magic boomerangs can be controlled by looking around after throwing
+>clawshots have been added, left click to be pulled towards something, shift+click to swing towards something horizontally.
+>added butterflies and waterfall effects
+>added hawk eye
+>removed mobs_monster
+>hearts are now an entity that automatically heals any players who collect them
+>added roots, caveferns, stalagmites/tites, icicles and obsidian spikes
+>added the icesheet biome
+>new doors, some require keys
+>new plants in the moreplants mod
+>added dragonflies
+>added keys
+>added dungeon torch
+>added some sloped nodes
+>added stair corners
+>changed chicken to cuccoo
+>changed cow and sheep models
+>merged icetools with hyruletools
+>added flame rod
+>added connected chests (shift and click on the side of a chest)
+>sword stands now hold all swords except the ice sword
+>added treasure and key chests
+>added wind boomerang
+>added villages
+>added letters
+>letterbox now uses a model
+>removed tv
+>added junglevines
+>improved 3rd person view
+>arrows can be picked up from when they are inside a node
+>added subrosia(hell mod)
+>added magnetic gloves which can pull or push magnetic nodes
+>pots have a new model and textures
+>added classic shield and sword
+>collecting rupees makes a different sound
+>added spikes, sinking sand, fake carpet
+>waterlily and cactus now use models
+>optional leaf model(like nodebox_trees)
+>waterlilies are walkable
+>added lamps which trigger doors when righ clicked with a lantern
+>lanterns dropped by poes
+>added new dungeons(above and below ground)
+>added rupee blocks
+>player effects is now used(much better physics overrides)
+>new ice nodes
+>new swamp biome
+>fixed the lost woods biome being almost impossible to find
+>added quest npc's, which can be used to add quests really easily
+>added deku mask
+>bones changed to a tombstone
+>new players(singleplayer only) will spawn inside a cave
+>new player skin
+>mana added, tools now use this
+>added witchcraft mod and better potions
+>improved medallions, they now work as they do in link to the past
+>removed xdecor potion
+>added cave crystals
+>changed deku scrub to an actual deku scrub
+>business scrubs are added(previously deku scrub)
+>added corals and shrubs
+>flowerpots now use a 3d model
+>removed xdecor walls added walls mod
+>ganon now has his own dungeon, which is placed by his spawner
+>ganon can't be killed until all 'ganon' orbs in the dungeon are destroyed
+>removed twilight model change :'(
+>added music
+>beamos
+>new sound effects
+>mobs_loz mobs all have new models and textures
+>hud item counters are shown in singleplayer mode to count bombs rupees and keys
+>new nodes added
+>many textures have been changed
+
+
+>New mobs:
+*Midna
+*subrosian
+*redead
+*peahat
+*skulltula
+*shopkeeper
+*octorock
+*hiploop
+*giant octorock
+*mimics
+*wolfos
+*keese
+*biri
+*darknut
+*white wolfos
+*tektite
+*armos
+*leever
+*moldorm
+*zol
+*mad scrubs
