@@ -22,7 +22,7 @@ mana.playerlist = {}
 mana.settings = {}
 mana.settings.default_max = 200
 mana.settings.default_regen = 1
-mana.settings.regen_timer = 0.5
+mana.settings.regen_timer = 0.4
 
 do
 	local default_max = tonumber(minetest.setting_get("mana_default_max"))

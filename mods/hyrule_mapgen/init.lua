@@ -231,8 +231,8 @@ minetest.register_abm({
 
 minetest.register_abm({
 	nodenames = {"hyrule_mapgen:healwater_src"},
-	interval = 4,
-	chance = 2,
+	interval = 5,
+	chance = 5,
 	action = function(pos, node)
 		minetest.add_particlespawner({
 			amount = 10,

@@ -1368,6 +1368,7 @@ minetest.register_tool("hyruletools:medallion3", {
 			local player = placer:get_player_name()
 			if mana.subtract(player, 100) then
 			local playerpos = placer:getpos();
+			minetest.sound_play("flamearrow", {pos=playerpos, gain=0.7, max_hear_distance=15})
 			
 			--particles
 			minetest.add_particlespawner(
