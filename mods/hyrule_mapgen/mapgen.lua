@@ -992,6 +992,7 @@ minetest.register_decoration({
 })
 
 -- Large cactus
+--[[
 minetest.register_decoration({
 	deco_type = "schematic",
 	place_on = {"default:desert_sand"},
@@ -1010,7 +1011,7 @@ minetest.register_decoration({
 	schematic = minetest.get_modpath("default").."/schematics/large_cactus.mts",
 	flags = "place_center_x",
 	rotation = "random",
-})
+})]]
 
 -- palm tree
 minetest.register_decoration({

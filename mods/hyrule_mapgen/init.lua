@@ -351,27 +351,24 @@ minetest.override_item("flowers:waterlily", {
 if minetest.setting_getbool("3d_leaves") then
 minetest.override_item("default:leaves", {
 	drawtype = "mesh",
-	mesh = "leaf.b3d",
+	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_default_leaves.png"},
 	paramtype = "light",
-	visual_scale = 0.5,
 	walkable = false,
 })
 
 minetest.override_item("default:aspen_leaves", {
 	drawtype = "mesh",
-	mesh = "leaf.b3d",
+	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_aspen_leaves.png"},
 	paramtype = "light",
-	visual_scale = 0.5,
 	walkable = false,
 })
 minetest.override_item("default:jungleleaves", {
 	drawtype = "mesh",
-	mesh = "leaf.b3d",
+	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_jungleleaves.png"},
 	paramtype = "light",
-	visual_scale = 0.5,
 	walkable = false,
 })
 end
@@ -2693,10 +2690,9 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 if minetest.setting_getbool("3d_leaves") then
 minetest.override_item("hyrule_mapgen:magic_leaves", {
 	drawtype = "mesh",
-	mesh = "leaf.b3d",
+	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_magic_leaves2.png"},
 	paramtype = "light",
-	visual_scale = 0.5,
 })
 end
 
@@ -2789,10 +2785,9 @@ minetest.register_node("hyrule_mapgen:wild_leaves", {
 if minetest.setting_getbool("3d_leaves") then
 minetest.override_item("hyrule_mapgen:wild_leaves", {
 	drawtype = "mesh",
-	mesh = "leaf.b3d",
+	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_wild_leaves2.png"},
 	paramtype = "light",
-	visual_scale = 0.5,
 })
 end
 

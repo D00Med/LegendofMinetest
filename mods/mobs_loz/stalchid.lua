@@ -22,8 +22,8 @@ mobs:register_mob("mobs_loz:stalchild", {
 		random = "mobs_dirtmonster",
 	},
 	view_range = 15,
-	walk_velocity = 0.8,
-	run_velocity = 1.4,
+	walk_velocity = 1,
+	run_velocity = 2,
 	jump = true,
 	visual_scale = {x=0.8, y=0.8},
 	on_die = function(self)

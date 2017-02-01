@@ -8,7 +8,7 @@ mobs:register_mob("mobs_loz:octorock", {
 	shoot_offset = 1.2,
 	hp_min = 20,
 	hp_max = 35,
-	armor = 80,
+	armor = 100,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 0.8, 0.5},
 	visual_size = {x=1.5, y=1.5},
 	visual = "mesh",

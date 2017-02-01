@@ -5,6 +5,7 @@ local music_name = ""
 local duration = 0
 local gain = 0
 
+if not minetest.setting_get("music") == 0 then
 minetest.register_globalstep(function()
 	for _, player in ipairs(minetest.get_connected_players()) do	
 		local playername = player:get_player_name()
@@ -43,3 +44,4 @@ minetest.register_globalstep(function()
 		
 	end
 end)
+end
