@@ -1042,7 +1042,7 @@ minetest.register_node("hyrule_mapgen:chest", {
 		if math.random(1,rarity) == 1 then
 			meta:set_string("item", item)
 			else
-			meta:set_string("item", "hyruletools:green_rupee")
+			meta:set_string("item", "hyruletools:green_rupee 20")
 		end
 		end
 		inv:set_size("main", 1*1)
@@ -1065,7 +1065,7 @@ minetest.register_node("hyrule_mapgen:chest", {
 				if math.random(1,rarity) == 1 then
 					meta:set_string("item", item)
 					else
-					meta:set_string("item", "hyruletools:green_rupee")
+					meta:set_string("item", "hyruletools:green_rupee 20")
 				end
 				end
 			end

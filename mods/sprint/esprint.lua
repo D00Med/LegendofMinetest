@@ -111,6 +111,8 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
+physics_overriden = nil
+
 function setSprinting(playerName, sprinting) --Sets the state of a player (0=stopped/moving, 1=sprinting)
 	local player = minetest.get_player_by_name(playerName)
 	local breath = player:get_breath()
@@ -118,7 +120,7 @@ function setSprinting(playerName, sprinting) --Sets the state of a player (0=sto
 		players[playerName]["sprinting"] = sprinting
 		if sprinting == true and breath >= 10 then
 			player:set_physics_override({speed=SPRINT_SPEED,jump=SPRINT_JUMP})
-		elseif sprinting == false and not physics_overriden then
+		elseif sprinting == false and physics_overriden ~= true then
 			player:set_physics_override({speed=1.0,jump=1.0})
 		end
 		return true
