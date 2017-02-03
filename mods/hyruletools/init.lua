@@ -771,7 +771,7 @@ minetest.register_craftitem("hyruletools:triforce", {
 			1, --minsize
 			2, --maxsize
 			false, --collisiondetection
-			"maptools_nyan_coin.png" --texture
+			"hyruletools_nyan_rupee.png" --texture
 		)
 	minetest.env:add_entity(pos, "experience:orb")
 	minetest.env:add_entity(pos, "experience:orb")
