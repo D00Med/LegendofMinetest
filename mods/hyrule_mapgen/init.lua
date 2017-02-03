@@ -1594,7 +1594,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'hyrule_mapgen:brupee',
+	output = 'hyrule_mapgen:nrupee',
 	recipe = {
 		{'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee'},
 		{'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee', 'hyruletools:nyan_rupee'},
@@ -2528,7 +2528,7 @@ minetest.register_craft({
 	output = 'hyrule_mapgen:volvagia_spawn',
 	recipe = {
 		{'', 'default:stone', ''},
-		{'mobs:lava_orb', 'hyruletools:pendant3', 'mobs:lava_orb'},
+		{'buckets:bucket_lava', 'hyruletools:pendant3', 'buckets:bucket_lava'},
 		{'', 'default:stone', ''},
 	}
 })
@@ -2559,7 +2559,7 @@ minetest.register_craft({
 	output = 'hyrule_mapgen:bongo_spawn',
 	recipe = {
 		{'', 'default:stone', ''},
-		{'mobs:lava_orb', 'hyruletools:pendant1', 'mobs:lava_orb'},
+		{'buckets:bucket_lava', 'hyruletools:pendant1', 'buckets:bucket_lava'},
 		{'', 'default:stone', ''},
 	}
 })

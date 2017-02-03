@@ -1377,9 +1377,9 @@ minetest.register_tool("hyruletools:medallion2", {
 minetest.register_craft({
 	output = 'hyruletools:medallion2',
 	recipe = {
-		{'', 'lavabiome:dirt', ''},
-		{'lavabiome:dirt', 'hyruletools:magic_powder', 'lavabiome:dirt'},
-		{'', 'lavabiome:dirt', ''},
+		{'', 'hyrule_mapgen:lavabiome_dirt', ''},
+		{'hyrule_mapgen:lavabiome_dirt', 'hyruletools:magic_powder', 'hyrule_mapgen:lavabiome_dirt'},
+		{'', 'hyrule_mapgen:lavabiome_dirt', ''},
 	}
 })
 

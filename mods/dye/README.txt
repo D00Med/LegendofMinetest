@@ -9,4 +9,5 @@ Originally by Perttu Ahola (celeron55) <celeron55@gmail.com> (MIT)
 Various Minetest developers and contributors (MIT)
 
 Authors of media (textures)
----------------------------D00Med (CC BY-SA 3.0)
+---------------------------
+Perttu Ahola (celeron55) <celeron55@gmail.com> (CC BY-SA 3.0)
