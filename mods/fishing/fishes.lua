@@ -46,7 +46,7 @@ minetest.register_craftitem("fishing:clownfish_raw", {
 -- bluewhite
 -----------------------------------------------------------------------------------------------
 minetest.register_craftitem("fishing:bluewhite_raw", {
-	description = fishing_setting.func.S("Bluewhite"),
+	description = fishing_setting.func.S("Bluewhite Fish"),
 	groups = {},
 	inventory_image = "fishing_bluewhite_raw.png",
 	 on_use = minetest.item_eat(2),
@@ -55,7 +55,7 @@ minetest.register_craftitem("fishing:bluewhite_raw", {
 -- exoticfish
 -----------------------------------------------------------------------------------------------
 minetest.register_craftitem("fishing:exoticfish_raw", {
-	description = fishing_setting.func.S("Exotic"),
+	description = fishing_setting.func.S("Exotic Fish"),
 	groups = {},
 	inventory_image = "fishing_exoticfish_raw.png",
 	 on_use = minetest.item_eat(2),

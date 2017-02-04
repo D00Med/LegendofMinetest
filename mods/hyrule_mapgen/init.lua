@@ -664,7 +664,7 @@ minetest.register_craft( {
 })
 
 minetest.register_node("hyrule_mapgen:crystal_1", {
-	description = "Cave Crystal",
+	description = "Cave Crystal (Blue)",
 	tiles = {
 		"hyrule_mapgen_crystal1.png",
 	},
@@ -688,7 +688,7 @@ minetest.register_node("hyrule_mapgen:crystal_1", {
 })
 
 minetest.register_node("hyrule_mapgen:crystal_3", {
-	description = "Cave Crystal",
+	description = "Cave Crystal (Green)",
 	tiles = {
 		"hyrule_mapgen_crystal3.png",
 	},
@@ -710,7 +710,7 @@ minetest.register_node("hyrule_mapgen:crystal_3", {
 })
 
 minetest.register_node("hyrule_mapgen:crystal_2", {
-	description = "Cave Crystal",
+	description = "Cave Crystal (Purple)",
 	tiles = {
 		"hyrule_mapgen_crystal2.png",
 	},

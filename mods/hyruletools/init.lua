@@ -600,7 +600,7 @@ minetest.register_node("hyruletools:pot", {
 	sounds = default.node_sound_glass_defaults(),
 	drop = "",
 	paramtype = "light",
-	groups = {oddly_breakable_by_hand=1, falling_node=1},
+	groups = {oddly_breakable_by_hand=1, cracky=1, dig_immediate=3, falling_node=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -644,7 +644,7 @@ minetest.register_node("hyruletools:pot2", {
 	sounds = default.node_sound_glass_defaults(),
 	drop = "",
 	paramtype = "light",
-	groups = {oddly_breakable_by_hand=1, falling_node=1},
+	groups = {oddly_breakable_by_hand=1, cracky=1, dig_immediate=3, falling_node=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -675,7 +675,7 @@ minetest.register_node("hyruletools:pot2", {
 })
 
 minetest.register_craft( {
-	output = "hyruletools:vase 5",
+	output = "hyruletools:pot 5",
 	recipe = {
 		{ "default:clay_lump", "", "default:clay_lump" },
 		{ "default:clay_lump", "dye:brown", "default:clay_lump" },
@@ -684,7 +684,7 @@ minetest.register_craft( {
 })
 
 minetest.register_craft( {
-	output = "hyruletools:vase 5",
+	output = "hyruletools:pot2 5",
 	recipe = {
 		{ "default:clay_lump", "", "default:clay_lump" },
 		{ "default:clay_lump", "dye:cyan", "default:clay_lump" },
@@ -707,7 +707,7 @@ minetest.register_tool("hyruletools:axe_obsidian", {
 })
 
 minetest.register_craftitem("hyruletools:magic_powder", {
-	description = "magicpowder",
+	description = "Magic Powder",
 	inventory_image = "hyruletools_powder.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
@@ -1793,7 +1793,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("hyruletools:seed_satchel", {
-	description = "seed satchet(empty)",
+	description = "Seed Bag(empty)",
 	inventory_image = "hyruletools_seedbag.png"
 })
 
@@ -1875,7 +1875,7 @@ minetest.register_tool("hyruletools:flame_rod", {
 })
 
 minetest.register_craftitem("hyruletools:seed_fire", {
-	description = "seed satchet(ember)",
+	description = "Seed Bag (Ember)",
 	inventory_image = "hyruletools_seedbag_red.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
@@ -1894,7 +1894,7 @@ minetest.register_craftitem("hyruletools:seed_fire", {
 })
 
 minetest.register_craftitem("hyruletools:seed_mystery", {
-	description = "seed satchet(mystery)",
+	description = "Seed Bag (Mystery)",
 	inventory_image = "hyruletools_seedbag_green.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
@@ -1924,7 +1924,7 @@ minetest.register_craftitem("hyruletools:seed_mystery", {
 })
 
 minetest.register_craftitem("hyruletools:seed_gasha", {
-	description = "seed satchet(gasha)",
+	description = "Seed Bag (Gasha)",
 	inventory_image = "hyruletools_seedbag_blue.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
@@ -1943,7 +1943,7 @@ minetest.register_craftitem("hyruletools:seed_gasha", {
 })
 
 minetest.register_craftitem("hyruletools:seed_scent", {
-	description = "seed satchet(scent)",
+	description = "Seed Bag (Scent)",
 	inventory_image = "hyruletools_seedbag_orange.png",
 	on_use = function(item, placer)
 		local playerpos = placer:getpos();
@@ -1956,7 +1956,7 @@ minetest.register_craftitem("hyruletools:seed_scent", {
 })
 
 minetest.register_craftitem("hyruletools:seed_pegasus", {
-	description = "seed satchet(pegasus)",
+	description = "Seed Bag (Pegasus)",
 	inventory_image = "hyruletools_seedbag_green2.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
@@ -1978,7 +1978,7 @@ minetest.register_craftitem("hyruletools:rocfeather", {
 })
 
 minetest.register_craftitem("hyruletools:seed_gale", {
-	description = "seed satchet(gale)",
+	description = "Seed Bag (Gale)",
 	inventory_image = "hyruletools_seedbag_cyan.png",
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
