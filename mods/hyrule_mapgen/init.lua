@@ -253,14 +253,6 @@ minetest.register_abm({
 	end
 })
 
-minetest.register_abm({
-	nodenames = {"hyrule_mapgen:subrosian_sand"},
-	interval = 30,
-	chance = 100,
-	action = function(pos, node)
-		minetest.env:add_entity(pos, "mobs_loz:subrosian")
-	end
-})
 
 
 --entities

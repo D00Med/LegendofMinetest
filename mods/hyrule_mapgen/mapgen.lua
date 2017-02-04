@@ -1702,7 +1702,7 @@ end)
 
 --villages
 
-local village_rarity = 10000
+local village_rarity = 50000
 
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 21000 then

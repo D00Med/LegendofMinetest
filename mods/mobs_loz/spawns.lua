@@ -52,7 +52,7 @@ mobs:spawn({
 	name = "mobs_loz:subrosian",
 	nodes = {"hyrule_mapgen:subrosian_tile", "hyrule_mapgen:subrosian_sand"},
 	min_light = 0,
-	chance = 15000,
+	chance = 24000,
 	min_height = -20000,
 	day_toggle = true,
 })

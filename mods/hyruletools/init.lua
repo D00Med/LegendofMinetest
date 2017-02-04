@@ -1089,7 +1089,7 @@ minetest.register_tool("hyruletools:mirror", {
 		local pos1 = user:getpos()
 		local pos = math.random(1,50)
 		local vertical = 0
-		if pos1.y <= -20000 then
+		if pos1.y <= -20001 then
 		vertical = 5
 		else
 		vertical = -21000
