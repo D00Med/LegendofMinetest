@@ -53,6 +53,7 @@ minetest.register_craftitem(":mobs:honey", {
 	on_use = minetest.item_eat(6),
 })
 
+--[[]
 -- beehive (when placed spawns bee)
 minetest.register_node(":mobs:beehive", {
 	description = "Beehive",
@@ -122,7 +123,7 @@ minetest.register_craft({
 	recipe = {
 		{"mobs:bee","mobs:bee","mobs:bee"},
 	}
-})
+})]]
 
 -- honey block
 minetest.register_node(":mobs:honey_block", {
@@ -147,7 +148,7 @@ minetest.register_craft({
 		{"mobs:honey_block"},
 	}
 })
-
+--[[
 -- beehive workings
 minetest.register_abm({
 	nodenames = {"mobs:beehive"},
@@ -184,3 +185,4 @@ minetest.register_abm({
 		end
 	end
 })
+]]
