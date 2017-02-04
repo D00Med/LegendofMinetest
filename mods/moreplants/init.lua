@@ -268,7 +268,7 @@ minetest.register_node("moreplants:weed", {
 })
 
 minetest.register_node("moreplants:stoneweed", {
-	description = "Stone weed",
+	description = "Stone Weed",
 	drawtype = "plantlike",
 	tiles = {"moreplants_stoneplant.png"},
 	paramtype = "light",
@@ -328,7 +328,7 @@ minetest.register_node("moreplants:bluespike", {
 })
 
 minetest.register_node("moreplants:blueflower", {
-	description = "blue flower",
+	description = "Blue Flower",
 	drawtype = "plantlike",
 	tiles = {"moreplants_blueflower.png"},
 	paramtype = "light",
@@ -348,7 +348,7 @@ minetest.register_node("moreplants:blueflower", {
 })
 
 minetest.register_node("moreplants:eyeweed", {
-	description = "Eye weed",
+	description = "Eye Weed",
 	drawtype = "plantlike",
 	tiles = {"moreplants_eyeweed.png"},
 	paramtype = "light",
@@ -471,7 +471,7 @@ minetest.register_node("moreplants:bluemush", {
 })
 
 minetest.register_node("moreplants:caveflower", {
-	description = "Cave flower",
+	description = "Cave Flower",
 	drawtype = "plantlike",
 	tiles = {"moreplants_cavefung.png"},
 	paramtype = "light",
@@ -512,7 +512,7 @@ minetest.register_node("moreplants:moonflower", {
 })
 
 minetest.register_node("moreplants:fireflower", {
-	description = "Fire flower",
+	description = "Fire Flower",
 	drawtype = "plantlike",
 	tiles = {"moreplants_fireflower.png"},
 	paramtype = "light",
@@ -532,7 +532,7 @@ minetest.register_node("moreplants:fireflower", {
 })
 
 minetest.register_node("moreplants:deadweed", {
-	description = "dead weed",
+	description = "Dead Weed",
 	drawtype = "plantlike",
 	tiles = {"moreplants_deadweed.png"},
 	paramtype = "light",
@@ -552,7 +552,7 @@ minetest.register_node("moreplants:deadweed", {
 })
 
 minetest.register_node("moreplants:taigabush", {
-	description = "Taiga bush",
+	description = "Taiga Bush",
 	drawtype = "plantlike",
 	tiles = {"moreplants_tundrabush.png"},
 	paramtype = "light",
@@ -572,7 +572,7 @@ minetest.register_node("moreplants:taigabush", {
 })
 
 minetest.register_node("moreplants:glowfung", {
-	description = "glow fungus",
+	description = "Glow Fungus",
 	drawtype = "torchlike",
 	tiles = {"moreplants_glowfung.png"},
 	paramtype = "light",
@@ -598,7 +598,7 @@ minetest.register_node("moreplants:glowfung", {
 })
 
 minetest.register_node("moreplants:jungleflower", {
-	description = "Jungle flower",
+	description = "Jungle Flower",
 	drawtype = "plantlike",
 	tiles = {"moreplants_jungleflower1.png"},
 	paramtype = "light",
@@ -646,7 +646,7 @@ minetest.register_node("moreplants:mushroom", {
 })
 
 minetest.register_node("moreplants:curly", {
-	description = "Curly flower",
+	description = "Curly Flower",
 	drawtype = "plantlike",
 	tiles = {"moreplants_curly.png"},
 	paramtype = "light",
@@ -692,7 +692,7 @@ minetest.register_node("moreplants:clover", {
 })
 
 minetest.register_node("moreplants:mushcluster", {
-	description = "Mushroom Cluster",
+	description = "Small Mushroom Cluster",
 	drawtype = "firelike",
 	tiles = {
 		"moreplants_mushcluster.png",
@@ -718,7 +718,7 @@ minetest.register_node("moreplants:mushcluster", {
 
 
 minetest.register_node("moreplants:groundfung", {
-	description = "Ground fungus",
+	description = "Ground Fungus",
 	drawtype = "firelike",
 	tiles = {
 		"moreplants_groundfung.png",
@@ -886,7 +886,7 @@ minetest.register_node("moreplants:pinkflower", {
 --trees
 
 minetest.register_node("moreplants:palm", {
-	description = "Palm tree",
+	description = "Palm Tree",
 	tiles = {"moreplants_palmtree_top.png", "moreplants_palmtree_top.png", "moreplants_palmtree.png"},
 	paramtype2 = "facedir",
 	is_ground_content = false,
@@ -906,7 +906,7 @@ minetest.register_node("moreplants:palm", {
 })
 
 minetest.register_node("moreplants:palmleaves2", {
-	description = "palm leaves (2)",
+	description = "Palm Leaves (2)",
 	drawtype = "plantlike",
 	visual_scale = 2.5,
 	tiles = {"moreplants_palmleaves2.png"},
@@ -925,7 +925,7 @@ minetest.register_node("moreplants:palmleaves2", {
 })
 
 minetest.register_node("moreplants:palmleaves1", {
-	description = "palm leaves (1)",
+	description = "Palm Leaves (1)",
 	drawtype = "signlike",
 	visual_scale = 4.0,
 	tiles = {"moreplants_palmleaves.png"},

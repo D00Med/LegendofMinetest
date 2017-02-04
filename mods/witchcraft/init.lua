@@ -134,7 +134,7 @@ minetest.register_craft({
 --empty cooking pot
 
 minetest.register_node("witchcraft:pot", {
-	description = "magic cooking pot",
+	description = "Magic Cooking Pot",
 	tiles = {
 		"witchcraft_pot_top.png",
 		"witchcraft_pot_bottom.png",

@@ -741,7 +741,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("hyruletools:heart", {
-	description = "heart",
+	description = "Heart",
 	inventory_image = "hyruletools_heart.png",
 	on_use = function(itemstack, player)
 	local health = player:get_hp();
@@ -753,7 +753,7 @@ minetest.register_craftitem("hyruletools:heart", {
 
 
 minetest.register_craftitem("hyruletools:triforce", {
-	description = "triforce",
+	description = "Triforce",
 	inventory_image = "hyruletools_triforce.png",
 	on_use = function(pos, placer)
 	local pos = placer:getpos();
@@ -863,7 +863,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("hyruletools:ocarina", {
-	description = "ocarina",
+	description = "Ocarina",
 	inventory_image = "hyruletools_ocarina.png",
 	on_use = function(pos, placer)
 		minetest.sound_play("hyruletools_tune", {gain = 0.5, max_hear_distance = 15})
@@ -898,7 +898,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("hyruletools:ocarina2", {
-	description = "red ocarina",
+	description = "Red Ocarina",
 	inventory_image = "hyruletools_ocarina_red.png",
 	on_use = function(pos, placer)
 		minetest.sound_play("hyruletools_trumpet", {gain = 0.5, max_hear_distance = 15})
@@ -941,7 +941,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("hyruletools:ocarina3", {
-	description = "yellow ocarina",
+	description = "Yellow Ocarina",
 	inventory_image = "hyruletools_ocarina_yellow.png",
 	on_use = function(pos, placer)
 		minetest.sound_play("hyruletools_epona", {gain = 0.5, max_hear_distance = 15})
@@ -992,7 +992,7 @@ minetest.register_craftitem("hyruletools:doompick", {
 })
 
 minetest.register_craftitem("hyruletools:ocarina4", {
-	description = "green ocarina",
+	description = "Green Ocarina",
 	inventory_image = "hyruletools_ocarina_green.png",
 	on_use = function(pos, placer, itemstack)
 		minetest.sound_play("hyruletools_forest", {gain = 0.5, max_hear_distance = 15})
@@ -1030,7 +1030,7 @@ minetest.register_craft({
 })
 
 minetest.register_node("hyruletools:fire", {
-	description = "magical fire",
+	description = "Magical Fire",
 	drawtype = "plantlike",
 	sunlight_propagates = true,
 	paramtype = "light",
@@ -1052,7 +1052,7 @@ minetest.register_node("hyruletools:fire", {
 })
 
 minetest.register_tool("hyruletools:lantern", {
-	description = "lantern",
+	description = "Lantern",
 	inventory_image = "hyruletools_lantern.png",
 	tool_capabilities = {
 		groupcaps = { igniter = {uses=10, maxlevel=1} }
@@ -1078,7 +1078,7 @@ minetest.register_tool("hyruletools:lantern", {
 
 
 minetest.register_tool("hyruletools:mirror", {
-	description = "magic mirror (use at your own risk!)",
+	description = "Magic Mirror (use at your own risk!)",
 	inventory_image = "hyruletools_mirror.png",
 	tool_capabilities = {
 		groupcaps = { igniter = {uses=10, maxlevel=1} }
@@ -1163,7 +1163,7 @@ minetest.register_entity("hyruletools:spark", {
 })
 
 minetest.register_tool("hyruletools:medallion", {
-	description = "ether medallion",
+	description = "Ether Medallion",
 	inventory_image = "hyruletools_medallion.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local player = placer:get_player_name()
@@ -1267,7 +1267,7 @@ minetest.register_entity("hyruletools:stone", {
 
 --DO NOT point at the sky, make sure there is stone in the path of the spark or it will continue forever
 minetest.register_tool("hyruletools:medallion2", {
-	description = "quake medallion",
+	description = "Quake Medallion",
 	inventory_image = "hyruletools_medallion2.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local player = placer:get_player_name()
@@ -1384,7 +1384,7 @@ minetest.register_craft({
 })
 
 minetest.register_tool("hyruletools:medallion3", {
-	description = "bombos medallion",
+	description = "Bombos Medallion",
 	inventory_image = "hyruletools_medallion3.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local player = placer:get_player_name()
@@ -1506,7 +1506,7 @@ minetest.register_craft({
 })
 
 minetest.register_tool("hyruletools:pendant1", {
-	description = "pendant of power",
+	description = "Pendand of Power",
 	inventory_image = "hyruletools_pendant1.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
@@ -1532,7 +1532,7 @@ minetest.register_tool("hyruletools:pendant1", {
 })
 
 minetest.register_tool("hyruletools:pendant2", {
-	description = "pendant of courage",
+	description = "Pendant of Courage",
 	inventory_image = "hyruletools_pendant2.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
@@ -1558,7 +1558,7 @@ minetest.register_tool("hyruletools:pendant2", {
 })
 
 minetest.register_tool("hyruletools:pendant3", {
-	description = "pendant of wisdom",
+	description = "Pendant of Wisdom",
 	inventory_image = "hyruletools_pendant3.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
@@ -1711,6 +1711,7 @@ minetest.register_tool("hyruletools:sword_light", {
 		},
 		damage_groups = {fleshy=5},
 	},
+	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, placer, pointed_thing)
 			local name = placer:get_player_name()
 			if mana.subtract(name, 10) then
@@ -2428,7 +2429,7 @@ minetest.register_craft({
 
 
 minetest.register_node("hyruletools:bomb", {
-	description = "decorative bomb",
+	description = "Decorative Bomb",
 	drawtype = "mesh",
 	mesh = "hyruletools_bomb.b3d",
 	tiles = {
@@ -2470,7 +2471,7 @@ minetest.register_node("hyruletools:bomb_flower", {
 
 tnt.register_tnt({
 	name = "hyruletools:bomb_flower",
-	description = "bombflower",
+	description = "Bomb Flower",
 	drawtype = "mesh",
 	mesh = "hyruletools_bomb.b3d",
 	tiles = {
@@ -2495,7 +2496,7 @@ tnt.register_tnt({
 })
 
 minetest.register_node("hyruletools:bomb_plant", {
-	description = "decorative bomb flower",
+	description = "Decorative Bomb Flower",
 	drawtype = "mesh",
 	mesh = "hyruletools_bomb.b3d",
 	tiles = {

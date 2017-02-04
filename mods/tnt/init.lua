@@ -665,7 +665,7 @@ minetest.register_abm({
 
 tnt.register_tnt({
 	name = "tnt:tnt",
-	description = "bomb",
+	description = "Bomb",
 	drawtype = "mesh",
 	mesh = "hyruletools_bomb.b3d",
 	tiles = {

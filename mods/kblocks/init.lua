@@ -1,6 +1,6 @@
 if minetest.setting_getbool("loz_mode") then
 minetest.register_node("kblocks:blue", {
-	description = "Blue rooftile",
+	description = "Blue Rooftile",
 	tiles = {
 		"kblocks_blue.png"
 	},
@@ -8,7 +8,7 @@ minetest.register_node("kblocks:blue", {
 })
 
 minetest.register_node("kblocks:red", {
-	description = "Red rooftile",
+	description = "Red Rooftile",
 	tiles = {
 		"kblocks_red.png"
 	},
@@ -36,7 +36,7 @@ stairs.register_stair_and_slab(
 )
 
 minetest.register_node("kblocks:brown", {
-	description = "brown tile",
+	description = "Brown Tile",
 	tiles = {
 		"kblocks_browntile.png"
 	},
@@ -44,7 +44,7 @@ minetest.register_node("kblocks:brown", {
 })
 
 minetest.register_node("kblocks:green", {
-	description = "green tile",
+	description = "Green Tile",
 	tiles = {
 		"kblocks_greentile.png"
 	},
@@ -52,7 +52,7 @@ minetest.register_node("kblocks:green", {
 })
 
 minetest.register_node("kblocks:hedge", {
-	description = "hedge",
+	description = "Hedge",
 	tiles = {
 		"kblocks_hedge_top.png",
 		"kblocks_hedge_bottom.png",
@@ -65,7 +65,7 @@ minetest.register_node("kblocks:hedge", {
 })
 
 minetest.register_node("kblocks:vent", {
-	description = "vent",
+	description = "Chimney",
 	tiles = {
 		"kblocks_hole.png",
 		"kblocks_hedge_bottom.png",
@@ -112,7 +112,7 @@ minetest.register_node("kblocks:vent_invis", {
 })
 
 minetest.register_node("kblocks:stone", {
-	description = "garden stone",
+	description = "Garden Stone",
 	tiles = {
 		"kblocks_stone.png",
 		"kblocks_stone.png",

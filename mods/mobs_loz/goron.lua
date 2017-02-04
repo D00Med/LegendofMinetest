@@ -94,4 +94,4 @@ mobs:register_mob("mobs_loz:goron", {
 		end,
 })
 
-mobs:register_egg("mobs_loz:goron", "goron", "hyrule_mapgen_dirt.png", 1)
+mobs:register_egg("mobs_loz:goron", "Goron", "hyrule_mapgen_dirt.png", 1)
