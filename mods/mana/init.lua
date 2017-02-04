@@ -230,17 +230,17 @@ minetest.register_on_joinplayer(function(player)
 	mana.setmax(playername, 200)
 	player:hud_add({
 			hud_elem_type = "statbar",
-			position = {x=1.02,y=0.02},
+			position = {x=0.842,y=0.02},
 			size = {x=248, y=34},
 			text = "hud_mana_bg.png",
-			number = 2,
+			number = 2.1,
 			alignment = {x=0,y=1},
 			offset = {x=-300, y=-10},
 			}
 		)
 	mana_hud = player:hud_add({
 			hud_elem_type = "statbar",
-			position = {x=1.022,y=0.02},
+			position = {x=0.847,y=0.02},
 			size = {x=24, y=34},
 			text = "hud_mana.png",
 			number = mana.get(playername)/10,
