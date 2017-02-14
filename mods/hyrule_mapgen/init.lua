@@ -2520,7 +2520,7 @@ minetest.register_craft({
 	output = 'hyrule_mapgen:volvagia_spawn',
 	recipe = {
 		{'', 'default:stone', ''},
-		{'buckets:bucket_lava', 'hyruletools:pendant3', 'buckets:bucket_lava'},
+		{'bucket:bucket_lava', 'hyruletools:pendant3', 'bucket:bucket_lava'},
 		{'', 'default:stone', ''},
 	}
 })
