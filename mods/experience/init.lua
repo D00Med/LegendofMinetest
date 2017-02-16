@@ -111,7 +111,9 @@ minetest.register_globalstep(function(dtime)
 				xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "r")
 				experience = xp:read("*l")
 				xp:close()
-				if experience ~= nil and experience <= 1000 then
+				if experience ~= nil then
+					local xp_max = experience+1
+					if xp_max <= 1000 then
 					new_xp = experience + 1
 					xp_write = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "w")
 					xp_write:write(new_xp)
@@ -176,6 +178,7 @@ minetest.register_globalstep(function(dtime)
 							to_player = player:get_player_name(),
 						})
 					end	
+					end
 				end
 				object:remove()
 			end

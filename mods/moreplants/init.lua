@@ -74,7 +74,7 @@ minetest.register_node("moreplants:seaweed1", {
 	inventory_image = "moreplants_seaweed1.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -94,7 +94,7 @@ minetest.register_node("moreplants:seaweed2", {
 	inventory_image = "moreplants_seaweed2.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -114,7 +114,7 @@ minetest.register_node("moreplants:seaweed3", {
 	inventory_image = "moreplants_seaweed3.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -809,7 +809,7 @@ minetest.register_node("moreplants:coral", {
 	tiles = {
 		"moreplants_coral.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -829,7 +829,7 @@ minetest.register_node("moreplants:coral1", {
 	tiles = {
 		"moreplants_coral1.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -849,7 +849,7 @@ minetest.register_node("moreplants:coral2", {
 	tiles = {
 		"moreplants_coral2.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -1329,7 +1329,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y > -50 then
+	if maxp.y < -50 or maxp.y > 1000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
@@ -1337,7 +1337,7 @@ minetest.register_on_generated(function(minp, maxp)
 	for n = 1, #stone do
 		if math.random(1, 50) == 1 then
 			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
-			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_flowing" then
+			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_source" then
 				if math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:seaweed1"})
 				elseif math.random(1,2) == 1 then
@@ -1351,7 +1351,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y > -50 then
+	if maxp.y < -50 or maxp.y > 1000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
@@ -1359,7 +1359,7 @@ minetest.register_on_generated(function(minp, maxp)
 	for n = 1, #stone do
 		if math.random(1, 50) == 1 then
 			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
-			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_flowing" then
+			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_source" then
 				if math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "moreplants:coral"})
 				elseif math.random(1,2) == 1 then
