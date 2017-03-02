@@ -1307,7 +1307,7 @@ end
 local frequency = 200
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y > 0 then
+	if maxp.y > 0 or maxp.y < -20000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area_under_air(minp, maxp,
