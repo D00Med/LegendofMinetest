@@ -1329,7 +1329,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -50 or maxp.y > 1000 then
+	if maxp.y < -50 or maxp.y > 1000 or maxp.y < -20000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
@@ -1351,7 +1351,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -50 or maxp.y > 1000 then
+	if maxp.y < -50 or maxp.y > 1000 or maxp.y < -20000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
@@ -1373,7 +1373,7 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y < -100 then
+	if maxp.y < -100 or maxp.y < -20000 then
 		return
 	end
 	local stone = minetest.find_nodes_in_area(minp, maxp,
