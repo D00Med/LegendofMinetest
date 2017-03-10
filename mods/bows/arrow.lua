@@ -109,6 +109,7 @@ minetest.register_entity("bows:arrow",{
 					local inv = minetest.get_inventory({type="player", name=pname});
 					local remov = inv:add_item("main", self.name)
 					bows.arrow_remove(self)
+					minetest.sound_play("item_drop_pickup", {pos = pos, gain = 0.3, max_hear_distance = 16})
 				end
 			end
 			return self
