@@ -34,6 +34,10 @@ local revertsky = function()
 	if ttl > 0 then
 		return
 	end
+	
+	if weather.state ~= "none" then
+		return
+	end
 
 	for key, entry in pairs(ps) do
 		if not sky_set then

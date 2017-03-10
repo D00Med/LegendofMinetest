@@ -1,2 +1,2 @@
 default
-weather_core
+weather_pack

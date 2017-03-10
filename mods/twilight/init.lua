@@ -72,8 +72,8 @@ twilight.particles_count = 25
 twilight.add_rain_particles = function(player, dtime)
   rain.last_rp_count = 0
   for i=twilight.particles_count, 1,-1 do
-    local random_pos_x, random_pos_y, random_pos_z = get_random_pos_by_player_look_dir(player)
-    random_pos_y = math.random() + random_pos(player:getpos().y - 1, player:getpos().y + 7)
+    local random_pos_x, random_pos_y, random_pos_z = weather.get_random_pos_by_player_look_dir(player)
+    random_pos_y = math.random() + math.random(player:getpos().y - 1, player:getpos().y + 7)
     if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) == 15 then
       rain.last_rp_count = rain.last_rp_count + 1
       minetest.add_particle({
@@ -111,7 +111,7 @@ minetest.register_globalstep(function(dtime)
   end
   
   for _, player in ipairs(minetest.get_connected_players()) do
-    if (is_underwater(player)) then 
+    if (weather.is_underwater(player)) then 
       return false
     end
     twilight.add_rain_particles(player, dtime)

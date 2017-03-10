@@ -47,30 +47,22 @@ end
 
 -- checks if player is undewater. This is needed in order to
 -- turn off weather particles generation.
-function is_underwater(player)
+weather.is_underwater = function(player)
     local ppos = player:getpos()
     local offset = player:get_eye_offset()
     local player_eye_pos = {x = ppos.x + offset.x, 
                             y = ppos.y + offset.y + 1.5, 
                             z = ppos.z + offset.z}
-    
-    if minetest.get_node_level(player_eye_pos) == 8 then
+    local node_level = minetest.get_node_level(player_eye_pos)
+    if node_level == 8 or node_level == 7 then
       return true
     end
     return false
 end
 
--- returns random number between a and b.
-function random_pos(a, b)
-  if (a > b) then
-    return math.random(b, a);
-  end
-  return math.random(a, b);
-end
-
 -- trying to locate position for particles by player look direction for performance reason.
 -- it is costly to generate many particles around player so goal is focus mainly on front view.  
-function get_random_pos_by_player_look_dir(player)
+weather.get_random_pos_by_player_look_dir = function(player)
   local look_dir = player:get_look_dir()
   local player_pos = player:getpos()
 
@@ -80,23 +72,23 @@ function get_random_pos_by_player_look_dir(player)
 
   if look_dir.x > 0 then
     if look_dir.z > 0 then
-      random_pos_x = math.random() + math.random(player_pos.x - 2.5, player_pos.x + 10)
-      random_pos_z = math.random() + math.random(player_pos.z - 2.5, player_pos.z + 10)
+      random_pos_x = math.random() + math.random(player_pos.x - 2.5, player_pos.x + 5)
+      random_pos_z = math.random() + math.random(player_pos.z - 2.5, player_pos.z + 5)
     else
-      random_pos_x = math.random() + math.random(player_pos.x - 2.5, player_pos.x + 10)
-      random_pos_z = math.random() + math.random(player_pos.z - 10, player_pos.z + 2.5)
+      random_pos_x = math.random() + math.random(player_pos.x - 2.5, player_pos.x + 5)
+      random_pos_z = math.random() + math.random(player_pos.z - 5, player_pos.z + 2.5)
     end
   else
     if look_dir.z > 0 then
-      random_pos_x = math.random() + math.random(player_pos.x - 10, player_pos.x + 2.5)
-      random_pos_z = math.random() + math.random(player_pos.z - 2.5, player_pos.z + 10)
+      random_pos_x = math.random() + math.random(player_pos.x - 5, player_pos.x + 2.5)
+      random_pos_z = math.random() + math.random(player_pos.z - 2.5, player_pos.z + 5)
     else
-      random_pos_x = math.random() + math.random(player_pos.x - 10, player_pos.x + 2.5)
-      random_pos_z = math.random() + math.random(player_pos.z - 10, player_pos.z + 2.5)
+      random_pos_x = math.random() + math.random(player_pos.x - 5, player_pos.x + 2.5)
+      random_pos_z = math.random() + math.random(player_pos.z - 5, player_pos.z + 2.5)
     end
   end
 
-  random_pos_y = math.random() + random_pos(player_pos.y + 1, player_pos.y + 7)
+  random_pos_y = math.random() + math.random(player_pos.y + 1, player_pos.y + 3)
   return random_pos_x, random_pos_y, random_pos_z
 end
 

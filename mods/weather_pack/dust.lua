@@ -1,14 +1,15 @@
 dust = {}
 
 dust.particles_count = 25
+dust.init_done = false
 
 -- calculates coordinates and draw particles for dust weather 
 dust.add_rain_particles = function(player, dtime)
   rain.last_rp_count = 0
   for i=dust.particles_count, 1,-1 do
-    local random_pos_x, random_pos_y, random_pos_z = get_random_pos_by_player_look_dir(player)
-    random_pos_y = math.random() + random_pos(player:getpos().y - 1, player:getpos().y + 7)
-    if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) == 15 then
+    local random_pos_x, random_pos_y, random_pos_z = weather.get_random_pos_by_player_look_dir(player)
+    random_pos_y = math.random() + math.random(player:getpos().y - 1, player:getpos().y + 7)
+    if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) >= 10 then
       rain.last_rp_count = rain.last_rp_count + 1
       minetest.add_particle({
         pos = {x=random_pos_x, y=random_pos_y, z=random_pos_z},
@@ -37,23 +38,45 @@ dust.get_texture = function()
   return texture_name;
 end
 
+dust.set_sky_box = function()
+  skycolor.add_layer(
+    "weather-pack-dust-sky",
+    {{r=137, g=226, b=164},
+    {r=137, g=226, b=164},
+    {r=0, g=0, b=0}}
+  )
+  skycolor.active = true
+end
+
+dust.clear = function() 
+  skycolor.remove_layer("weather-pack-dust-sky")
+  dust.init_done = false
+end
+
 minetest.register_globalstep(function(dtime)
   if weather.state ~= "dust" then 
     return false
   end
   
+  if dust.init_done == false then
+    dust.set_sky_box()
+    dust.init_done = true
+  end
+  
   for _, player in ipairs(minetest.get_connected_players()) do
-    if (is_underwater(player)) then 
+    if (weather.is_underwater(player)) then 
       return false
     end
     dust.add_rain_particles(player, dtime)
   end
 end)
 
+
+
 -- register dust weather
 if weather.reg_weathers.dust == nil then
   weather.reg_weathers.dust = {
     chance = 10,
-    clear = function() end
+    clear = dust.clear
   }
 end
