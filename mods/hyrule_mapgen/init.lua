@@ -125,21 +125,25 @@ hyrule_mapgen.register_slope("broof", "Blue Roof", {"kblocks_blue.png"}, "kblock
 hyrule_mapgen.register_slope("straw", "Straw Roof", {"farming_straw.png"}, "farming:straw")
 
 --effects
-minetest.register_abm({
+minetest.register_lbm({
+	name = "hyrule_mapgen:spawn_butterflies",
 	nodenames = {"flowers:flower_rose", "flowers:flower_tulip", "flowers:flower_dandelion_yellow", "flowers:flower_viola", "flowers:flower_dandelion_white", "flowers:flower_geranium"},
-	interval = 7.0,
-	chance = 6,
+	run_at_every_load = true,
 	action = function(pos, node, active_object_count, active_object_count_wider)
+		if math.random(1,3) == 3 then
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:butterfly")
+		end
 	end
 })
 
-minetest.register_abm({
+minetest.register_lbm({
+	name = "hyrule_mapgen:spawn_dragonflies",
 	nodenames = {"moreplants:tallgrass", "moreplants:bulrush"},
-	interval = 10.0,
-	chance = 60,
+	run_at_every_load = true,
 	action = function(pos, node, active_object_count, active_object_count_wider)
+		if math.random(1,3) == 3 then
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:dragonfly")
+		end
 	end
 })
 
@@ -147,8 +151,8 @@ sound = false
 
 minetest.register_abm({
 	nodenames = {"default:water_flowing"},
-	interval = 1.0,
-	chance = 1,
+	interval = 2.0,
+	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
@@ -156,7 +160,7 @@ minetest.register_abm({
 		if above == "default:water_flowing" and below ~= "default:water_flowing" and above2 == "default:water_flowing" and minetest.find_nodes_in_area({x=pos.x-2, y=pos.y, z=pos.z-2}, {x=pos.x+2, y=pos.x+3, z=pos.z+2}, {"default:water_source"}) ~= nil then
 		minetest.add_particlespawner({
 			amount = 9,
-			time = 1,
+			time = 2,
 			minpos = {x=pos.x-0.9, y=pos.y+0.3, z=pos.z-0.9},
 			maxpos = {x=pos.x+0.9, y=pos.y+0.9, z=pos.z+0.9},
 			minvel = {x=0, y=0.1, z=0},
@@ -173,7 +177,7 @@ minetest.register_abm({
 		})
 		minetest.add_particlespawner({
 			amount = 9,
-			time = 1,
+			time = 2,
 			minpos = {x=pos.x-0.8, y=pos.y+0.7, z=pos.z-0.8},
 			maxpos = {x=pos.x+0.8, y=pos.y+0.8, z=pos.z+0.8},
 			minvel = {x=0, y=0.1, z=0},
@@ -203,15 +207,16 @@ minetest.register_abm({
 	end
 })
 
+--[[
 minetest.register_abm({
 	nodenames = {"fire:basic_flame"},
-	interval = 1.0,
+	interval = 2.0,
 	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local num = math.random(1,100)
 		minetest.add_particlespawner({
 			amount = 3,
-			time = 1,
+			time = 2,
 			minpos = {x=pos.x-0.3, y=pos.y+0.5, z=pos.z-0.3},
 			maxpos = {x=pos.x+0.3, y=pos.y+0.5, z=pos.z+0.3},
 			minvel = {x=0, y=0.3, z=0},
@@ -228,6 +233,7 @@ minetest.register_abm({
 		})
 	end
 })
+]]
 
 minetest.register_abm({
 	nodenames = {"hyrule_mapgen:healwater_src"},
@@ -269,7 +275,7 @@ minetest.register_entity("hyrule_mapgen:windmill", {
 	end,
 	on_step = function(self)
 		local pos = self.object:getpos()
-		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name ~= "hyrule_mapgen:windmill_node" then
+		if not minetest.find_node_near(pos, 1, {"hyrule_mapgen:windmill_node"}) then
 		self.object:remove()
 		end
 	end,
@@ -286,9 +292,12 @@ minetest.register_entity("hyrule_mapgen:butterfly", {
 		self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
 		self.object:set_animation({x=1, y=10}, 20, 0)
 		self.object:setyaw(math.pi+num)
-		minetest.after(10, function()
+		--minetest.after(10, function()
+		--self.object:remove()
+		--end)
+		if math.random(1,100) == 1 then
 		self.object:remove()
-		end)
+		end
 	end,
 	on_step = function(self)
 		local pos = self.object:getpos()
@@ -312,9 +321,12 @@ minetest.register_entity("hyrule_mapgen:dragonfly", {
 		--self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
 		self.object:set_animation({x=1, y=10}, 40, 0)
 		self.object:setyaw(math.pi+num)
-		minetest.after(10, function()
+		--minetest.after(10, function()
+		--self.object:remove()
+		--end)
+		if math.random(1,100) == 1 then
 		self.object:remove()
-		end)
+		end
 	end,
 	on_step = function(self, dtime)
 		local num = math.random(-math.pi, math.pi)
@@ -1375,7 +1387,7 @@ minetest.register_node("hyrule_mapgen:geyser", {
 
 minetest.register_abm({
 	nodenames = {"hyrule_mapgen:geyser"},
-	interval = 0.5,
+	interval = 1,
 	chance = 2,
 	action = function(pos, node)
 		minetest.add_particlespawner({
@@ -1392,7 +1404,8 @@ minetest.register_abm({
 			minsize = 3,
 			maxsize = 5,
 			collisiondetection = false,
-			texture = "hyrule_mapgen_fire.png"
+			texture = "hyrule_mapgen_fire.png",
+			glow = 14
 		})
 	end
 })
