@@ -109,7 +109,7 @@ minetest.register_globalstep(function(dtime)
 					to_player = player:get_player_name(),
 				})
 				xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "r")
-				experience = xp:read("*l")
+				experience = tonumber(xp:read("*l"))
 				xp:close()
 				if experience ~= nil then
 					local xp_max = experience+1

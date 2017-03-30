@@ -292,12 +292,9 @@ minetest.register_entity("hyrule_mapgen:butterfly", {
 		self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
 		self.object:set_animation({x=1, y=10}, 20, 0)
 		self.object:setyaw(math.pi+num)
-		--minetest.after(10, function()
-		--self.object:remove()
-		--end)
-		if math.random(1,100) == 1 then
+		minetest.after(60, function()
 		self.object:remove()
-		end
+		end)
 	end,
 	on_step = function(self)
 		local pos = self.object:getpos()
