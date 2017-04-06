@@ -9,7 +9,10 @@ dust.add_rain_particles = function(player, dtime)
   for i=dust.particles_count, 1,-1 do
     local random_pos_x, random_pos_y, random_pos_z = weather.get_random_pos_by_player_look_dir(player)
     random_pos_y = math.random() + math.random(player:getpos().y - 1, player:getpos().y + 7)
-    if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) >= 10 then
+    if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) == nil then
+	return
+	end
+	if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) >= 10 then
       dust.last_rp_count = dust.last_rp_count + 1
       minetest.add_particle({
         pos = {x=random_pos_x, y=random_pos_y, z=random_pos_z},
