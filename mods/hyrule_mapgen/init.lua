@@ -2561,7 +2561,7 @@ minetest.register_craft({
 	output = 'hyrule_mapgen:bongo_spawn',
 	recipe = {
 		{'', 'default:stone', ''},
-		{'buckets:bucket_lava', 'hyruletools:pendant1', 'buckets:bucket_lava'},
+		{'bucket:bucket_lava', 'hyruletools:pendant1', 'bucket:bucket_lava'},
 		{'', 'default:stone', ''},
 	}
 })
