@@ -22,7 +22,7 @@ mobs:register_mob("mobs_loz:redead", {
 	attack_type = "dogfight",
 	hp_min = 20,
 	hp_max = 30,
-	armor = 100,
+	armor = 150,
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.7, 0.4},
 	visual = "mesh",
 	mesh = "character.b3d",

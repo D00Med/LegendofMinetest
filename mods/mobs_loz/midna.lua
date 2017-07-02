@@ -9,7 +9,6 @@ mobs:register_mob("mobs_loz:midna", {
 	hp_min = 50,
 	hp_max = 85,
 	armor = 80,
-	owner = "",
 	order = "follow",
 	collisionbox = {-0.3, 0, -0.3, 0.3, 1.5, 0.3},
 	visual = "mesh",
@@ -42,33 +41,20 @@ mobs:register_mob("mobs_loz:midna", {
 		punch_end = 50,
 	},
 	do_custom = function(self, dtime)
+		if math.random(1,4) ~= 1 then return end
 		local pos = self.object:getpos()
-		minetest.add_particlespawner(
-			1, --amount
-			2, --time
-			{x=pos.x-0.3, y=pos.y-0.3, z=pos.z-0.3}, --minpos
-			{x=pos.x+1, y=pos.y+1, z=pos.z+1}, --maxpos
-			{x=0, y=0, z=0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0,y=0,z=-0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			1, --minexptime
-			2, --maxexptime
-			0.5, --minsize
-			1, --maxsize
-			false, --collisiondetection
-			"mobs_particle.png" --texture
-		)
-	end,
-	on_rightclick = function(self, clicker)
-		local player = clicker:get_player_name()
-			if self.order == "follow" then
-				self.order = "stand"
-				minetest.chat_send_player(player, "Midna is following")
-			else
-				self.order = "follow"
-				minetest.chat_send_player(player, "Midna is wandering")
-			end
+	minetest.add_particle({
+		pos = {x=pos.x+math.random(-10,10)/10, y=pos.y+math.random(0,10)/10, z=pos.z+math.random(-10,10)/10},
+        velocity = {x = math.random(-1,1)/10, y = 0.4, z = math.random(-1,1)/10},
+        acceleration = {x = math.random(-1,1)/10, y=0.5, z = math.random(-1,1)/10},
+        expirationtime = 0.8,
+        size = math.random(5, 20)/10,
+		collisiondetection = true,
+		collisionremoval = true,
+		vertical = true,
+		texture = "twilight_twilight"..math.random(1,2)..".png",
+		glow = 5
+	})
 	end,
 })
 

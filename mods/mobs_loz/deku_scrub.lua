@@ -8,7 +8,7 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	shoot_offset = 2,
 	hp_min = 10,
 	hp_max = 25,
-	armor = 90,
+	armor = 120,
 	collisionbox = {-0.4, 0, -0.2, 0.2, 1, 0.2},
 	visual = "mesh",
 	mesh = "deku_scrub.b3d",

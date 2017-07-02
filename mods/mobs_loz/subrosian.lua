@@ -6,7 +6,7 @@ mobs:register_mob("mobs_loz:subrosian", {
 	attack_type = "dogfight",
 	hp_min = 10,
 	hp_max = 25,
-	armor = 80,
+	armor = 120,
 	collisionbox = {-0.4, 0, -0.4, 0.4, 1, 0.4},
 	visual = "mesh",
 	mesh = "subrosian.b3d",

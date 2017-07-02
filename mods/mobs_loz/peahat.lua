@@ -8,7 +8,7 @@ mobs:register_mob("mobs_loz:peahat", {
 	attack_type = "dogfight",
 	hp_min = 7,
 	hp_max = 12,
-	armor = 130,
+	armor = 100,
 	collisionbox = {-0.4, 0, -0.4, 0.4, 1.2, 0.4},
 	visual = "mesh",
 	mesh = "peahat.b3d",
@@ -23,7 +23,7 @@ mobs:register_mob("mobs_loz:peahat", {
 	water_damage = 1,
 	lava_damage = 2,
 	light_damage = 0,
-	view_range = 10,
+	view_range = 25,
 	drops = {
 		{name = "hyruletools:blue_rupee",
 		chance = 5, min = 1, max = 3},

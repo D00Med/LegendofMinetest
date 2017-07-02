@@ -22,7 +22,6 @@ if minetest.setting_getbool("twilight") then
 --Vignette overlay from Vignette mod by TriBlade9(license MIT)
 
 minetest.register_on_joinplayer(function(player)
-	weather.state = "twilight"
 	minetest.after(0,function()
 		player:override_day_night_ratio(0.41)
 	end)
@@ -61,70 +60,9 @@ local name = player:get_player_name()
          end
             end)
 
-			
---weather, see weather pack
 
 twilight = {}
 
-twilight.particles_count = 25
-
--- calculates coordinates and draw particles for twilight weather 
-twilight.add_rain_particles = function(player, dtime)
-  rain.last_rp_count = 0
-  for i=twilight.particles_count, 1,-1 do
-    local random_pos_x, random_pos_y, random_pos_z = weather.get_random_pos_by_player_look_dir(player)
-    random_pos_y = math.random() + math.random(player:getpos().y - 1, player:getpos().y + 7)
-    if minetest.get_node_light({x=random_pos_x, y=random_pos_y, z=random_pos_z}, 0.5) == 15 then
-      rain.last_rp_count = rain.last_rp_count + 1
-      minetest.add_particle({
-        pos = {x=random_pos_x, y=random_pos_y, z=random_pos_z},
-        velocity = {x = math.random(-0.1,0.1), y = math.random(0.1,0.1), z = math.random(-0.1,0.1)},
-        acceleration = {x = math.random(-0.1,0.1), y=0.1, z = math.random(-0.1,0.1)},
-        expirationtime = 0.6,
-        size = math.random(0.5, 1),
-        collisiondetection = true,
-        vertical = true,
-        texture = twilight.get_texture(),
-        playername = player:get_player_name()
-      })
-    end
-  end
-end
-
-
-
--- Simple random texture getter
-twilight.get_texture = function()
-  local texture_name
-  local random_number = math.random()
-  if random_number > 0.5 then
-    texture_name = "twilight_twilight1.png"
-  else
-    texture_name = "twilight_twilight2.png"
-  end
-  return texture_name;
-end
-
-minetest.register_globalstep(function(dtime)
-  if weather.state ~= "twilight" then 
-    return false
-  end
-  
-  for _, player in ipairs(minetest.get_connected_players()) do
-    if (weather.is_underwater(player)) then 
-      return false
-    end
-    twilight.add_rain_particles(player, dtime)
-  end
-end)
-
--- register twilight weather
-if weather.reg_weathers.twilight == nil then
-  weather.reg_weathers.twilight = {
-    chance = 10,
-    clear = function() end
-  }
-end
 
 twilight_mode = false
 --[[
@@ -152,8 +90,9 @@ local glow = nil
 
 minetest.register_globalstep(function(dtime)
 if twilight_mode == true then 
-	weather.state = "twilight"
 	for _, player in ipairs(minetest.get_connected_players()) do
+	hyrule_weather.current = 8
+	hyrule_weather.weather = "twilight"
 	player:set_sky({}, "skybox", twilightsky) -- Sets skybox
 	player:override_day_night_ratio(0.41)
 			local pname = player:get_player_name();
@@ -162,6 +101,19 @@ if twilight_mode == true then
 			local remov = inv:remove_item("main", "hyruletools:sword")
 			local add = inv:add_item("main", "hyruletools:sword_light")
 	end
+	local pos = player:getpos()
+	minetest.add_particle({
+		pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(0,1), z=pos.z+math.random(-10,10)},
+        velocity = {x = math.random(-1,1)/10, y = 0.4, z = math.random(-1,1)/10},
+        acceleration = {x = math.random(-1,1)/10, y=0.5, z = math.random(-1,1)/10},
+        expirationtime = 0.8,
+        size = math.random(5, 20)/10,
+		collisiondetection = true,
+		collisionremoval = true,
+		vertical = true,
+		texture = "twilight_twilight"..math.random(1,2)..".png",
+		glow = 5
+	})
 	if hud_changed == false then
 	glow = player:hud_add({
     hud_elem_type = "image",
@@ -171,7 +123,7 @@ if twilight_mode == true then
       y = -100
     },
     text = "twilight_hud.png"
-  })
+	})
 	hud_changed = true
 	--player:set_properties({mesh = "wolfplayer.b3d", textures = {"wolfplayer.png"}})
 	--player:set_eye_offset({x=0,y=0,z=0}, {x=0,y=3,z=-3})
@@ -189,10 +141,11 @@ if twilight_mode == true then
 end
 else
 	for _, player in ipairs(minetest.get_connected_players()) do
-	if weather.state == "twilight" then
+	if hyrule_weather.weather == "twilight" then
 	player:set_sky({}, "regular", {}) -- Sets skybox
 	player:override_day_night_ratio(nil)
-	weather.state = "none"
+	hyrule_weather.weather = "none"
+	hyrule_weather.current = 7
 	end
 			local pname = player:get_player_name();
 	local inv = minetest.get_inventory({type="player", name=pname});
@@ -229,12 +182,12 @@ minetest.register_craftitem("twilight:crystal", {
 	twilight_mode = false
 	elseif twilight_mode == false then
 	twilight_mode = true
-	if not midna_spawned then
+	if not midna_spawned and placer:get_player_name() == "singleplayer" then
 	local pos = placer:getpos()
 	local obj = minetest.env:add_entity({x=pos.x, y=pos.y+2, z=pos.z}, "mobs_loz:midna")
 	local midna = obj:get_luaentity()
-	midna.owner = placer
 	midna.tamed = true
+	midna.owner = "singleplayer"
 	midna_spawned = true
 	end
 	return itemstack

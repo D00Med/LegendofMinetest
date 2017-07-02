@@ -28,22 +28,18 @@ if mobs.mod and mobs.mod == "redo" then
 		stepheight = 10,
 		do_custom = function(self, pos)
 		local pos = self.object:getpos()
-		minetest.add_particlespawner(
-			1, --amount
-			1, --time
-			{x=pos.x-0.1, y=pos.y, z=pos.z-0.1}, --minpos
-			{x=pos.x+0.1, y=pos.y, z=pos.z+0.1}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.2,y=-0.2,z=-0.2}, --minacc
-			{x=0.2,y=-0.5,z=0.2}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			1, --minsize
-			2, --maxsize
-			false, --collisiondetection
-			"mobs_fairy_spark.png" --texture
-		)
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-1,1)/10, y=pos.y, z=pos.z+math.random(-1,1)/10},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=math.random(-2,2)/10, y=math.random(-2,-5)/10, z=math.random(-2,2)/10},
+			expirationtime = math.random(5,10)/10,
+			size = math.random(1,2),
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "mobs_fairy_spark.png",
+			glow = 9
+		})
 		
 		local objs = minetest.env:get_objects_inside_radius(pos, 1.5) 
 		for _, obj in pairs(objs) do

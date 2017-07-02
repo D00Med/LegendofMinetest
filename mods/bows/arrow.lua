@@ -102,12 +102,31 @@ minetest.register_entity("bows:arrow",{
 				bows.arrow_remove(self)
 			end
 			local pos = self.object:getpos()
-			local objs = minetest.get_objects_inside_radius(pos, 1.3)
+			local objs = minetest.get_objects_inside_radius(pos, 2)
+			for _, obj in ipairs(objs) do
+				if obj:is_player() then
+				local pos2 = self.object:getpos()
+				local pos1 = obj:getpos()
+				if pos1 ~= nil and pos2 ~= nil then
+					--pos1.y = pos1.y+1
+					local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
+					vec.x = vec.x/0.15
+					vec.y = vec.y/0.15
+					vec.z = vec.z/0.15
+					self.object:setvelocity(vec)
+				end
+			end
+			end
+			local objs = minetest.get_objects_inside_radius(pos, 0.3)
 			for _, obj in ipairs(objs) do
 				if obj:is_player() then
 					local pname = obj:get_player_name()
 					local inv = minetest.get_inventory({type="player", name=pname});
+					if math.random(1,7) == 1 then
 					local remov = inv:add_item("main", self.name)
+					else
+					local remov = inv:add_item("main", "default:stick")
+					end
 					bows.arrow_remove(self)
 					minetest.sound_play("item_drop_pickup", {pos = pos, gain = 0.3, max_hear_distance = 16})
 				end

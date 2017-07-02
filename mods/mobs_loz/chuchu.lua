@@ -9,7 +9,7 @@ mobs:register_mob("mobs_loz:chuchu", {
 	damage = 2,
 	hp_min = 3,
 	hp_max = 27,
-	armor = 100,
+	armor = 150,
 	collisionbox = {-0.2, -0, -0.2, 0.2, 0.7, 0.2},
 	visual_size = {x=1.5, y=1.5},
 	visual = "mesh",

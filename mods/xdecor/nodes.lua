@@ -120,7 +120,7 @@ xdecor.register("cobweb", {
 	liquid_range = 0,
 	walkable = false,
 	selection_box = {type = "regular"},
-	groups = {dig_immediate=3, liquid=3, flammable=3},
+	groups = {oddly_breakable_by_hand=1, liquid=3, flammable=3},
 	sounds = default.node_sound_leaves_defaults()
 })
 

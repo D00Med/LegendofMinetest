@@ -392,7 +392,7 @@ minetest.register_craft({
 	output = "xdecor:worktable",
 	recipe = {
 		{"group:wood", "group:wood", "group:wood"},
-		{"group:wood", "", ""},
+		{"group:wood", "default:steel_ingot", "group:wood"},
 	}
 })
 	

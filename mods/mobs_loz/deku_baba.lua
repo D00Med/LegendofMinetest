@@ -5,16 +5,17 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	reach = 2,
+	reach = 3.5,
 	damage = 2,
 	hp_min = 10,
 	hp_max = 27,
-	armor = 95,
+	armor = 130,
 	collisionbox = {-0.3, 0, -0.2, 0.2, 1.2, 0.2},
 	visual = "mesh",
 	mesh = "dekubaba.b3d",
 	textures = {
 		{"mobs_dekubaba.png"},
+		{"mobs_dekubaba2.png"},
 	},
 	blood_texture = "default_dry_grass.png",
 	makes_footstep_sound = false,
@@ -26,7 +27,7 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	run_velocity = 0.05,
 	jump = false,
 	drops = {
-		{name = "mobs_loz:deku_nut",
+		{name = "mobs_loz:nut",
 		chance = 1, min = 1, max = 3},
 	},
 	on_die = function(self)
@@ -42,7 +43,7 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	fear_height = 3,
 	animation = {
 		speed_normal = 12,
-		speed_run = 15,
+		speed_run = 30,
 		stand_start = 1,
 		stand_end = 19,
 		walk_start = 1,

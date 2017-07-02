@@ -908,7 +908,7 @@ minetest.register_node("moreplants:palm", {
 minetest.register_node("moreplants:palmleaves2", {
 	description = "Palm Leaves (2)",
 	drawtype = "plantlike",
-	visual_scale = 2.5,
+	visual_scale = 5,
 	tiles = {"moreplants_palmleaves2.png"},
 	inventory_image = "moreplants_palmleaves2.png",
 	use_texture_alpha = true,
@@ -927,7 +927,7 @@ minetest.register_node("moreplants:palmleaves2", {
 minetest.register_node("moreplants:palmleaves1", {
 	description = "Palm Leaves (1)",
 	drawtype = "signlike",
-	visual_scale = 4.0,
+	visual_scale = 5.0,
 	tiles = {"moreplants_palmleaves.png"},
 	inventory_image = "moreplants_palmleaves.png",
 	use_texture_alpha = true,

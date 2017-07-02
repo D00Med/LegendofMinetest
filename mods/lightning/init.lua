@@ -18,15 +18,15 @@ lightning.range_h = 100
 lightning.range_v = 50
 lightning.size = 100
 -- disable this to stop lightning mod from striking
-lightning.auto = true
+lightning.auto = false
 
 local rng = PcgRandom(32321123312123)
 
 local ps = {}
-local ttl = 1
+--local ttl = 1
 local sky_set = false
 
-local revertsky = function()
+--[[local revertsky = function()
 	if ttl == 0 then
 		return
 	end
@@ -35,9 +35,9 @@ local revertsky = function()
 		return
 	end
 	
-	if weather.state ~= "none" then
-		return
-	end
+	--if weather.state ~= "none" then
+	--	return
+	--end
 
 	for key, entry in pairs(ps) do
 		if not sky_set then
@@ -48,9 +48,9 @@ local revertsky = function()
 	end
 
 	ps = {}
-end
+end]]
 
-minetest.register_globalstep(revertsky)
+--minetest.register_globalstep(revertsky)
 
 -- select a random strike point, midpoint
 local function choose_pos(pos)
@@ -106,27 +106,19 @@ lightning.strike = function(pos)
 	if not pos then
 		return false
 	end
-
-	minetest.add_particlespawner({
-		amount = 1,
-		time = 0.2,
-		-- make it hit the top of a block exactly with the bottom
-		minpos = {x = pos2.x, y = pos2.y + (lightning.size / 2) + 1/2, z = pos2.z },
-		maxpos = {x = pos2.x, y = pos2.y + (lightning.size / 2) + 1/2, z = pos2.z },
-		minvel = {x = 0, y = 0, z = 0},
-		maxvel = {x = 0, y = 0, z = 0},
-		minacc = {x = 0, y = 0, z = 0},
-		maxacc = {x = 0, y = 0, z = 0},
-		minexptime = 0.2,
-		maxexptime = 0.2,
-		minsize = lightning.size * 10,
-		maxsize = lightning.size * 10,
-		collisiondetection = true,
-		vertical = true,
-		-- to make it appear hitting the node that will get set on fire, make sure
-		-- to make the texture lightning bolt hit exactly in the middle of the
-		-- texture (e.g. 127/128 on a 256x wide texture)
-		texture = "lightning_lightning_" .. rng:next(1,3) .. ".png",
+	
+	
+	minetest.add_particle({
+			pos = {x = pos2.x, y = pos2.y + (lightning.size / 2) + 1/2, z = pos2.z },
+			velocity = {x = 0, y = 0, z = 0},
+			acceleration = {x = 0, y = 0, z = 0},
+			expirationtime = 0.2,
+			size = lightning.size * 10,
+			collisiondetection = true,
+			collision_removal = false,
+			vertical = true,
+			texture = "lightning_lightning_" .. rng:next(1,3) .. ".png",
+			glow = 10
 	})
 
 	minetest.sound_play({ pos = pos, name = "lightning_thunder", gain = 10, max_hear_distance = 500 })
@@ -148,11 +140,20 @@ lightning.strike = function(pos)
 		if ps[name] == nil then
 			ps[name] = {p = player, sky = sky}
 			player:set_sky(0xffffff, "plain", {})
+	minetest.after(0.3, function()
+		if player ~= nil then
+			if minetest.get_timeofday()*24000 >= 6000 and minetest.get_timeofday()*24000 <= 19000 then
+			player:set_sky({r=111, g=111, b=111}, "plain", nil, true)
+			else
+			player:set_sky(nil, "regular", nil, true)
+			end
+		end
+	end)
 		end
 	end
-
+	
 	-- trigger revert of skybox
-	ttl = 5
+	--ttl = 5
 
 	-- set the air node above it on fire
 	pos2.y = pos2.y + 1/2

@@ -9,7 +9,7 @@ mobs:register_mob("mobs_loz:darknut", {
 	damage = 4,
 	hp_min = 30,
 	hp_max = 47,
-	armor = 80,
+	armor = 100,
 	collisionbox = {-0.7, -0, -0.7, 0.7, 2, 0.7},
 	visual_size = {x=1.3, y=1.3},
 	visual = "mesh",

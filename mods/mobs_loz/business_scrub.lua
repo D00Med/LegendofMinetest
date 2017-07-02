@@ -7,7 +7,7 @@ mobs:register_mob("mobs_loz:business_scrub", {
 	shoot_offset = 1.5,
 	hp_min = 10,
 	hp_max = 25,
-	armor = 90,
+	armor = 150,
 	collisionbox = {-0.4, -0.1, -0.2, 0.2, 0.4, 0.2},
 	visual = "mesh",
 	mesh = "business_scrub.b3d",

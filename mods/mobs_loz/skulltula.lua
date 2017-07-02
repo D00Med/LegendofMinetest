@@ -6,7 +6,7 @@ mobs:register_mob("mobs_loz:skulltula", {
 	damage = 3,
 	hp_min = 28,
 	hp_max = 37,
-	armor = 90,
+	armor = 150,
 	collisionbox = {-0.3, 0, -0.3, 0.3, 1, 0.3},
 	visual_size = {x=1.5, y=1.5},
 	visual = "mesh",

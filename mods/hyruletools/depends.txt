@@ -1,4 +1,5 @@
 default
-weather_pack
 3d_armor
 playereffects
+hyrule_weather
+lightning

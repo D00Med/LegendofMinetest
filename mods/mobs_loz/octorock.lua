@@ -8,7 +8,7 @@ mobs:register_mob("mobs_loz:octorock", {
 	shoot_offset = 1.2,
 	hp_min = 20,
 	hp_max = 35,
-	armor = 100,
+	armor = 150,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 0.8, 0.5},
 	visual_size = {x=1.5, y=1.5},
 	visual = "mesh",
@@ -66,7 +66,7 @@ mobs:register_arrow("mobs_loz:octorock_rock", {
 	if item ~= "shields:shield_steel" and item ~= "shields:shield_admin" and item ~= "shields:shield_bronze" and item ~= "shields:shield_wood" and item ~= "shields:shield_cactus" and item ~= "shields:shield_wood_enhanced" and item ~= "shields:shield_cactus_enhanced" then
       player:punch(self.object, 1.0, {
          full_punch_interval = 1.0,
-         damage_groups = {fleshy = 1},
+         damage_groups = {fleshy = 2},
       }, nil)
 	  end
    end,
@@ -74,7 +74,7 @@ mobs:register_arrow("mobs_loz:octorock_rock", {
    hit_mob = function(self, player)
       player:punch(self.object, 1.0, {
          full_punch_interval = 1.0,
-         damage_groups = {fleshy = 1},
+         damage_groups = {fleshy = 2},
       }, nil)
    end,
 
@@ -112,8 +112,8 @@ mobs:register_mob("mobs_loz:octorock_boss", {
 	fall_speed = -6,
 	stepheight = 3,
 	drops = {
-		{name = "hyruletools:blue_rupee",
-		chance = 5, min = 5, max = 5},
+		{name = "hyruletools:magglv_n",
+		chance = 1, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
@@ -121,6 +121,22 @@ mobs:register_mob("mobs_loz:octorock_boss", {
 		minetest.env:add_entity(pos, "hyruletools:heart_entity")
 		end
 		minetest.env:add_entity(pos, "experience:orb")
+		for i=1,10 do
+		minetest.after((i/10)+math.random(-9,9)/20, function()
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-1,1), y=pos.y, z=pos.z+math.random(-1,1)},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=math.random(-5,5)/10, y=1, z=math.random(-5,5)/10},
+			expirationtime = math.random(10,15)/10,
+			size = math.random(20,25),
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "mobs_loz_light.png",
+			glow = 9
+		})
+		end)
+		end
 	end,
 	water_damage = 1,
 	lava_damage = 1,

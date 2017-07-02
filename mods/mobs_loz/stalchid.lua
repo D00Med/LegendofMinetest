@@ -9,7 +9,7 @@ mobs:register_mob("mobs_loz:stalchild", {
 	damage = 2,
 	hp_min = 12,
 	hp_max = 27,
-	armor = 100,
+	armor = 130,
 	collisionbox = {-0.3, 0, -0.3, 0.3, 1.2, 0.3},
 	visual = "mesh",
 	mesh = "stalchild.b3d",

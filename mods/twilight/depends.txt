@@ -1,2 +1,2 @@
 default
-weather_pack
+hyrule_weather
