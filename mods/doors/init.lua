@@ -464,6 +464,18 @@ doors.register("door_wood", {
 		}
 })
 
+doors.register("door_stone", {
+		tiles = {{ name = "doors_door_stone.png", backface_culling = true }},
+		description = "Stone Door",
+		inventory_image = "default_stone.png",
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+		recipe = {
+			{"group:stone", "group:stone"},
+			{"group:stone", "group:stone"},
+			{"group:stone", "group:stone"},
+		}
+})
+
 doors.register("door_wood_2", {
 		tiles = {{ name = "doors_door_wood_2.png", backface_culling = true }},
 		description = "Dark Wooden Door",

@@ -68,7 +68,7 @@ if mobs.mod and mobs.mod == "redo" then
 			punch_start = 1,		punch_end = 10
 		},
 		on_rightclick = function(self, clicker)
-			if clicker:get_wielded_item():get_name() == "bucket:bucket_empty" and math.random(1,5) == 5 or clicker:get_wielded_item():get_name() == "mobs:net" and math.random(1,2) == 1 then
+			if clicker:get_wielded_item():get_name() == "bucket:bucket_empty" and math.random(1,3) == 3 or clicker:get_wielded_item():get_name() == "mobs:net" and math.random(1,2) == 1 then
 			mobs:capture_mob(self, clicker, 1, 1, 0, true, nil)
 			end
 		end

@@ -10,7 +10,8 @@ local counter2 = nil
 local counter3 = nil
 
 minetest.register_globalstep(function()
-	for _, player in ipairs(minetest.get_connected_players()) do
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_player_name() ~= "singleplayer" then return end
 		if player:get_wielded_item():get_name() == "hyruletools:climbing_gloves" then
 			local pos = player:getpos()
 			--player:get_wielded_item():add_wear(2000)
@@ -29,14 +30,7 @@ minetest.register_globalstep(function()
 			if remove_node then
 				minetest.remove_node(remove_node)
 			end]]
-		elseif player:get_wielded_item():get_name() == "hyruletools:sword_complete" and player:get_player_control().LMB then
-			local dir = player:get_look_dir()
-			local playerpos = player:getpos()
-			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark")
-			local vec = {x=dir.x*7,y=dir.y*7,z=dir.z*7}
-			obj:setvelocity(vec)	
-		end
-		if player:get_wielded_item():get_name() == "hyruletools:lantern" then
+		elseif player:get_wielded_item():get_name() == "hyruletools:lantern" then
 			local pos = player:getpos()
 			local item = player:get_wielded_item()
 			item:add_wear(2000)
@@ -51,9 +45,6 @@ minetest.register_globalstep(function()
 			end
 			end
 			return item
-		end
-		if player:get_player_name() ~= "singleplayer" then
-		return
 		end
 		count = 0
 		count2 = 0
@@ -1878,6 +1869,35 @@ minetest.register_entity("hyruletools:swdspark", {
 
 --master sword, an edit of Mese sword(see liscence for default)
 minetest.register_tool("hyruletools:sword", {
+	description = "True Master Sword",
+	inventory_image = "mastersword_sword.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=4},
+	},
+	on_use = function(itemstack, placer, pointed_thing)
+			local name = placer:get_player_name()
+			local dir = placer:get_look_dir()
+			local playerpos = placer:getpos()
+			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark")
+			local vec = {x=dir.x*7,y=dir.y*7,z=dir.z*7}
+			obj:setvelocity(vec)
+		return itemstack
+	end,
+})
+
+minetest.register_craftitem("hyruletools:crest", {
+	description = "Hylian Crest",
+	inventory_image = "hyruletools_crest.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+})
+
+minetest.register_tool("hyruletools:sword_incomplete", {
 	description = "Master Sword",
 	inventory_image = "hyruletools_mastersword_incomplete.png",
 	wield_scale = {x = 1.5, y = 1.5, z = 1},
@@ -1887,7 +1907,7 @@ minetest.register_tool("hyruletools:sword", {
 		groupcaps={
 			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
 		},
-		damage_groups = {fleshy=4},
+		damage_groups = {fleshy=5},
 	},
 	on_use = function(itemstack, placer, pointed_thing)
 			local name = placer:get_player_name()
@@ -1900,27 +1920,6 @@ minetest.register_tool("hyruletools:sword", {
 			end
 		return itemstack
 	end,
-})
-
-minetest.register_craftitem("hyruletools:crest", {
-	description = "Hylian Crest",
-	inventory_image = "hyruletools_crest.png",
-	wield_scale = {x = 1.5, y = 1.5, z = 1},
-})
-
-minetest.register_tool("hyruletools:sword_complete", {
-	description = "True Master Sword",
-	inventory_image = "mastersword_sword.png",
-	wield_scale = {x = 1.5, y = 1.5, z = 1},
-	tool_capabilities = {
-		full_punch_interval = 0.7,
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
-		},
-		damage_groups = {fleshy=5},
-	},
-	range = 5,
 })
 
 --mobs redo arrow code, see mobs license
@@ -2055,7 +2054,7 @@ minetest.register_tool("hyruletools:classic_sword", {
 })
 
 minetest.register_craft({
-	output = 'hyruletools:sword',
+	output = 'hyruletools:sword_incomplete',
 	recipe = {
 		{'hyruletools:foreststone'},
 		{'hyruletools:waterstone'},
@@ -2064,7 +2063,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'hyruletools:sword_complete',
+	output = 'hyruletools:sword',
 	recipe = {
 		{'hyruletools:crest'},
 		{'hyruletools:sword'},

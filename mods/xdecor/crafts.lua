@@ -105,7 +105,7 @@ minetest.register_craft({
 		{"default:stone", "default:coalblock"}
 	}
 })
-
+--[[]
 minetest.register_craft({
 	output = "xdecor:cobble_wall_ln 6",
 	recipe = {
@@ -113,6 +113,7 @@ minetest.register_craft({
 		{"default:cobble", "default:cobble", "default:cobble"}
 	}
 })
+]]
 
 minetest.register_craft({
 	output = "xdecor:crate",
@@ -123,6 +124,7 @@ minetest.register_craft({
 	}
 })
 
+--[[
 minetest.register_craft({
 	output = "xdecor:mossycobble_wall_ln 6",
 	recipe = {
@@ -130,6 +132,7 @@ minetest.register_craft({
 		{"default:mossycobble", "default:mossycobble", "default:mossycobble"}
 	}
 })
+]]
 
 minetest.register_craft({
 	output = "xdecor:cobweb",

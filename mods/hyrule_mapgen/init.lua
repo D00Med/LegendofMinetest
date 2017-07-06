@@ -141,7 +141,7 @@ minetest.register_lbm({
 	nodenames = {"moreplants:tallgrass", "moreplants:bulrush"},
 	run_at_every_load = true,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		if math.random(1,6) == 3 then
+		if math.random(1,50) == 3 then
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:dragonfly")
 		end
 	end

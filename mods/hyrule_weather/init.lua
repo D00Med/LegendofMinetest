@@ -175,6 +175,7 @@ minetest.register_globalstep(function(dtime)
 				display_weather = false
 			end
 		end
+		if pos.y <= -20 then display_weather = false end
 		--apply weather effect
 		if display_weather then
 			apply_weather(player, pos, hyrule_weather.weather)
