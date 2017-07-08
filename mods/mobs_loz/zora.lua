@@ -59,7 +59,7 @@ mobs:register_mob("mobs_loz:zora_male", {
 	do_custom = function(self)
 
 		if not self.child
-		and math.random(1, 2000) == 1 then
+		and math.random(1, 20000) == 1 then
 
 			local pos = self.object:getpos()
 
@@ -127,7 +127,7 @@ mobs:register_mob("mobs_loz:zora_female", {
 	do_custom = function(self)
 
 		if not self.child
-		and math.random(1, 250) == 1 then
+		and math.random(1, 20000) == 1 then
 
 			local pos = self.object:getpos()
 
