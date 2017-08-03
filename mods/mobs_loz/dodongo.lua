@@ -11,7 +11,7 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	hp_min = 12,
 	hp_max = 25,
 	armor = 160,
-	collisionbox = {-0.2, 0, -0.2, 0.2, 0.4, 0.4},
+	collisionbox = {-0.2, -0.1, -0.2, 0.2, 0.4, 0.4},
 	visual = "mesh",
 	mesh = "bdodongo.b3d",
 	textures = {

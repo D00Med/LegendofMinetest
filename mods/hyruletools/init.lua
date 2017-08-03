@@ -9,12 +9,26 @@ local counter1 = nil
 local counter2 = nil
 local counter3 = nil
 
+local players = {}
+
+minetest.register_on_joinplayer(function(player)
+	local name = player:get_player_name()
+	players[name] = true
+end)
+
+minetest.register_on_leaveplayer(function(player)
+	local name = player:get_player_name()
+	players[name] = nil
+end)
+
 minetest.register_globalstep(function()
-	for _,player in ipairs(minetest.get_connected_players()) do
-		if player:get_player_name() ~= "singleplayer" then return end
+	for name, _ in pairs(players) do
+		local player = minetest.get_player_by_name(name)
 		if player:get_wielded_item():get_name() == "hyruletools:climbing_gloves" then
 			local pos = player:getpos()
-			--player:get_wielded_item():add_wear(2000)
+			local item = player:get_wielded_item()
+			item:add_wear(5)
+			player:set_wielded_item(item)
 			local climbable = minetest.find_node_near(pos, 1, {"default:stone", "default:obsidian", "default:sandstone", "default:ice", "default:desert_stone", "default:cobblestone", "default:desert_cobblestone"})
 			if climbable and minetest.get_node(pos).name == "air" then
 				minetest.set_node(pos, {name="hyruletools:climbable"})
@@ -31,11 +45,13 @@ minetest.register_globalstep(function()
 				minetest.remove_node(remove_node)
 			end]]
 		elseif player:get_wielded_item():get_name() == "hyruletools:lantern" then
+		--minetest.chat_send_all("blah")
 			local pos = player:getpos()
-			local item = player:get_wielded_item()
-			item:add_wear(2000)
 			pos.y = pos.y+1
 			if minetest.get_node(pos).name == "air" then
+			local item = player:get_wielded_item()
+			item:add_wear(30)
+			player:set_wielded_item(item)
 				minetest.set_node(pos, {name="hyruletools:light"})
 			end
 			for i=1,2 do
@@ -44,8 +60,10 @@ minetest.register_globalstep(function()
 				minetest.remove_node(remove_node)
 			end
 			end
-			return item
 		end
+	end
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_player_name() ~= "singleplayer" then return end
 		count = 0
 		count2 = 0
 		count3 = 0
@@ -1333,6 +1351,15 @@ minetest.register_abm({
 minetest.register_tool("hyruletools:climbing_gloves", {
 	description = "Climbing Gloves",
 	inventory_image = "hyruletools_climbing_gloves.png"
+})
+
+minetest.register_craft({
+	output = "hyruletools:climbing_gloves",
+	recipe = {
+		{"default:stick", "", "default:stick"},
+		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"mobs:leather", "",  "mobs:leather"}
+	}
 })
 
 --[[minetest.register_node("hyruletools:climbable2", {

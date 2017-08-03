@@ -1130,7 +1130,7 @@ minetest.register_abm({
 		for _, obj in ipairs(objs) do
 			if obj:is_player() then
 				local name = obj:get_player_name()
-				minetest.sound_play("Laser", {to_player=obj, gain=0.5})
+				minetest.sound_play("Laser", {pos=pos, max_hear_distance=10, gain=0.5})
 				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
 				ent:setvelocity({x=12*x, y=0, z=12*z})
 				for i=1,5 do

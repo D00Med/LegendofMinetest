@@ -14,7 +14,7 @@ minetest.register_node("moreplants:tallgrass", {
 	inventory_image = "moreplants_longgrass.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -34,7 +34,7 @@ minetest.register_node("moreplants:grass", {
 	inventory_image = "moreplants_grass.png",
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -54,7 +54,7 @@ minetest.register_node("moreplants:pinkflower2", {
 	inventory_image = "moreplants_pink.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -74,7 +74,7 @@ minetest.register_node("moreplants:seaweed1", {
 	inventory_image = "moreplants_seaweed1.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -94,7 +94,7 @@ minetest.register_node("moreplants:seaweed2", {
 	inventory_image = "moreplants_seaweed2.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -114,7 +114,7 @@ minetest.register_node("moreplants:seaweed3", {
 	inventory_image = "moreplants_seaweed3.png",
 	visual_scale = 1.4,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -134,7 +134,7 @@ minetest.register_node("moreplants:aliengrass", {
 	inventory_image = "moreplants_aliengrass.png",
 	visual_scale = 1.54,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -156,7 +156,7 @@ minetest.register_node("moreplants:bulrush", {
 	inventory_image = "moreplants_bullrush.png",
 	visual_scale = 1.3,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -176,7 +176,7 @@ minetest.register_node("moreplants:bigfern", {
 	inventory_image = "moreplants_bigfern.png",
 	visual_scale = 1.5,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -196,7 +196,7 @@ minetest.register_node("moreplants:umbrella", {
 	inventory_image = "moreplants_umbrella.png",
 	visual_scale = 2,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -216,7 +216,7 @@ minetest.register_node("moreplants:bigflower", {
 	inventory_image = "moreplants_bigflower.png",
 	visual_scale = 1.2,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -236,7 +236,7 @@ minetest.register_node("moreplants:medflower", {
 	inventory_image = "moreplants_medflower.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -258,7 +258,7 @@ minetest.register_node("moreplants:weed", {
 	inventory_image = "moreplants_weed.png",
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -278,7 +278,7 @@ minetest.register_node("moreplants:stoneweed", {
 	inventory_image = "moreplants_stoneplant.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -298,7 +298,7 @@ minetest.register_node("moreplants:spikefern", {
 	inventory_image = "moreplants_spikefern.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -318,7 +318,7 @@ minetest.register_node("moreplants:bluespike", {
 	inventory_image = "moreplants_bluespike.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -338,7 +338,7 @@ minetest.register_node("moreplants:blueflower", {
 	inventory_image = "moreplants_blueflower.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -358,7 +358,7 @@ minetest.register_node("moreplants:eyeweed", {
 	inventory_image = "moreplants_eyeweed.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	drop = "moreplants:eye",
 	selection_box = {
@@ -379,7 +379,7 @@ minetest.register_node("moreplants:fern", {
 	inventory_image = "moreplants_fern.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -399,7 +399,7 @@ minetest.register_node("moreplants:bush", {
 	inventory_image = "moreplants_bush.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -419,7 +419,7 @@ minetest.register_node("moreplants:cactus", {
 	inventory_image = "moreplants_cactus.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -440,7 +440,7 @@ minetest.register_node("moreplants:firefung", {
 	inventory_image = "moreplants_firemush.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, igniter=1, hot=3, attatched_node=1, flora=1},
+	groups = {snappy=3, igniter=1, hot=3, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -460,7 +460,7 @@ minetest.register_node("moreplants:bluemush", {
 	inventory_image = "moreplants_bluemush.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -482,7 +482,7 @@ minetest.register_node("moreplants:caveflower", {
 	visual_scale = 1,
 	light_source = 5,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -502,7 +502,7 @@ minetest.register_node("moreplants:moonflower", {
 	inventory_image = "moreplants_moonflower.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -522,7 +522,7 @@ minetest.register_node("moreplants:fireflower", {
 	inventory_image = "moreplants_fireflower.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -542,7 +542,7 @@ minetest.register_node("moreplants:deadweed", {
 	inventory_image = "moreplants_deadweed.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -562,7 +562,7 @@ minetest.register_node("moreplants:taigabush", {
 	inventory_image = "moreplants_tundrabush.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -592,7 +592,7 @@ minetest.register_node("moreplants:glowfung", {
 	inventory_image = "moreplants_glowfung.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	walkable = false,
 })
@@ -608,7 +608,7 @@ minetest.register_node("moreplants:jungleflower", {
 	inventory_image = "moreplants_jungleflower1.png",
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -640,7 +640,7 @@ minetest.register_node("moreplants:mushroom", {
 			{-0.125, -0.1875, -0.125, 0.125, -0.125, 0.125}, -- NodeBox3
 		}
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	light_source=2,
 })
@@ -656,7 +656,7 @@ minetest.register_node("moreplants:curly", {
 	inventory_image = "moreplants_curly.png",
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	drop = "moreplants:curlyfruit",
 	selection_box = {
@@ -677,7 +677,7 @@ minetest.register_node("moreplants:clover", {
 		"moreplants_clover.png",
 		"moreplants_clover.png"
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -702,7 +702,7 @@ minetest.register_node("moreplants:mushcluster", {
 		"moreplants_mushcluster.png",
 		"moreplants_mushcluster.png"
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -728,7 +728,7 @@ minetest.register_node("moreplants:groundfung", {
 		"moreplants_groundfung.png",
 		"moreplants_groundfung.png"
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -749,7 +749,7 @@ minetest.register_node("moreplants:cavefern", {
 	tiles = {
 		"moreplants_cavefern.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -769,7 +769,7 @@ minetest.register_node("moreplants:hangingplant", {
 	tiles = {
 		"moreplants_hanging_plant.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -789,7 +789,7 @@ minetest.register_node("moreplants:seaweed", {
 	tiles = {
 		"moreplants_seaweed.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -809,7 +809,7 @@ minetest.register_node("moreplants:coral", {
 	tiles = {
 		"moreplants_coral.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -829,7 +829,7 @@ minetest.register_node("moreplants:coral1", {
 	tiles = {
 		"moreplants_coral1.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -849,7 +849,7 @@ minetest.register_node("moreplants:coral2", {
 	tiles = {
 		"moreplants_coral2.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -869,7 +869,7 @@ minetest.register_node("moreplants:pinkflower", {
 	tiles = {
 		"moreplants_pinkflower.png",
 	},
-	groups = {snappy=3, flammable=1, attatched_node=1, flower=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flower=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 

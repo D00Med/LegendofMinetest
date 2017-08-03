@@ -24,7 +24,7 @@ mobs:register_mob("mobs_loz:zora_male", {
 	runaway = true,
 	runaway_timer = 40,
 	jump = false,
-		stepheight = 1.5,
+		stepheight = 0,
 		fly = true,
 		fly_in = "default:water_source",
 	jump_height = 0,
@@ -59,7 +59,7 @@ mobs:register_mob("mobs_loz:zora_male", {
 	do_custom = function(self)
 
 		if not self.child
-		and math.random(1, 20000) == 1 then
+		and math.random(1, 50000) == 1 then
 
 			local pos = self.object:getpos()
 
@@ -92,7 +92,7 @@ mobs:register_mob("mobs_loz:zora_female", {
 	runaway = true,
 	runaway_timer = 40,
 	jump = false,
-		stepheight = 1.5,
+		stepheight = 0,
 		fly = true,
 		fly_in = "default:water_source",
 	jump_height = 0,
@@ -127,7 +127,7 @@ mobs:register_mob("mobs_loz:zora_female", {
 	do_custom = function(self)
 
 		if not self.child
-		and math.random(1, 20000) == 1 then
+		and math.random(1, 50000) == 1 then
 
 			local pos = self.object:getpos()
 
