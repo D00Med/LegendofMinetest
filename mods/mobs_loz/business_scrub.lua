@@ -34,6 +34,32 @@ mobs:register_mob("mobs_loz:business_scrub", {
 	on_activate = function(self)
 		set_animation(self, "stand")
 	end,
+	on_rightclick = function(self, clicker)
+		local item = clicker:get_wielded_item()
+		if item:get_name() == "farming:carrot" then
+		item:take_item()
+		clicker:set_wielded_item(item)
+		local pos = self.object:getpos()
+		minetest.add_particlespawner({
+			amount = 3,
+			time = 1.5,
+			minpos = {x=pos.x-0.2, y=pos.y+0.5, z=pos.z-0.2},
+			maxpos = {x=pos.x+0.2, y=pos.y+0.1, z=pos.z+0.2},
+			minvel = {x=-1, y=2, z=-1},
+			maxvel = {x=1, y=4, z=1},
+			minacc = {x=0, y=-7, z=0},
+			maxacc = {x=0, y=-7, z=0},
+			minexptime = 1,
+			maxexptime = 2,
+			minsize = 1,
+			maxsize = 2,
+			collisiondetection = false,
+			texture = "hyruletools_heart.png"
+		})
+		minetest.env:add_entity(pos, "mobs_loz:business_scrub_passive")
+		self.object:remove()
+		end
+	end,
 	water_damage = 0,
 	lava_damage = 1,
 	light_damage = 0,
@@ -202,6 +228,28 @@ mobs:register_mob("mobs_loz:business_scrub_passive", {
 	},
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
+		
+		if item:get_name() == "farming:carrot" then
+		item:take_item()
+		clicker:set_wielded_item(item)
+		local pos = self.object:getpos()
+		minetest.add_particlespawner({
+			amount = 3,
+			time = 1.5,
+			minpos = {x=pos.x-0.2, y=pos.y+0.9, z=pos.z-0.2},
+			maxpos = {x=pos.x+0.2, y=pos.y+0.6, z=pos.z+0.2},
+			minvel = {x=-1, y=2, z=-1},
+			maxvel = {x=1, y=4, z=1},
+			minacc = {x=0, y=-7, z=0},
+			maxacc = {x=0, y=-7, z=0},
+			minexptime = 1,
+			maxexptime = 2,
+			minsize = 2,
+			maxsize = 3,
+			collisiondetection = false,
+			texture = "hyruletools_heart.png"
+		})
+		end
 		
 		if item:get_name() == "hyruletools:green_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
