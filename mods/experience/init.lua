@@ -8,7 +8,7 @@ level1 = 50
 level1_drop = "bucket:bucket_empty 1"
 
 level2 = 100
-level2_drop = "default:steelblock 5"
+level2_drop = "default:steel_sword 1"
 
 level3 = 150
 level3_drop = "default:goldblock 1"
@@ -32,7 +32,19 @@ level9 = 450
 level9_drop = "default:mese 1"
 
 level10 = 500
-level10_drop = "default:sword_mese 1"
+level10_drop = "hyruletools:dungeon_spawner 1"
+
+level11 = 650
+level11_drop = "default:sword_mese 1"
+
+level11 = 80
+level11_drop = "hyruletools:dungeon_spawner2 1"
+
+level12 = 900
+level12_drop = "default:sword_mese 1"
+
+level13 = 1000
+level13_drop = "hyruletools:crest 1"
 
 
 

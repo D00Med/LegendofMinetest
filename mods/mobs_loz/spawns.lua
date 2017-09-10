@@ -1,7 +1,15 @@
 
 --friendlies
 mobs:spawn({
-	name = "mobs_loz:zora",
+	name = "mobs_loz:zora_male",
+	nodes = {"default:water_source"},
+	min_light = 10,
+	chance = 15000,
+	min_height = 0,
+	day_toggle = true,
+})
+mobs:spawn({
+	name = "mobs_loz:zora_female",
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,

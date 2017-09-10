@@ -7,7 +7,7 @@ mobs:register_mob("mobs_loz:armos", {
 	damage = 3,
 	hp_min = 10,
 	hp_max = 27,
-	armor = 90,
+	armor = 100,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 1.5, 0.5},
 	visual = "mesh",
 	mesh = "armos.b3d",

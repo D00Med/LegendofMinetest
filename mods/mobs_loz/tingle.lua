@@ -3,7 +3,7 @@ mobs:register_mob("mobs_loz:tingle", {
 	passive = true,
 	hp_min = 13,
 	hp_max = 27,
-	armor = 90,
+	armor = 150,
 	collisionbox = {-0.2, -0, -0.2, 0.2, 1.3, 0.2},
 	--visual_size = {x=1.5, y=1.5},
 	visual = "mesh",
@@ -35,7 +35,7 @@ mobs:register_mob("mobs_loz:tingle", {
 		local pos = self.object:getpos()
 		minetest.chat_send_player(name, "Tingle, Tingle! Kooloo-Limpah!")
 		self.state = "stand"
-		set_animation(self, "punch")
+		self.object:set_animation({x=1, y=20}, 12, 0)
 			minetest.add_particlespawner({
 			amount = 3,
 			time = 1.5,

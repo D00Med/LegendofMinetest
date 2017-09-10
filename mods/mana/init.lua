@@ -22,7 +22,7 @@ mana.playerlist = {}
 mana.settings = {}
 mana.settings.default_max = 200
 mana.settings.default_regen = 1
-mana.settings.regen_timer = 0.4
+mana.settings.regen_timer = 1
 
 do
 	local default_max = tonumber(minetest.setting_get("mana_default_max"))
@@ -230,8 +230,8 @@ minetest.register_on_joinplayer(function(player)
 	mana.setmax(playername, 200)
 	player:hud_add({
 			hud_elem_type = "statbar",
-			position = {x=0.842,y=0.02},
-			size = {x=248, y=34},
+			position = {x=0.992,y=0.02},
+			size = {x=247, y=34},
 			text = "hud_mana_bg.png",
 			number = 2.1,
 			alignment = {x=0,y=1},
@@ -240,7 +240,7 @@ minetest.register_on_joinplayer(function(player)
 		)
 	mana_hud = player:hud_add({
 			hud_elem_type = "statbar",
-			position = {x=0.847,y=0.02},
+			position = {x=0.994,y=0.02},
 			size = {x=24, y=34},
 			text = "hud_mana.png",
 			number = mana.get(playername)/10,

@@ -10,7 +10,7 @@ mobs:register_mob("mobs_loz:goron", {
 	attack_type = "dogfight",
 	hp_min = 10,
 	hp_max = 25,
-	armor = 80,
+	armor = 100,
 	collisionbox = {-0.4, 0, -0.4, 0.4, 1.5, 0.4},
 	visual = "mesh",
 	mesh = "goron.b3d",

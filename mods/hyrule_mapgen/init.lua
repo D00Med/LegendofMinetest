@@ -141,7 +141,7 @@ minetest.register_lbm({
 	nodenames = {"moreplants:tallgrass", "moreplants:bulrush"},
 	run_at_every_load = true,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		if math.random(1,3) == 3 then
+		if math.random(1,50) == 3 then
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:dragonfly")
 		end
 	end
@@ -240,22 +240,22 @@ minetest.register_abm({
 	interval = 5,
 	chance = 5,
 	action = function(pos, node)
-		minetest.add_particlespawner({
-			amount = 10,
-			time = 4,
-			minpos = {x=pos.x-0.5, y=pos.y+0.3, z=pos.z-0.5},
-			maxpos = {x=pos.x+0.5, y=pos.y+0.5, z=pos.z+0.5},
-			minvel = {x=-0, y=0.5, z=-0},
-			maxvel = {x=0, y=0.5, z=0},
-			minacc = {x=0, y=0.5, z=0},
-			maxacc = {x=0, y=0.5, z=0},
-			minexptime = 0.5,
-			maxexptime = 2,
-			minsize = 1,
-			maxsize = 2,
+		for i=1,10 do
+		minetest.after(i*0.4, function()
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-5,5)/10, y=pos.y+0.3, z=pos.z+math.random(-5,5)/10},
+			velocity = {x=0, y=0.5, z=0},
+			acceleration = {x=0, y=0.5, z=0},
+			expirationtime = math.random(5,20)/10,
+			size = math.random(1,2),
 			collisiondetection = false,
-			texture = "mobs_fairy_spark.png"
+			collisionremoval = false,
+			vertical = false,
+			texture = "mobs_fairy_spark.png",
+			glow = 9
 		})
+		end)
+		end
 	end
 })
 
@@ -315,12 +315,12 @@ minetest.register_entity("hyrule_mapgen:dragonfly", {
 	visual_size = {x=0.3, y=0.3},
 	on_activate = function(self)
 		num = math.random(1,4)
-		--self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
+		self.object:set_properties({textures = {"hyrule_mapgen_dragonfly"..num..".png",},})
 		self.object:set_animation({x=1, y=10}, 40, 0)
 		self.object:setyaw(math.pi+num)
-		--minetest.after(10, function()
-		--self.object:remove()
-		--end)
+		minetest.after(60, function()
+		self.object:remove()
+		end)
 		if math.random(1,100) == 1 then
 		self.object:remove()
 		end
@@ -339,6 +339,40 @@ minetest.register_entity("hyrule_mapgen:dragonfly", {
 })
 
 --overrides
+
+local dirt_treasure = {
+	{"hyruletools:green_rupee", 10},
+	{"fishing:bait_worm", 10},
+	{"hyruletools:blue_rupee", 20},
+	{"hyruletools:red_rupee", 40},
+}
+
+local shovels = {
+	{"default:shovel_steel"},
+	{"default:shovel_wood"},
+	{"default:shovel_bronze"},
+	{"default:shovel_diamond"},
+	{"default:shovel_mese"},
+	{"default:shovel_stone"},
+	}
+
+for _, row in ipairs(shovels) do
+minetest.override_item(row[1], {
+	on_place = function(itemstack, placer, pointed_thing)
+		if minetest.get_node(pointed_thing.under).name == "default:dirt" or minetest.get_node(pointed_thing.under).name == "default:dirt_with_grass" or minetest.get_node(pointed_thing.under).name == "default:dirt_with_grass2" or minetest.get_node(pointed_thing.under).name == "default:dirt_with_grass3" then
+		minetest.set_node(pointed_thing.under, {name="hyrule_mapgen:packed_dirt"})
+		for _, row in ipairs(dirt_treasure) do
+			local item = row[1]
+			local chance = row[2]
+			local pos = pointed_thing.under
+			if math.random(1, chance) == 1 then
+				minetest.add_item({x=pos.x, y=pos.y+1.2,z=pos.z}, item)
+			end
+		end
+		end
+	end,
+})
+end
 
 minetest.override_item("flowers:waterlily", {
 	drawtype = "mesh",
@@ -500,6 +534,24 @@ minetest.override_item("default:furnace", {
 	},
 })
 
+minetest.override_item("default:furnace_active", {
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.3125, 0.5}, -- NodeBox1
+			{-0.4375, 0.375, -0.5, 0.4375, 0.4375, 0.5}, -- NodeBox2
+			{-0.375, 0.4375, -0.5, 0.375, 0.5, 0.5}, -- NodeBox3
+			{-0.5, 0.3125, -0.5, 0.5, 0.375, 0.5}, -- NodeBox4
+			{-0.5, -0.5, -0.5, -0.3125, 0.3125, 0.5}, -- NodeBox5
+			{0.3125, -0.5, -0.5, 0.5, 0.375, 0.5}, -- NodeBox6
+			{-0.5, -0.0625, -0.5, 0.5, 0.0625, 0.5}, -- NodeBox7
+			{-0.5, -0.5, -0.375, 0.5, 0.3125, 0.5}, -- NodeBox8
+		}
+	},
+})
+
 minetest.override_item("default:chest_locked", {
 	paramtype = "light",
 	drawtype = "nodebox",
@@ -594,6 +646,124 @@ minetest.override_item("default:stone_with_gold", {
 
 --new nodes
 
+minetest.register_node("hyrule_mapgen:chillshroom", {
+	description = "Chillshroom",
+	tiles = {"hyrule_mapgen_chillshroom.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1, -0.5, -0.1, 0.1, -0.1, 0.1}
+		}
+	},
+	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_leaves_defaults(),
+	drop = "hyrule_mapgen:chillshroom 3",
+	walkable = false,
+	on_use = minetest.item_eat(1)
+})
+
+minetest.register_node("hyrule_mapgen:chillshroom_2", {
+	description = "Chillshroom (ceiling)",
+	tiles = {"hyrule_mapgen_chillshroom.png^[transformFY"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1, 0.1, -0.1, 0.1, 0.5, 0.1}
+		}
+	},
+	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_leaves_defaults(),
+	drop = "hyrule_mapgen:chillshroom 3",
+	walkable = false,
+	on_use = minetest.item_eat(1)
+})
+
+minetest.register_node("hyrule_mapgen:sunshroom", {
+	description = "Sunshroom",
+	tiles = {"hyrule_mapgen_sunshroom.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1, -0.5, -0.1, 0.1, -0.1, 0.1}
+		}
+	},
+	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3, flammable=1},
+	sounds = default.node_sound_leaves_defaults(),
+	drop = "hyrule_mapgen:sunshroom 3",
+	walkable = false,
+	on_use = minetest.item_eat(1)
+})
+
+minetest.register_node("hyrule_mapgen:zapshroom", {
+	description = "Zapshroom",
+	tiles = {"hyrule_mapgen_zapshroom.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1, -0.5, -0.1, 0.1, -0.1, 0.1}
+		}
+	},
+	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_leaves_defaults(),
+	drop = "hyrule_mapgen:zapshroom 3",
+	walkable = false,
+	on_use = minetest.item_eat(1)
+})
+
+minetest.register_node("hyrule_mapgen:rushroom", {
+	description = "Rushroom",
+	tiles = {"hyrule_mapgen_rushroom.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1, -0.5, -0.1, 0.1, -0.1, 0.1}
+		}
+	},
+	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_leaves_defaults(),
+	drop = "hyrule_mapgen:rushroom 3",
+	walkable = false,
+	on_use = minetest.item_eat(1)
+})
+
+minetest.register_node("hyrule_mapgen:berry_bush", {
+	description = "Wildberry Bush",
+	tiles = {"hyrule_mapgen_wildberry_bush.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1, -0.5, -0.1, 0.1, 0, 0.1}
+		}
+	},
+	groups = {snappy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	sounds = default.node_sound_leaves_defaults(),
+	walkable = false,
+	on_rightclick = function(pos, node)
+		minetest.add_item(pos, "hyrule_mapgen:wildberry")
+		minetest.add_item(pos, "hyrule_mapgen:wildberry")
+		minetest.add_item(pos, "hyrule_mapgen:wildberry")
+		minetest.remove_node(pos)
+	end,
+})
+
+minetest.register_craftitem("hyrule_mapgen:wildberry", {
+	description = "Wild Berry",
+	inventory_image = "hyrule_mapgen_wildberry.png",
+	on_use = minetest.item_eat(1)
+})
+
 minetest.register_node("hyrule_mapgen:logpile", {
 	description = "Log Pile",
 	tiles = {
@@ -620,6 +790,14 @@ minetest.register_node("hyrule_mapgen:logpile", {
 	},
 	groups = {choppy=3, oddly_breakable_by_hand=1, flammable=1, falling_node=1},
 	drop = "default:tree 3",
+})
+
+minetest.register_craft( {
+	output = "hyrule_mapgen:logpile 1",
+	recipe = {
+		{ "", "default:tree", "" },
+		{ "default:tree", "", "default:tree" }
+	}
 })
 
 minetest.register_node("hyrule_mapgen:bigmush", {
@@ -773,6 +951,28 @@ minetest.register_node("hyrule_mapgen:dungeon_seed", {
 	drop = "default:stone"
 })
 
+minetest.register_node("hyrule_mapgen:moldorm_stone", {
+	description = "Moldorm Stone",
+	tiles = {"hyrule_mapgen_moldorm_stone.png"},
+	groups = {},
+	sounds = default.node_sound_stone_defaults(),
+	on_rightclick = function(pos, node, clicker, itemstack)
+		minetest.env:add_entity({x=pos.x, y=pos.y+1, z=pos.z}, "mobs_loz:great_moldorm")
+		minetest.remove_node(pos)
+	end,
+})
+
+minetest.register_node("hyrule_mapgen:octorock_stone", {
+	description = "Octorock Stone",
+	tiles = {"hyrule_mapgen_octorock_stone.png"},
+	groups = {},
+	sounds = default.node_sound_stone_defaults(),
+	on_rightclick = function(pos, node, clicker, itemstack)
+		minetest.env:add_entity({x=pos.x, y=pos.y+1, z=pos.z}, "mobs_loz:octorock_boss")
+		minetest.remove_node(pos)
+	end,
+})
+
 minetest.register_node("hyrule_mapgen:ice_brick", {
 	description = "Ice Brick",
 	tiles = {"hyrule_mapgen_ice_brick.png"},
@@ -910,7 +1110,7 @@ minetest.register_node("hyrule_mapgen:beamos", {
 
 minetest.register_abm({
 	nodenames = {"hyrule_mapgen:beamos"},
-	interval = 1,
+	interval = 0.8,
 	chance = 1,
 	action = function(pos, node)
 		local x = 0
@@ -925,33 +1125,20 @@ minetest.register_abm({
 			x = 1
 		end
 		--minetest.chat_send_all(node.param2)
-		local numbers = {
-		{1},
-		{2},
-		{3},
-		{4},
-		}
-		for _, number in ipairs(numbers) do
-		local num = number[1]
-		local objs = minetest.get_objects_inside_radius({x=pos.x+x*num, y=pos.y, z=pos.z+z*num}, 1)
+		for num=1,5 do
+		local objs = minetest.get_objects_inside_radius({x=pos.x+x*num, y=pos.y-0.5, z=pos.z+z*num}, 1)
 		for _, obj in ipairs(objs) do
 			if obj:is_player() then
 				local name = obj:get_player_name()
-				minetest.sound_play("Laser", {to_player=obj, gain=0.5})
+				minetest.sound_play("Laser", {pos=pos, max_hear_distance=10, gain=0.5})
 				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
-				ent:setvelocity({x=7*x, y=0, z=7*z})
-				minetest.after(0.1, function()
+				ent:setvelocity({x=12*x, y=0, z=12*z})
+				for i=1,5 do
+				minetest.after(i/10, function()
 				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
-				ent:setvelocity({x=7*x, y=0, z=7*z})
+				ent:setvelocity({x=12*x, y=0, z=12*z})
 				end)
-				minetest.after(0.2, function()
-				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
-				ent:setvelocity({x=7*x, y=0, z=7*z})
-				end)
-				minetest.after(0.3, function()
-				local ent = minetest.env:add_entity(pos, "hyrule_mapgen:laser")
-				ent:setvelocity({x=7*x, y=0, z=7*z})
-				end)
+				end
 			end
 		end
 		end
@@ -1002,18 +1189,18 @@ minetest.register_node("hyrule_mapgen:sinkingsand", {
 
 
 chest_items = {
-	{"clawshot:clawshot", 20},
-	{"hyruletools:eye", 20},
-	{"hyruletools:boomerang", 20},
-	{"hyruletools:flame_rod", 50},
-	{"hyruletools:wand", 50},
-	{"hyruletools:medallion", 50},
-	{"hyruletools:medallion2", 50},
-	{"hyruletools:medallion3", 50},
-	{"hyruletools:green_rupee 5", 10},
-	{"hyruletools:blue_rupee 2", 10},
-	{"hyruletools:red_rupee", 10},
-	{"hyruletools:nyan_rupee", 50},
+	{"clawshot:clawshot", 5},
+	{"hyruletools:eye", 5},
+	{"hyruletools:boomerang", 5},
+	{"hyruletools:flame_rod", 10},
+	{"hyruletools:wand", 10},
+	{"hyruletools:medallion", 10},
+	{"hyruletools:medallion2", 10},
+	{"hyruletools:medallion3", 10},
+	{"hyruletools:ice_rod 1", 5},
+	{"hyruletools:blue_rupee 20", 5},
+	{"hyruletools:red_rupee 10", 5},
+	{"hyruletools:nyan_rupee", 5},
 }
 
 minetest.register_node("hyrule_mapgen:chest", {
@@ -1042,7 +1229,8 @@ minetest.register_node("hyrule_mapgen:chest", {
 		local rarity = row[2]
 		if math.random(1,rarity) == 1 then
 			meta:set_string("item", item)
-			else
+			return
+		else
 			meta:set_string("item", "hyruletools:green_rupee 20")
 		end
 		end
@@ -1387,23 +1575,22 @@ minetest.register_abm({
 	interval = 1,
 	chance = 2,
 	action = function(pos, node)
-		minetest.add_particlespawner({
-			amount = 30,
-			time = 4,
-			minpos = {x=pos.x-0.2, y=pos.y, z=pos.z-0.2},
-			maxpos = {x=pos.x+0.2, y=pos.y+1, z=pos.z+0.2},
-			minvel = {x=-0.1, y=1, z=-0.1},
-			maxvel = {x=0.1, y=2, z=0.1},
-			minacc = {x=0, y=-0.5, z=0},
-			maxacc = {x=0, y=-1, z=0},
-			minexptime = 1,
-			maxexptime = 2,
-			minsize = 3,
-			maxsize = 5,
+		for i=1,30 do
+		minetest.after(i*0.13, function()
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y+math.random(0,3)/10, z=pos.z},
+			velocity = {x=math.random(-1,1)/10, y=math.random(1,2), z=math.random(-1,1)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			expirationtime = math.random(5,10)/10,
+			size = math.random(3,5),
 			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
 			texture = "hyrule_mapgen_fire.png",
-			glow = 14
+			glow = 9
 		})
+		end)
+		end
 	end
 })
 
@@ -1814,6 +2001,15 @@ minetest.register_node("hyrule_mapgen:floorbrick", {
 	groups = {cracky=1}
 })
 
+stairs.register_stair_and_slab(
+	"floortile",
+	"hyrule_mapgen:floortile",
+	{cracky = 3, cools_lava = 1},
+	{"hyrule_mapgen_floortile.png"},
+	"Floor Tile Stair",
+	"Floor Tile Slab",
+	default.node_sound_stone_defaults()
+)
 
 minetest.register_node("hyrule_mapgen:carpet", {
 	description = "Carpet Block",
@@ -1955,22 +2151,22 @@ minetest.register_abm({
 	interval = 1,
 	chance = 1,
 	action = function(pos, node)
-		local part = minetest.add_particlespawner(
-			5, --amount
-			1, --time
-			{x=pos.x-0.1, y=pos.y, z=pos.z-0.1}, --minpos
-			{x=pos.x+0.1, y=pos.y+0.2, z=pos.z+0.1}, --maxpos
-			{x=-0, y=0.5, z=-0}, --minvel
-			{x=0, y=1, z=0}, --maxvel
-			{x=0,y=0.5,z=0}, --minacc
-			{x=0.5,y=0.5,z=0.5}, --maxacc
-			0.2, --minexptime
-			0.5, --maxexptime
-			4, --minsize
-			8, --maxsize
-			false, --collisiondetection
-			"hyrule_mapgen_flame.png" --texture
-		)
+		for i=1,5 do
+		minetest.after(i*0.2, function()
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-2,2)/10, y=pos.y, z=pos.z+math.random(-2,2)/10},
+			velocity = {x=0, y=math.random(5,10)/10, z=0},
+			acceleration = {x=math.random(0,5)/10, y=0.5, z=math.random(0,5)/10},
+			expirationtime = math.random(2,5)/10,
+			size = math.random(4,8),
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "hyruletools_flame.png",
+			glow = 9
+		})
+		end)
+		end
 	end
 })
 
@@ -2108,6 +2304,16 @@ minetest.register_node("hyrule_mapgen:dungeon_brick", {
 	groups = {cracky=3},
 })
 
+stairs.register_stair_and_slab(
+	"dungeon_brick",
+	"hyrule_mapgen:dungeon_brick",
+	{cracky = 3, cools_lava = 1},
+	{"hyrule_mapgen_dungeon_brick.png"},
+	"Retro Dungeon Stair",
+	"Retro Dungeon Slab",
+	default.node_sound_stone_defaults()
+)
+
 minetest.register_node("hyrule_mapgen:dungeon_barrier2", {
 	description = "Retro Dungeon Barrier 2",
 	tiles = {
@@ -2131,6 +2337,16 @@ minetest.register_node("hyrule_mapgen:dungeon_brick2", {
 	},
 	groups = {cracky=3},
 })
+
+stairs.register_stair_and_slab(
+	"dungeon_brick2",
+	"hyrule_mapgen:dungeon_brick2",
+	{cracky = 3, cools_lava = 1},
+	{"hyrule_mapgen_dungeon_brick2.png"},
+	"Retro Dungeon Stair 2",
+	"Retro Dungeon Slab 2",
+	default.node_sound_stone_defaults()
+)
 
 minetest.register_node("hyrule_mapgen:dungeon_torch", {
 	description = "Dungeon Torch",
@@ -2600,7 +2816,7 @@ minetest.register_craft({
 minetest.register_node("hyrule_mapgen:boulder", {
 	description = "Boulder",
 	tiles = {
-		"default_stone.png",
+		"hyrule_mapgen_boulder.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -2674,7 +2890,7 @@ minetest.register_node("hyrule_mapgen:magic_tree", {
 		"hyrule_mapgen_magic_tree.png"
 	},
 	paramtype = "facedir",
-	groups = {tree=1, choppy=2, flammable=2, oddly_breakable_by_hand = 1, not_in_creative_inventory=1},
+	groups = {tree=1, choppy=2, flammable=2, oddly_breakable_by_hand = 1,},
 	on_place = minetest.rotate_node
 })
 
@@ -2684,7 +2900,7 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 	tiles = {
 		"hyrule_mapgen_magic_leaves.png"
 	},
-	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1, not_in_creative_inventory=1},
+	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1,},
 	paramtype = "light",
 	walkable = false,
 })
@@ -2731,7 +2947,7 @@ minetest.register_node("hyrule_mapgen:palm_leaves", {
 		"hyrule_mapgen_palm_leaf.png"
 	},
 	inventory_image = "hyrule_mapgen_palm_leaf.png",
-	visual_scale = 3,
+	visual_scale = 6,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1, not_in_creative_inventory=1},
 	paramtype = "light",
@@ -2753,6 +2969,10 @@ minetest.register_node("hyrule_mapgen:coconut", {
 	groups = {snappy=3, flammable=1, oddly_breakable_by_hand = 1, not_in_creative_inventory=1},
 	paramtype = "light",
 	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.3, -0.2, 0.2, 0.3, 0.2}
+	},
 	on_use = minetest.item_eat(2)
 })
 
@@ -2767,7 +2987,7 @@ minetest.register_node("hyrule_mapgen:wild_tree", {
 		"hyrule_mapgen_wild_tree.png"
 	},
 	paramtype = "facedir",
-	groups = {tree=1, choppy=2, oddly_breakable_by_hand = 1, flammable=2, not_in_creative_inventory=1},
+	groups = {tree=1, choppy=2, oddly_breakable_by_hand = 1, flammable=2,},
 	on_place = minetest.rotate_node
 })
 
@@ -2779,7 +2999,7 @@ minetest.register_node("hyrule_mapgen:wild_leaves", {
 	},
 	wield_image = "hyrule_mapgen_wild_leaves.png",
 	inventory_image = "hyrule_mapgen_wild_leaves.png",
-	groups = {snappy=3, flammable=1, oddly_breakable_by_hand = 1, leafdecay=3, leaves=1, not_in_creative_inventory=1},
+	groups = {snappy=3, flammable=1, oddly_breakable_by_hand = 1, leafdecay=3, leaves=1,},
 	paramtype = "light",
 	walkable = false,
 })

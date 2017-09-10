@@ -881,6 +881,52 @@ minetest.register_decoration({
 	y_min = 0,
 	y_max = 50,
 })
+--berry bushes and mushrooms
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:snowblock", "default:dirt_with_snow"},
+	sidelen = 26,
+	fill_ratio = 0.002,
+	biomes = {"taiga"},
+	decoration = "hyrule_mapgen:berry_bush",
+	height = 1,
+})
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:snowblock", "default:dirt_with_snow"},
+	sidelen = 26,
+	fill_ratio = 0.002,
+	biomes = {"taiga"},
+	decoration = "hyrule_mapgen:chillshroom",
+	height = 1,
+})
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:desert_sand", "default:desert_stone"},
+	sidelen = 26,
+	fill_ratio = 0.002,
+	biomes = {"desert"},
+	decoration = "hyrule_mapgen:sunshroom",
+	height = 1,
+})
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:dirt_with_grass2"},
+	sidelen = 26,
+	fill_ratio = 0.002,
+	biomes = {"lost_woods"},
+	decoration = "hyrule_mapgen:zapshroom",
+	height = 1,
+})
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:dirt_with_dry_grass"},
+	sidelen = 26,
+	fill_ratio = 0.002,
+	biomes = {"savanna"},
+	decoration = "hyrule_mapgen:rushroom",
+	height = 1,
+})
 
 -- Jungle tree
 minetest.register_decoration({
@@ -1577,6 +1623,7 @@ minetest.register_ore({
 
 moreplants.mapgen()
 farming.register_mgv7_decorations()
+flowers.register_decorations()
 
 local frequency = 5
 
@@ -1619,6 +1666,22 @@ minetest.register_on_generated(function(minp, maxp)
 					else
 					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:stalagtite3"})
 					end
+				end
+		end
+	end
+end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y > -3 or maxp.y < -500 then
+		return
+	end
+	local stone = minetest.find_nodes_in_area(minp, maxp,
+		{"default:ice"})
+	for n = 1, #stone do
+		if math.random(1, 50) == 1 then
+			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
+				if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
+					minetest.add_node({x=pos.x, y=pos.y-1, z=pos.z}, {name = "hyrule_mapgen:chillshroom_2"})
 				end
 		end
 	end
@@ -1715,6 +1778,7 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/witch_hut.mts", 0, {}, true)
+				minetest.after(0.1, function()
 				local obj = minetest.env:add_entity({x=pos.x+7, y=pos.y+7, z=pos.z+4}, "mobs_npc:npc_custom")
 				local npc = obj:get_luaentity()
 				npc.text = "I'll give you something nice if you find me a 'big mushroom'"
@@ -1724,6 +1788,7 @@ minetest.register_on_generated(function(minp, maxp)
 				npc.xdir = -1
 				npc.skin = "mobs_witch.png"
 				npc.object:set_properties({textures = {"mobs_witch.png"}})
+				end)
 				end
 		end
 	end
@@ -1740,6 +1805,7 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/pine_village.mts", 0, {}, true)
+				minetest.after(0.1, function()
 				local obj = minetest.env:add_entity({x=pos.x+4, y=pos.y+7, z=pos.z+5}, "mobs_npc:shopkeeper")
 				local obj = minetest.env:add_entity({x=pos.x+6, y=pos.y+3, z=pos.z+18}, "mobs_npc:npc_custom")
 				local npc = obj:get_luaentity()
@@ -1757,6 +1823,7 @@ minetest.register_on_generated(function(minp, maxp)
 				npc2.reward_item = "witchcraft:potion_herbal"
 				npc2.skin = "mobs_witch.png"
 				npc2.zdir = -1
+				end)
 				end
 		end
 	end
@@ -1773,6 +1840,7 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = grass[n].x, y = grass[n].y, z = grass[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/savanna_village.mts", 0, {}, true)
+				minetest.after(0.1, function()
 				local shopkeeper = minetest.env:add_entity({x=pos.x+6, y=pos.y+6, z=pos.z+2}, "mobs_npc:shopkeeper")
 				local windmill = minetest.env:add_entity({x=pos.x+23, y=pos.y+13, z=pos.z+29}, "hyrule_mapgen:windmill")
 				local obj = minetest.env:add_entity({x=pos.x+9, y=pos.y+9, z=pos.z+33}, "mobs_npc:npc_custom")
@@ -1783,6 +1851,7 @@ minetest.register_on_generated(function(minp, maxp)
 				npc.reward_item = "hyruletools:green_rupee"
 				npc.item_count = 500
 				npc.zdir = -1
+				end)
 				end
 		end
 	end
@@ -1797,6 +1866,7 @@ minetest.register_on_generated(function(minp, maxp)
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/world"..num..".mts", 0, {}, true)
 				if num == 1 then
+				minetest.after(0.1, function()
 				local obj = minetest.env:add_entity({x=pos.x+5, y=pos.y+3, z=pos.z+4}, "mobs_npc:npc_custom")
 				local npc = obj:get_luaentity()
 				npc.text = "Deku Scrubs have been scaring my animals..."
@@ -1806,15 +1876,18 @@ minetest.register_on_generated(function(minp, maxp)
 				npc.skin = "mobs_farmer.png"
 				npc.item_count = 10
 				npc.zdir = -1
+				end)
 				end
 				
 				if num == 5 then
+				minetest.after(0.1, function()
 				local obj = minetest.env:add_entity({x=pos.x+3, y=pos.y+3, z=pos.z+3}, "mobs_npc:npc_custom")
 				local npc = obj:get_luaentity()
 				npc.skin = "mobs_npc_old.png"
 				npc.text = "It's dangerous to travel in darkness"
 				npc.item = "hyruletools:lantern"
 				npc.xdir = 1
+				end)
 				end
 				end
 		end
@@ -1858,7 +1931,7 @@ minetest.register_on_generated(function(minp, maxp)
 			else
 			local number = math.random(1,5)
 				if math.random(1,5) == 1 then
-				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon"..number..".mts", 0, {{["hyrule_mapgen:chest"] = "hyrule_mapgen:chest_key",}}, true)
+				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon"..number..".mts", 0, {["hyrule_mapgen:chest"] = "hyrule_mapgen:chest_key",}, true)
 				minetest.add_node({x=pos.x+math.random(1,12), y=pos.y+1, z=pos.z+math.random(1,12)}, {name = "mobs_loz:mimic_chest"})
 				else
 				minetest.place_schematic(pos, minetest.get_modpath("hyrule_mapgen").."/schematics/dungeon"..number..".mts", 0, {}, true)

@@ -9,11 +9,61 @@ local counter1 = nil
 local counter2 = nil
 local counter3 = nil
 
+local players = {}
+
+minetest.register_on_joinplayer(function(player)
+	local name = player:get_player_name()
+	players[name] = true
+end)
+
+minetest.register_on_leaveplayer(function(player)
+	local name = player:get_player_name()
+	players[name] = nil
+end)
+
 minetest.register_globalstep(function()
-	for _, player in ipairs(minetest.get_connected_players()) do
-		if player:get_player_name() ~= "singleplayer" then
-		return
+	for name, _ in pairs(players) do
+		local player = minetest.get_player_by_name(name)
+		if player:get_wielded_item():get_name() == "hyruletools:climbing_gloves" then
+			local pos = player:getpos()
+			local item = player:get_wielded_item()
+			item:add_wear(5)
+			player:set_wielded_item(item)
+			local climbable = minetest.find_node_near(pos, 1, {"default:stone", "default:obsidian", "default:sandstone", "default:ice", "default:desert_stone", "default:cobblestone", "default:desert_cobblestone"})
+			if climbable and minetest.get_node(pos).name == "air" then
+				minetest.set_node(pos, {name="hyruletools:climbable"})
+			end
+			for i=1,2 do
+			local remove_node = minetest.find_node_near(pos, 1, {"hyruletools:climbable"})
+			if remove_node then
+				minetest.remove_node(remove_node)
+			end
+			end
+		--[[else
+			local remove_node = minetest.find_node_near(player:getpos(), 1, {"hyruletools:climbable"})
+			if remove_node then
+				minetest.remove_node(remove_node)
+			end]]
+		elseif player:get_wielded_item():get_name() == "hyruletools:lantern" then
+		--minetest.chat_send_all("blah")
+			local pos = player:getpos()
+			pos.y = pos.y+1
+			if minetest.get_node(pos).name == "air" then
+			local item = player:get_wielded_item()
+			item:add_wear(30)
+			player:set_wielded_item(item)
+				minetest.set_node(pos, {name="hyruletools:light"})
+			end
+			for i=1,2 do
+			local remove_node = minetest.find_node_near(pos, 1, {"hyruletools:light"}, false)
+			if remove_node then
+				minetest.remove_node(remove_node)
+			end
+			end
 		end
+	end
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_player_name() ~= "singleplayer" then return end
 		count = 0
 		count2 = 0
 		count3 = 0
@@ -553,6 +603,203 @@ minetest.register_tool("hyruletools:magglv_s", {
 	end,
 })
 
+
+minetest.register_craftitem("hyruletools:dungeon_spawner", {
+	description = "Dungeon Spawner",
+	inventory_image = "hyruletools_dungeon_spawner.png",
+	on_use = function(itemstack, user, pointed_thing)
+		if pointed_thing == nil then return end
+		local node = minetest.get_node(pointed_thing.under).name
+		local pos = pointed_thing.under
+		pos.y = pos.y+1
+		if node == "default:dirt_with_dry_grass" then
+			minetest.place_schematic(pos, minetest.get_modpath("hyruletools").."/schematics/moldorms_lair.mts", 0, {}, true)
+		end
+		itemstack:take_item()
+		return itemstack
+	end,
+})
+
+minetest.register_craftitem("hyruletools:dungeon_spawner2", {
+	description = "Advanced Dungeon Spawner",
+	inventory_image = "hyruletools_dungeon_spawner2.png",
+	on_use = function(itemstack, user, pointed_thing)
+		if pointed_thing == nil then return end
+		local node = minetest.get_node(pointed_thing.under).name
+		local pos = pointed_thing.under
+		pos.y = pos.y+1
+		if node == "default:dirt_with_dry_grass" then
+			minetest.place_schematic(pos, minetest.get_modpath("hyruletools").."/schematics/moldorms_lair.mts", 0, {}, true)
+		end
+		itemstack:take_item()
+		return itemstack
+	end,
+})
+
+minetest.register_node("hyruletools:beaconb", {
+	description = "Beacon (red)",
+	drawtype = "glasslike",
+	tiles = {"hyruletools_beacon_boxb.png"},
+	use_texture_alpha = true,
+	paramtype = "light",
+	light_source = 5,
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	on_construct = function(pos, node, clicker, itemstack)
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+			minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z}, {name="hyruletools:beacon_lightb"})
+		end
+	end,
+	on_destruct = function(pos, oldnode)
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "hyruletools:beacon_lightb" then
+			minetest.remove_node({x=pos.x, y=pos.y+1, z=pos.z})
+		end
+	end,
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyruletools:beacon_lightb", {
+	description = "Beacon Light",
+	tiles = {"hyruletools_beaconb.png"},
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	pointable = false,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox1
+		}
+	},
+	light_source = 12,
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
+	walkable = false,
+	drop = "",
+	on_construct = function(pos, node)
+	if pos.y >= 41000 then return end
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+			minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z}, {name="hyruletools:beacon_lightb"})
+		end
+	end,
+	on_destruct = function(pos, oldnode)
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "hyruletools:beacon_lightb" then
+			minetest.remove_node({x=pos.x, y=pos.y+1, z=pos.z})
+		end
+	end,
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_abm({
+	nodenames = {"hyruletools:beaconb"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y+0.1, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 30,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "hyruletools_beacon_centerb.png",
+			animation = {type = "vertical_frames", aspect_w = 64, aspect_h = 64, length = 0.30},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_node("hyruletools:beacon", {
+	description = "Beacon (blue)",
+	drawtype = "glasslike",
+	tiles = {"hyruletools_beacon_box.png"},
+	use_texture_alpha = true,
+	paramtype = "light",
+	light_source = 5,
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	on_construct = function(pos, node, clicker, itemstack)
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+			minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z}, {name="hyruletools:beacon_light"})
+		end
+	end,
+	on_destruct = function(pos, oldnode)
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "hyruletools:beacon_light" then
+			minetest.remove_node({x=pos.x, y=pos.y+1, z=pos.z})
+		end
+	end,
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyruletools:beacon_light", {
+	description = "Beacon Light",
+	tiles = {"hyruletools_beacon.png"},
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	pointable = false,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox1
+		}
+	},
+	light_source = 12,
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
+	walkable = false,
+	drop = "",
+	on_construct = function(pos, node)
+	if pos.y >= 41000 then return end
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+			minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z}, {name="hyruletools:beacon_light"})
+		end
+	end,
+	on_destruct = function(pos, oldnode)
+		if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "hyruletools:beacon_light" then
+			minetest.remove_node({x=pos.x, y=pos.y+1, z=pos.z})
+		end
+	end,
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_abm({
+	nodenames = {"hyruletools:beacon"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y+0.1, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 30,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "hyruletools_beacon_center.png",
+			animation = {type = "vertical_frames", aspect_w = 64, aspect_h = 64, length = 0.30},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_craft({
+	output = 'hyruletools:beacon',
+	recipe = {
+		{'default:glass'},
+		{'mobs_loz:soul'},
+		{'hyruletools:blue_ore'},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyruletools:beaconb',
+	recipe = {
+		{'default:glass'},
+		{'mobs_loz:soul'},
+		{'hyruletools:red_ore'},
+	}
+})
+
 minetest.register_tool("hyruletools:shield_classic", {
 	description = "Classic Shield",
 	inventory_image = "shields_inv_shield_classic.png",
@@ -924,7 +1171,8 @@ minetest.register_craftitem("hyruletools:ocarina2", {
 		local dir = placer:get_look_dir();
 		local player = placer:get_player_name()
 		if minetest.setting_getbool("enable_weather") then	
-		weather.state = "thunder"
+		hyrule_weather.weather = "storm"
+		hyrule_weather.current = 3
 		else
 		minetest.chat_send_player(player, "weather not enabled!")
 		end
@@ -1075,7 +1323,90 @@ minetest.register_tool("hyruletools:lantern", {
 	end
 })
 
+minetest.register_node("hyruletools:climbable", {
+	drawtype = "airlike",
+	groups = {not_in_creative_inventory=1},
+	walkable = false,
+	climbable = true,
+	pointable = false,
+})
 
+minetest.register_node("hyruletools:light", {
+	drawtype = "airlike",
+	groups = {not_in_creative_inventory=1},
+	walkable = false,
+	pointable = false,
+	light_source = 10,
+})
+
+minetest.register_abm({
+	nodenames = {"hyruletools:climbable", "hyruletools:light"},
+	interval = 1,
+	chance = 1,
+	action = function(pos, node)
+		minetest.remove_node(pos)
+	end,
+})
+
+minetest.register_tool("hyruletools:climbing_gloves", {
+	description = "Climbing Gloves",
+	inventory_image = "hyruletools_climbing_gloves.png"
+})
+
+minetest.register_craft({
+	output = "hyruletools:climbing_gloves",
+	recipe = {
+		{"default:stick", "", "default:stick"},
+		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"mobs:leather", "",  "mobs:leather"}
+	}
+})
+
+--[[minetest.register_node("hyruletools:climbable2", {
+	drawtype = "airlike",
+	groups = {not_in_creative_inventory=1},
+	walkable = true,
+	pointable = false,
+})
+
+minetest.register_abm({
+	nodenames = {"hyruletools:climbable2"},
+	interval = 1,
+	chance = 1,
+	action = function(pos, node)
+		local objs = minetest.get_objects_inside_radius(pos, 1)
+		local destroy = true
+		for _,obj in ipairs(objs) do
+		if obj:is_player() then
+		destroy = false
+		return destroy
+		end
+		end
+		if destroy then
+		minetest.remove_node(pos)
+		end
+	end,
+})
+
+minetest.register_tool("hyruletools:climbing_gloves2", {
+	description = "Climbing Gloves 2",
+	inventory_image = "hyruletools_climbing_gloves.png",
+	range = 3,
+	on_use = function(itemstack, clicker, pointed_thing)
+		if not pointed_thing then return end
+		local pos = pointed_thing.above
+		local pos2 = clicker:getpos()
+		pos2.y = pos2.y-1
+		if minetest.get_node(pos2).name == "hyruletools:climbable2" then
+			minetest.remove_node(pos2)
+		end
+		clicker:setpos(pos)
+		pos.y = pos.y-1
+		minetest.set_node(pos, {name="hyruletools:climbable2"})
+		itemstack:add_wear(1000)
+		return itemstack
+	end,
+})]]
 
 minetest.register_tool("hyruletools:mirror", {
 	description = "Magic Mirror (use at your own risk!)",
@@ -1170,26 +1501,26 @@ minetest.register_tool("hyruletools:medallion", {
 			if mana.subtract(player, 100) then
 			local playerpos = placer:getpos();
 			--particles
-			minetest.add_particlespawner(
-			12, --amount
-			1.5, --time
-			{x=playerpos.x-0.2, y=playerpos.y+1, z=playerpos.z-0.2},
-			{x=playerpos.x+0.2, y=playerpos.y+1, z=playerpos.z+0.2},
-			{x=0, y=4, z=0}, --minvel
-			{x=0, y=4, z=0}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			0.1, --minexptime
-			0.2, --maxexptime
-			30, --minsize
-			30, --maxsize
-			false, --collisiondetection
-			"hyruletools_lightning.png" --texture
-			)
+			for i=1,5 do
+			minetest.after(i*0.1, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x, y=playerpos.y+1, z=playerpos.z},
+				velocity = {x=0, y=4, z=0},
+				acceleration = {x=0, y=1, z=0},
+				expirationtime = 0.5,
+				size = 30,
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = true,
+				texture = "hyruletools_lightning.png",
+				glow = 9
+			})
+			end)
+			end
 			
 			--objects
 			minetest.after(1, function()
-			minetest.sound_play("thunder", {pos = playerpos, gain = 0.5, max_hear_distance = 2*64})
+			minetest.sound_play("thunder", {pos = playerpos, gain = 0.4, max_hear_distance = 2*64})
 			local obj = minetest.env:add_entity({x=playerpos.x+1,y=playerpos.y+1,z=playerpos.z+1}, "hyruletools:spark")
 			local vec = {x=6,y=0,z=6}
 			obj:setvelocity(vec)
@@ -1221,6 +1552,11 @@ minetest.register_tool("hyruletools:medallion", {
 			local obj = minetest.env:add_entity({x=playerpos.x+1,y=playerpos.y+1,z=playerpos.z}, "hyruletools:spark")
 			local vec = {x=6,y=0,z=0}
 			obj:setvelocity(vec)
+			minetest.after(0.5, function()
+			for i=1,5 do
+				lightning.strike({x=playerpos.x+math.random(-6,6), y=playerpos.y, z=playerpos.z+math.random(-6,6)})
+			end
+			end)
 			end)
 			end
 		return itemstack
@@ -1239,12 +1575,16 @@ minetest.register_craft({
 
 minetest.register_entity("hyruletools:stone", {
 	visual = "cube",
-	textures = {"default_stone.png", "default_stone.png", "default_stone.png", "default_stone.png", "default_stone.png", "default_stone.png"},
+	textures = {"default_stone.png", "default_stone.png^[colorize:black:50", "default_stone.png^[colorize:black:10", "default_stone.png^[colorize:black:10", "default_stone.png^[colorize:black:20", "default_stone.png^[colorize:black:20"},
 	velocity = 15,
 	collision_box = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
-	physical = false,
+	physical = true,
 	on_activate = function(self)
 		minetest.after(5, function()
+			local pos = self.object:getpos()
+			if pos ~= nil and minetest.get_node(pos).name == "air" then
+				minetest.set_node(pos, {name="default:stone"})
+			end
 			self.object:remove()
 		end)
 	end,
@@ -1256,7 +1596,7 @@ minetest.register_entity("hyruletools:stone", {
 					if obj:get_luaentity().name ~= "hyruletools:stone" and obj:get_luaentity().name ~= "__builtin:item" then
 						obj:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
-							damage_groups={fleshy=9},
+							damage_groups={fleshy=12},
 						}, nil)
 					self.object:remove()
 					end
@@ -1275,100 +1615,38 @@ minetest.register_tool("hyruletools:medallion2", {
 			local playerpos = placer:getpos();
 			minetest.sound_play("earthquake", {pos = playerpos, gain = 0.5, max_hear_distance = 32})
 			--particles
-			minetest.add_particlespawner(
-			24, --amount
-			3, --time
-			{x=playerpos.x-4, y=playerpos.y+0.8, z=playerpos.z-4},
-			{x=playerpos.x+4, y=playerpos.y+1, z=playerpos.z+4},
-			{x=-1, y=1, z=-1}, --minvel
-			{x=1, y=4, z=1}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			0.1, --minexptime
-			0.2, --maxexptime
-			10, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_lightning2.png" --texture
-			)
+			for i=1,24 do
+			minetest.after(i*0.1, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x+math.random(-4,4), y=playerpos.y+math.random(8,10)/10, z=playerpos.z+math.random(-4,4)},
+				velocity = {x=math.random(-1,1), y=math.random(1,4), z=math.random(-1,1)},
+				acceleration = {x=0, y=1, z=0},
+				expirationtime = 0.5,
+				size = 10,
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = false,
+				texture = "hyruletools_lightning2.png",
+				animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 0.20},
+				glow = 9
+			})
+			end)
+			end
 			
-			minetest.after(1.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
+			for i=1,20 do
+			minetest.after(i*0.5, function()
+			local obj = minetest.env:add_entity({x=playerpos.x+math.random(-5,5),y=playerpos.y+5,z=playerpos.z+math.random(-5,5)}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+6,z=playerpos.z+0}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+math.random(-5,5),y=playerpos.y+6,z=playerpos.z+math.random(-5,5)}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+7,z=playerpos.z+3}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+5,z=playerpos.z-4}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z+4}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+5,z=playerpos.z+0}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+6,z=playerpos.z+3}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+5,z=playerpos.z+3}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z-3}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+0,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-4,y=playerpos.y+6,z=playerpos.z-4}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+7,z=playerpos.z+0}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+2,y=playerpos.y+5,z=playerpos.z+4}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x+4,y=playerpos.y+6,z=playerpos.z}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-3,y=playerpos.y+7,z=playerpos.z+3}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			minetest.after(0.5, function()
-			local obj = minetest.env:add_entity({x=playerpos.x+3,y=playerpos.y+5,z=playerpos.z-4}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x,y=playerpos.y+6,z=playerpos.z+3}, "hyruletools:stone")
-			local vec = {x=0,y=-13,z=0}
-			obj:setvelocity(vec)
-			local obj = minetest.env:add_entity({x=playerpos.x-4,y=playerpos.y+7,z=playerpos.z+4}, "hyruletools:stone")
+			local obj = minetest.env:add_entity({x=playerpos.x+math.random(-5,5),y=playerpos.y+7,z=playerpos.z+math.random(-5,5)}, "hyruletools:stone")
 			local vec = {x=0,y=-13,z=0}
 			obj:setvelocity(vec)
 			end)
-			end)
-			end)
-			end)
-			end)
-			end)
-			end)
+			end
+			
 			end
 		return itemstack
 	end,
@@ -1393,91 +1671,83 @@ minetest.register_tool("hyruletools:medallion3", {
 			minetest.sound_play("flamearrow", {pos=playerpos, gain=0.7, max_hear_distance=15})
 			
 			--particles
-			minetest.add_particlespawner(
-			12, --amount
-			1, --time
-			{x=playerpos.x, y=playerpos.y+1, z=playerpos.z-3},
-			{x=playerpos.x, y=playerpos.y+1, z=playerpos.z-3},
-			{x=0, y=4, z=0}, --minvel
-			{x=0, y=4, z=0}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			1, --minexptime
-			1, --maxexptime
-			10, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_firestack.png" --texture
-			)
 			
-			minetest.add_particlespawner(
-			12, --amount
-			1, --time
-			{x=playerpos.x, y=playerpos.y+1, z=playerpos.z+3},
-			{x=playerpos.x, y=playerpos.y+1, z=playerpos.z+3},
-			{x=0, y=4, z=0}, --minvel
-			{x=0, y=4, z=0}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			1, --minexptime
-			1, --maxexptime
-			10, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_firestack.png" --texture
-			)
-			
-			minetest.add_particlespawner(
-			12, --amount
-			1, --time
-			{x=playerpos.x-3, y=playerpos.y+1, z=playerpos.z},
-			{x=playerpos.x-3, y=playerpos.y+1, z=playerpos.z},
-			{x=0, y=4, z=0}, --minvel
-			{x=0, y=4, z=0}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			1, --minexptime
-			1, --maxexptime
-			10, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_firestack.png" --texture
-			)
-			
-			minetest.add_particlespawner(
-			12, --amount
-			1, --time
-			{x=playerpos.x+3, y=playerpos.y+1, z=playerpos.z},
-			{x=playerpos.x+3, y=playerpos.y+1, z=playerpos.z},
-			{x=0, y=4, z=0}, --minvel
-			{x=0, y=4, z=0}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			1, --minexptime
-			1, --maxexptime
-			10, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_firestack.png" --texture
-			)
+			for i=1,12 do
+			minetest.after(i*0.1, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x, y=playerpos.y+1, z=playerpos.z-3},
+				velocity = {x=0, y=4, z=0},
+				acceleration = {x=0, y=1, z=0},
+				expirationtime = 1,
+				size = 10,
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = true,
+				texture = "hyruletools_firestack.png",
+			animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
+				glow = 9
+			})
+			minetest.add_particle({
+				pos = {x=playerpos.x, y=playerpos.y+1, z=playerpos.z+3},
+				velocity = {x=0, y=4, z=0},
+				acceleration = {x=0, y=1, z=0},
+				expirationtime = 1,
+				size = 10,
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = true,
+				texture = "hyruletools_firestack.png",
+			animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
+				glow = 9
+			})
+			minetest.add_particle({
+				pos = {x=playerpos.x-3, y=playerpos.y+1, z=playerpos.z},
+				velocity = {x=0, y=4, z=0},
+				acceleration = {x=0, y=1, z=0},
+				expirationtime = 1,
+				size = 10,
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = true,
+				texture = "hyruletools_firestack.png",
+			animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
+				glow = 9
+			})
+			minetest.add_particle({
+				pos = {x=playerpos.x+3, y=playerpos.y+1, z=playerpos.z},
+				velocity = {x=0, y=4, z=0},
+				acceleration = {x=0, y=1, z=0},
+				expirationtime = 1,
+				size = 10,
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = true,
+				texture = "hyruletools_firestack.png",
+			animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
+				glow = 9
+			})
+			end)
+			end
 			
 			minetest.after(1, function()
-			minetest.add_particlespawner(
-			64, --amount
-			3, --time
-			{x=playerpos.x-4, y=playerpos.y+1, z=playerpos.z-4},
-			{x=playerpos.x+4, y=playerpos.y+1.5, z=playerpos.z+4},
-			{x=0, y=4, z=0}, --minvel
-			{x=0, y=8, z=0}, --maxvel
-			{x=0,y=1,z=0}, --minacc
-			{x=0,y=1,z=0}, --maxacc
-			0.1, --minexptime
-			0.2, --maxexptime
-			5, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_bombeffect.png" --texture
-			)
+			
+			for i=1,30 do
+			minetest.after(i*0.1, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x+math.random(-4,4), y=playerpos.y+1, z=playerpos.z+math.random(-4,4)},
+				velocity = {x=0, y=4, z=0},
+				acceleration = {x=0, y=math.random(1,8), z=0},
+				expirationtime = 0.3,
+				size = math.random(5,9),
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = true,
+				texture = "hyruletools_bombeffect.png",
+			animation = {type = "vertical_frames", aspect_w = 20, aspect_h = 20, length = 0.50},
+				glow = 9
+			})
+			end)
+			end
 			
 			tnt.boom({x=playerpos.x, y=playerpos.y+1, z=playerpos.z+4}, {damage_radius=3,radius=1,ignore_protection=false, disable_playerdamage=true})
 			minetest.after(0.2, function()
@@ -1511,22 +1781,22 @@ minetest.register_tool("hyruletools:pendant1", {
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
-			minetest.add_particlespawner(
-			5, --amount
-			0.1, --time
-			{x=playerpos.x-1, y=playerpos.y, z=playerpos.z-1}, --minpos
-			{x=playerpos.x+1, y=playerpos.y, z=playerpos.z+1}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=4,z=-0.5}, --minacc
-			{x=0.5,y=4,z=0.5}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			8, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_powder2.png" --texture
-		)
+		for i=1,5 do
+			minetest.after(i*0.02, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x+math.random(-1,1), y=playerpos.y, z=playerpos.z+math.random(-1,1)},
+				velocity = {x=0, y=0, z=0},
+				acceleration = {x=math.random(-5,5)/10, y=4, z=math.random(-5,5)/10},
+				expirationtime = math.random(5,10)/10,
+				size = math.random(8,10),
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = false,
+				texture = "hyruletools_powder2.png",
+				glow = 9
+			})
+			end)
+			end
 	end,
 	light_source = 12,
 })
@@ -1537,22 +1807,22 @@ minetest.register_tool("hyruletools:pendant2", {
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
-			minetest.add_particlespawner(
-			5, --amount
-			0.1, --time
-			{x=playerpos.x-1, y=playerpos.y, z=playerpos.z-1}, --minpos
-			{x=playerpos.x+1, y=playerpos.y, z=playerpos.z+1}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=4,z=-0.5}, --minacc
-			{x=0.5,y=4,z=0.5}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			8, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_powder3.png" --texture
-		)
+		for i=1,5 do
+			minetest.after(i*0.02, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x+math.random(-1,1), y=playerpos.y, z=playerpos.z+math.random(-1,1)},
+				velocity = {x=0, y=0, z=0},
+				acceleration = {x=math.random(-5,5)/10, y=4, z=math.random(-5,5)/10},
+				expirationtime = math.random(5,10)/10,
+				size = math.random(8,10),
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = false,
+				texture = "hyruletools_powder3.png",
+				glow = 9
+			})
+			end)
+			end
 	end,
 	light_source = 12,
 })
@@ -1563,22 +1833,22 @@ minetest.register_tool("hyruletools:pendant3", {
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
 			local playerpos = placer:getpos();
-			minetest.add_particlespawner(
-			5, --amount
-			0.1, --time
-			{x=playerpos.x-1, y=playerpos.y, z=playerpos.z-1}, --minpos
-			{x=playerpos.x+1, y=playerpos.y, z=playerpos.z+1}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=4,z=-0.5}, --minacc
-			{x=0.5,y=4,z=0.5}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			8, --minsize
-			10, --maxsize
-			false, --collisiondetection
-			"hyruletools_powder4.png" --texture
-		)
+		for i=1,5 do
+			minetest.after(i*0.02, function()
+			minetest.add_particle({
+				pos = {x=playerpos.x+math.random(-1,1), y=playerpos.y, z=playerpos.z+math.random(-1,1)},
+				velocity = {x=0, y=0, z=0},
+				acceleration = {x=math.random(-5,5)/10, y=4, z=math.random(-5,5)/10},
+				expirationtime = math.random(5,10)/10,
+				size = math.random(8,10),
+				collisiondetection = false,
+				collisionremoval = false,
+				vertical = false,
+				texture = "hyruletools_powder4.png",
+				glow = 9
+			})
+			end)
+			end
 	end,
 	light_source = 12,
 })
@@ -1586,7 +1856,7 @@ minetest.register_tool("hyruletools:pendant3", {
 --mobs redo arrow code, see mobs license
 
 minetest.register_entity("hyruletools:swdspark", {
-	textures = {"hyruletools_swdbeam.png"},
+	textures = {"hyrule_mapgen_trans.png"},
 	velocity = 15,
 	damage = 2,
 	collisionbox = {0, 0, 0, 0, 0, 0},
@@ -1609,28 +1879,24 @@ minetest.register_entity("hyruletools:swdspark", {
 			end
 		local apos = self.object:getpos()
 		local velo = self.object:getvelocity()
-		local part = minetest.add_particlespawner(
-			1, --amount
-			0.3, --time
-			{x=apos.x-0, y=apos.y-0, z=apos.z-0}, --minpos
-			{x=apos.x+0, y=apos.y+0, z=apos.z+0}, --maxpos
-			{x=-velo.x/2, y=-velo.y/2, z=-velo.z/2}, --minvel
-			{x=-velo.x/2, y=-velo.y/2, z=-velo.z/2}, --maxvel
-			{x=0,y=-0,z=0}, --minacc
-			{x=0,y=0,z=0}, --maxacc
-			0.1, --minexptime
-			0.2, --maxexptime
-			8, --minsize
-			8, --maxsize
-			false, --collisiondetection
-			"hyruletools_swdbeam.png" --texture
-		)
+		minetest.add_particle({
+			pos = {x=apos.x, y=apos.y, z=apos.z},
+			velocity = {x=-velo.x/2, y=-velo.y/2, z=-velo.z/2},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 0.1,
+			size = 8,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "hyruletools_swdbeam_trail.png",
+			glow = 9
+		})
 	end,
 })
 
 --master sword, an edit of Mese sword(see liscence for default)
 minetest.register_tool("hyruletools:sword", {
-	description = "Master Sword",
+	description = "True Master Sword",
 	inventory_image = "mastersword_sword.png",
 	wield_scale = {x = 1.5, y = 1.5, z = 1},
 	tool_capabilities = {
@@ -1643,9 +1909,38 @@ minetest.register_tool("hyruletools:sword", {
 	},
 	on_use = function(itemstack, placer, pointed_thing)
 			local name = placer:get_player_name()
+			local dir = placer:get_look_dir()
+			local playerpos = placer:getpos()
+			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark")
+			local vec = {x=dir.x*7,y=dir.y*7,z=dir.z*7}
+			obj:setvelocity(vec)
+		return itemstack
+	end,
+})
+
+minetest.register_craftitem("hyruletools:crest", {
+	description = "Hylian Crest",
+	inventory_image = "hyruletools_crest.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+})
+
+minetest.register_tool("hyruletools:sword_incomplete", {
+	description = "Master Sword",
+	inventory_image = "hyruletools_mastersword_incomplete.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=5},
+	},
+	on_use = function(itemstack, placer, pointed_thing)
+			local name = placer:get_player_name()
 			if mana.subtract(name, 5) then
-			local dir = placer:get_look_dir();
-			local playerpos = placer:getpos();
+			local dir = placer:get_look_dir()
+			local playerpos = placer:getpos()
 			local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1.5+dir.y,z=playerpos.z+0+dir.z}, "hyruletools:swdspark")
 			local vec = {x=dir.x*6,y=dir.y*6,z=dir.z*6}
 			obj:setvelocity(vec)
@@ -1679,22 +1974,23 @@ minetest.register_entity("hyruletools:swdspark_light", {
 				end
 			end
 		local apos = self.object:getpos()
-		local part = minetest.add_particlespawner(
-			1, --amount
-			0.3, --time
-			{x=apos.x-0.3, y=apos.y-0.3, z=apos.z-0.3}, --minpos
-			{x=apos.x+0.3, y=apos.y+0.3, z=apos.z+0.3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=0,y=-0.5,z=0}, --minacc
-			{x=0.5,y=0.5,z=0.5}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			1, --minsize
-			2, --maxsize
-			false, --collisiondetection
-			"hyruletools_swdbeam_trail_light.png" --texture
-		)
+		local velo = self.object:getvelocity()
+		for i=1,5 do
+		minetest.after(i*0.1, function()
+		minetest.add_particle({
+			pos = {x=apos.x, y=apos.y, z=apos.z},
+			velocity = {x=-velo.x/2, y=-velo.y/2, z=-velo.z/2},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 0.1,
+			size = 8,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "hyruletools_swdbeam_light.png",
+			glow = 9
+		})
+		end)
+		end
 	end,
 })
 
@@ -1785,11 +2081,19 @@ minetest.register_tool("hyruletools:classic_sword", {
 })
 
 minetest.register_craft({
-	output = 'hyruletools:sword',
+	output = 'hyruletools:sword_incomplete',
 	recipe = {
 		{'hyruletools:foreststone'},
 		{'hyruletools:waterstone'},
 		{'hyruletools:firestone'},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyruletools:sword',
+	recipe = {
+		{'hyruletools:crest'},
+		{'hyruletools:sword'},
 	}
 })
 
@@ -1984,7 +2288,8 @@ minetest.register_craftitem("hyruletools:seed_gale", {
 	on_use = function(item, user, pointed_thing)
 		local player = user:get_player_name()
 		if minetest.setting_getbool("enable_weather") then	
-		weather.state = "dust"
+		hyrule_weather.weather = "pollen"
+		hyrule_weather.current = 4
 		else
 		minetest.chat_send_player(player, "weather not enabled!")
 		end
@@ -2175,22 +2480,22 @@ minetest.register_entity("hyruletools:sboomer", {
 				end
 			end
 		local apos = self.object:getpos()
-		local part = minetest.add_particlespawner(
-			1, --amount
-			0.3, --time
-			{x=apos.x-0.3, y=apos.y-0.3, z=apos.z-0.3}, --minpos
-			{x=apos.x+0.3, y=apos.y+0.3, z=apos.z+0.3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=0,y=-0.5,z=0}, --minacc
-			{x=0.5,y=0.5,z=0.5}, --maxacc
-			0.5, --minexptime
-			1, --maxexptime
-			0.5, --minsize
-			1, --maxsize
-			false, --collisiondetection
-			"hyruletools_star.png" --texture
-		)
+		for i=1,3 do
+		minetest.after(i*0.1, function()
+		minetest.add_particle({
+			pos = {x=apos.x, y=apos.y, z=apos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=math.random(-5,5)/10, z=0},
+			expirationtime = math.random(5,10)/10,
+			size = math.random(5,10)/10,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = false,
+			texture = "hyruletools_star.png",
+			glow = 9
+		})
+		end)
+		end
 	end,
 })
 
@@ -3536,6 +3841,29 @@ minetest.register_craft({
 		{'hyruletools:ice_fragment', 'hyruletools:ice_fragment'},
 		{'hyruletools:ice_fragment', 'group:stick'},
 		{'', 'group:stick'},
+	}
+})
+
+minetest.register_tool("hyruletools:obsidian_sword", {
+	description = "Dark Sword",
+	inventory_image = "hyruletools_obsidian_sword.png",
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=20, maxlevel=4},
+		},
+		damage_groups = {fleshy=5},
+	}
+})
+
+minetest.register_craft({
+	output = 'hyruletools:obsidian_sword',
+	recipe = {
+		{'default:obsidian_shard'},
+		{'default:obsidian_shard'},
+		{'default:stick'},
 	}
 })
 

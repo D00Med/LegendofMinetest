@@ -6,7 +6,7 @@ mobs:register_mob("mobs_loz:keese", {
 	attack_type = "dogfight",
 	hp_min = 5,
 	hp_max = 10,
-	armor = 100,
+	armor = 170,
 	collisionbox = {-0.2, 0, -0.2, 0.2, 0.5, 0.2},
 	visual = "mesh",
 	mesh = "keese.b3d",

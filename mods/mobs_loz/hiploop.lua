@@ -6,7 +6,7 @@ mobs:register_mob("mobs_loz:hiploop", {
 	damage = 5,
 	hp_min = 10,
 	hp_max = 20,
-	armor = 100,
+	armor = 140,
 	collisionbox = {-0.3, 0, -0.3, 0.3, 0.5, 0.3},
 	visual = "mesh",
 	mesh = "hiploop.b3d",

@@ -93,22 +93,22 @@ mobs:register_mob("mobs_loz:bongobongo", {
 		shoot_end = 25,
 	},
 	on_die = function(self, pos)
-		minetest.add_particlespawner(
-			10, --amount
-			1, --time
-			{x=pos.x-1, y=pos.y-1, z=pos.z-1}, --minpos
-			{x=pos.x+1, y=pos.y-1, z=pos.z+1}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=1,z=-0.5}, --minacc
-			{x=0.5,y=1,z=0.5}, --maxacc
-			1, --minexptime
-			1.5, --maxexptime
-			20, --minsize
-			25, --maxsize
-			false, --collisiondetection
-			"mobs_loz_light.png" --texture
-		)
+		for i=1,10 do
+		minetest.after((i/10)+math.random(-9,9)/20, function()
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-1,1), y=pos.y, z=pos.z+math.random(-1,1)},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=math.random(-5,5)/10, y=1, z=math.random(-5,5)/10},
+			expirationtime = math.random(10,15)/10,
+			size = math.random(20,25),
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "mobs_loz_light.png",
+			glow = 9
+		})
+		end)
+		end
 		minetest.set_node(pos, {name = "default:water_source"})
 	end,
 	on_rightclick = function(self, clicker)

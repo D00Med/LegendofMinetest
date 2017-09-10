@@ -10,8 +10,8 @@ mobs:register_mob("mobs_loz:bdodongo", {
 	damage = 1,
 	hp_min = 12,
 	hp_max = 25,
-	armor = 80,
-	collisionbox = {-0.2, 0, -0.2, 0.2, 0.4, 0.4},
+	armor = 160,
+	collisionbox = {-0.2, -0.1, -0.2, 0.2, 0.4, 0.4},
 	visual = "mesh",
 	mesh = "bdodongo.b3d",
 	textures = {
@@ -169,7 +169,7 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 	damage = 3,
 	hp_min = 82,
 	hp_max = 125,
-	armor = 60,
+	armor = 80,
 	collisionbox = {-2, 0, -2, 1.5, 4.5, 2},
 	visual = "mesh",
 	mesh = "dodongo.b3d",
@@ -198,6 +198,22 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 		minetest.env:add_entity(pos, "experience:orb")
 		minetest.env:add_entity(pos, "experience:orb")
 		minetest.env:add_entity(pos, "experience:orb")
+		for i=1,10 do
+		minetest.after((i/10)+math.random(-9,9)/20, function()
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-1,1), y=pos.y, z=pos.z+math.random(-1,1)},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=math.random(-5,5)/10, y=1, z=math.random(-5,5)/10},
+			expirationtime = math.random(10,15)/10,
+			size = math.random(20,25),
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "mobs_loz_light.png",
+			glow = 9
+		})
+		end)
+		end
 	end,
 	water_damage = 5,
 	lava_damage = 0,
@@ -216,25 +232,6 @@ mobs:register_mob("mobs_loz:dodongo_boss", {
 		shoot_start = 45,
 		shoot_end = 65,
 	},
-	on_die = function(self, pos)
-		minetest.set_node(pos, {name = "fire:basic_flame"})
-		minetest.add_particlespawner(
-			10, --amount
-			1, --time
-			{x=pos.x-1, y=pos.y-1, z=pos.z-1}, --minpos
-			{x=pos.x+1, y=pos.y-1, z=pos.z+1}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=0, y=0, z=0}, --maxvel
-			{x=-0.5,y=1,z=-0.5}, --minacc
-			{x=0.5,y=1,z=0.5}, --maxacc
-			1, --minexptime
-			1.5, --maxexptime
-			20, --minsize
-			25, --maxsize
-			false, --collisiondetection
-			"mobs_loz_light.png" --texture
-		)
-	end,
 })
 
 --mobs:register_spawn("mobs_loz:dodongo_boss", {"hyrule_mapgen:dodongo_spawn"}, 20, 0, 7000, 1, 31000)

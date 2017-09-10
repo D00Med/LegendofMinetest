@@ -12,7 +12,7 @@ mobs:register_mob("mobs_loz:mad_scrub", {
 	shoot_offset = 1.5,
 	hp_min = 30,
 	hp_max = 35,
-	armor = 80,
+	armor = 130,
 	collisionbox = {-0.4, 0, -0.4, 0.4, 0.5, 0.4},
 	visual = "mesh",
 	mesh = "mad_scrub.b3d",

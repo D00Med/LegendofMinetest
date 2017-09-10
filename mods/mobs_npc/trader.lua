@@ -26,24 +26,24 @@ mobs.human = {
 mobs.shopkeeper = {
 	items = {
 		--{item for sale, price, chance of appearing in trader's inventory}
-		{"hyruletools:heart 5", "hyruletools:green_rupee 10", 10},
-		{"bows:arrow_steel 10", "hyruletools:green_rupee 20", 5},
-		{"shields:shield_wood 1", "hyruletools:green_rupee 30", 12},
-		{"shields:shield_steel 1", "hyruletools:green_rupee 25", 17},
-		{"hyruletools:goron_tunic 1", "hyruletools:red_rupee 30", 17},
-		{"hyruletools:zora_tunic 1", "hyruletools:blue_rupee 30", 50},
+		{"hyruletools:heart 5", "hyruletools:green_rupee 5", 10},
+		{"bows:arrow_steel 10", "hyruletools:green_rupee 10", 5},
+		{"shields:shield_wood 1", "hyruletools:green_rupee 20", 12},
+		{"shields:shield_steel 1", "hyruletools:green_rupee 30", 17},
+		{"hyruletools:goron_tunic 1", "hyruletools:red_rupee 40", 17},
+		{"hyruletools:zora_tunic 1", "hyruletools:blue_rupee 40", 50},
 		{"hyruletools:key 1", "hyruletools:green_rupee 10", 40},
 		{"hyruletools:letter 5", "hyruletools:green_rupee 5", 17},
-		{"tnt:tnt 10", "hyruletools:blue_rupee 15", 20},
-		{"mobs_fairy:fairy 1", "hyruletools:red_rupee 50", 17},
+		{"tnt:tnt 10", "hyruletools:blue_rupee 10", 20},
+		{"mobs_fairy:fairy 1", "hyruletools:red_rupee 30", 17},
 		{"mobs:bucket_milk 1", "hyruletools:green_rupee 15", 27},
 		{"default:papyrus 5", "hyruletools:green_rupee 15", 7},
-		{"default:pick_steel 1", "hyruletools:blue_rupee 50", 7},
-		{"default:sword_steel 1", "hyruletools:red_rupee 100", 17},
-		{"default:shovel_steel 1", "hyruletools:green_rupee 50", 17},
+		{"default:pick_steel 1", "hyruletools:blue_rupee 30", 7},
+		{"default:sword_steel 1", "hyruletools:red_rupee 35", 17},
+		{"default:shovel_steel 1", "hyruletools:green_rupee 25", 17},
 	},
 	names = {
-		"Bruce", "Bruce", "Bruce", "Bruce", "Bruce", "Bruce", "Bruce"
+		"Bruce", "B.", "BRUCE", "Bruce", "Bruice", "Brusse", "Brooce"
 	}
 }
 
