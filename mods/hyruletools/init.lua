@@ -2093,7 +2093,7 @@ minetest.register_craft({
 	output = 'hyruletools:sword',
 	recipe = {
 		{'hyruletools:crest'},
-		{'hyruletools:sword'},
+		{'hyruletools:sword_incomplete'},
 	}
 })
 
