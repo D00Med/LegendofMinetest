@@ -749,7 +749,7 @@ minetest.register_node("moreplants:cavefern", {
 	tiles = {
 		"moreplants_cavefern.png",
 	},
-	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
+	groups = {snappy=3, flammable=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -769,7 +769,7 @@ minetest.register_node("moreplants:hangingplant", {
 	tiles = {
 		"moreplants_hanging_plant.png",
 	},
-	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
+	groups = {snappy=3, flammable=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 

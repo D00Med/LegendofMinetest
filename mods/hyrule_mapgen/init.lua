@@ -151,9 +151,15 @@ sound = false
 
 minetest.register_abm({
 	nodenames = {"default:water_flowing"},
-	interval = 2.0,
-	chance = 2,
+	interval = 3.0,
+	chance = 3,
 	action = function(pos, node, active_object_count, active_object_count_wider)
+	
+	if minetest.find_node_near(pos, 6, {"default:ice"}) and not minetest.find_node_near(pos, 6, {"hyrule_mapgen:lamp_lit", "fire:basic_flame"}) then
+		minetest.set_node(pos, {name="hyrule_mapgen:ice_waterfall"})
+		return
+	end
+	
 		local above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		local below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 		local above2 = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name
@@ -204,6 +210,36 @@ minetest.register_abm({
 		end)
 		end
 		end
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:ice_waterfall"},
+	interval = 2.0,
+	chance = 2,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+	
+	if minetest.find_node_near(pos, 6, {"fire:basic_flame", "hyrule_mapgen:lamp_lit"}) then
+		minetest.set_node(pos, {name="default:water_flowing"})
+	end
+	--[[
+	minetest.add_particlespawner({
+			amount = 1,
+			time = 2,
+			minpos = {x=pos.x-1.3, y=pos.y+0.3, z=pos.z-1.3},
+			maxpos = {x=pos.x+1.3, y=pos.y+0.9, z=pos.z+1.3},
+			minvel = {x=0, y=0.1, z=0},
+			maxvel = {x=0.1, y=0.3, z=0.1},
+			minacc = {x=0, y=0.1, z=0},
+			maxacc = {x=0.2, y=0.2, z=0.2},
+			minexptime = 0.5,
+			maxexptime = 1,
+			minsize = 12,
+			maxsize = 15,
+			collisiondetection = false,
+			vertical = false,
+			texture = "hyrule_mapgen_mist.png",
+		})]]
 	end
 })
 
@@ -976,6 +1012,15 @@ minetest.register_node("hyrule_mapgen:octorock_stone", {
 minetest.register_node("hyrule_mapgen:ice_brick", {
 	description = "Ice Brick",
 	tiles = {"hyrule_mapgen_ice_brick.png"},
+	groups = {cracky = 3, cools_lava = 1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("hyrule_mapgen:ice_waterfall", {
+	description = "Frozen Waterfall",
+	drawtype = "glasslike",
+	use_texture_alpha = true,
+	tiles = {"hyrule_mapgen_ice_waterfall.png"},
 	groups = {cracky = 3, cools_lava = 1},
 	sounds = default.node_sound_glass_defaults(),
 })
