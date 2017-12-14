@@ -130,7 +130,7 @@ minetest.register_lbm({
 	nodenames = {"flowers:flower_rose", "flowers:flower_tulip", "flowers:flower_dandelion_yellow", "flowers:flower_viola", "flowers:flower_dandelion_white", "flowers:flower_geranium"},
 	run_at_every_load = true,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		if math.random(1,3) == 3 then
+		if math.random(1,20) == 3 then
 		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "hyrule_mapgen:butterfly")
 		end
 	end
@@ -328,7 +328,7 @@ minetest.register_entity("hyrule_mapgen:butterfly", {
 		self.object:set_properties({textures = {"hyrule_mapgen_butterfly"..num..".png",},})
 		self.object:set_animation({x=1, y=10}, 20, 0)
 		self.object:setyaw(math.pi+num)
-		minetest.after(60, function()
+		minetest.after(30, function()
 		self.object:remove()
 		end)
 	end,

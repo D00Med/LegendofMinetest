@@ -37,6 +37,7 @@ local apply_weather = function(player, pos, weather_type)
 		end
 		for i=1,8 do
 		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-4,4), z=pos.z+math.random(-7,7)}, 10, {"default:water_source", "default:river_water_source"}, true)
+		if not water then return end
 		water.y =  water.y+1
 		if minetest.get_node(water).name == "air" then
 			minetest.set_node(water, {name="hyrule_weather:ice"})
