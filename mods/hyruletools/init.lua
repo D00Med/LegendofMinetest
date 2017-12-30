@@ -1213,7 +1213,7 @@ minetest.register_craftitem("hyruletools:ocarina3", {
 		)
 		local playerpos = placer:getpos();
 		local dir = placer:get_look_dir();
-		local obj = minetest.env:add_entity({x=playerpos.x+1+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+1+dir.z}, "kpgmobs:horseh1")
+		local obj = minetest.env:add_entity({x=playerpos.x+1+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+1+dir.z}, "kpgmobs:horse")
 	end
 })
 

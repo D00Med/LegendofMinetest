@@ -1,18 +1,4 @@
 
-minetest.register_craftitem("kpgmobs:saddle", {
-	description = "Saddle",
-	inventory_image = "mobs_saddle.png",
-})
-
-minetest.register_craft({
-	output = "kpgmobs:saddle",
-	recipe = {
-		{'mobs:leather', 'mobs:leather', 'mobs:leather'},
-		{'mobs:leather', 'default:steel_ingot', 'mobs:leather'},
-		{'mobs:leather', 'default:steel_ingot', 'mobs:leather'},
-	}
-})
-
 mobs:register_mob("kpgmobs:horse", {
 	type = "animal",
 	hp_min = 5,
@@ -54,23 +40,23 @@ mobs:register_mob("kpgmobs:horse", {
 		local inv = clicker:get_inventory()
 
 		if self.driver and clicker == self.driver then
-		if inv:room_for_item("main", {name = "kpgmobs:saddle"}) then
-				clicker:get_inventory():add_item("main", "kpgmobs:saddle")
+		if inv:room_for_item("main", {name = "mobs:saddle"}) then
+				clicker:get_inventory():add_item("main", "mobs:saddle")
 		else
 			local pos = self.object:getpos()
-			minetest.env:add_item(pos, "kpgmobs:saddle")
+			minetest.env:add_item(pos, "mobs:saddle")
 		end
-		object_detach(self, clicker, {x=1, y=0, z=1})
+		vehicles.object_detach(self, clicker, {x=1, y=0, z=1})
 		elseif not self.driver and self.tamed then
-		if item == "kpgmobs:saddle" then
-		inv:remove_item("main", "kpgmobs:saddle")
-		object_attach(self, clicker, {x=0, y=19, z=0}, true, {x=0, y=6, z=0})
+		if item == "mobs:saddle" then
+		inv:remove_item("main", "mobs:saddle")
+		vehicles.object_attach(self, clicker, {x=0, y=19, z=0}, true, {x=0, y=6, z=0})
 		end
 		end
 	end,
 	do_custom = function(self, dtime)
 	if self.driver then
-		object_drive(self, dtime, {
+		vehicles.on_step(self, dtime, {
 			speed = 13,
 			decell = 0.5,
 			moving_anim = {x=75, y=100},
