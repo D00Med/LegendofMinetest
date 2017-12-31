@@ -1776,7 +1776,7 @@ minetest.register_craft({
 })
 
 minetest.register_tool("hyruletools:pendant1", {
-	description = "Pendand of Power",
+	description = "Pendant of Power",
 	inventory_image = "hyruletools_pendant1.png",
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
