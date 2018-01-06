@@ -428,6 +428,15 @@ minetest.override_item("default:leaves", {
 	walkable = false,
 })
 
+
+minetest.override_item("default:pine_needles", {
+	drawtype = "mesh",
+	mesh = "leaf.obj",
+	tiles = {"hyrule_mapgen_pine_needles.png"},
+	paramtype = "light",
+	walkable = false,
+})
+
 minetest.override_item("default:aspen_leaves", {
 	drawtype = "mesh",
 	mesh = "leaf.obj",

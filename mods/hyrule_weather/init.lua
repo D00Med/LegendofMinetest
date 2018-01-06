@@ -54,12 +54,25 @@ local apply_weather = function(player, pos, weather_type)
 			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
 			glow = 0
 		})
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			expirationtime = 3,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
+			glow = 0
+		})
 		end
 	elseif weather_type == "rain" then
 		if minetest.get_timeofday()*24000 >= 6000 and minetest.get_timeofday()*24000 <= 19000 then
 		player:set_sky({r=177, g=177, b=177}, "plain", nil, true)
 		end
-		for i=1,12 do
+		for i=1,24 do
+		minetest.after((math.random(1,10)/10), function(dtime)
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
 			velocity = {x=0, y=math.random(-15,-20), z=0},
@@ -72,12 +85,14 @@ local apply_weather = function(player, pos, weather_type)
 			texture = "hyrule_weather_rain_"..math.random(1,2)..".png",
 			glow = 0
 		})
+		end)
 		end
 	elseif weather_type == "storm" then
 		if minetest.get_timeofday()*24000 >= 6000 and minetest.get_timeofday()*24000 <= 19000 then
 		player:set_sky({r=101, g=101, b=101}, "plain", nil, true)
 		end
-		for i=1,25 do
+		for i=1,30 do
+		minetest.after((math.random(1,10)/10), function(dtime)
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
 			velocity = {x=0, y=math.random(-25,-30), z=0},
@@ -90,6 +105,7 @@ local apply_weather = function(player, pos, weather_type)
 			texture = "hyrule_weather_rain_3.png",
 			glow = 0
 		})
+		end)
 		if math.random(1,2000) == 1 then
 			lightning.strike()
 		end
