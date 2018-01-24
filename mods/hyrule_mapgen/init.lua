@@ -150,6 +150,69 @@ minetest.register_lbm({
 sound = false
 
 minetest.register_abm({
+	nodenames = {"hyrule_mapgen:crystal_1"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 19,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_crystal_glow1.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:crystal_2"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 19,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_crystal_glow2.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:crystal_3"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 19,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_crystal_glow3.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_abm({
 	nodenames = {"default:water_flowing"},
 	interval = 3.0,
 	chance = 3,
