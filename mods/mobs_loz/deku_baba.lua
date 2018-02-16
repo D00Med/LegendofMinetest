@@ -5,7 +5,7 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	reach = 3.5,
+	reach = 4,
 	damage = 2,
 	hp_min = 10,
 	hp_max = 27,

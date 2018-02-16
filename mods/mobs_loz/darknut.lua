@@ -23,7 +23,9 @@ mobs:register_mob("mobs_loz:darknut", {
 	run_velocity = 1.5,
 	drops = {
 		{name = "default:steel_ingot",
-		chance = 7, min = 1, max = 3},
+		chance = 7, min = 3, max = 6},
+		{name = "default:sword_diamond",
+		chance = 20, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()

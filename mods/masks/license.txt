@@ -1,7 +1,7 @@
 License for Code
 ----------------
 
-Copyright (C) 2017 D00MED <heiselong@gmx.com>
+Copyright (C) 2017 D00Med <heiselong@gmx.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
@@ -20,4 +20,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 License for Textures, Models
 ---------------------------------------
 
-CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
+CC BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)

@@ -50,7 +50,24 @@ minetest.register_node("doomshrooms:stalk", {
 	description = "Mushroom Stalk",
 	tile_images = {"doomshrooms_stalk_base.png","doomshrooms_stalk_base.png","doomshrooms_stalk.png","doomshrooms_stalk.png"},
 	groups = {choppy=1},
-	})
+	sounds = default.node_sound_wood_defaults(),
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-6/16,-8/16,-8/16,6/16,8/16,8/16},
+			{-8/16,-8/16,-6/16,8/16,8/16,6/16},
+			{-7/16,-8/16,-7/16,7/16,8/16,7/16},
+		},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+		{-0.5,-0.5,-0.5,0.5,0.5,0.5}
+		},
+	},
+})
 
 minetest.register_node("doomshrooms:tall",{
 	description = "Tall Mushroom",
@@ -75,6 +92,23 @@ minetest.register_node("doomshrooms:stalk2", {
 	groups = {choppy=1},	
 	sunlight_propagates = true,
 	light_source = 14,
+	sounds = default.node_sound_wood_defaults(),
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-6/16,-8/16,-8/16,6/16,8/16,8/16},
+			{-8/16,-8/16,-6/16,8/16,8/16,6/16},
+			{-7/16,-8/16,-7/16,7/16,8/16,7/16},
+		},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+		{-0.5,-0.5,-0.5,0.5,0.5,0.5}
+		},
+	},
 })
 
 minetest.register_node("doomshrooms:cap", {

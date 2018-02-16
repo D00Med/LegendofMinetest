@@ -530,7 +530,7 @@ local function register_grass_decoration(offset, scale, length, dry)
 	end
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass", "default:dirt_with_grass2", "default:sand"},
+		place_on = {"default:dirt_with_grass", "default:dirt_with_dry_grass", "default:dirt_with_grass2", "default:sand"},
 		sidelen = 16,
 		noise_params = {
 			offset = offset,
@@ -1531,8 +1531,7 @@ minetest.register_ore({
 			octaves = 1,
 			persist = 0.0
 		},
-	})
-	
+})
 	
 --rupees
 

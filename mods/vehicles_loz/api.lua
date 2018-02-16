@@ -309,13 +309,13 @@ function vehicles.object_drive(entity, dtime, def)
 		return node == "default:river_water_source" or node == "default:water_source" or node == "default:river_water_flowing" or node == "default:water_flowing"
 	end
 	entity.on_water = is_water(node)
-	entity.in_water = is_water(minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name) or is_water(node_under.name)
+	entity.in_water = is_water(minetest.get_node({x=pos.x, y=pos.y+0.6, z=pos.z}).name) or is_water(node_under.name)
 	
 	--apply water effects
 	if is_watercraft and entity.in_water then
-		entity.object:setvelocity({x=velo.x*0.9, y=velo.y+1, z=velo.z*0.9})
+		entity.object:setvelocity({x=velo.x*0.9, y=velo.y+0.1, z=velo.z*0.9})
 	elseif is_watercraft and entity.on_water == false then
-		entity.object:setvelocity({x=velo.x*decell,y=velo.y-1,z=velo.z*decell})
+		entity.object:setvelocity({x=velo.x*decell,y=velo.y-0.1,z=velo.z*decell})
 	elseif (entity.on_water or entity.in_water) and not is_watercraft then
 		entity.object:setvelocity({x=velo.x*0.9, y=-1, z=velo.z*0.9})
 	
@@ -784,9 +784,9 @@ function vehicles.object_no_drive(entity, dtime, def)
 
 	--apply water effects
 	if is_watercraft and entity.in_water then
-		entity.object:setvelocity({x=velo.x*0.9, y=velo.y+1, z=velo.z*0.9})
+		entity.object:setvelocity({x=velo.x*0.9, y=velo.y+0.2, z=velo.z*0.9})
 	elseif is_watercraft and entity.on_water == false then
-		entity.object:setvelocity({x=velo.x*decell,y=velo.y-1,z=velo.z*decell})
+		entity.object:setvelocity({x=velo.x*decell,y=velo.y-0.1,z=velo.z*decell})
 	elseif entity.on_water and not is_watercraft then
 		entity.object:setvelocity({x=velo.x*0.9, y=-1, z=velo.z*0.9})
 	else

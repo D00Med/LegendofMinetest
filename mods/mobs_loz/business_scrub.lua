@@ -144,7 +144,7 @@ mobs:register_mob("mobs_loz:business_scrub_standing", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = "default:leaves"})
+			minetest.add_item(pos, {name = "tnt:tnt"})
 		elseif item:get_name() == "hyruletools:blue_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
@@ -169,7 +169,7 @@ mobs:register_mob("mobs_loz:business_scrub_standing", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = "default:dirt"})
+			minetest.add_item(pos, {name = "default:sword_steel"})
 			end
 		end,
 })
@@ -206,6 +206,10 @@ mobs:register_mob("mobs_loz:business_scrub_passive", {
 		{name = "mobs_loz:nut",
 		chance = 9, min = 1, max = 2},
 	},
+	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then return end
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if math.random(1,5) == 2 then
@@ -320,6 +324,10 @@ mobs:register_mob("mobs_loz:business_scrub_passive2", {
 		{name = "mobs_loz:weird_beard",
 		chance = 1, min = 1, max = 1},
 	},
+	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then return end
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if math.random(1,5) == 2 then
@@ -350,7 +358,7 @@ mobs:register_mob("mobs_loz:business_scrub_passive2", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = "default:leaves"})
+			minetest.add_item(pos, {name = "hyrule_mapgen:zapshroom"})
 		elseif item:get_name() == "hyruletools:blue_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
@@ -358,16 +366,7 @@ mobs:register_mob("mobs_loz:business_scrub_passive2", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = "default:stick"})
-		
-		elseif item:get_name() == "hyruletools:blue_rupee" then
-			if not minetest.setting_getbool("creative_mode") then
-				item:take_item()
-				clicker:set_wielded_item(item)
-			end
-			local pos = self.object:getpos()
-			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = "default:stick"})
+			minetest.add_item(pos, {name = "farming:sugar"})
 		elseif item:get_name() == "hyruletools:red_rupee" then
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
@@ -375,7 +374,7 @@ mobs:register_mob("mobs_loz:business_scrub_passive2", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = "default:dirt"})
+			minetest.add_item(pos, {name = "default:sword_bronze"})
 			end
 		end,
 })
@@ -393,4 +392,8 @@ minetest.register_craftitem("mobs_loz:weird_beard", {
 	groups = {not_in_creative_inventory=1}
 })
 
-
+minetest.register_craft({
+	type = "fuel",
+	recipe = "mobs_loz:deku_nut",
+	burntime = 2,
+})

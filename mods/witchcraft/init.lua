@@ -36,7 +36,21 @@ minetest.register_node("witchcraft:shelf", {
 	is_ground_content = false,
 	groups = {choppy=3,oddly_breakable_by_hand=2,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
-
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.375, -0.4375, 0.4375, 0.4375, 0.4375}, -- NodeBox1
+			{-0.5, -0.5, -0.5, 0.5, -0.375, 0.5}, -- NodeBox2
+			{-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox3
+			{-0.5, -0.0625, -0.5, 0.5, 0.125, 0.5}, -- NodeBox4
+			{-0.5, -0.5, -0.5, -0.4375, 0.5, -0.4375}, -- NodeBox5
+			{-0.5, -0.5, 0.4375, -0.4375, 0.5, 0.5}, -- NodeBox6
+			{0.4375, -0.5, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox7
+			{0.4375, -0.5, -0.5, 0.5, 0.5, -0.4375}, -- NodeBox8
+		}
+	},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", vessels_shelf_formspec)
@@ -287,13 +301,48 @@ minetest.register_abm({
 
 minetest.register_node("witchcraft:potion_herbal", {
 	description = "Herbal Potion",
-	drawtype = "plantlike",
-	tiles = {"witchcraft_potion_herbal.png"},
-	wield_image = "witchcraft_potion_herbal.png",
+	tiles = {
+		"witchcraft_potion_herbal2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
 	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	wield_image = "witchcraft_potion_herbal.png",
 	stack_max = 1,
 	is_ground_content = false,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
@@ -301,17 +350,53 @@ minetest.register_node("witchcraft:potion_herbal", {
 	groups = {vessel=1,dig_immediate=3,attached_node=1, potion=1},
 	sounds = default.node_sound_glass_defaults(),
 	inventory_image = "witchcraft_potion_herbal.png",
+	light_source = 5,
 })
 
 minetest.register_node("witchcraft:potion_redbrown", {
 	description = "Basic Soup",
-	drawtype = "plantlike",
-	tiles = {"witchcraft_potion_redbrown.png"},
-	wield_image = "witchcraft_potion_redbrown.png",
+	tiles = {
+		"witchcraft_potion_redbrown2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
 	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	wield_image = "witchcraft_potion_redbrown.png",
 	stack_max = 1,
 	is_ground_content = false,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
@@ -328,13 +413,48 @@ minetest.register_node("witchcraft:potion_redbrown", {
 
 minetest.register_node("witchcraft:potion_orange", {
 	description = "Superior Soup",
-	drawtype = "plantlike",
-	tiles = {"witchcraft_potion_orange.png"},
-	wield_image = "witchcraft_potion_orange.png",
+	tiles = {
+		"witchcraft_potion_orange2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
 	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	wield_image = "witchcraft_potion_orange.png",
 	stack_max = 1,
 	is_ground_content = false,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
@@ -352,13 +472,48 @@ minetest.register_node("witchcraft:potion_orange", {
 
 minetest.register_node("witchcraft:potion_red", {
 	description = "Red Potion",
-	drawtype = "plantlike",
-	tiles = {"witchcraft_potion_red.png"},
-	wield_image = "witchcraft_potion_red.png",
+	tiles = {
+		"witchcraft_potion_red2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
 	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	wield_image = "witchcraft_potion_red.png",
 	stack_max = 1,
 	is_ground_content = false,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
@@ -376,13 +531,48 @@ minetest.register_node("witchcraft:potion_red", {
 
 minetest.register_node("witchcraft:potion_blue2", {
 	description = "Blue Potion",
-	drawtype = "plantlike",
-	tiles = {"witchcraft_potion_blue2.png"},
-	wield_image = "witchcraft_potion_blue2.png",
+	tiles = {
+		"witchcraft_potion_blue3.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
 	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	wield_image = "witchcraft_potion_blue2.png",
 	stack_max = 1,
 	is_ground_content = false,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
@@ -403,13 +593,48 @@ minetest.register_node("witchcraft:potion_blue2", {
 
 minetest.register_node("witchcraft:potion_green", {
 	description = "Green potion",
-	drawtype = "plantlike",
-	tiles = {"witchcraft_potion_green.png"},
-	wield_image = "witchcraft_potion_green.png",
+	tiles = {
+		"witchcraft_potion_green2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
 	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	wield_image = "witchcraft_potion_green.png",
 	stack_max = 1,
 	is_ground_content = false,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}

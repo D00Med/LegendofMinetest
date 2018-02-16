@@ -358,7 +358,125 @@ minetest.register_abm({
 	end
 })
 
+minetest.register_abm({
+	nodenames = {"default:meselamp"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 25,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_glow_small.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 2.00},
+			glow = 9
+		})
+	end
+})
 
+minetest.register_abm({
+	nodenames = {"default:mese_post_light"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y+0.1, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 15,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_glow_small.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 2.00},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"hyrule_mapgen:dungeon_torch"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y+1, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 13,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_glow_small.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 2.00},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"default:torch", "default:torch_ceiling",},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		if minetest.get_timeofday() <= 0.6 and minetest.get_timeofday() >= 0.2 and pos.y >= -20 then
+		return 
+		end
+		minetest.add_particle({
+			pos = {x=pos.x, y=pos.y+0.1, z=pos.z},
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 15,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_glow_small.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 0.20},
+			glow = 9
+		})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"default:torch_wall"},
+	interval = 5,
+	chance = 1,
+	action = function(pos, node)
+		if minetest.get_timeofday() <= 0.6 and minetest.get_timeofday() >= 0.2 and pos.y >= -20  then
+		return 
+		end
+		local dir = minetest.facedir_to_dir(node.param2)
+		local particle_pos = {x=pos.x-0.22*dir.z*1.2, y=pos.y+0.1, z=pos.z-0.18*dir.x*1.2}
+		if dir.x == 0 and dir.z == 0 then
+		particle_pos = {x=pos.x, y=pos.y+0.1, z=pos.z+0.2}
+		elseif dir.x == -1 and dir.z == 0 then
+		particle_pos = {x=pos.x-0.15, y=pos.y+0.1, z=pos.z}
+		elseif dir.x == 0 and dir.z == -1 then
+		particle_pos = {x=pos.x+0.15, y=pos.y+0.1, z=pos.z}
+		end
+		minetest.add_particle({
+			pos = particle_pos,
+			velocity = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 5,
+			size = 15,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "hyrule_mapgen_glow_small.png",
+			animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 0.20},
+			glow = 9
+		})
+	end
+})
 
 --entities
 
@@ -437,6 +555,32 @@ minetest.register_entity("hyrule_mapgen:dragonfly", {
 	collisionbox = {0,0,0,0,0.1,0},
 })
 
+--default nodes
+
+minetest.register_node(":default:dirt_with_grass2", {
+	description = "Dirt with dark Grass",
+	tiles = {"default_grass_top_2.png", "default_dirt.png",
+		{name = "default_dirt.png^default_grass_side_2.png",
+			tileable_vertical = false}},
+	groups = {crumbly = 3, soil = 1},
+	drop = 'default:dirt',
+	sounds = default.node_sound_dirt_defaults({
+		footstep = {name = "default_grass_footstep", gain = 0.25},
+	}),
+})
+
+minetest.register_node(":default:dirt_with_grass3", {
+	description = "Dirt with dark Grass",
+	tiles = {"default_grass_top_3.png", "default_dirt.png",
+		{name = "default_dirt.png^default_grass_side_3.png",
+			tileable_vertical = false}},
+	groups = {crumbly = 3, soil = 1},
+	drop = 'default:dirt',
+	sounds = default.node_sound_dirt_defaults({
+		footstep = {name = "default_grass_footstep", gain = 0.25},
+	}),
+})
+
 --overrides
 
 local dirt_treasure = {
@@ -472,6 +616,281 @@ minetest.override_item(row[1], {
 	end,
 })
 end
+
+minetest.clear_craft({output="default:sword_steel",})
+minetest.clear_craft({output="default:sword_bronze",})
+minetest.clear_craft({output="default:sword_mese",})
+minetest.clear_craft({output="default:sword_diamond",})
+
+minetest.override_item("default:junglegrass", {
+	selection_box = {
+		type = "fixed",
+		fixed = {
+		{-0.3,-0.5,-0.3,0.3,0,0.3},
+		},
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+		{-0.3,-0.5,-0.3,0.3,0,0.3},
+		},
+	},
+})
+
+minetest.override_item("default:book", {
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local dir = placer:get_look_dir()
+		minetest.set_node(pos, {name="default:book_placed", param2=minetest.dir_to_facedir(dir)})
+		itemstack:take_item()
+		return itemstack
+	end,
+})
+
+minetest.override_item("default:book_written", {
+	on_place = function(itemstack, placer, pointed_thing)
+		minetest.chat_send_player(placer:get_player_name(), "Written books can't be placed!")
+	end,
+})
+
+minetest.override_item("vessels:drinking_glass", {
+	drawtype = "nodebox",
+	paramtype = "light",
+	tiles = {
+		"hyrule_mapgen_trans.png",
+		"hyrule_mapgen_trans.png",
+		"vessels_drinking_glass.png",
+	},
+	walkable = true,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
+			{-0.25, -0.4375, -0.25, 0.25, 0, -0.25},
+			{-0.25, -0.4375, 0.25, 0.25, 0, 0.25},
+			{0.25, -0.4375, -0.25, 0.25, 0, 0.25},
+			{-0.25, -0.4375, -0.25, -0.25, 0, 0.25},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
+			{-0.25, -0.4375, -0.25, 0.25, 0, 0.25},
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875},
+			{-0.25, -0.4375, -0.25, 0.25, 0, -0.25},
+			{-0.25, -0.4375, 0.25, 0.25, 0, 0.25},
+			{0.25, -0.4375, -0.25, 0.25, 0, 0.25},
+			{-0.25, -0.4375, -0.25, -0.25, 0, 0.25},
+		}
+	},
+})
+
+minetest.override_item("default:meselamp", {
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.4375, -0.4375, 0.4375, 0.4375, 0.4375}, -- NodeBox1
+			{-0.5, -0.5, 0.4375, -0.4375, 0.5, 0.5}, -- NodeBox2
+			{0.4375, -0.5, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox3
+			{-0.5, -0.5, -0.5, -0.4375, 0.5, -0.4375}, -- NodeBox4
+			{0.4375, -0.5, -0.5, 0.5, 0.5, -0.4375}, -- NodeBox5
+			{-0.5, -0.5, -0.5, -0.4375, -0.4375, 0.5}, -- NodeBox6
+			{0.4375, -0.5, -0.5, 0.5, -0.4375, 0.5}, -- NodeBox7
+			{0.4375, 0.4375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox8
+			{-0.5, 0.4375, -0.5, -0.4375, 0.5, 0.5}, -- NodeBox9
+			{-0.5, -0.5, -0.5, 0.5, -0.4375, -0.4375}, -- NodeBox10
+			{-0.5, -0.5, 0.4375, 0.5, -0.4375, 0.5}, -- NodeBox11
+			{-0.5, 0.4375, -0.5, 0.5, 0.5, -0.4375}, -- NodeBox12
+			{-0.5, 0.4375, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox13
+		}
+	}
+})
+
+minetest.override_item("default:chest_open", {
+	visual_scale = 0.5,
+	tiles = {
+		"default_chest_open.png",
+	},
+})
+
+minetest.override_item("default:chest_locked_open", {
+	visual_scale = 0.5,
+	tiles = {
+		"default_chest_locked_open.png",
+	},
+})
+
+minetest.override_item("vessels:steel_bottle", {
+	tiles = {
+		"vessels_steel_bottle_top.png",
+		"vessels_steel_bottle_top.png",
+		"vessels_steel_bottle.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.1875, 0.125, -0.4375, 0.1875}, -- NodeBox1
+			{-0.1875, -0.5, -0.125, 0.1875, -0.4375, 0.125}, -- NodeBox2
+			{-0.1875, -0.4375, -0.25, 0.1875, 0, 0.25}, -- NodeBox3
+			{-0.25, -0.4375, -0.1875, 0.25, 0, 0.1875}, -- NodeBox4
+			{-0.1875, 0, -0.125, 0.1875, 0.0625, 0.125}, -- NodeBox5
+			{-0.125, 0, -0.1875, 0.125, 0.0625, 0.1875}, -- NodeBox6
+			{-0.0625, 0.0625, -0.0625, 0.0625, 0.125, 0.0625}, -- NodeBox7
+			{-0.125, 0.125, -0.125, 0.125, 0.1875, 0.125}, -- NodeBox8
+			{-0.0625, 0.1875, -0.0625, 0.0625, 0.25, 0.0625}, -- NodeBox9
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.1875, 0.125, -0.4375, 0.1875}, -- NodeBox1
+			{-0.1875, -0.5, -0.125, 0.1875, -0.4375, 0.125}, -- NodeBox2
+			{-0.1875, -0.4375, -0.25, 0.1875, 0, 0.25}, -- NodeBox3
+			{-0.25, -0.4375, -0.1875, 0.25, 0, 0.1875}, -- NodeBox4
+			{-0.1875, 0, -0.125, 0.1875, 0.0625, 0.125}, -- NodeBox5
+			{-0.125, 0, -0.1875, 0.125, 0.0625, 0.1875}, -- NodeBox6
+			{-0.0625, 0.0625, -0.0625, 0.0625, 0.125, 0.0625}, -- NodeBox7
+			{-0.125, 0.125, -0.125, 0.125, 0.1875, 0.125}, -- NodeBox8
+			{-0.0625, 0.1875, -0.0625, 0.0625, 0.25, 0.0625}, -- NodeBox9
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.1875, 0.125, -0.4375, 0.1875}, -- NodeBox1
+			{-0.1875, -0.5, -0.125, 0.1875, -0.4375, 0.125}, -- NodeBox2
+			{-0.1875, -0.4375, -0.25, 0.1875, 0, 0.25}, -- NodeBox3
+			{-0.25, -0.4375, -0.1875, 0.25, 0, 0.1875}, -- NodeBox4
+			{-0.1875, 0, -0.125, 0.1875, 0.0625, 0.125}, -- NodeBox5
+			{-0.125, 0, -0.1875, 0.125, 0.0625, 0.1875}, -- NodeBox6
+			{-0.0625, 0.0625, -0.0625, 0.0625, 0.125, 0.0625}, -- NodeBox7
+			{-0.125, 0.125, -0.125, 0.125, 0.1875, 0.125}, -- NodeBox8
+			{-0.0625, 0.1875, -0.0625, 0.0625, 0.25, 0.0625}, -- NodeBox9
+		}
+	},
+	walkable = true,
+})
+
+minetest.override_item("default:mese_post_light", {
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 8 / 16, 2 / 16},
+			{-3/16, -3/16, -3/16, 3/16, 6/16, 3/16},
+		},
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 8 / 16, 2 / 16},
+			{-3/16, -3/16, -3/16, 3/16, 6/16, 3/16},
+		},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 8 / 16, 2 / 16},
+			{-3/16, -3/16, -3/16, 3/16, 6/16, 3/16},
+		},
+	},
+})
+
+minetest.override_item("default:ladder_wood", {
+	tiles = {
+	"default_wood.png",
+	},
+	walkable = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.5, 0.3125, 0.375, 0.5, 0.4375, 0.5}, -- NodeBox3
+			{-0.5, 0.0625, 0.375, 0.5, 0.1875, 0.5}, -- NodeBox4
+			{-0.5, -0.1875, 0.375, 0.5, -0.0625, 0.5}, -- NodeBox5
+			{-0.5, -0.4375, 0.375, 0.5, -0.3125, 0.5}, -- NodeBox6
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.5, 0.3125, 0.375, 0.5, 0.4375, 0.5}, -- NodeBox3
+			{-0.5, 0.0625, 0.375, 0.5, 0.1875, 0.5}, -- NodeBox4
+			{-0.5, -0.1875, 0.375, 0.5, -0.0625, 0.5}, -- NodeBox5
+			{-0.5, -0.4375, 0.375, 0.5, -0.3125, 0.5}, -- NodeBox6
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.5, 0.3125, 0.375, 0.5, 0.4375, 0.5}, -- NodeBox3
+			{-0.5, 0.0625, 0.375, 0.5, 0.1875, 0.5}, -- NodeBox4
+			{-0.5, -0.1875, 0.375, 0.5, -0.0625, 0.5}, -- NodeBox5
+			{-0.5, -0.4375, 0.375, 0.5, -0.3125, 0.5}, -- NodeBox6
+		}
+	},
+})
+
+minetest.override_item("default:ladder_steel", {
+	tiles = {
+	"default_steel_block.png",
+	},
+	walkable = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.4, 0.3125, 0.375, 0.4, 0.4375, 0.5}, -- NodeBox3
+			{-0.4, 0.0625, 0.375, 0.4, 0.1875, 0.5}, -- NodeBox4
+			{-0.4, -0.1875, 0.375, 0.4, -0.0625, 0.5}, -- NodeBox5
+			{-0.4, -0.4375, 0.375, 0.4, -0.3125, 0.5}, -- NodeBox6
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.4, 0.3125, 0.375, 0.4, 0.4375, 0.5}, -- NodeBox3
+			{-0.4, 0.0625, 0.375, 0.4, 0.1875, 0.5}, -- NodeBox4
+			{-0.4, -0.1875, 0.375, 0.4, -0.0625, 0.5}, -- NodeBox5
+			{-0.4, -0.4375, 0.375, 0.4, -0.3125, 0.5}, -- NodeBox6
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.3125, 0.5, 0.5}, -- NodeBox1
+			{0.3125, -0.5, 0.4375, 0.4375, 0.5, 0.5}, -- NodeBox2
+			{-0.4, 0.3125, 0.375, 0.4, 0.4375, 0.5}, -- NodeBox3
+			{-0.4, 0.0625, 0.375, 0.4, 0.1875, 0.5}, -- NodeBox4
+			{-0.4, -0.1875, 0.375, 0.4, -0.0625, 0.5}, -- NodeBox5
+			{-0.4, -0.4375, 0.375, 0.4, -0.3125, 0.5}, -- NodeBox6
+		}
+	},
+})
 
 minetest.override_item("flowers:waterlily", {
 	drawtype = "mesh",
@@ -725,6 +1144,16 @@ minetest.override_item("vessels:shelf", {
 	},
 })
 
+minetest.override_item("farming:bread", {
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local dir = placer:get_look_dir()
+		minetest.set_node(pos, {name="farming:bread_node", param2=minetest.dir_to_facedir(dir)})
+		itemstack:take_item()
+		return itemstack
+	end,
+})
+
 
 --ore overrides
 
@@ -753,6 +1182,95 @@ minetest.override_item("default:stone_with_gold", {
 })
 
 --new nodes
+
+local dye_colours = {
+	{"red"},
+	{"blue"},
+	{"orange"},
+	{"green"},
+	{"dark_green"},
+	{"dark_grey"},
+	{"black"},
+	{"grey"},
+	{"white"},
+	{"yellow"},
+	{"brown"},
+	{"cyan"},
+	{"magenta"},
+	{"violet"},
+	{"pink"},
+}
+
+for _, dye in ipairs(dye_colours) do
+local colour = dye[1]
+	minetest.register_node(":dye:"..colour.."_node", {
+	tiles = {
+		"dye_"..colour.."_model.png",
+	},
+	drawtype = "mesh",
+	mesh = "dye.obj",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.25, -0.4375, -0.25, 0.25, -0.1875, 0.25}, -- NodeBox2
+			{-0.1875, -0.1875, -0.1875, 0.1875, -0.125, 0.1875}, -- NodeBox3
+			{-0.125, -0.125, -0.125, 0.125, -0.0625, 0.125}, -- NodeBox4
+			{-0.1875, -0.0625, -0.125, 0.1875, 0, 0.125}, -- NodeBox5
+			{-0.125, 0, -0.125, 0.125, 0.0625, 0.125}, -- NodeBox6
+			{-0.125, -0.0625, -0.1875, 0.125, 0, 0.1875}, -- NodeBox8
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.25, -0.4375, -0.25, 0.25, -0.1875, 0.25}, -- NodeBox2
+			{-0.1875, -0.1875, -0.1875, 0.1875, -0.125, 0.1875}, -- NodeBox3
+			{-0.125, -0.125, -0.125, 0.125, -0.0625, 0.125}, -- NodeBox4
+			{-0.1875, -0.0625, -0.1875, 0.1875, 0, 0.1875}, -- NodeBox5
+			{-0.125, 0, -0.125, 0.125, 0.0625, 0.125}, -- NodeBox6
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, dig_immediate=3},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "dye:"..colour,
+	})
+	minetest.override_item("dye:"..colour, {
+		on_place = function(itemstack, placer, pointed_thing)
+			local pos = pointed_thing.above
+			minetest.set_node(pos, {name="dye:"..colour.."_node"})
+			itemstack:take_item()
+			return itemstack
+			end,
+	})
+end
+
+minetest.register_node(":farming:bread_node", {
+	tiles = {
+		"farming_bread_top.png",
+		"farming_bread_top.png",
+		"farming_bread_side.png",
+		"farming_bread_side.png",
+		"farming_bread_front.png^[transformFX",
+		"farming_bread_front.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.25, 0.125, -0.3125, 0.25}, -- NodeBox1
+			{-0.25, -0.3125, -0.25, 0.1875, -0.1875, 0.25}, -- NodeBox2
+			{-0.1875, -0.1875, -0.25, 0.125, -0.125, 0.25}, -- NodeBox3
+		}
+	},
+	groups = {crumbly=1, not_in_creative_inventory=1},
+	sounds = default.node_sound_dirt_defaults(),
+	drop = "farming:bread"
+})
 
 minetest.register_node("hyrule_mapgen:chillshroom", {
 	description = "Chillshroom",
@@ -906,6 +1424,32 @@ minetest.register_craft( {
 		{ "", "default:tree", "" },
 		{ "default:tree", "", "default:tree" }
 	}
+})
+
+minetest.register_node(":default:book_placed", {
+	tiles = {
+		"default_book_top.png",
+		"default_book_top.png^[transformFY",
+		"default_book_right.png",
+		"default_book_left.png",
+		"default_book_top.png^[transformFX",
+		"default_book_top.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.375, 0.25, -0.4375, 0.3125}, -- NodeBox1
+			{-0.25, -0.375, -0.375, 0.25, -0.3125, 0.3125}, -- NodeBox2
+			{-0.25, -0.4375, -0.375, -0.1875, -0.375, 0.3125}, -- NodeBox3
+			{-0.25, -0.4375, -0.375, 0.1875, -0.375, 0.25}, -- NodeBox4
+		}
+	},
+	groups = {choppy=1, dig_immediate=3, not_in_creative_inventory=1},
+	sounds = default.node_sound_leaves_defaults(),
+	drop = "default:book"
 })
 
 minetest.register_node("hyrule_mapgen:bigmush", {
@@ -1093,6 +1637,7 @@ minetest.register_node("hyrule_mapgen:ice_waterfall", {
 	drawtype = "glasslike",
 	use_texture_alpha = true,
 	tiles = {"hyrule_mapgen_ice_waterfall.png"},
+	inventory_image = "[inventorycube{hyrule_mapgen_ice_waterfall_inv.png{hyrule_mapgen_ice_waterfall_inv.png{hyrule_mapgen_ice_waterfall_inv.png",
 	groups = {cracky = 3, cools_lava = 1},
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -1305,7 +1850,7 @@ minetest.register_node("hyrule_mapgen:sinkingsand", {
 })
 
 
-chest_items = {
+local chest_items = {
 	{"clawshot:clawshot", 5},
 	{"hyruletools:eye", 5},
 	{"hyruletools:boomerang", 5},
@@ -1908,12 +2453,37 @@ minetest.register_craft({
 	}
 })
 
+xpanes.register_pane("wood_fence", {
+	description = "Wooden Fence",
+	textures = {"hyrule_mapgen_woodfence.png","xpanes_pane_half.png","xpanes_pane_half.png"},
+	inventory_image = "hyrule_mapgen_woodfence.png",
+	wield_image = "hyrule_mapgen_woodfence.png",
+	sounds = default.node_sound_glass_defaults(),
+	groups = {snappy=2, choppy=1, oddly_breakable_by_hand=3},
+	recipe = {
+		{"default:stick", "default:stick", "default:stick"},
+		{"default:stick", "default:stick", "default:stick"}
+	}
+})
+
 minetest.register_node("hyrule_mapgen:sandstone", {
 	description = "Dungeon Sandstone",
 	tiles = {
 		"hyrule_mapgen_sandstone.png"
 	},
-	groups = {cracky=3,}
+	groups = {cracky=3,},
+	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:sandstone_block", {
+	description = "Dungeon Sandstone Block",
+	tiles = {
+		"hyrule_mapgen_sandstone.png",
+		"hyrule_mapgen_sandstone.png",
+		"hyrule_mapgen_sandstone_side.png",
+	},
+	groups = {cracky=3,},
+	sounds = default.node_sound_stone_defaults()
 })
 
 stairs.register_stair_and_slab(
@@ -1931,7 +2501,8 @@ minetest.register_node("hyrule_mapgen:sandstone_tile", {
 	tiles = {
 		"hyrule_mapgen_sandstone_tile.png"
 	},
-	groups = {cracky=3,}
+	groups = {cracky=3,},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:sandstone_decoration", {
@@ -1944,7 +2515,8 @@ minetest.register_node("hyrule_mapgen:sandstone_decoration", {
 		"hyrule_mapgen_sandstone_decoration.png",
 		"hyrule_mapgen_sandstone_decoration.png",
 	},
-	groups = {cracky=3,}
+	groups = {cracky=3,},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
@@ -1957,7 +2529,8 @@ minetest.register_node("hyrule_mapgen:sandstone_decoration2", {
 		"hyrule_mapgen_sandstone_decoration2.png",
 		"hyrule_mapgen_sandstone_decoration2.png",
 	},
-	groups = {cracky=3,}
+	groups = {cracky=3,},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:pillar", {
@@ -1978,7 +2551,8 @@ minetest.register_node("hyrule_mapgen:pillar", {
 		fixed = {
 			{-0.25, -0.5, -0.25, 0.25, 0.5, 0.25}, -- NodeBox4
 		}
-	}
+	},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:pillar_base", {
@@ -2002,7 +2576,8 @@ minetest.register_node("hyrule_mapgen:pillar_base", {
 			{-0.3125, -0.3125, -0.3125, 0.3125, -0.1875, 0.3125}, -- NodeBox3
 			{-0.25, -0.1875, -0.25, 0.25, 0.5, 0.25}, -- NodeBox4
 		}
-	}
+	},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:pillar_top", {
@@ -2026,7 +2601,8 @@ minetest.register_node("hyrule_mapgen:pillar_top", {
 			{-0.3125, 0.1875, -0.3125, 0.3125, 0.3125, 0.3125}, -- NodeBox3
 			{-0.25, -0.5, -0.25, 0.25, 0.1875, 0.25}, -- NodeBox4
 		}
-	}
+	},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("hyrule_mapgen:greenwall", {
@@ -2468,7 +3044,7 @@ stairs.register_stair_and_slab(
 minetest.register_node("hyrule_mapgen:dungeon_torch", {
 	description = "Dungeon Torch",
 	drawtype = "plantlike",
-	visual_scale = 1.6,
+	visual_scale = 2,
 	walkable = false,
 	tiles = {
 		{name = "hyrule_mapgen_torch.png", animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 0.5,},
@@ -2994,6 +3570,279 @@ minetest.register_node("hyrule_mapgen:snowball", {
 	},
 	groups = {explody=1},
 	sounds = default.node_sound_dirt_defaults()
+})
+
+minetest.register_node("hyrule_mapgen:bucket_milk", {
+	tiles = {
+		"mobs_bucket_milk2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1,},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "mobs:bucket_milk"
+})
+
+minetest.override_item("mobs:bucket_milk", {
+	on_place= function(itemstack, placer, pointed_thing)
+		if pointed_thing == nil then return end
+		local pos = pointed_thing.above
+		minetest.set_node(pos, {name="hyrule_mapgen:bucket_milk"})
+		itemstack:take_item()
+		return itemstack
+	end
+})
+
+minetest.register_node("hyrule_mapgen:bucket", {
+	tiles = {
+		"bucket2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1,},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "bucket:bucket_empty"
+})
+
+minetest.override_item("bucket:bucket_empty", {
+	on_place= function(itemstack, placer, pointed_thing)
+		if pointed_thing == nil then return end
+		local pos = pointed_thing.above
+		minetest.set_node(pos, {name="hyrule_mapgen:bucket"})
+		itemstack:take_item()
+		return itemstack
+	end
+})
+
+minetest.register_node("hyrule_mapgen:bucket_river_water", {
+	tiles = {
+		"bucket_river_water2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1,},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "bucket:bucket_river_water"
+})
+
+minetest.override_item("bucket:bucket_river_water", {
+	on_use = function(itemstack, placer, pointed_thing)
+		if pointed_thing == nil then return end
+		local pos = pointed_thing.above
+		minetest.set_node(pos, {name="hyrule_mapgen:bucket_river_water"})
+		itemstack:take_item()
+		return itemstack
+	end
+})
+
+
+minetest.register_node("hyrule_mapgen:bucket_lava", {
+	tiles = {
+		"bucket_lava2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1,},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "bucket:bucket_lava",
+	light_source = 6,
+})
+
+minetest.override_item("bucket:bucket_lava", {
+	on_use = function(itemstack, placer, pointed_thing)
+		if pointed_thing == nil then return end
+		local pos = pointed_thing.above
+		minetest.set_node(pos, {name="hyrule_mapgen:bucket_lava"})
+		itemstack:take_item()
+		return itemstack
+	end
+})
+
+
+minetest.register_node("hyrule_mapgen:bucket_water", {
+	tiles = {
+		"bucket_water2.png",
+	},
+	drawtype = "mesh",
+	mesh = "bottle.obj",
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.25, 0.25, -0.4375, 0.25}, -- NodeBox1
+			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox2
+			{-0.25, -0.4375, -0.3125, 0.25, 0, 0.3125}, -- NodeBox3
+			{-0.25, 0, -0.1875, 0.25, 0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, 0.0625, -0.125, 0.1875, 0.125, 0.125}, -- NodeBox5
+			{-0.125, 0.125, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
+			{-0.125, 0.25, -0.1875, 0.125, 0.3125, 0.1875}, -- NodeBox7
+			{-0.1875, 0.25, -0.125, 0.1875, 0.3125, 0.125}, -- NodeBox8
+			{-0.125, 0.3125, -0.125, 0.125, 0.375, 0.125}, -- NodeBox9
+			{-0.125, 0.0625, -0.1875, 0.125, 0.125, 0.1875}, -- NodeBox10
+			{-0.1875, 0, -0.25, 0.1875, 0.0625, 0.25}, -- NodeBox11
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1,},
+	sounds = default.node_sound_glass_defaults(),
+	drop = "bucket:bucket_water"
+})
+
+minetest.override_item("bucket:bucket_water", {
+	on_use = function(itemstack, placer, pointed_thing)
+		if pointed_thing == nil then return end
+		local pos = pointed_thing.above
+		minetest.set_node(pos, {name="hyrule_mapgen:bucket_water"})
+		itemstack:take_item()
+		return itemstack
+	end
 })
 
 minetest.register_node("hyrule_mapgen:magic_tree", {

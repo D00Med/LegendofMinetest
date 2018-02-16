@@ -230,6 +230,21 @@ minetest.register_entity("experience:orb", {
 			self.object:remove()
 		end
 		local p = self.object:getpos()
+		if math.random(1,5) == 5 then
+		minetest.add_particle({
+			pos = {x=p.x+(math.random(-5,5)/100), y=p.y, z=p.z+(math.random(-5,5)/100)},
+			velocity = {x=0, y=0.5, z=0},
+			acceleration = {x=0, y=1, z=0},
+			expirationtime = 0.8,
+			size = 0.5,
+			collisiondetection = false,
+			collisionremoval = false,
+			vertical = true,
+			texture = "experience_glow.png",
+			animation = {type = "vertical_frames", aspect_w = 1, aspect_h = 1, length = 0.8},
+			glow = 14
+		})
+		end
 		local nn = minetest.env:get_node(p).name
 		noder = minetest.env:get_node(p).name
 		p.y = p.y - 0.3

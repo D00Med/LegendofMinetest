@@ -25,6 +25,8 @@ mobs:register_mob("mobs_loz:armos", {
 	drops = {
 		{name = "hyruletools:red_rupee",
 		chance = 5, min = 1, max = 3},
+		{name = "default:sword_steel",
+		chance = 10, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()

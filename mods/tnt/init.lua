@@ -522,12 +522,14 @@ minetest.register_entity("tnt:tnt_object", {
 	textures = {"hyruletools_bomb.png",},
 	visual_size = {x=10, y=10},
 	collision_box = {-0.1, 0, -0.1, 0.1, 0.2, 0.1},
+	hp_max = 1000,
 	physical = true,
 	on_activate = function(self)
 		minetest.after(3, function()
 			if self.object ~= nil then
 			local pos = self.object:getpos()
 			tnt.boom(pos, {damage_radius=3, radius=3})
+			self.object:remove()
 			end
 		end)
 	end,
