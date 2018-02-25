@@ -3,7 +3,7 @@
 License for Code
 ----------------
 
-Copyright (C) 2016 DOOMED <heiselong@gmx.com>
+Copyright (C) 2016 D00Med <heiselong@gmx.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
@@ -39,9 +39,9 @@ https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 License for Textures, Models and Sounds
 ---------------------------------------
 
-CC-BY-SA 3.0 UNPORTED. Created by DOOMED
+CC-BY-SA 3.0 UNPORTED. Created by D00Med
 
-hyrule_mapgen_roots.png, hyrule_mapgen_roots2.png, hyrule_mapgen_statue_active.png, hyrule_mapgen_statue_front.png, hyrule_mapgen_statue_side.png, hyrule_mapgen_big_sapling.png, cactus.b3d, leaf.b3d, waterlily.b3d, default_stone.png, hyrule_mapgen_grupee.png, hyrule_mapgen_brupee.png, hyrule_mapgen_rrupee.png   -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
+hyrule_mapgen_roots.png, hyrule_mapgen_roots2.png, hyrule_mapgen_statue_active.png, hyrule_mapgen_statue_front.png, hyrule_mapgen_statue_side.png, hyrule_mapgen_big_sapling.png, cactus.b3d, leaf.b3d, waterlily.b3d, default_stone.png, hyrule_mapgen_grupee.png, hyrule_mapgen_brupee.png, hyrule_mapgen_rrupee.png, goddess_statue.obj   -  CC-BY-SA 3.0 UNPORTED. Created by toby109tt(aka tobyplowy)
 
 For moreblocks_slope.obj:
 

@@ -159,3 +159,58 @@ mobs:register_mob("mobs_loz:wolfos2", {
 })
 
 mobs:register_egg("mobs_loz:wolfos2", "White Wolfos", "wool_cyan.png", 1)
+
+mobs:register_mob("mobs_loz:wolfos_tower", {
+	type = "monster",
+	passive = false,
+	attack_type = "dogfight",
+	reach = 2.5,
+	damage = 4,
+	hp_min = 60,
+	hp_max = 87,
+	armor = 90,
+	collisionbox = {-0.5, -0, -0.5, 0.5, 1, 0.5},
+	--visual_size = {x=1.5, y=1.5},
+	visual = "mesh",
+	mesh = "wolfos.b3d",
+	textures = {
+		{"mobs_wolfos_tower.png"},
+	},
+	makes_footstep_sound = true,
+	view_range = 10,
+	walk_velocity = 1.6,
+	run_velocity = 3.2,
+	drops = {
+		{name = "loot:key",
+		chance = 5, min = 1, max = 1},
+	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,5) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		if math.random(1,50) == 1 then 
+			minetest.set_node(self.object:getpos(), {name="mobs_loz:wolfos_tear"})
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
+	water_damage = 1,
+	lava_damage = 5,
+	light_damage = 0,
+	fear_height = 6,
+	animation = {
+		speed_normal = 14,
+		speed_run = 18,
+		stand_start = 1,
+		stand_end = 20,
+		walk_start = 45,
+		walk_end = 65,
+		run_start = 45,
+		run_end = 65,
+		punch_start = 20,
+		punch_end = 40,
+	},
+})
+
+mobs:register_egg("mobs_loz:wolfos_tower", "Tower Wolfos", "default_dirt.png", 1)

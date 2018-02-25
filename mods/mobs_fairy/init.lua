@@ -12,6 +12,7 @@ if mobs.mod and mobs.mod == "redo" then
 		armor = 130,
 		collisionbox = {-0.1,-0.1,-0.1, 0.1,0.1,0.1},
 		visual = "mesh",
+		glow = 12,
 		mesh = "fairy2.b3d",
 		textures = {
 		{"fairy.png"},

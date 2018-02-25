@@ -216,6 +216,7 @@ minetest.register_entity("experience:orb", {
 	physical = true,
 	timer = 0,
 	textures = {"orb.png"},
+	glow = 12,
 	visual_size = {x=0.3, y=0.3},
 	collisionbox = {-0.17,-0.17,-0.17,0.17,0.17,0.17},
 	on_activate = function(self, staticdata)

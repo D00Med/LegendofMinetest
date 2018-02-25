@@ -1521,7 +1521,7 @@ minetest.register_ore({
 		clust_scarcity  = 16 * 16 * 16,
 		clust_size      = 12,
 		y_min           = -31000,
-		y_max           = 31000,
+		y_max           = 10,
 		noise_threshold = 0.0,
 		noise_params    = {
 			offset = 0.5,
@@ -1936,3 +1936,17 @@ minetest.register_on_generated(function(minp, maxp)
 		end
 	end
 end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if minp.x < 50 and 50 < maxp.x and minp.y < 10 and 10 < maxp.y and minp.z < 50 and 50 < maxp.z then
+		minetest.place_schematic({x=0,y=10,z=0}, minetest.get_modpath("hyrule_mapgen").."/schematics/tower_ground.mts", 0, {["hyrule_mapgen:tower_dev"] = "hyrule_mapgen:tower_spawner",}, true)
+	end
+end)
+
+--Tower Generation
+
+-- minetest.register_on_newplayer(function(player)
+	-- if player:get_player_name() == "singleplayer" then
+		-- minetest.place_schematic({x=0,y=15,z=0}, minetest.get_modpath("hyrule_mapgen").."/schematics/tower_ground.mts", 0, {["hyrule_mapgen:tower_dev"] = "hyrule_mapgen:tower_spawner",}, true)
+	-- end
+-- end)

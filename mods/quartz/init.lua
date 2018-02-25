@@ -77,6 +77,7 @@ minetest.register_node("quartz:wall_immortal", {
 	description = "Unbreakeable Quartz Wall",
 	tiles = {"quartz_wall.png",},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
+	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),
 	on_blast = function(pos, intensity) 
 	end,
@@ -88,6 +89,7 @@ minetest.register_node("quartz:block_immortal", {
 	tiles = {"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
 	sounds = default.node_sound_stone_defaults(),
+	is_ground_content = false,
 	on_blast = function(pos, intensity) 
 	end,
 })
@@ -98,6 +100,7 @@ minetest.register_node("quartz:chiseled_immortal", {
 	tiles = {"quartz_chiseled_top.png", "quartz_chiseled_top.png", "quartz_chiseled_side.png"},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
 	sounds = default.node_sound_stone_defaults(),
+	is_ground_content = false,
 	on_blast = function(pos, intensity) 
 	end,
 })
@@ -108,6 +111,7 @@ minetest.register_node("quartz:pillar_immortal", {
 	tiles = {"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
 	sounds = default.node_sound_stone_defaults(),
+	is_ground_content = false,
 	on_blast = function(pos, intensity)
 	end,
 	on_place = minetest.rotate_node,

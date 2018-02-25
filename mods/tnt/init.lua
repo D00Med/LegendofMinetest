@@ -528,8 +528,47 @@ minetest.register_entity("tnt:tnt_object", {
 		minetest.after(3, function()
 			if self.object ~= nil then
 			local pos = self.object:getpos()
+			local node = minetest.find_node_near(pos, 1, {"default:water_source", "default:water_flowing", "default:river_water_source", "default:river_water_flowing"})
+			if node and not self.waterproof then
+			minetest.add_particlespawner({
+				amount = 5,
+				time = 0.2,
+				minpos = {x=pos.x-0.4, y=pos.y+0.1, z=pos.z-0.4},
+				maxpos = {x=pos.x+0.4, y=pos.y+0.5, z=pos.z+0.4},
+				minvel = {x=-0.5, y=0.5, z=0.5},
+				maxvel = {x=1, y=1, z=1},
+				minacc = {x=-0.2, y=1, z=-0.2},
+				maxacc = {x=0.2, y=1, z=0.2},
+				minexptime = 0.5,
+				maxexptime = 1,
+				minsize = 1,
+				maxsize = 2,
+				collisiondetection = false,
+				texture = "bubble.png"
+			})
+			self.object:remove()
+			elseif not node or self.waterproof then
 			tnt.boom(pos, {damage_radius=3, radius=3})
 			self.object:remove()
+			if self.waterproof then
+			minetest.add_particlespawner({
+				amount = 5,
+				time = 0.2,
+				minpos = {x=pos.x-0.4, y=pos.y+0.1, z=pos.z-0.4},
+				maxpos = {x=pos.x+0.4, y=pos.y+0.5, z=pos.z+0.4},
+				minvel = {x=-0.5, y=0.5, z=0.5},
+				maxvel = {x=1, y=1, z=1},
+				minacc = {x=-0.2, y=1, z=-0.2},
+				maxacc = {x=0.2, y=1, z=0.2},
+				minexptime = 0.5,
+				maxexptime = 1,
+				minsize = 1,
+				maxsize = 2,
+				collisiondetection = false,
+				texture = "bubble.png"
+			})
+			end
+			end
 			end
 		end)
 	end,
@@ -541,7 +580,7 @@ minetest.register_entity("tnt:tnt_object", {
 		local pos = self.object:getpos()
 		if pos ~= nil then
 		minetest.add_particlespawner({
-			amount = 5,
+			amount = 2,
 			time = 0.2,
 			minpos = {x=pos.x, y=pos.y+0.4, z=pos.z},
 			maxpos = {x=pos.x, y=pos.y+0.5, z=pos.z},
@@ -628,8 +667,30 @@ function tnt.register_tnt(def)
 		drop = "",
 		sounds = default.node_sound_wood_defaults(),
 		groups = {falling_node = 1},
-		on_timer = function(pos, elapsed)
+		on_timer = function(pos, elapsed)			
+			local node = minetest.find_node_near(pos, 1, {"default:water_source", "default:water_flowing", "default:river_water_source", "default:river_water_flowing"})
+			local name = minetest.get_node(pos).name
+			if node and minetest.get_item_group(name, "waterproof") < 1 then
+			minetest.add_particlespawner({
+				amount = 5,
+				time = 0.2,
+				minpos = {x=pos.x-0.4, y=pos.y+0.1, z=pos.z-0.4},
+				maxpos = {x=pos.x+0.4, y=pos.y+0.5, z=pos.z+0.4},
+				minvel = {x=-0.5, y=0.5, z=0.5},
+				maxvel = {x=1, y=1, z=1},
+				minacc = {x=-0.2, y=1, z=-0.2},
+				maxacc = {x=0.2, y=1, z=0.2},
+				minexptime = 0.5,
+				maxexptime = 1,
+				minsize = 1,
+				maxsize = 2,
+				collisiondetection = false,
+				texture = "bubble.png"
+			})
+			minetest.set_node(pos, {name="air"})
+			elseif not node or minetest.get_item_group(name, "waterproof") > 0 then
 			tnt.boom(pos, def)
+			end
 		end,
 		-- unaffected by explosions
 		on_blast = function() end,
@@ -647,7 +708,7 @@ minetest.register_abm({
 	chance = 1,
 	action = function(pos, node)
 		minetest.add_particlespawner({
-			amount = 25,
+			amount = 10,
 			time = 1,
 			minpos = {x=pos.x, y=pos.y+0.4, z=pos.z},
 			maxpos = {x=pos.x, y=pos.y+0.5, z=pos.z},

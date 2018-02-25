@@ -36,7 +36,7 @@ minetest.register_node("loot:chest", {
 			{-0.5, 0.4375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox4
 		}
 	},
-	groups = {cracky = 2, oddly_breakable_by_hand = 1},
+	groups = {cracky = 3,},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
@@ -57,6 +57,22 @@ minetest.register_node("loot:chest", {
 	end,
 	on_rightclick = function(pos, node, clicker, item, _)
 		local name = clicker:get_player_name()
+		if math.random(1,50) == 6 then
+			for i=1,3 do
+			minetest.env:add_entity({x=pos.x+math.random(-10,10)*0.1, y=pos.y+0.1, z=pos.z+math.random(-10,10)*0.1}, "mobs_loz:moldorm_leech")
+			end
+		return
+		elseif math.random(1,50) == 6 then
+			for i=1,4 do
+			minetest.env:add_entity({x=pos.x+math.random(-10,10)*0.1, y=pos.y+0.1, z=pos.z+math.random(-10,10)*0.1}, "mobs_loz:leever_poison")
+			end
+		return
+		elseif math.random(1,50) == 6 then
+			for i=1,5 do
+			minetest.env:add_entity({x=pos.x+math.random(-10,10)*0.1, y=pos.y+0.1, z=pos.z+math.random(-10,10)*0.1}, "mobs_loz:zol")
+			end
+		return
+		end
 		if clicker:get_wielded_item():get_name() == "loot:key" then
 			item:take_item()
 			local meta = minetest.get_meta(pos)
@@ -219,6 +235,52 @@ minetest.register_node("loot:amethyst_cube", {
 	use_texture_alpha = true,
 	groups = {cracky=1, not_in_creative_inventory=1},
 	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("loot:vegemite", {
+	description = "Vegemite",
+	tiles = {
+		"loot_vegemite_top.png",
+		"loot_vegemite_top.png",
+		"loot_vegemite.png",
+		"loot_vegemite.png^[transformFX",
+		"loot_vegemite.png^[transformFX",
+		"loot_vegemite.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-2/16, -0.5, -3/16, 2/16, 0, 3/16},
+			{-3/16, -0.5, -2/16, 3/16, 0, 2/16},
+		}
+	},
+	groups = {cracky=1, not_in_creative_inventory=1},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("loot:pc", {
+	description = "PC",
+	tiles = {
+		"loot_pc_top.png",
+		"loot_pc_top.png",
+		"loot_pc_side.png",
+		"loot_pc_side.png",
+		"loot_pc_front.png",
+		"loot_pc_top.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.25, 0.5}, -- NodeBox1
+			{-0.25, -0.25, -0.25, 0.3125, -0.1875, 0.25}, -- NodeBox2
+			{-0.375, -0.1875, -0.375, 0.375, 0.5, 0.4375}, -- NodeBox4
+		}
+	},
+	groups = {cracky=1, not_in_creative_inventory=1}
 })
 
 minetest.register_node("loot:carpet", {

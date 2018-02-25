@@ -34,7 +34,7 @@ mobs:register_mob("mobs_loz:volvagia", {
 	run_velocity = 5,
 	jump = false,
 	drops = {
-		{name = "hyruletools:firestone", chance = 1, min = 3, max = 5},
+		{name = "hyruletools:firestone", chance = 1, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
@@ -119,7 +119,7 @@ mobs:register_mob("mobs_loz:volvagia_ice", {
 	run_velocity = 5,
 	jump = false,
 	drops = {
-		{name = "hyruletools:firestone", chance = 1, min = 3, max = 5},
+		{name = "loot:key", chance = 1, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()

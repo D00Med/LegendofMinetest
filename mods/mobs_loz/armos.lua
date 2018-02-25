@@ -1,6 +1,28 @@
 
+minetest.register_node("mobs_loz:armos_statue", {
+	description = "Armos Statue",
+	tiles = {
+		"mobs_armos_frozen.png",
+	},
+	visual_scale = 0.5,
+	drawtype = "mesh",
+	mesh = "armos.b3d",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	selection_box = {
+		type = "fixed",
+		fixed = {{-0.35, -0.5, -0.35, 0.35, 1.3, 0.35},}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {{-0.35, -0.5, -0.35, 0.35, 1.3, 0.35},}
+	},
+	groups = {cracky=3,},
+	sounds = default.node_sound_stone_defaults(),
+})
+
 mobs:register_mob("mobs_loz:armos", {
-	type = "animal",
+	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
 	reach = 2,
@@ -8,7 +30,7 @@ mobs:register_mob("mobs_loz:armos", {
 	hp_min = 10,
 	hp_max = 27,
 	armor = 100,
-	collisionbox = {-0.5, 0, -0.5, 0.5, 1.5, 0.5},
+	collisionbox = {-0.35, -0.5, -0.35, 0.35, 1.3, 0.35},
 	visual = "mesh",
 	mesh = "armos.b3d",
 	textures = {
