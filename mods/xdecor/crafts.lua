@@ -1,4 +1,11 @@
 minetest.register_craft({ 
+	output = "dye:green",
+	recipe = {
+		{"xdecor:ivy",},
+	} 
+})
+
+minetest.register_craft({ 
 	output = "xdecor:baricade",
 	recipe = {
 		{"group:stick", "", "group:stick"},

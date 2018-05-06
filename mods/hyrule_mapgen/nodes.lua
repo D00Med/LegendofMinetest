@@ -2519,6 +2519,7 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 	},
 	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1,},
 	paramtype = "light",
+	light_source = 5,
 	walkable = false,
 })
 
@@ -2528,6 +2529,7 @@ minetest.override_item("hyrule_mapgen:magic_leaves", {
 	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_magic_leaves2.png"},
 	paramtype = "light",
+	light_source = 5,
 })
 end
 

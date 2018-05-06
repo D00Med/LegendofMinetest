@@ -2359,6 +2359,67 @@ minetest.register_node("hyruletools:pendant3", {
 	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate=3},
 })
 
+minetest.register_node("hyruletools:chomper", {
+	description = "Wood Chomper",
+	tiles = {
+		"hyruletools_chomper_top.png",
+		"hyruletools_chomper_bottom.png",
+		"hyruletools_chomper.png",
+		"hyruletools_chomper.png",
+		"hyruletools_chomper_front.png",
+		"hyruletools_chomper.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0.1875, -0.5, 0.5, 0.5, -0.3125}, -- NodeBox1
+			{0.3125, 0.5, 0.3125, 0.4375, 0.625, 0.4375}, -- NodeBox2
+			{-0.4375, 0.5, 0.3125, -0.3125, 0.625, 0.4375}, -- NodeBox3
+			{-0.4375, 0.5, -0.4375, -0.3125, 0.625, -0.3125}, -- NodeBox4
+			{0.3125, 0.5, -0.4375, 0.4375, 0.625, -0.3125}, -- NodeBox5
+			{0.3125, 0.5, -0.0625, 0.4375, 0.625, 0.0625}, -- NodeBox6
+			{-0.4375, 0.5, -0.0625, -0.3125, 0.625, 0.0625}, -- NodeBox7
+			{-0.0625, 0.5, -0.4375, 0.0625, 0.625, -0.3125}, -- NodeBox8
+			{-0.0625, 0.5, 0.3125, 0.0625, 0.625, 0.4375}, -- NodeBox9
+			{-0.5, 0.1875, 0.3125, 0.5, 0.5, 0.5}, -- NodeBox10
+			{0.3125, 0.1875, -0.5, 0.5, 0.5, 0.5}, -- NodeBox11
+			{-0.5, 0.1875, -0.5, -0.3125, 0.5, 0.5}, -- NodeBox12
+		}
+	},
+	sounds = default.node_sound_metal_defaults(),
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	on_construct = function(pos)
+		local pos_above = {x=pos.x, y=pos.y+1, z=pos.z}
+		local node = minetest.get_node(pos)
+		local node_above = minetest.get_node(pos_above)
+		if minetest.get_item_group(node_above.name, "choppy") >= 1 then
+			minetest.after(0.5, function()
+				if node ~= nil and node_above ~= nil and pos_above ~= nil then
+					minetest.remove_node(pos)
+					minetest.add_item(pos, node_above.name)
+					minetest.set_node(pos_above, {name="hyruletools:chomper", param2=node.param2})
+					minetest.sound_play("hunger_eat", {pos=pos, gain=0.7})
+				end
+			end)
+		else
+			minetest.add_item(pos, "hyruletools:chomper")
+			minetest.sound_play("gulp", {pos=pos, gain=2})
+			minetest.remove_node(pos)
+		end
+	end,
+})
+
+minetest.register_craft({
+	output = 'hyruletools:chomper',
+	recipe = {
+		{'mobs_loz:scale', "mobs_loz:scale", "mobs_loz:scale"},
+		{'default:copper_ingot', 'default:copper_ingot', 'default:copper_ingot'},
+	}
+})
+
 --mobs redo arrow code, see mobs license
 
 minetest.register_entity("hyruletools:swdspark", {
