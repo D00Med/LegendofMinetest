@@ -164,6 +164,8 @@ minetest.register_on_joinplayer(function()
 	end
 end)
 
+local sound_ready = true
+
 minetest.register_globalstep(function(dtime)
 	if math.random(1,4) ~= 4 or hyrule_weather.weather == "twilight" then return end
 	--select random weather (serverwide)
@@ -196,6 +198,15 @@ minetest.register_globalstep(function(dtime)
 		--apply weather effect
 		if display_weather then
 			apply_weather(player, pos, hyrule_weather.weather)
+			if sound_ready and hyrule_weather.weather ~= nil then 
+				local weather_name = hyrule_weather.weather
+				local plyr = player:get_player_name()
+				minetest.sound_play(weather_name, {to_player=plyr, gain=1.5,  max_hear_distance = 3, loop=false})
+				sound_ready = false
+				minetest.after(33, function()
+					sound_ready = true
+				end)
+			end
 		else
 			apply_weather(player, pos, "none")
 		end

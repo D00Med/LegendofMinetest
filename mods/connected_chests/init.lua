@@ -4,7 +4,9 @@ local load_time_start = minetest.get_us_time()
 local creative_enabled = minetest.setting_getbool"creative_mode"
 
 local big_formspec = "size[13,9]"..
+	"background[5,5;1,1;gui_formbg.png;true]"..
 	"list[current_name;main;0,0;13,5;]"..
+	default.gui_slots ..
 	"list[current_player;main;2.5,5.2;8,4;]"..
 	"listring[current_name;main]"..
 	"listring[current_player;main]"
