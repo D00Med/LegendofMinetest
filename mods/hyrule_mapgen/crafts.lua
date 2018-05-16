@@ -24,6 +24,15 @@ minetest.register_craft( {
 	}
 })
 
+minetest.register_craft( {
+	output = "hyrule_mapgen:stone_pillar 6",
+	recipe = {
+		{"default:stone", "default:stone"},
+		{"default:stone", "default:stone"},
+		{"default:stone", "default:stone"}
+	}
+})
+
 minetest.register_craft({
 	output = 'hyrule_mapgen:ice_brick',
 	recipe = {

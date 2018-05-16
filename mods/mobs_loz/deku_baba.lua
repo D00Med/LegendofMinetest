@@ -22,14 +22,14 @@ mobs:register_mob("mobs_loz:deku_baba", {
 	sounds = {
 		random = "mobs_dirtmonster",
 	},
+	drops = {
+		{name = "mobs_loz:nut",
+		chance = 1, min = 1, max = 3},
+	},
 	view_range = 5,
 	walk_velocity = 0.01,
 	run_velocity = 0.05,
 	jump = false,
-	drops = {
-		{name = "loot:key",
-		chance = 1, min = 1, max = 1},
-	},
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if math.random(1,2) == 2 then
@@ -82,8 +82,8 @@ mobs:register_mob("mobs_loz:deku_baba_dry", {
 	run_velocity = 0.05,
 	jump = false,
 	drops = {
-		{name = "mobs_loz:nut",
-		chance = 1, min = 1, max = 3},
+		{name = "loot:key",
+		chance = 1, min = 1, max = 1},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()

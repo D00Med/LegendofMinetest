@@ -416,9 +416,9 @@ function mobs_trader(self, clicker, entity, race)
 		.. "label[6,0.5;Price]"
 		.. "list[detached:" .. unique_entity_id .. ";price;6,1;7,2;]"
 		.. "label[4.5,3.5;Payment]"
-		.. "list[detached:" .. unique_entity_id .. ";payment;4.5,4;5.5,5;]"
+		.. "list[detached:" .. unique_entity_id .. ";payment;4.5,4;1,1;]"
 		.. "label[6,3.5;Bought items]"
-		.. "list[detached:" .. unique_entity_id .. ";takeaway;6,4;7.5,5.5;]"
+		.. "list[detached:" .. unique_entity_id .. ";takeaway;6,4;1,1;]"
 		.. "list[current_player;main;0,6;8,4;]"
 	)
 end

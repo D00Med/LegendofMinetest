@@ -561,6 +561,18 @@ minetest.register_node("hyrule_mapgen:beamos", {
 	paramtype2 = "facedir",
 })
 
+minetest.register_node("hyrule_mapgen:stone_pillar", {
+	description = "Stone Pillar",
+	tiles = {
+		"hyrule_mapgen_stone_pillar_top.png",
+		"hyrule_mapgen_stone_pillar_top.png",
+		"hyrule_mapgen_stone_pillar.png",
+	},
+	groups = {cracky = 1,},
+	paramtype2 = "facedir",
+	on_place = minetest.rotate_node
+})
+
 minetest.register_node("hyrule_mapgen:spikes", {
 	description = "Spikes",
 	drawtype = "firelike",
@@ -2840,7 +2852,7 @@ minetest.register_node("hyrule_mapgen:skull", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=0},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -3119,7 +3131,7 @@ minetest.register_node("hyrule_mapgen:quartz_table", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = false,
-	groups = {cracky=4, not_in_creative_inventory=1},
+	groups = {cracky=4, not_in_creative_inventory=0},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -3149,7 +3161,7 @@ minetest.register_node("hyrule_mapgen:candles", {
 			{-0.2, -0.5, -0.2, 0.2, -0.2, 0.2},
 		}
 	},
-	groups = {choppy=1, not_in_creative_inventory=1,},
+	groups = {choppy=1, not_in_creative_inventory=0,},
 	sounds = default.node_sound_wood_defaults(),
 	drop = "xdecor:candle 2",
 	is_ground_content = false,
@@ -3180,7 +3192,7 @@ minetest.register_node("hyrule_mapgen:goddess_statue", {
 	},
 	visual_scale = 0.5,
 	is_ground_content = false,
-	groups = {cracky=1, not_in_creative_inventory=1,},
+	groups = {cracky=1,},
 	sounds = default.node_sound_stone_defaults(),
 })
 

@@ -23,7 +23,7 @@ minetest.register_node("hyrule_weather:ice", {
 			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5}, -- NodeBox1
 		}
 	},
-	drop = "hyruletools:ice_fragment",
+	drop = "",
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -36,36 +36,39 @@ local apply_weather = function(player, pos, weather_type)
 		player:set_sky({r=208, g=223, b=238}, "plain", nil, true)
 		end
 		for i=1,8 do
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			expirationtime = 3,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
+			glow = 0
+		})
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			expirationtime = 3,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
+			glow = 0
+		})
 		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-4,4), z=pos.z+math.random(-7,7)}, 10, {"default:water_source", "default:river_water_source"}, true)
 		if not water then return end
 		water.y =  water.y+1
 		if minetest.get_node(water).name == "air" then
 			minetest.set_node(water, {name="hyrule_weather:ice"})
+			if math.random(1,2) == 2 then
+				minetest.sound_play("freeze", {pos=water, gain=1.2,  max_hear_distance = 5, loop=false})
+			end
 		end
-		minetest.add_particle({
-			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
-			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
-			expirationtime = 3,
-			size = math.random(3,5),
-			collisiondetection = true,
-			collision_removal = true,
-			vertical = false,
-			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
-			glow = 0
-		})
-		minetest.add_particle({
-			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
-			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
-			expirationtime = 3,
-			size = math.random(3,5),
-			collisiondetection = true,
-			collision_removal = true,
-			vertical = false,
-			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
-			glow = 0
-		})
 		end
 	elseif weather_type == "rain" then
 		if minetest.get_timeofday()*24000 >= 6000 and minetest.get_timeofday()*24000 <= 19000 then

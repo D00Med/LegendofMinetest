@@ -214,7 +214,7 @@ minetest.register_node("moreplants:umbrella", {
 	buildable_to = true, 
 	sunlight_propagates = true,
 	inventory_image = "moreplants_umbrella.png",
-	visual_scale = 2,
+	visual_scale = 3,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
 	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),

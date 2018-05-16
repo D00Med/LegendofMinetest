@@ -24,3 +24,5 @@ License for Sounds
 rain.ogg/storm.ogg, insects.ogg - by Mike Keonig CC Attribution 3.0 http://soundbible.com/920-Cicada.html
 dust.ogg/snow.ogg - by Mark DiAngelo CC Attribution 3.0
 pollen.ogg - by GlorySunz Public Domain http://soundbible.com/1818-Rainforest-Ambience.html
+freeze.ogg - by urupin CC By-NC 3.0 https://freesound.org/people/urupin/
+http://creativecommons.org/licenses/by-nc/3.0/

@@ -595,8 +595,8 @@ minetest.register_decoration({
 	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	noise_params = {
-		offset = 0.04,
-		scale = 0.01,
+		offset = 0.02,
+		scale = 0.015,
 		spread = {x = 250, y = 250, z = 250},
 		seed = 2,
 		octaves = 3,
@@ -609,6 +609,27 @@ minetest.register_decoration({
 	flags = "place_center_x, place_center_z",
 })
 
+--Oak tree
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:dirt_with_grass"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.01,
+		scale = 0.01,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 2,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"deciduous_forest"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/oak_tall.mts",
+	flags = "place_center_x, place_center_z",
+})
+
 --aspen tree
 
 minetest.register_decoration({
@@ -616,8 +637,8 @@ minetest.register_decoration({
 	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	noise_params = {
-		offset = 0.02,
-		scale = 0.001,
+		offset = 0.01,
+		scale = 0.0005,
 		spread = {x = 250, y = 250, z = 250},
 		seed = 2,
 		octaves = 3,
@@ -896,7 +917,7 @@ minetest.register_decoration({
 	place_on = {"default:snowblock", "default:dirt_with_snow"},
 	sidelen = 26,
 	fill_ratio = 0.002,
-	biomes = {"taiga"},
+	biomes = {"taiga", "icesheet", "tundra", "icesheet_ocean"},
 	decoration = "hyrule_mapgen:chillshroom",
 	height = 1,
 })

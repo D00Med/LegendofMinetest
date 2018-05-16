@@ -198,8 +198,8 @@ mobs:register_mob("mobs_loz:business_scrub_passive", {
 	visual_size = {x=1, y=1},
 	blood_texture = "default_wood.png",
 	view_range = 10,
-	walk_velocity = 1.5,
-	run_velocity = 5,
+	walk_velocity = 0.8,
+	run_velocity = 1.5,
 	jump_height = 5,
 	makes_footstep_sound = true,
 	drops = {

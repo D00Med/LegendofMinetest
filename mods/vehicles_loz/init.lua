@@ -77,7 +77,7 @@ minetest.register_entity("vehicles:wooden_boat", {
 vehicles.register_spawner("vehicles:wooden_boat", S("Wooden Boat"), "boats_inventory.png", true)
 
 minetest.register_craft({
-	output = "vehicles:wooden_boat",
+	output = "vehicles:wooden_boat_spawner",
 	recipe = {
 		{"",           "",           ""          },
 		{"group:wood", "",           "group:wood"},
