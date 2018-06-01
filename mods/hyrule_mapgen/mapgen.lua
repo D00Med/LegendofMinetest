@@ -1971,3 +1971,17 @@ end)
 		-- minetest.place_schematic({x=0,y=15,z=0}, minetest.get_modpath("hyrule_mapgen").."/schematics/tower_ground.mts", 0, {["hyrule_mapgen:tower_dev"] = "hyrule_mapgen:tower_spawner",}, true)
 	-- end
 -- end)
+
+minetest.register_lbm({
+	name = "hyrule_mapgen:apple_growth",
+	nodenames = {"default:leaves", "hyrule_mapgen:wild_leaves"},
+	run_at_every_load = true,
+	action = function(pos, node)
+		if math.random(1,200) == 1 and not minetest.find_node_near(pos, 3, {"default:apple"}) then 
+			pos.y = pos.y-1
+			if minetest.get_node(pos).name == "air" then
+			minetest.set_node(pos, {name="default:apple"})
+			end
+		end
+	end
+})

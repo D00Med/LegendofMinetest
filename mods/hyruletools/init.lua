@@ -21,6 +21,17 @@ minetest.register_on_leaveplayer(function(player)
 	players[name] = nil
 end)
 
+--[[
+minetest.register_on_player_inventory_action(function(player, inventory, action, inventory_info)
+	if action == "put" then
+		minetest.sound_play("put", {to_player=player:get_player_name(), gain=1.2, loop=false})
+	elseif action == "take" then
+		minetest.sound_play("take", {to_player=player:get_player_name(), gain=1.2, loop=false})
+	end
+end)]]
+
+
+
 minetest.register_entity("hyruletools:gliding_player", {
 	visual = "mesh",
 	mesh = "character_gliding.b3d",
@@ -682,7 +693,6 @@ end)
 
 
 --tools
-
 
 minetest.register_entity("hyruletools:block_dummy", {
 	visual = "mesh",

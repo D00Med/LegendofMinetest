@@ -212,15 +212,17 @@ function mobs.allow_take(inv, listname, index, stack, player)
 	end
 end
 
-function mobs.on_put(inv, listname, index, stack)
-
+function mobs.on_put(inv, listname, index, stack, player)
+	if listname ~= "main" then 
+	minetest.sound_play("put", {to_player=player:get_player_name(), gain=0.5, loop=false})
+	end
 	if listname == "payment" then
 		mobs.update_takeaway(inv)
 	end
 end
 
-function mobs.on_take(inv, listname, count, index, stack, player)
-
+function mobs.on_take(inv, listname, index, stack, player)
+	minetest.sound_play("take", {to_player=player:get_player_name(), gain=0.5, loop=false})
 	if listname == "takeaway" then
 
 		local amount = inv:get_stack("payment", 1):get_count()
@@ -234,7 +236,6 @@ function mobs.on_take(inv, listname, count, index, stack, player)
 	end
 
 	if listname == "payment" then
-
 		if mobs.check_pay(inv, false) then
 
 			local selection = inv.get_stack(inv, "selection", 1)
@@ -346,6 +347,7 @@ function mobs_trader(self, clicker, entity, race)
 
 			if from_list == "goods"
 			and to_list == "selection" then
+				minetest.sound_play("take", {to_player=player:get_player_name(), gain=0.5, loop=false})
 
 				local inv = inventory
 				local moved = inv.get_stack(inv,to_list, to_index)
