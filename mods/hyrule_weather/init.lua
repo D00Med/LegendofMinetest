@@ -80,7 +80,7 @@ local apply_weather = function(player, pos, weather_type)
 		for i=1,25 do
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=0, y=math.random(-25,-30), z=0},
+			velocity = {x=0, y=math.random(-30,-25), z=0},
 			acceleration = {x=0, y=-1, z=0},
 			expirationtime = 2,
 			size = math.random(3,5),
