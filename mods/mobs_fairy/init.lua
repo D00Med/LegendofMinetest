@@ -31,7 +31,7 @@ if mobs.mod and mobs.mod == "redo" then
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-1,1)/10, y=pos.y, z=pos.z+math.random(-1,1)/10},
 			velocity = {x=0, y=0, z=0},
-			acceleration = {x=math.random(-2,2)/10, y=math.random(-2,-5)/10, z=math.random(-2,2)/10},
+			acceleration = {x=math.random(-2,2)/10, y=math.random(-5,-2)/10, z=math.random(-2,2)/10},
 			expirationtime = math.random(5,10)/10,
 			size = math.random(1,2),
 			collisiondetection = false,
