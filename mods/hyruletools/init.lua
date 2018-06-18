@@ -2225,7 +2225,7 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_node("hyruletools:pendant1", {
+minetest.register_tool("hyruletools:pendant1", {
 	description = "Pendant of Power",
 	inventory_image = "hyruletools_pendant1.png",
 	on_use = function(itemstack, placer, pointed_thing)
@@ -2246,7 +2246,7 @@ minetest.register_node("hyruletools:pendant1", {
 				glow = 9
 			})
 			end)
-			end
+		end
 	end,
 	tiles = {
 		"hyruletools_pendant_1s.png",
@@ -2294,7 +2294,7 @@ minetest.register_node("hyruletools:pendant2", {
 				glow = 9
 			})
 			end)
-			end
+		end
 	end,
 	tiles = {
 		"hyruletools_pendant_2s.png",

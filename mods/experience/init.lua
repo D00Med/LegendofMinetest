@@ -72,7 +72,7 @@ local xp_hud = nil
 --hudbar by D00Med
 minetest.register_on_joinplayer(function(player)
 xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "r")
-				experience = xp:read("*l")
+				experience = tonumber(xp:read("*l"))
 				xp:close()
 local playername = player:get_player_name()
 player:hud_add({
@@ -100,7 +100,7 @@ end)
 minetest.register_globalstep(function(dtime)
 for _,player in ipairs(minetest.get_connected_players()) do
 xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "r")
-				experience = xp:read("*l")
+				experience = tonumber(xp:read("*l"))
 				expe = experience/20
 				xp:close()
 player:hud_change(xp_hud, "xp_hud", expe)
