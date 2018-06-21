@@ -1208,7 +1208,7 @@ minetest.register_node("hyrule_mapgen:nrupee", {
 })
 
 minetest.register_node("hyrule_mapgen:wood_fence", {
-	description = "Wooden Fence",
+	description = "Rough Wooden Fence",
 	inventory_image = "hyrule_mapgen_woodfence.png",
 	wield_image = "hyrule_mapgen_woodfence.png",
 	sounds = default.node_sound_wood_defaults(),
