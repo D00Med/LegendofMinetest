@@ -290,3 +290,11 @@ mobs:spawn({
 	min_height = -5000,
 	day_toggle = true,
 })
+mobs:spawn({
+	name = "mobs_loz:zol_friendly",
+	nodes = {"default:dirt_with_dry_grass", "default:dirt_with_grass3",},
+	min_light = 6,
+	chance = 30000,
+	min_height = -200,
+	day_toggle = false,
+})
