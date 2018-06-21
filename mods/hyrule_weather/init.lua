@@ -38,8 +38,8 @@ local apply_weather = function(player, pos, weather_type)
 		for i=1,8 do
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
-			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-6,-4), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
 			expirationtime = 3,
 			size = math.random(3,5),
 			collisiondetection = true,
@@ -50,8 +50,8 @@ local apply_weather = function(player, pos, weather_type)
 		})
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
-			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-6,-4), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
 			expirationtime = 3,
 			size = math.random(3,5),
 			collisiondetection = true,
@@ -78,7 +78,7 @@ local apply_weather = function(player, pos, weather_type)
 		minetest.after((math.random(1,10)/10), function(dtime)
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=0, y=math.random(-15,-20), z=0},
+			velocity = {x=0, y=math.random(-20,-15), z=0},
 			acceleration = {x=0, y=-1, z=0},
 			expirationtime = 2,
 			size = math.random(3,5),
