@@ -379,8 +379,16 @@ minetest.register_node("hyrule_mapgen:bush_leaves", {
 	drawtype = "allfaces",
 	paramtype = "light",
 	walkable = false,
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'default:bush_sapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:bush_leaves'},}
+		}
+	},
 	groups = {snappy=1, oddly_breakable_by_hand=1, leaves=1},
 	sounds = default.node_sound_leaves_defaults(),
+	after_place_node = default.after_place_leaves
 })
 
 minetest.register_node("hyrule_mapgen:windmill_node", {
@@ -482,7 +490,7 @@ minetest.register_node("hyrule_mapgen:icicle", {
 })
 
 minetest.register_node("hyrule_mapgen:obsidian_spike", {
-	description = "Obsidian spike",
+	description = "Obsidian Spike",
 	tiles = {
 		"default_obsidian.png",
 	},
@@ -596,7 +604,7 @@ minetest.register_node("hyrule_mapgen:spikes", {
 })
 
 minetest.register_node("hyrule_mapgen:sinkingsand", {
-	description = "Sinkin Sand",
+	description = "Sinking Sand",
 	drawtype = "liquid",
 	tiles = {{
 		name = "hyrule_mapgen_sinkingsand.png",
@@ -1025,7 +1033,13 @@ minetest.register_node("hyrule_mapgen:leaves_with_gale", {
 	tiles = {
 		"default_leaves.png^hyrule_mapgen_galeseed.png"
 	},
-	drop = "default:leaves",
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'default:sapling'}, rarity = 20,},
+			{items = {'default:leaves'},}
+		}
+	},
 	on_rightclick = function(pos, node, clicker, itemstack)
 		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
 		local item = clicker:get_wielded_item()
@@ -1035,7 +1049,8 @@ minetest.register_node("hyrule_mapgen:leaves_with_gale", {
 		end
 	end,
 	walkable = false,
-	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3},
+	after_place_node = default.after_place_leaves
 })
 
 minetest.register_node("hyrule_mapgen:leaves_with_ember", {
@@ -1065,7 +1080,13 @@ minetest.register_node("hyrule_mapgen:leaves_with_pegasus", {
 	tiles = {
 		"default_jungleleaves.png^hyrule_mapgen_pegasusseed.png"
 	},
-	drop = "default:jungleleaves",
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'default:junglesapling'}, rarity = 20,},
+			{items = {'default:jungleleaves'},}
+		}
+	},
 	on_rightclick = function(pos, node, clicker, itemstack)
 		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
 		local item = clicker:get_wielded_item()
@@ -1075,7 +1096,8 @@ minetest.register_node("hyrule_mapgen:leaves_with_pegasus", {
 		end
 	end,
 	walkable = false,
-	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3},
+	after_place_node = default.after_place_leaves
 })
 
 minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
@@ -1085,7 +1107,13 @@ minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
 	tiles = {
 		"default_aspen_leaves.png^hyrule_mapgen_mysteryseed.png"
 	},
-	drop = "default:aspen_leaves",
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'default:aspen_sapling'}, rarity = 20,},
+			{items = {'default:aspen_leaves'},}
+		}
+	},
 	on_rightclick = function(pos, node, clicker, itemstack)
 		if clicker:get_wielded_item():get_name() == "hyruletools:seed_satchel" then
 		local item = clicker:get_wielded_item()
@@ -1095,7 +1123,8 @@ minetest.register_node("hyrule_mapgen:leaves_with_mystery", {
 		end
 	end,
 	walkable = false,
-	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3}
+	groups = {snappy=3, oddly_breakable_by_hand=1, dig_immediate=3},
+	after_place_node = default.after_place_leaves
 })
 
 minetest.register_node("hyrule_mapgen:swamp_mud", {
@@ -1656,7 +1685,7 @@ minetest.register_node("hyrule_mapgen:stone_with_bluerupee", {
 	sounds = default.node_sound_stone_defaults(),
 })
 minetest.register_node("hyrule_mapgen:stone_with_greenrupee", {
-	description = "Buried green rupee",
+	description = "Buried Green Rupee",
 	tiles = {"default_stone.png^hyruletools_greenrupee_ore.png"},
 	groups = {cracky = 2, xp = 1},
 	drop = 'hyruletools:green_rupee',
@@ -2075,7 +2104,7 @@ minetest.register_node("hyrule_mapgen:statue_active", {
 
 
 minetest.register_node("hyrule_mapgen:glowstone", {
-	description = "glowstone",
+	description = "Glowstone",
 	drawtype = "allfaces",
 	tiles = {
 		"hyrulemapgen_glowstone.png"
@@ -2088,7 +2117,7 @@ minetest.register_node("hyrule_mapgen:glowstone", {
 })
 
 minetest.register_node("hyrule_mapgen:volvagia_spawn", {
-	description = "Volvagia spawner",
+	description = "Volvagia Spawner",
 	tiles = {
 		"hyrule_mapgen_vspawn.png"
 	},
@@ -2111,7 +2140,7 @@ minetest.register_node("hyrule_mapgen:volvagia_spawn", {
 })
 
 minetest.register_node("hyrule_mapgen:ganon_spawn", {
-	description = "Ganon spawner",
+	description = "Ganon Spawner",
 	tiles = {
 		"hyrule_mapgen_gspawn.png"
 	},
@@ -2128,7 +2157,7 @@ minetest.register_node("hyrule_mapgen:ganon_spawn", {
 })
 
 minetest.register_node("hyrule_mapgen:bongo_spawn", {
-	description = "Bongo Bongo spawner",
+	description = "Bongo Bongo Spawner",
 	tiles = {
 		"hyrule_mapgen_wspawn.png"
 	},
@@ -2150,7 +2179,7 @@ minetest.register_node("hyrule_mapgen:bongo_spawn", {
 })
 
 minetest.register_node("hyrule_mapgen:dodongo_spawn", {
-	description = "King Dodongo spawner",
+	description = "King Dodongo Spawner",
 	tiles = {
 		"hyrule_mapgen_dspawn.png"
 	},
@@ -2509,7 +2538,7 @@ minetest.override_item("bucket:bucket_water", {
 })
 
 minetest.register_node("hyrule_mapgen:magic_tree", {
-	description = "magic tree trunk",
+	description = "Magic Tree Trunk",
 	tiles = {
 		"hyrule_mapgen_magic_tree_top.png",
 		"hyrule_mapgen_magic_tree_top.png",
@@ -2524,15 +2553,22 @@ minetest.register_node("hyrule_mapgen:magic_tree", {
 })
 
 minetest.register_node("hyrule_mapgen:magic_leaves", {
-	description = "magic leaves",
+	description = "Magic Leaves",
 	drawtype = "allfaces_optional",
 	tiles = {
 		"hyrule_mapgen_magic_leaves.png"
 	},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'hyrule_mapgen:magic_sapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:magic_leaves'},}
+		}
+	},
 	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1,},
 	paramtype = "light",
 	light_source = 5,
-	walkable = false,
+	after_place_node = default.after_place_leaves
 })
 
 if minetest.setting_getbool("3d_leaves") then
@@ -2542,11 +2578,20 @@ minetest.override_item("hyrule_mapgen:magic_leaves", {
 	tiles = {"hyrule_mapgen_magic_leaves2.png"},
 	paramtype = "light",
 	light_source = 5,
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'hyrule_mapgen:magic_sapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:magic_leaves'},}
+		}
+	},
+	walkable = false,
+	after_place_node = default.after_place_leaves
 })
 end
 
 minetest.register_node("hyrule_mapgen:canopy_leaves", {
-	description = "canopy leaves",
+	description = "Canopy Leaves",
 	drawtype = "allfaces_optional",
 	tiles = {
 		"default_leaves.png"
@@ -2554,10 +2599,11 @@ minetest.register_node("hyrule_mapgen:canopy_leaves", {
 	groups = {snappy=3, flammable=1, leaves=1, oddly_breakable_by_hand = 1, not_in_creative_inventory=1},
 	paramtype = "light",
 	walkable = false,
+	after_place_node = default.after_place_leaves
 })
 
 minetest.register_node("hyrule_mapgen:palm_tree", {
-	description = "palm tree trunk",
+	description = "Palm Tree Trunk",
 	tiles = {
 		"hyrule_mapgen_palm_tree_top.png",
 		"hyrule_mapgen_palm_tree_top.png",
@@ -2572,10 +2618,17 @@ minetest.register_node("hyrule_mapgen:palm_tree", {
 })
 
 minetest.register_node("hyrule_mapgen:palm_leaves", {
-	description = "palm leaves",
+	description = "Palm Leaves",
 	drawtype = "plantlike",
 	tiles = {
 		"hyrule_mapgen_palm_leaf.png"
+	},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'hyrule_mapgen:palmsapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:palm_leaves'},}
+		}
 	},
 	inventory_image = "hyrule_mapgen_palm_leaf.png",
 	visual_scale = 6,
@@ -2590,7 +2643,7 @@ minetest.register_node("hyrule_mapgen:palm_leaves", {
 })
 
 minetest.register_node("hyrule_mapgen:coconut", {
-	description = "coconut",
+	description = "Coconut",
 	drawtype = "plantlike",
 	tiles = {
 		"hyrule_mapgen_coconut.png"
@@ -2608,7 +2661,7 @@ minetest.register_node("hyrule_mapgen:coconut", {
 })
 
 minetest.register_node("hyrule_mapgen:wild_tree", {
-	description = "wild tree trunk",
+	description = "Wild Tree Trunk",
 	tiles = {
 		"hyrule_mapgen_wild_tree_top.png",
 		"hyrule_mapgen_wild_tree_top.png",
@@ -2623,16 +2676,24 @@ minetest.register_node("hyrule_mapgen:wild_tree", {
 })
 
 minetest.register_node("hyrule_mapgen:wild_leaves", {
-	description = "wild tree leaves",
+	description = "Wild Tree Leaves",
 	drawtype = "plantlike",
 	tiles = {
 		"hyrule_mapgen_wild_leaves.png"
+	},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'hyrule_mapgen:wildsapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:wild_leaves'},}
+		}
 	},
 	wield_image = "hyrule_mapgen_wild_leaves.png",
 	inventory_image = "hyrule_mapgen_wild_leaves.png",
 	groups = {snappy=3, flammable=1, oddly_breakable_by_hand = 1, leafdecay=3, leaves=1,},
 	paramtype = "light",
 	walkable = false,
+	after_place_node = default.after_place_leaves
 })
 
 if minetest.setting_getbool("3d_leaves") then
@@ -2641,6 +2702,14 @@ minetest.override_item("hyrule_mapgen:wild_leaves", {
 	mesh = "leaf.obj",
 	tiles = {"hyrule_mapgen_wild_leaves2.png"},
 	paramtype = "light",
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'hyrule_mapgen:wildsapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:wild_leaves'},}
+		}
+	},
+	after_place_node = default.after_place_leaves
 })
 end
 
@@ -3198,7 +3267,7 @@ minetest.register_node("hyrule_mapgen:goddess_statue", {
 
 
 minetest.register_node("hyrule_mapgen:lightshaft", {
-	description = "lightshaft",
+	description = "Lightshaft",
 	tiles = {
 		"hyrule_mapgen_lightshaft.png",
 	},
@@ -3223,7 +3292,7 @@ minetest.register_node("hyrule_mapgen:lightshaft", {
 })
 
 minetest.register_node("hyrule_mapgen:lightshaft2", {
-	description = "lightshaft",
+	description = "Lightshaft",
 	tiles = {
 		"hyrule_mapgen_lightshaft.png",
 	},
