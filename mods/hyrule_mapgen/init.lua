@@ -1625,7 +1625,7 @@ minetest.register_abm({
 		minetest.add_particle({
 			pos = {x=pos.x, y=pos.y+math.random(0,3)/10, z=pos.z},
 			velocity = {x=math.random(-1,1)/10, y=math.random(1,2), z=math.random(-1,1)/10},
-			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
 			expirationtime = math.random(5,10)/10,
 			size = math.random(3,5),
 			collisiondetection = false,
