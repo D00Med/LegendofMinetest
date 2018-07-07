@@ -61,7 +61,13 @@ minetest.register_node("kblocks:hedge", {
 		"kblocks_hedge_side.png",
 		"kblocks_hedge_side.png"
 	},
-	groups = {cracky=1}
+	groups = {cracky=1},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0, 0.5}
+		}
+	}
 })
 
 minetest.register_node("kblocks:vent", {

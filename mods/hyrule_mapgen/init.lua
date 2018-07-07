@@ -58,6 +58,78 @@ minetest.register_craftitem("hyrule_mapgen:village_spawner", {
 	end,
 })
 
+minetest.register_node("hyrule_mapgen:village_npc_spawner", {
+	description = "Village NPC Spawner",
+	drawtype = "allfaces",
+	tiles = {
+		"hyrule_mapgen_npc_spawn.png",
+	},
+	walkable = false,
+	pointable = true,
+	drop = "",
+	groups = {not_in_creative_inventory=1},
+	on_blast = function(pos, intensity)
+	end,
+	sunlight_propagates = false,
+	paramtype = "light",
+	buildable_to = true,
+	is_ground_content = false,
+})
+
+minetest.register_node("hyrule_mapgen:village_shop_spawner", {
+	description = "Village Shopkeeper Spawner",
+	drawtype = "allfaces",
+	tiles = {
+		"hyrule_mapgen_npc_spawn.png^[colorize:cyan:100",
+	},
+	walkable = false,
+	pointable = true,
+	drop = "",
+	groups = {not_in_creative_inventory=1},
+	on_blast = function(pos, intensity)
+	end,
+	sunlight_propagates = false,
+	paramtype = "light",
+	buildable_to = true,
+	is_ground_content = false,
+})
+
+minetest.register_node("hyrule_mapgen:village_quest_spawner", {
+	description = "Village Quest NPC Spawner",
+	drawtype = "allfaces",
+	tiles = {
+		"hyrule_mapgen_npc_spawn.png^[colorize:yellow:100",
+	},
+	walkable = false,
+	pointable = true,
+	drop = "",
+	groups = {not_in_creative_inventory=1},
+	on_blast = function(pos, intensity)
+	end,
+	sunlight_propagates = false,
+	paramtype = "light",
+	buildable_to = true,
+	is_ground_content = false,
+})
+
+minetest.register_node("hyrule_mapgen:village_witch_spawner", {
+	description = "Village Witch Spawner",
+	drawtype = "allfaces",
+	tiles = {
+		"hyrule_mapgen_npc_spawn.png^[colorize:black:100",
+	},
+	walkable = false,
+	pointable = true,
+	drop = "",
+	groups = {not_in_creative_inventory=1},
+	on_blast = function(pos, intensity)
+	end,
+	sunlight_propagates = false,
+	paramtype = "light",
+	buildable_to = true,
+	is_ground_content = false,
+})
+
 --functions
 hyrule_mapgen = {}
 
