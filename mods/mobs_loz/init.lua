@@ -34,6 +34,7 @@ dofile(path.."/gibido.lua")
 dofile(path.."/biri.lua")
 dofile(path.."/keese.lua")
 dofile(path.."/skulltula.lua")
+dofile(path.."/seafish.lua")
 dofile(path.."/spawns.lua")
 end
 

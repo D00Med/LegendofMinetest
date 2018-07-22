@@ -887,7 +887,7 @@ minetest.register_node("moreplants:coral2", {
 })
 
 minetest.register_node("moreplants:kelp", {
-	description = "Kelp",
+	description = "Short Kelp",
 	drawtype = "mesh",
 	mesh = "kelp_3.obj",
 	tiles = {{name = "moreplants_kelp.png",animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},}, "default_sand.png"},
@@ -925,7 +925,7 @@ minetest.register_node("moreplants:kelp2", {
 })
 
 minetest.register_node("moreplants:kelp3", {
-	description = "Kelp",
+	description = "Tall Kelp",
 	drawtype = "mesh",
 	mesh = "kelp_6.obj",
 	tiles = {{name = "moreplants_kelp.png",animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},}, "default_sand.png"},

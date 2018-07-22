@@ -1,11 +1,19 @@
 
 --friendlies
 mobs:spawn({
+	name = "mobs_loz:seafish",
+	nodes = {"default:water_source"},
+	min_light = 10,
+	chance = 15000,
+	min_height = -20,
+	day_toggle = true,
+})
+mobs:spawn({
 	name = "mobs_loz:zora_male",
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,
-	min_height = 0,
+	min_height = -10,
 	day_toggle = true,
 })
 mobs:spawn({
@@ -13,7 +21,7 @@ mobs:spawn({
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,
-	min_height = 0,
+	min_height = -10,
 	day_toggle = true,
 })
 mobs:spawn({
@@ -21,7 +29,7 @@ mobs:spawn({
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,
-	min_height = 0,
+	min_height = -20,
 	day_toggle = true,
 })
 mobs:spawn({

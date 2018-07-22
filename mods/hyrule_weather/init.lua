@@ -152,7 +152,11 @@ local apply_weather = function(player, pos, weather_type)
 	elseif weather_type == "insects" then
 		player:set_sky(nil, "regular", nil, true)
 	elseif weather_type == "none" then
+		if underwater then
+		player:set_sky({r=10, g=20, b=75}, "plain", nil, true)
+		else
 		player:set_sky(nil, "regular", nil, true)
+		end
 		return 
 	end
 end
@@ -168,6 +172,7 @@ minetest.register_on_joinplayer(function()
 end)
 
 local sound_ready = true
+local underwater = false
 
 minetest.register_globalstep(function(dtime)
 	if math.random(1,4) ~= 4 or hyrule_weather.weather == "twilight" then return end
@@ -199,7 +204,7 @@ minetest.register_globalstep(function(dtime)
 		end
 		if pos.y <= -20 then display_weather = false end
 		--apply weather effect
-		if display_weather then
+		if display_weather and not underwater then
 			apply_weather(player, pos, hyrule_weather.weather)
 			if sound_ready and hyrule_weather.weather ~= nil then 
 				local weather_name = hyrule_weather.weather
@@ -212,6 +217,18 @@ minetest.register_globalstep(function(dtime)
 			end
 		else
 			apply_weather(player, pos, "none")
+		end
+		--underwater effects
+		if minetest.setting_get("underwater_effects") then
+			if minetest.get_node({x=pos.x, y=pos.y+0.5, z=pos.z}).name == "default:water_source" and minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name == "default:water_source" then
+			underwater = true
+			player:set_sky({r=10, g=20, b=75}, "plain", nil, true)
+			else
+			underwater = false
+			if not display_weather then
+			player:set_sky(nil, "regular", nil, true)
+			end
+			end
 		end
 	end
 end)
