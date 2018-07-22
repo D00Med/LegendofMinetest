@@ -187,6 +187,26 @@ minetest.register_globalstep(function(dtime)
 	if dtime <= 0.02 then return end
 	for name, _ in pairs(players) do
 		local player = minetest.get_player_by_name(name)
+		
+		--bubbles
+		if math.random(1,10) == 1 then
+		local pos = player:getpos()
+		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-6,-3), z=pos.z+math.random(-7,7)}, 5, {"default:water_source", "default:river_water_source"}, true)
+		if not water then return end
+		minetest.add_particle({
+			pos = {x=water.x, y=water.y, z=water.z},
+			velocity = {x=math.random(-5,5)/10, y=math.random(3,5), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
+			expirationtime = 3,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "bubble.png",
+			glow = 5
+		})
+		end
+		
 		if player:get_wielded_item():get_name() == "hyruletools:sail" then
 			if player:get_player_control().aux1 then
 			local item = player:get_wielded_item()

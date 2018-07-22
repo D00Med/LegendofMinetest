@@ -897,6 +897,14 @@ minetest.override_item("default:junglegrass", {
 	},
 })
 
+minetest.override_item("default:water_source", {
+	post_effect_color = {a = 143, r = 25, g = 40, b = 90},
+})
+
+minetest.override_item("default:water_flowing", {
+	post_effect_color = {a = 143, r = 25, g = 40, b = 90},
+})
+
 minetest.override_item("default:book", {
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos = pointed_thing.above
