@@ -13,7 +13,7 @@ local regular = {
 }
 
 local function place_building(pos, name, facing)
-	minetest.place_schematic(pos, minetest.get_modpath("hyrule_towns").."/schems/"..name..".mts", facing, {}, true)
+	minetest.place_schematic({x=pos.x-4, y=pos.y, z=pos.z-4}, minetest.get_modpath("hyrule_towns").."/schems/"..name..".mts", facing, {}, true)
 end
 
 local function place_town(pos, surface_type)
@@ -32,34 +32,32 @@ local function place_town(pos, surface_type)
 		{x=pos.x-21, y=pos.y, z=pos.z-9},
 		{x=pos.x-21, y=pos.y, z=pos.z+13},
 	}
+	local used_positions = {}
 	local schematics = {}
 	if surface_type == "default:dirt_with_grass" or surface_type == "default:dirt_with_grass3" then
 		schematics = regular
 	else
 		schematics = regular
 	end
-	for _, position in ipairs(building_positions) do
+	for i = 1,12 do
+		local position = building_positions[i]
+		if used_positions[i] == building_positions[i] then 
+		--minetest.chat_send_all("can't place building (position taken)")
+		return end
 		local building_name = schematics[math.random(1,8)]
-		for i = -10,10 do
-			position.y = position.y+i
-			local ground = minetest.find_node_near(position, 1, {"default:dirt_with_grass", "default:dirt_with_grass3"})
-			minetest.chat_send_all("looking for ground")
+		for j = -10,10 do
+			position.y = position.y+j
+			local ground = minetest.find_node_near(position, 1, {"default:dirt_with_grass", "default:dirt_with_grass3"}, true)
 			if ground then
-				local grass_nodes = minetest.find_nodes_in_area({x=ground.x-4, y=ground.y-4, z=ground.z-4}, {x=ground.x+4, y=ground.y+3, z=ground.z+4}, {"default:dirt_with_grass", "dirt_with_grass3"})
+				--minetest.chat_send_all("ground has been found :)")
+				--This doesn't look as good as I'd hoped. I'm leaving it in in case I change my mind.
+				--[[local grass_nodes = minetest.find_nodes_in_area({x=ground.x-4, y=ground.y-4, z=ground.z-4}, {x=ground.x+4, y=ground.y+3, z=ground.z+4}, {"default:dirt_with_grass", "dirt_with_grass3"})
 				for _, grass_pos in ipairs(grass_nodes) do
 				minetest.set_node(grass_pos, {name="default:dirt_with_dry_grass"})
-				end
+				end]]
 				place_building(ground, building_name, random)
-				minetest.chat_send_all("building placed")
-				local num = nil
-				for i = 1,12 do
-					if building_positions[i] == position then
-						num = i
-						minetest.chat_send_all("num set")
-					end
-				end
-				table.remove(building_positions, num)
-				minetest.chat_send_all("removed position")
+				used_positions[i] = position
+				--minetest.chat_send_all("building placed")
 			end
 		end
 	end

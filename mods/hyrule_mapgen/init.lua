@@ -76,6 +76,38 @@ minetest.register_node("hyrule_mapgen:village_npc_spawner", {
 	is_ground_content = false,
 })
 
+minetest.register_lbm({
+	name = "hyrule_mapgen:village_npc_spawner",
+	nodenames = {"hyrule_mapgen:village_npc_spawner"},
+	run_at_every_load = true,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "mobs_npc:npc")
+		minetest.remove_node(pos)
+	end
+})
+
+minetest.register_lbm({
+	name = "hyrule_mapgen:village_quest_spawner",
+	nodenames = {"hyrule_mapgen:village_quest_spawner"},
+	run_at_every_load = true,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local obj = minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "mobs_npc:npc_quest")
+		local npc = obj:get_luaentity()
+		npc.text = "D00Med hasn't finished me"
+		minetest.remove_node(pos)
+	end
+})
+
+minetest.register_lbm({
+	name = "hyrule_mapgen:village_shop_spawner",
+	nodenames = {"hyrule_mapgen:village_shop_spawner"},
+	run_at_every_load = true,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		minetest.env:add_entity({x=pos.x,y=pos.y+0.5,z=pos.z}, "mobs_npc:shopkeeper")
+		minetest.remove_node(pos)
+	end
+})
+
 minetest.register_node("hyrule_mapgen:village_shop_spawner", {
 	description = "Village Shopkeeper Spawner",
 	drawtype = "allfaces",
@@ -898,11 +930,11 @@ minetest.override_item("default:junglegrass", {
 })
 
 minetest.override_item("default:water_source", {
-	post_effect_color = {a = 143, r = 25, g = 40, b = 90},
+	post_effect_color = {a = 113, r = 25, g = 40, b = 90},
 })
 
 minetest.override_item("default:water_flowing", {
-	post_effect_color = {a = 143, r = 25, g = 40, b = 90},
+	post_effect_color = {a = 113, r = 25, g = 40, b = 90},
 })
 
 minetest.override_item("default:book", {

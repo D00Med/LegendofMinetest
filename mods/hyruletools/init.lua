@@ -191,13 +191,13 @@ minetest.register_globalstep(function(dtime)
 		--bubbles
 		if math.random(1,10) == 1 then
 		local pos = player:getpos()
-		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-10,-7), z=pos.z+math.random(-7,7)}, 5, {"default:water_source", "default:river_water_source"}, true)
-		if not water then return end
+		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-10,-7), z=pos.z+math.random(-7,7)}, 5, {"default:water_source",}, true)
+		if water and minetest.get_node({x=water.x, y=water.y+6, z=water.z}).name == "default:water_source" then
 		minetest.add_particle({
 			pos = {x=water.x, y=water.y, z=water.z},
 			velocity = {x=math.random(-5,5)/10, y=math.random(3,5), z=math.random(-5,5)/10},
 			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
-			expirationtime = 3,
+			expirationtime = 2,
 			size = math.random(3,5),
 			collisiondetection = true,
 			collision_removal = true,
@@ -211,7 +211,7 @@ minetest.register_globalstep(function(dtime)
 			pos = {x=water2.x, y=water2.y, z=water2.z},
 			velocity = {x=math.random(-5,5)/10, y=math.random(3,5), z=math.random(-5,5)/10},
 			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
-			expirationtime = 3,
+			expirationtime = 2,
 			size = math.random(3,5),
 			collisiondetection = true,
 			collision_removal = true,
@@ -219,6 +219,7 @@ minetest.register_globalstep(function(dtime)
 			texture = "bubble.png",
 			glow = 5
 		})
+		end
 		end
 		
 		if player:get_wielded_item():get_name() == "hyruletools:sail" then

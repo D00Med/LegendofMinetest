@@ -1207,6 +1207,30 @@ minetest.register_node("hyrule_mapgen:nrupee", {
 	groups = {cracky=1, oddly_breakable_by_hand=1}
 })
 
+minetest.register_node("hyrule_mapgen:coral", {
+	description = "Large Purple Coral",
+	tiles = {
+		"hyrule_mapgen_coral1.png"
+	},
+	groups = {fleshy=1, choppy=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:coral2", {
+	description = "Large Blue Coral",
+	tiles = {
+		"hyrule_mapgen_coral2.png"
+	},
+	groups = {fleshy=1, choppy=1, oddly_breakable_by_hand=1}
+})
+
+minetest.register_node("hyrule_mapgen:coral3", {
+	description = "Large Yellow Coral",
+	tiles = {
+		"hyrule_mapgen_coral3.png"
+	},
+	groups = {fleshy=1, choppy=1, oddly_breakable_by_hand=1}
+})
+
 minetest.register_node("hyrule_mapgen:wood_fence", {
 	description = "Rough Wooden Fence",
 	inventory_image = "hyrule_mapgen_woodfence.png",

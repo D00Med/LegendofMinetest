@@ -153,7 +153,7 @@ local apply_weather = function(player, pos, weather_type)
 		player:set_sky(nil, "regular", nil, true)
 	elseif weather_type == "none" then
 		if underwater then
-		player:set_sky({r=10, g=20, b=75}, "plain", nil, true)
+			player:set_sky({r=13, g=50, b=157}, "plain", nil, true)
 		else
 		player:set_sky(nil, "regular", nil, true)
 		end
@@ -222,7 +222,7 @@ minetest.register_globalstep(function(dtime)
 		if minetest.setting_get("underwater_effects") then
 			if minetest.get_node({x=pos.x, y=pos.y+0.5, z=pos.z}).name == "default:water_source" and minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name == "default:water_source" then
 			underwater = true
-			player:set_sky({r=10, g=20, b=75}, "plain", nil, true)
+			player:set_sky({r=13, g=50, b=157}, "plain", nil, true)
 			else
 			underwater = false
 			if not display_weather then

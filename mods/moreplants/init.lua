@@ -156,6 +156,7 @@ minetest.register_node("moreplants:aliengrass", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_aliengrass.png",
 	visual_scale = 1.54,
@@ -178,6 +179,7 @@ minetest.register_node("moreplants:bulrush", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_bullrush.png",
 	visual_scale = 1.3,
@@ -197,6 +199,7 @@ minetest.register_node("moreplants:bigfern", {
 	tiles = {"moreplants_bigfern.png"},
 	paramtype = "light",
 	is_ground_content = false,
+	waving = 1,
 	buildable_to = true, 
 	sunlight_propagates = true,
 	inventory_image = "moreplants_bigfern.png",
@@ -281,6 +284,7 @@ minetest.register_node("moreplants:weed", {
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
+	waving = 1,
 	inventory_image = "moreplants_weed.png",
 	visual_scale = 1.1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
@@ -320,6 +324,7 @@ minetest.register_node("moreplants:spikefern", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_spikefern.png",
 	visual_scale = 1,
@@ -341,6 +346,7 @@ minetest.register_node("moreplants:bluespike", {
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
+	waving = 1,
 	inventory_image = "moreplants_bluespike.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
@@ -380,6 +386,7 @@ minetest.register_node("moreplants:eyeweed", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_eyeweed.png",
 	visual_scale = 1,
@@ -402,6 +409,7 @@ minetest.register_node("moreplants:fern", {
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
+	waving = 1,
 	inventory_image = "moreplants_fern.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
@@ -422,6 +430,7 @@ minetest.register_node("moreplants:bush", {
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
+	waving = 1,
 	inventory_image = "moreplants_bush.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
@@ -525,6 +534,7 @@ minetest.register_node("moreplants:moonflower", {
 	is_ground_content = false,
 	buildable_to = true, 
 	sunlight_propagates = true,
+	waving = 1,
 	inventory_image = "moreplants_moonflower.png",
 	visual_scale = 1,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
@@ -544,6 +554,7 @@ minetest.register_node("moreplants:fireflower", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_fireflower.png",
 	visual_scale = 1,
@@ -564,6 +575,7 @@ minetest.register_node("moreplants:deadweed", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_deadweed.png",
 	visual_scale = 1,
@@ -584,6 +596,7 @@ minetest.register_node("moreplants:taigabush", {
 	paramtype = "light",
 	is_ground_content = false,
 	buildable_to = true, 
+	waving = 1,
 	sunlight_propagates = true,
 	inventory_image = "moreplants_tundrabush.png",
 	visual_scale = 1,
@@ -811,10 +824,9 @@ minetest.register_node("moreplants:hangingplant", {
 
 minetest.register_node("moreplants:seaweed", {
 	description = "Green Seaweed",
-	drawtype = "plantlike",
-	tiles = {
-		"moreplants_seaweed.png",
-	},
+	drawtype = "mesh",
+	mesh = "waterplant.obj",
+	tiles = {"moreplants_seaweed.png", "default_sand.png"},
 	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
@@ -891,7 +903,7 @@ minetest.register_node("moreplants:kelp", {
 	drawtype = "mesh",
 	mesh = "kelp_3.obj",
 	tiles = {{name = "moreplants_kelp.png",animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},}, "default_sand.png"},
-	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1},
+	groups = {snappy=3, flammable=1, attached_node=1, flora=1, sea=1,},
 	sounds = default.node_sound_leaves_defaults(),
 	is_ground_content=true,
 	buildable_to = true, 
@@ -1428,11 +1440,13 @@ minetest.register_on_generated(function(minp, maxp)
 			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
 			if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_source" then
 				if math.random(1,2) == 1 then
-					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:seaweed1"})
+					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:seaweed"})
 				elseif math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:seaweed2"})
 				elseif math.random(1,2) == 1 then
 					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:seaweed3"})
+				elseif math.random(1,2) == 1 then
+					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:seaweed1"})
 				end
 			end
 		end
@@ -1457,18 +1471,17 @@ minetest.register_on_generated(function(minp, maxp)
 					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:coral2"})
 				end
 			end
-		end
-		if math.random(1, 25) == 1 then
+		elseif math.random(1, 25) == 1 then
 			local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z }
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "default:water_source" then
 					if math.random(1,4) == 1 and minetest.get_node({x=pos.x, y=pos.y+3, z=pos.z}).name == "default:water_source" then
-					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:kelp1"})
+					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:kelp"})
 					elseif math.random(1,2) == 1 and minetest.get_node({x=pos.x, y=pos.y+6, z=pos.z}).name == "default:water_source" then
 					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:kelp3"})
 					elseif minetest.get_node({x=pos.x, y=pos.y+4, z=pos.z}).name == "default:water_source" then
 					minetest.add_node({x=pos.x, y=pos.y, z=pos.z}, {name = "moreplants:kelp2"})
-					end
 				end
+			end
 		end
 	end
 end)
