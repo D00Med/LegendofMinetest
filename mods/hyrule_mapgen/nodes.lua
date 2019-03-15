@@ -2585,13 +2585,13 @@ minetest.register_node("hyrule_mapgen:magic_leaves", {
 	drop = {
 		max_items = 1,
 		items = {
-			{items = {'hyrule_mapgen:magic_sapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:magicsapling'}, rarity = 20,},
 			{items = {'hyrule_mapgen:magic_leaves'},}
 		}
 	},
 	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1,},
 	paramtype = "light",
-	light_source = 5,
+	light_source = 7,
 	after_place_node = default.after_place_leaves
 })
 
@@ -2605,7 +2605,7 @@ minetest.override_item("hyrule_mapgen:magic_leaves", {
 	drop = {
 		max_items = 1,
 		items = {
-			{items = {'hyrule_mapgen:magic_sapling'}, rarity = 20,},
+			{items = {'hyrule_mapgen:magicsapling'}, rarity = 20,},
 			{items = {'hyrule_mapgen:magic_leaves'},}
 		}
 	},
@@ -2657,7 +2657,7 @@ minetest.register_node("hyrule_mapgen:palm_leaves", {
 	inventory_image = "hyrule_mapgen_palm_leaf.png",
 	visual_scale = 6,
 	wield_scale = {x=0.5, y=0.5, z=0.5},
-	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1, not_in_creative_inventory=1},
+	groups = {snappy=3, flammable=1, leafdecay=3, oddly_breakable_by_hand = 1, leaves=1, not_in_creative_inventory=1, attached_node=1},
 	paramtype = "light",
 	walkable = false,
 	selection_box = {
@@ -3438,3 +3438,16 @@ minetest.register_node("hyrule_mapgen:tower_generator", {
 	is_ground_content = false,
 	paramtype = "light",
 })
+
+--leafdecay 
+
+	default.register_leafdecay({
+		leaves = {"hyrule_mapgen:magic_leaves"},
+		trunks = {"hyrule_mapgen:magic_tree"},
+		radius = 6,
+	})
+	default.register_leafdecay({
+		leaves = {"hyrule_mapgen:wild_leaves"},
+		trunks = {"hyrule_mapgen:wild_tree"},
+		radius = 6,
+	})

@@ -681,7 +681,7 @@ minetest.register_node("moreplants:mushroom", {
 	},
 	groups = {snappy=3, flammable=1, attached_node=1, flora=1},
 	sounds = default.node_sound_leaves_defaults(),
-	light_source=2,
+	light_source=4,
 })
 
 minetest.register_node("moreplants:curly", {
