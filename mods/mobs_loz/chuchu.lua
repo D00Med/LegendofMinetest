@@ -52,4 +52,4 @@ mobs:register_mob("mobs_loz:chuchu", {
 	},
 })
 
-mobs:register_egg("mobs_loz:chuchu", "Chuchu", "hyruletools_spark.png", 1)
+mobs:register_egg("mobs_loz:chuchu", "Chuchu", "hyruletools_ocarina_placed_green.png", 1)

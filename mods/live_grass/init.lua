@@ -3,7 +3,9 @@ local range = 15
 local falloff = range/2
 local ready = true
 local lastpos = {x=0, y=0, z=0}
---[[
+local livegrass = false
+
+if livegrass then
 minetest.register_globalstep(function(dtime)
 	for _, player in ipairs(minetest.get_connected_players()) do
 	if player:get_player_name() ~= "singleplayer" then return end
@@ -32,4 +34,5 @@ minetest.register_globalstep(function(dtime)
 	ready = true
 	end)
 	end
-end)]]
+end)
+end

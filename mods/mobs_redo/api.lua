@@ -2052,7 +2052,7 @@ local mob_punch = function(self, hitter, tflp, tool_capabilities, dir)
 
 			pos.y = pos.y + (-self.collisionbox[2] + self.collisionbox[5]) * .5
 
-			effect(pos, self.blood_amount, self.blood_texture, nil, nil, 1, nil)
+			effect(pos, self.blood_amount*4, self.blood_texture, nil, 1.2, (self.collisionbox[4]-self.collisionbox[1])*2.2, -5)
 		end
 
 		-- do damage

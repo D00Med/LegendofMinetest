@@ -3,7 +3,9 @@ minetest.register_on_leaveplayer(function(player)
 	local pos = player:getpos()
 		local objs = minetest.env:get_objects_inside_radius(pos, 1)
 			for _,obj in ipairs(objs) do
-				if obj:get_luaentity() ~= nil and obj:get_luaentity().name == "masks:deku" then
+				local name = obj:get_luaentity().name
+				if obj:get_luaentity() ~= nil then return end
+				if name == "masks:deku" or name == "masks:scent" then
 					obj:remove()
 				end
 			end
@@ -37,6 +39,40 @@ minetest.register_craftitem("masks:deku_item", {
 		local objs = minetest.env:get_objects_inside_radius(pos, 1)
 			for _,obj in ipairs(objs) do
 				if obj:get_luaentity() ~= nil and obj:get_luaentity().name == "masks:deku" then
+					obj:remove()
+				end
+			end
+	end
+})
+
+minetest.register_entity("masks:scent", {
+	visual = "mesh",
+	physical = false,
+    hp_max = 1,
+	mesh = "dekumask.b3d",
+	textures = {"masks_scent.png"},
+	collisionbox = {0,0,0,0,0,0},
+})
+
+minetest.register_craftitem("masks:scent_item", {
+	description = "Mask of Scents",
+	inventory_image = "masks_scent_inv.png",
+	on_use = function(itemstack, placer, pointed_thing)
+		local pos = placer:getpos()
+		-- local objs = minetest.env:get_objects_inside_radius(pos, 1)
+			-- for _,obj in ipairs(objs) do
+				-- if obj:get_luaentity() ~= nil and obj:get_luaentity().name == "masks:deku" then
+					-- obj:remove()
+				-- end
+			-- end
+		local ent = minetest.env:add_entity(pos, "masks:scent")
+		ent:set_attach(placer, "", {x=0, y=0, z=0}, {x=0, y=0, z=0})
+	end,
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = placer:getpos()
+		local objs = minetest.env:get_objects_inside_radius(pos, 1)
+			for _,obj in ipairs(objs) do
+				if obj:get_luaentity() ~= nil and obj:get_luaentity().name == "masks:scent" then
 					obj:remove()
 				end
 			end

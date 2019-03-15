@@ -4,3 +4,6 @@ tnt
 moreplants
 hyruletools
 farming
+bucket
+mobs
+xpanes

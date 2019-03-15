@@ -21,15 +21,251 @@ minetest.register_on_leaveplayer(function(player)
 	players[name] = nil
 end)
 
-minetest.register_globalstep(function()
+--[[
+minetest.register_on_player_inventory_action(function(player, inventory, action, inventory_info)
+	if action == "put" then
+		minetest.sound_play("put", {to_player=player:get_player_name(), gain=1.2, loop=false})
+	elseif action == "take" then
+		minetest.sound_play("take", {to_player=player:get_player_name(), gain=1.2, loop=false})
+	end
+end)]]
+
+
+
+minetest.register_entity("hyruletools:gliding_player", {
+	visual = "mesh",
+	mesh = "character_gliding.b3d",
+	textures = {
+		"character_gliding.png",
+	},
+	collisionbox = {-0, -0.5, -0, 0, 1.5, 0},
+	physical = true,
+	automatic_face_movement_dir = -90.0,
+	on_activate = function(self)
+		self.object:set_animation({x=33, y=40}, 20, 0)
+		minetest.after(0.2, function()
+			self.object:set_animation({x=1, y=21}, 10, 0)
+		end)
+	end,
+	on_step = function(self, dtime)
+		if dtime <= 0.02 then return end
+		if self.player == nil then
+		minetest.after(0.2, function()
+		self.object:remove()
+		end)
+		return
+		end
+		
+		local pos = self.object:getpos()
+		local player = self.player
+		local dir = player:get_look_dir()
+		self.object:set_velocity({x=8*dir.x, y=-3, z=8*dir.z})
+		
+		if default.player_attached[player:get_player_name()] ~= true then
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			self.player = nil
+			return
+		elseif not player:get_player_control().aux1 then
+			self.object:set_animation({x=40, y=47}, 20, 0)
+			minetest.after(0.2, function()
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			end)
+			self.player = nil
+			return
+		elseif player:get_wielded_item():get_name() ~= "hyruletools:paraglider" then
+			self.object:set_animation({x=40, y=47}, 20, 0)
+			minetest.after(0.2, function()
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			end)
+			self.player = nil
+			return
+		elseif minetest.get_node({x=pos.x,y=pos.y-2,z=pos.z}).name ~= "air" then
+			self.object:set_animation({x=40, y=47}, 20, 0)
+			minetest.after(0.2, function()
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			end)
+			self.player = nil
+			return
+		end
+	end,
+})
+
+minetest.register_entity("hyruletools:sailing_player", {
+	visual = "mesh",
+	mesh = "character_gliding.b3d",
+	textures = {
+		"character_sailing.png",
+	},
+	collisionbox = {-0, -0.5, -0, 0, 1.5, 0},
+	physical = true,
+	automatic_face_movement_dir = -90.0,
+	on_activate = function(self)
+		self.object:set_animation({x=33, y=40}, 20, 0)
+		minetest.after(0.2, function()
+			self.object:set_animation({x=1, y=21}, 10, 0)
+		end)
+	end,
+	on_step = function(self, dtime)
+		if dtime <= 0.02 then return end
+		if self.player == nil then
+		minetest.after(0.2, function()
+		self.object:remove()
+		end)
+		return
+		end
+		local player = self.player
+		local velo = self.object:getvelocity()
+		local dir = player:get_look_dir()
+		local pos = self.object:getpos()
+		
+		self.object:set_velocity({x=2*dir.x, y=-9.8+velo.y*0.2, z=2*dir.z})
+		if	default.player_attached[player:get_player_name()] ~= true then
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			self.player = nil
+			return
+		elseif not player:get_player_control().aux1 then
+			self.object:set_animation({x=40, y=47}, 20, 0)
+			minetest.after(0.2, function()
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			end)
+			self.player = nil
+			return
+		elseif player:get_wielded_item():get_name() ~= "hyruletools:sail" then
+			self.object:set_animation({x=40, y=47}, 20, 0)
+			minetest.after(0.2, function()
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			end)
+			self.player = nil
+			return
+		elseif minetest.get_node({x=pos.x,y=pos.y-2,z=pos.z}).name ~= "air" then
+			self.object:set_animation({x=40, y=47}, 20, 0)
+			minetest.after(0.2, function()
+				player:set_properties({visual_size = {x=1, y=1}})
+				player:set_eye_offset({x=0,y=0,z=0},{x=3,y=3,z=-1})
+				default.player_attached[player:get_player_name()] = false
+				player:set_detach()
+			end)
+			self.player = nil
+			return
+		end
+	end,
+})
+
+minetest.register_tool("hyruletools:sail", {
+	description = "Sail Cloth",
+	inventory_image = "hyruletools_sail.png",
+})
+
+minetest.register_tool("hyruletools:paraglider", {
+	description = "Paraglider",
+	inventory_image = "hyruletools_paraglider.png",
+})
+
+
+minetest.register_globalstep(function(dtime)
+	if dtime <= 0.02 then return end
 	for name, _ in pairs(players) do
 		local player = minetest.get_player_by_name(name)
+		
+		--bubbles
+		if math.random(1,10) == 1 then
+		local pos = player:getpos()
+		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-10,-7), z=pos.z+math.random(-7,7)}, 5, {"default:water_source",}, true)
+		if water and minetest.get_node({x=water.x, y=water.y+6, z=water.z}).name == "default:water_source" then
+		minetest.add_particle({
+			pos = {x=water.x, y=water.y, z=water.z},
+			velocity = {x=math.random(-5,5)/10, y=math.random(3,5), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
+			expirationtime = 2,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "bubble.png",
+			glow = 5
+		})
+		local water2 = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-10,-7), z=pos.z+math.random(-7,7)}, 5, {"default:water_source", "default:river_water_source"}, true)
+		if not water2 then return end
+		minetest.add_particle({
+			pos = {x=water2.x, y=water2.y, z=water2.z},
+			velocity = {x=math.random(-5,5)/10, y=math.random(3,5), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
+			expirationtime = 2,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "bubble.png",
+			glow = 5
+		})
+		end
+		end
+		
+		if player:get_wielded_item():get_name() == "hyruletools:sail" then
+			if player:get_player_control().aux1 then
+			local item = player:get_wielded_item()
+			item:add_wear(1)
+			player:set_wielded_item(item)
+			local pos = player:getpos()
+			if player:get_attach() == nil and default.player_attached[player:get_player_name()] ~= true and minetest.get_node({x=pos.x,y=pos.y-2,z=pos.z}).name == "air" then
+				local obj = minetest.env:add_entity({x=pos.x, y=pos.y+2, z=pos.z}, "hyruletools:sailing_player")
+				local sail = obj:get_luaentity()
+				if sail ~= nil then
+				sail.player = player
+				player:set_attach(sail.object, "head", {x=0,y=0,x=0}, {x=0,y=0,z=0})
+				player:set_eye_offset({x=0,y=-5.5,z=2},{x=3,y=-3,z=-1})
+				default.player_attached[player:get_player_name()] = true
+				player:set_properties({visual_size = {x=0, y=0}})
+				end
+			end
+		end
+		end
+		if player:get_wielded_item():get_name() == "hyruletools:paraglider" then
+			if player:get_player_control().aux1 then
+			local item = player:get_wielded_item()
+			item:add_wear(1)
+			player:set_wielded_item(item)
+			local pos = player:getpos()
+			if player:get_attach() == nil and default.player_attached[player:get_player_name()] ~= true and minetest.get_node({x=pos.x,y=pos.y-2,z=pos.z}).name == "air" then
+				local obj = minetest.env:add_entity({x=pos.x, y=pos.y+2, z=pos.z}, "hyruletools:gliding_player")
+				local glider = obj:get_luaentity()
+				if glider ~= nil then
+				glider.player = player
+				player:set_attach(glider.object, "head", {x=0,y=0,x=0}, {x=0,y=0,z=0})
+				player:set_eye_offset({x=0,y=-5.5,z=2},{x=3,y=-3,z=-1})
+				default.player_attached[player:get_player_name()] = true
+				player:set_properties({visual_size = {x=0, y=0}})
+				end
+			end
+		end
+		end
 		if player:get_wielded_item():get_name() == "hyruletools:climbing_gloves" then
 			local pos = player:getpos()
 			local item = player:get_wielded_item()
 			item:add_wear(5)
 			player:set_wielded_item(item)
-			local climbable = minetest.find_node_near(pos, 1, {"default:stone", "default:obsidian", "default:sandstone", "default:ice", "default:desert_stone", "default:cobblestone", "default:desert_cobblestone"})
+			local climbable = minetest.find_node_near(pos, 1, {"default:stone", "default:obsidian", "default:sandstone", "default:ice", "default:desert_stone", "default:cobble", "default:desert_cobblestone"})
 			if climbable and minetest.get_node(pos).name == "air" then
 				minetest.set_node(pos, {name="hyruletools:climbable"})
 			end
@@ -39,18 +275,12 @@ minetest.register_globalstep(function()
 				minetest.remove_node(remove_node)
 			end
 			end
-		--[[else
-			local remove_node = minetest.find_node_near(player:getpos(), 1, {"hyruletools:climbable"})
-			if remove_node then
-				minetest.remove_node(remove_node)
-			end]]
 		elseif player:get_wielded_item():get_name() == "hyruletools:lantern" then
-		--minetest.chat_send_all("blah")
 			local pos = player:getpos()
 			pos.y = pos.y+1
 			if minetest.get_node(pos).name == "air" then
 			local item = player:get_wielded_item()
-			item:add_wear(30)
+			item:add_wear(25)
 			player:set_wielded_item(item)
 				minetest.set_node(pos, {name="hyruletools:light"})
 			end
@@ -91,6 +321,18 @@ minetest.register_globalstep(function()
 			count2 = count2+number2
 		end
 		if stack:get_name() == "hyruletools:key" then
+			number3 = stack:get_count()
+			count3 = count3+number3
+		end
+		if stack:get_name() == "loot:key" then
+			number3 = stack:get_count()
+			count3 = count3+number3
+		end
+		if stack:get_name() == "hyruletools:retro_key" then
+			number3 = stack:get_count()
+			count3 = count3+number3
+		end
+		if stack:get_name() == "hyruletools:key_boss" then
 			number3 = stack:get_count()
 			count3 = count3+number3
 		end
@@ -486,7 +728,6 @@ end)
 
 
 --tools
-
 
 minetest.register_entity("hyruletools:block_dummy", {
 	visual = "mesh",
@@ -953,12 +1194,12 @@ minetest.register_tool("hyruletools:axe_obsidian", {
 	},
 })
 
-minetest.register_craftitem("hyruletools:magic_powder", {
+minetest.register_node("hyruletools:magic_powder", {
 	description = "Magic Powder",
 	inventory_image = "hyruletools_powder.png",
 	on_use = function(itemstack, placer, pointed_thing)
-			local dir = placer:get_look_dir();
-			local pos = placer:getpos()
+		if pointed_thing == nil then return end
+			local pos = pointed_thing.above
 			minetest.add_particlespawner(
 			5, --amount
 			0.1, --time
@@ -973,9 +1214,34 @@ minetest.register_craftitem("hyruletools:magic_powder", {
 			8, --minsize
 			10, --maxsize
 			false, --collisiondetection
-			"hyruletools_powder4.png" --texture
+			"hyruletools_powder3.png" --texture
 		)
 	end,
+	tiles = {
+		"hyruletools_powder_top.png",
+		"hyruletools_powder_top.png",
+		"hyruletools_powder.png",
+		"hyruletools_powder.png",
+		"hyruletools_powder.png",
+		"hyruletools_powder.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.125, -0.4375, 0.125}, -- NodeBox1
+			{-0.25, -0.4375, -0.1875, 0.25, -0.125, 0.1875}, -- NodeBox2
+			{-0.1875, -0.4375, -0.25, 0.1875, -0.125, 0.25}, -- NodeBox3
+			{-0.125, -0.125, -0.1875, 0.125, -0.0625, 0.1875}, -- NodeBox4
+			{-0.1875, -0.125, -0.125, 0.1875, -0.0625, 0.125}, -- NodeBox5
+			{-0.125, -0.0625, -0.125, 0.125, 0, 0.125}, -- NodeBox6
+			{-0.1875, 0, -0.125, 0.1875, 0.0625, 0.125}, -- NodeBox7
+			{-0.125, 0, -0.1875, 0.125, 0.0625, 0.1875}, -- NodeBox8
+		}
+	},
+	groups = {crumbly=1,},
+	sounds = default.node_sound_dirt_defaults()
 })
 
 minetest.register_craft({
@@ -1028,9 +1294,31 @@ minetest.register_craftitem("hyruletools:triforce", {
 	end
 })
 
-minetest.register_craftitem("hyruletools:key", {
+minetest.register_node("hyruletools:key", {
 	description = "Dungeon Key",
 	inventory_image = "hyruletools_key.png",
+	wield_image_image = "hyruletools_key.png",
+	tiles = {
+		"hyruletools_key_small.png",
+		"hyruletools_key_small.png",
+		"hyruletools_medallion_side.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, 0, 0, -0.4375, 0.25}, -- NodeBox1
+			{0.0625, -0.5, 0, 0.125, -0.4375, 0.25}, -- NodeBox2
+			{0, -0.5, 0.125, 0.0625, -0.4375, 0.1875}, -- NodeBox3
+			{0, -0.5, -0.25, 0.0625, -0.4375, 0.0625}, -- NodeBox4
+			{0.0625, -0.5, -0.25, 0.125, -0.4375, -0.1875}, -- NodeBox5
+			{0.0625, -0.5, -0.125, 0.125, -0.4375, -0.0625}, -- NodeBox6
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1, attached_node=1},
+	sounds = default.node_sound_metal_defaults()	
 })
 
 minetest.register_craftitem("hyruletools:retro_key", {
@@ -1038,9 +1326,31 @@ minetest.register_craftitem("hyruletools:retro_key", {
 	inventory_image = "hyruletools_key_retro.png",
 })
 
-minetest.register_craftitem("hyruletools:key_boss", {
+minetest.register_node("hyruletools:key_boss", {
 	description = "Boss Key",
 	inventory_image = "hyruletools_boss_key.png",
+	wield_image_image = "hyruletools_boss_key.png",
+	tiles = {
+		"hyruletools_boss_key_small.png",
+		"hyruletools_boss_key_small.png",
+		"hyruletools_medallion_side.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, 0, 0, -0.4375, 0.25}, -- NodeBox1
+			{0.0625, -0.5, 0, 0.125, -0.4375, 0.25}, -- NodeBox2
+			{0, -0.5, 0.0625, 0.0625, -0.4375, 0.1875}, -- NodeBox3
+			{0, -0.5, -0.25, 0.0625, -0.4375, 0.0625}, -- NodeBox4
+			{0.0625, -0.5, -0.25, 0.125, -0.4375, -0.1875}, -- NodeBox5
+			{0.0625, -0.5, -0.125, 0.125, -0.4375, -0.0625}, -- NodeBox6
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1, attached_node=1},
+	sounds = default.node_sound_metal_defaults()	
 })
 
 minetest.register_craftitem("hyruletools:red_rupee", {
@@ -1132,7 +1442,14 @@ minetest.register_craftitem("hyruletools:ocarina", {
 			false, --collisiondetection
 			"hyruletools_note.png" --texture
 		)
-	end
+	end,
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local dir = placer:get_look_dir()
+		minetest.set_node(pos, {name="hyruletools:ocarina_placed", param2=minetest.dir_to_facedir(dir)})
+		itemstack:take_item()
+		return itemstack
+	end,
 })
 
 minetest.register_craft({
@@ -1176,7 +1493,14 @@ minetest.register_craftitem("hyruletools:ocarina2", {
 		else
 		minetest.chat_send_player(player, "weather not enabled!")
 		end
-	end
+	end,
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local dir = placer:get_look_dir()
+		minetest.set_node(pos, {name="hyruletools:ocarina_placed2", param2=minetest.dir_to_facedir(dir)})
+		itemstack:take_item()
+		return itemstack
+	end,
 })
 
 minetest.register_craft({
@@ -1214,7 +1538,14 @@ minetest.register_craftitem("hyruletools:ocarina3", {
 		local playerpos = placer:getpos();
 		local dir = placer:get_look_dir();
 		local obj = minetest.env:add_entity({x=playerpos.x+1+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+1+dir.z}, "kpgmobs:horse")
-	end
+	end,
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local dir = placer:get_look_dir()
+		minetest.set_node(pos, {name="hyruletools:ocarina_placed3", param2=minetest.dir_to_facedir(dir)})
+		itemstack:take_item()
+		return itemstack
+	end,
 })
 
 minetest.register_craft({
@@ -1265,7 +1596,14 @@ minetest.register_craftitem("hyruletools:ocarina4", {
 		local playerpos = placer:getpos();
 		local dir = placer:get_look_dir();
 		local obj = minetest.env:add_entity({x=playerpos.x+1+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+1+dir.z}, "mobs_loz:business_scrub_passive")
-	end
+	end,
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos = pointed_thing.above
+		local dir = placer:get_look_dir()
+		minetest.set_node(pos, {name="hyruletools:ocarina_placed4", param2=minetest.dir_to_facedir(dir)})
+		itemstack:take_item()
+		return itemstack
+	end,
 })
 
 minetest.register_craft({
@@ -1277,12 +1615,100 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_node("hyruletools:ocarina_placed", {
+	drop = "hyruletools:ocarina",
+	tiles = {
+		"hyruletools_ocarina_placed.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.0625, 0.0625, -0.4375, 0.125}, -- NodeBox1
+			{-0.125, -0.4375, -0.125, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.0625, -0.4375, -0.1875, 0.0625, -0.375, 0.1875}, -- NodeBox3
+			{-0.0625, -0.375, -0.0625, 0.0625, -0.3125, 0.125}, -- NodeBox4
+			{0, -0.3125, 0.0625, 0.0625, -0.25, 0.125}, -- NodeBox5
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyruletools:ocarina_placed2", {
+	drop = "hyruletools:ocarina2",
+	tiles = {
+		"hyruletools_ocarina_placed_red.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.0625, 0.0625, -0.4375, 0.125}, -- NodeBox1
+			{-0.125, -0.4375, -0.125, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.0625, -0.4375, -0.1875, 0.0625, -0.375, 0.1875}, -- NodeBox3
+			{-0.0625, -0.375, -0.0625, 0.0625, -0.3125, 0.125}, -- NodeBox4
+			{0, -0.3125, 0.0625, 0.0625, -0.25, 0.125}, -- NodeBox5
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyruletools:ocarina_placed3", {
+	drop = "hyruletools:ocarina3",
+	tiles = {
+		"hyruletools_ocarina_placed_yellow.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.0625, 0.0625, -0.4375, 0.125}, -- NodeBox1
+			{-0.125, -0.4375, -0.125, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.0625, -0.4375, -0.1875, 0.0625, -0.375, 0.1875}, -- NodeBox3
+			{-0.0625, -0.375, -0.0625, 0.0625, -0.3125, 0.125}, -- NodeBox4
+			{0, -0.3125, 0.0625, 0.0625, -0.25, 0.125}, -- NodeBox5
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_glass_defaults()
+})
+
+minetest.register_node("hyruletools:ocarina_placed4", {
+	drop = "hyruletools:ocarina4",
+	tiles = {
+		"hyruletools_ocarina_placed_green.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.0625, 0.0625, -0.4375, 0.125}, -- NodeBox1
+			{-0.125, -0.4375, -0.125, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.0625, -0.4375, -0.1875, 0.0625, -0.375, 0.1875}, -- NodeBox3
+			{-0.0625, -0.375, -0.0625, 0.0625, -0.3125, 0.125}, -- NodeBox4
+			{0, -0.3125, 0.0625, 0.0625, -0.25, 0.125}, -- NodeBox5
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_glass_defaults()
+})
+
 minetest.register_node("hyruletools:fire", {
 	description = "Magical Fire",
 	drawtype = "plantlike",
 	sunlight_propagates = true,
 	paramtype = "light",
-	light_source = 14,
+	light_source = 5,
 	walkable = false,
 	damage_per_second = 2,
 	tiles = {{
@@ -1329,6 +1755,8 @@ minetest.register_node("hyruletools:climbable", {
 	walkable = false,
 	climbable = true,
 	pointable = false,
+	sunlight_propagates = true,
+	paramtype = "light",
 })
 
 minetest.register_node("hyruletools:light", {
@@ -1493,9 +1921,28 @@ minetest.register_entity("hyruletools:spark", {
 	end,
 })
 
-minetest.register_tool("hyruletools:medallion", {
+minetest.register_node("hyruletools:medallion", {
 	description = "Ether Medallion",
 	inventory_image = "hyruletools_medallion.png",
+	tiles = {
+		"hyruletools_medallion_small.png",
+		"hyruletools_medallion_small.png",
+		"hyruletools_medallion_side.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_metal_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.125, 0.375, -0.4375, 0.125}, -- NodeBox1
+			{-0.3125, -0.5, -0.25, 0.3125, -0.4375, 0.25}, -- NodeBox2
+			{-0.25, -0.5, -0.3125, 0.25, -0.4375, 0.3125}, -- NodeBox3
+			{-0.125, -0.5, -0.375, 0.125, -0.4375, 0.375}, -- NodeBox4
+		}
+	},
 	on_use = function(itemstack, placer, pointed_thing)
 			local player = placer:get_player_name()
 			if mana.subtract(player, 100) then
@@ -1605,10 +2052,29 @@ minetest.register_entity("hyruletools:stone", {
 	end,
 })
 
---DO NOT point at the sky, make sure there is stone in the path of the spark or it will continue forever
-minetest.register_tool("hyruletools:medallion2", {
+
+minetest.register_node("hyruletools:medallion2", {
 	description = "Quake Medallion",
 	inventory_image = "hyruletools_medallion2.png",
+	tiles = {
+		"hyruletools_medallion2_small.png",
+		"hyruletools_medallion2_small.png",
+		"hyruletools_medallion_side.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_metal_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.125, 0.375, -0.4375, 0.125}, -- NodeBox1
+			{-0.3125, -0.5, -0.25, 0.3125, -0.4375, 0.25}, -- NodeBox2
+			{-0.25, -0.5, -0.3125, 0.25, -0.4375, 0.3125}, -- NodeBox3
+			{-0.125, -0.5, -0.375, 0.125, -0.4375, 0.375}, -- NodeBox4
+		}
+	},
 	on_use = function(itemstack, placer, pointed_thing)
 			local player = placer:get_player_name()
 			if mana.subtract(player, 100) then
@@ -1661,9 +2127,28 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_tool("hyruletools:medallion3", {
+minetest.register_node("hyruletools:medallion3", {
 	description = "Bombos Medallion",
 	inventory_image = "hyruletools_medallion3.png",
+	tiles = {
+		"hyruletools_medallion3_small.png",
+		"hyruletools_medallion3_small.png",
+		"hyruletools_medallion_side.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_metal_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.125, 0.375, -0.4375, 0.125}, -- NodeBox1
+			{-0.3125, -0.5, -0.25, 0.3125, -0.4375, 0.25}, -- NodeBox2
+			{-0.25, -0.5, -0.3125, 0.25, -0.4375, 0.3125}, -- NodeBox3
+			{-0.125, -0.5, -0.375, 0.125, -0.4375, 0.375}, -- NodeBox4
+		}
+	},
 	on_use = function(itemstack, placer, pointed_thing)
 			local player = placer:get_player_name()
 			if mana.subtract(player, 100) then
@@ -1796,12 +2281,34 @@ minetest.register_tool("hyruletools:pendant1", {
 				glow = 9
 			})
 			end)
-			end
+		end
 	end,
-	light_source = 12,
+	tiles = {
+		"hyruletools_pendant_1s.png",
+		"hyruletools_pendant_1s.png",
+		"hyruletools_ocarina_placed.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.499, 0.5}, -- NodeBox1
+			{-0.0625, -0.5, -0.375, 0.125, -0.4375, -0.1875}, -- NodeBox2
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.375, 0.125, -0.4375, -0.1875}, -- NodeBox2
+		}
+	},
+	light_source = 2,
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate=3},
 })
 
-minetest.register_tool("hyruletools:pendant2", {
+minetest.register_node("hyruletools:pendant2", {
 	description = "Pendant of Courage",
 	inventory_image = "hyruletools_pendant2.png",
 	on_use = function(itemstack, placer, pointed_thing)
@@ -1822,12 +2329,34 @@ minetest.register_tool("hyruletools:pendant2", {
 				glow = 9
 			})
 			end)
-			end
+		end
 	end,
-	light_source = 12,
+	tiles = {
+		"hyruletools_pendant_2s.png",
+		"hyruletools_pendant_2s.png",
+		"hyruletools_ocarina_placed_green.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.499, 0.5}, -- NodeBox1
+			{-0.0625, -0.5, -0.375, 0.125, -0.4375, -0.1875}, -- NodeBox2
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.375, 0.125, -0.4375, -0.1875}, -- NodeBox2
+		}
+	},
+	light_source = 2,
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate=3},
 })
 
-minetest.register_tool("hyruletools:pendant3", {
+minetest.register_node("hyruletools:pendant3", {
 	description = "Pendant of Wisdom",
 	inventory_image = "hyruletools_pendant3.png",
 	on_use = function(itemstack, placer, pointed_thing)
@@ -1850,7 +2379,90 @@ minetest.register_tool("hyruletools:pendant3", {
 			end)
 			end
 	end,
-	light_source = 12,
+	tiles = {
+		"hyruletools_pendant_3s.png",
+		"hyruletools_pendant_3s.png",
+		"hyruletools_ocarina_placed_red.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.499, 0.5}, -- NodeBox1
+			{-0.0625, -0.5, -0.375, 0.125, -0.4375, -0.1875}, -- NodeBox2
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.375, 0.125, -0.4375, -0.1875}, -- NodeBox2
+		}
+	},
+	light_source = 2,
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate=3},
+})
+
+minetest.register_node("hyruletools:chomper", {
+	description = "Wood Chomper",
+	tiles = {
+		"hyruletools_chomper_top.png",
+		"hyruletools_chomper_bottom.png",
+		"hyruletools_chomper.png",
+		"hyruletools_chomper.png",
+		"hyruletools_chomper_front.png",
+		"hyruletools_chomper.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0.1875, -0.5, 0.5, 0.5, -0.3125}, -- NodeBox1
+			{0.3125, 0.5, 0.3125, 0.4375, 0.625, 0.4375}, -- NodeBox2
+			{-0.4375, 0.5, 0.3125, -0.3125, 0.625, 0.4375}, -- NodeBox3
+			{-0.4375, 0.5, -0.4375, -0.3125, 0.625, -0.3125}, -- NodeBox4
+			{0.3125, 0.5, -0.4375, 0.4375, 0.625, -0.3125}, -- NodeBox5
+			{0.3125, 0.5, -0.0625, 0.4375, 0.625, 0.0625}, -- NodeBox6
+			{-0.4375, 0.5, -0.0625, -0.3125, 0.625, 0.0625}, -- NodeBox7
+			{-0.0625, 0.5, -0.4375, 0.0625, 0.625, -0.3125}, -- NodeBox8
+			{-0.0625, 0.5, 0.3125, 0.0625, 0.625, 0.4375}, -- NodeBox9
+			{-0.5, 0.1875, 0.3125, 0.5, 0.5, 0.5}, -- NodeBox10
+			{0.3125, 0.1875, -0.5, 0.5, 0.5, 0.5}, -- NodeBox11
+			{-0.5, 0.1875, -0.5, -0.3125, 0.5, 0.5}, -- NodeBox12
+		}
+	},
+	sounds = default.node_sound_metal_defaults(),
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	on_construct = function(pos)
+		local pos_above = {x=pos.x, y=pos.y+1, z=pos.z}
+		local node = minetest.get_node(pos)
+		local node_above = minetest.get_node(pos_above)
+		if minetest.get_item_group(node_above.name, "choppy") >= 1 then
+			minetest.after(0.5, function()
+				if node ~= nil and node_above ~= nil and pos_above ~= nil then
+					minetest.remove_node(pos)
+					minetest.add_item(pos, node_above.name)
+					minetest.set_node(pos_above, {name="hyruletools:chomper", param2=node.param2})
+					minetest.sound_play("hunger_eat", {pos=pos, gain=0.7})
+				end
+			end)
+		else
+			minetest.add_item(pos, "hyruletools:chomper")
+			minetest.sound_play("gulp", {pos=pos, gain=2})
+			minetest.remove_node(pos)
+		end
+	end,
+})
+
+minetest.register_craft({
+	output = 'hyruletools:chomper',
+	recipe = {
+		{'mobs_loz:scale', "mobs_loz:scale", "mobs_loz:scale"},
+		{'default:copper_ingot', 'default:copper_ingot', 'default:copper_ingot'},
+	}
 })
 
 --mobs redo arrow code, see mobs license
@@ -1922,6 +2534,36 @@ minetest.register_craftitem("hyruletools:crest", {
 	description = "Hylian Crest",
 	inventory_image = "hyruletools_crest.png",
 	wield_scale = {x = 1.5, y = 1.5, z = 1},
+})
+
+minetest.register_node("hyruletools:crest_block", {
+	description = "Obsidian Crest Block",
+	tiles = {
+		"hyruletools_crest_block.png",
+		"hyruletools_crest_block.png",
+		"hyruletools_crest_block_side.png",
+		"hyruletools_crest_block_side.png",
+		"hyruletools_crest_block.png",
+		"hyruletools_crest_block.png",
+	},
+	paramtype2 = "facedir",
+	groups = {cracky=1},
+	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("hyruletools:crest_block2", {
+	description = "Gold Crest Block",
+	tiles = {
+		"hyruletools_crest_block2.png",
+		"hyruletools_crest_block2.png",
+		"hyruletools_crest_block2_side.png",
+		"hyruletools_crest_block2_side.png",
+		"hyruletools_crest_block2.png",
+		"hyruletools_crest_block2.png",
+	},
+	paramtype2 = "facedir",
+	groups = {cracky=1},
+	sounds = default.node_sound_metal_defaults()
 })
 
 minetest.register_tool("hyruletools:sword_incomplete", {
@@ -2398,18 +3040,34 @@ minetest.register_entity("hyruletools:boomer", {
 	end,
 })
 
-minetest.register_tool("hyruletools:boomerang", {
+minetest.register_node("hyruletools:boomerang", {
 	description = "Boomerang",
 	inventory_image = "hyruletools_boomer.png",
-	wield_scale = {x = 1.5, y = 1.5, z = 1},
-	tool_capabilities = {
-		full_punch_interval = 0.7,
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
-		},
-		damage_groups = {fleshy=1},
+	wield_image = "hyruletools_boomer.png",
+	tiles = {
+		"hyruletools_boomer.png",
+		"hyruletools_boomer.png",
+		"hyruletools_boomerang_tex.png",
 	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, 0.25, 0.5, -0.4375, 0.3125}, -- NodeBox1
+			{-0.4375, -0.5, 0.3125, 0.4375, -0.4375, 0.375}, -- NodeBox2
+			{-0.5, -0.5, 0.375, 0.375, -0.4375, 0.4375}, -- NodeBox3
+			{-0.5, -0.5, 0.4375, 0.3125, -0.4375, 0.5}, -- NodeBox4
+			{0.1875, -0.5, 0.1875, 0.25, -0.4375, 0.25}, -- NodeBox5
+			{0.25, -0.5, -0.375, 0.3125, -0.4375, 0.25}, -- NodeBox6
+			{0.3125, -0.5, -0.4375, 0.375, -0.4375, 0.25}, -- NodeBox7
+			{0.375, -0.5, -0.5, 0.5, -0.4375, 0.25}, -- NodeBox8
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_wood_defaults(),
+	wield_scale = {x = 1.5, y = 1.5, z = 1},
 	on_use = function(item, placer, pointed_thing)
 			local add = minetest.after(3, function()
 			local pos = placer:getpos()
@@ -2499,18 +3157,34 @@ minetest.register_entity("hyruletools:sboomer", {
 	end,
 })
 
-minetest.register_tool("hyruletools:boomerang_steel", {
+minetest.register_node("hyruletools:boomerang_steel", {
 	description = "Magic Boomerang",
 	inventory_image = "hyruletools_boomer_steel.png",
 	wield_scale = {x = 1.5, y = 1.5, z = 1},
-	tool_capabilities = {
-		full_punch_interval = 0.7,
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
-		},
-		damage_groups = {fleshy=1},
+	wield_image = "hyruletools_boomer_steel.png",
+	tiles = {
+		"hyruletools_boomer_steel.png",
+		"hyruletools_boomer_steel.png",
+		"hyruletools_boomerang_tex2.png",
 	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, 0.25, 0.5, -0.4375, 0.3125}, -- NodeBox1
+			{-0.4375, -0.5, 0.3125, 0.4375, -0.4375, 0.375}, -- NodeBox2
+			{-0.5, -0.5, 0.375, 0.375, -0.4375, 0.4375}, -- NodeBox3
+			{-0.5, -0.5, 0.4375, 0.3125, -0.4375, 0.5}, -- NodeBox4
+			{0.1875, -0.5, 0.1875, 0.25, -0.4375, 0.25}, -- NodeBox5
+			{0.25, -0.5, -0.375, 0.3125, -0.4375, 0.25}, -- NodeBox6
+			{0.3125, -0.5, -0.4375, 0.375, -0.4375, 0.25}, -- NodeBox7
+			{0.375, -0.5, -0.5, 0.5, -0.4375, 0.25}, -- NodeBox8
+		}
+	},
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = default.node_sound_wood_defaults(),
 	on_use = function(item, placer, pointed_thing)
 			local add = minetest.after(4, function()
 			local pos = placer:getpos()

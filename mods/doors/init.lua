@@ -540,16 +540,31 @@ doors.register("door_ice", {
 		tiles = {{name = "doors_door_ice.png", backface_culling = true}},
 		description = "Ice Door",
 		inventory_image = "doors_item_ice.png",
-		protected = true,
 		use_texture_alpha = true,
 		groups = {cracky = 1, level = 2},
-		sounds = default.node_sound_metal_defaults(),
+		sounds = default.node_sound_glass_defaults(),
 		sound_open = "doors_door_open",
 		sound_close = "doors_door_close",
 		recipe = {
 			{"default:ice", "default:ice"},
 			{"default:ice", "default:ice"},
 			{"default:ice", "default:ice"},
+		}
+})
+
+doors.register("door_quartz", {
+		tiles = {{name = "doors_door_quartz.png", backface_culling = true}},
+		description = "Quartz Door",
+		inventory_image = "doors_item_quartz.png",
+		use_texture_alpha = true,
+		groups = {cracky = 1, level = 2},
+		sounds = default.node_sound_stone_defaults(),
+		sound_open = "doors_door_open",
+		sound_close = "doors_door_close",
+		recipe = {
+			{"quartz:quartz_crystal", "quartz:quartz_crystal"},
+			{"quartz:quartz_crystal", "quartz:quartz_crystal"},
+			{"quartz:quartz_crystal", "quartz:quartz_crystal"},
 		}
 })
 

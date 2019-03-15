@@ -1,0 +1,1 @@
+compass mod for The Legend of Minetest

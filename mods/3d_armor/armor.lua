@@ -378,11 +378,13 @@ minetest.register_on_joinplayer(function(player)
 			player:get_inventory():set_stack(listname, index, stack)
 			armor:set_player_armor(player)
 			armor:update_inventory(player)
+			minetest.sound_play("metal_sound", {to_player=player:get_player_name(), gain=1.2, loop=false})
 		end,
 		on_take = function(inv, listname, index, stack, player)
 			player:get_inventory():set_stack(listname, index, nil)
 			armor:set_player_armor(player)
 			armor:update_inventory(player)
+			minetest.sound_play("inventory", {to_player=player:get_player_name(), gain=1.2, loop=false})
 		end,
 		on_move = function(inv, from_list, from_index, to_list, to_index, count, player)
 			local plaver_inv = player:get_inventory()
@@ -391,6 +393,7 @@ minetest.register_on_joinplayer(function(player)
 			player_inv:set_stack(from_list, from_index, nil)
 			armor:set_player_armor(player)
 			armor:update_inventory(player)
+			minetest.sound_play("metal_sound", {to_player=player:get_player_name(), gain=1.2, loop=false})
 		end,
 		allow_put = function(inv, listname, index, stack, player)
 			return 1

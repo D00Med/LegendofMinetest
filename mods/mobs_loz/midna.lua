@@ -41,6 +41,7 @@ mobs:register_mob("mobs_loz:midna", {
 		punch_end = 50,
 	},
 	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then
 		if math.random(1,4) ~= 1 then return end
 		local pos = self.object:getpos()
 	minetest.add_particle({
@@ -55,6 +56,9 @@ mobs:register_mob("mobs_loz:midna", {
 		texture = "twilight_twilight"..math.random(1,2)..".png",
 		glow = 5
 	})
+	else
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end
 	end,
 })
 

@@ -10,7 +10,7 @@ minetest.register_craftitem("quartz:quartz_crystal", {
 minetest.register_node("quartz:quartz_ore", {
     description = "Quartz Ore",
  	tiles = {"default_stone.png^quartz_ore.png"},
-	groups = {cracky=3, stone=1},
+	groups = {cracky=3, stone=1, xp=1},
 	drop = 'quartz:quartz_crystal',
     sounds = default.node_sound_stone_defaults(),
 })
@@ -69,6 +69,72 @@ stairs.register_slab("quartzstair", "quartz:pillar",
 	"Quartz Pillar slab",
 	default.node_sound_stone_defaults()
 )		
+
+--Unbreakeable nodes
+
+--Quartz Wall
+minetest.register_node("quartz:wall_immortal", {
+	description = "Unbreakeable Quartz Wall",
+	tiles = {"quartz_wall.png",},
+	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
+	is_ground_content = false,
+	sounds = default.node_sound_stone_defaults(),
+	on_blast = function(pos, intensity) 
+	end,
+})
+
+--Quartz Block
+minetest.register_node("quartz:block_immortal", {
+	description = "Unbreakeable Quartz Block",
+	tiles = {"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
+	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
+	sounds = default.node_sound_stone_defaults(),
+	is_ground_content = false,
+	on_blast = function(pos, intensity) 
+	end,
+})
+
+--Chiseled Quartz
+minetest.register_node("quartz:chiseled_immortal", {
+	description = "Unbreakeable Chiseled Quartz",
+	tiles = {"quartz_chiseled_top.png", "quartz_chiseled_top.png", "quartz_chiseled_side.png"},
+	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
+	sounds = default.node_sound_stone_defaults(),
+	is_ground_content = false,
+	on_blast = function(pos, intensity) 
+	end,
+})
+
+--Quartz Pillar
+minetest.register_node("quartz:pillar_immortal", {
+	description = "Unbreakeable Quartz Pillar",
+	tiles = {"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
+	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
+	sounds = default.node_sound_stone_defaults(),
+	is_ground_content = false,
+	on_blast = function(pos, intensity)
+	end,
+	on_place = minetest.rotate_node,
+	paramtype2 = "facedir"
+})
+
+
+--Stairs & Slabs
+stairs.register_stair_and_slab("quartzblock_immortal", nil,
+	{snappy=0,bendy=0,cracky=0,level=2, not_in_creative_inventory=1},
+	{"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
+	"Unbreakeable Quartz stair",
+	"Unbreakeable Quartz slab",
+	default.node_sound_stone_defaults()
+)
+
+stairs.register_slab("quartzstair_immortal", nil,
+	{snappy=0,bendy=0,cracky=0,level=2, not_in_creative_inventory=1},
+	{"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
+	"Unbreakeable Quartz Pillar stair",
+	"Unbreakeable Quartz Pillar slab",
+	default.node_sound_stone_defaults()
+)	
 
 --Crafting
 

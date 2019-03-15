@@ -54,6 +54,10 @@ mobs:register_mob("mobs_loz:goron", {
 		punch_start = 50,
 		punch_end = 70,
 	},
+	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then return end
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end,
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		

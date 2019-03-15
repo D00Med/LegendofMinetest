@@ -30,6 +30,10 @@ mobs:register_mob("mobs_loz:subrosian", {
 		{name = "hyruletools:red_ore",
 		chance = 1, min = 1, max = 2},
 	},
+	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then return end
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if math.random(1,2) == 2 then

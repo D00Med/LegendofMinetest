@@ -530,7 +530,7 @@ local function register_grass_decoration(offset, scale, length, dry)
 	end
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass", "default:dirt_with_grass2", "default:sand"},
+		place_on = {"default:dirt_with_grass", "default:dirt_with_dry_grass", "default:dirt_with_grass2", "default:sand"},
 		sidelen = 16,
 		noise_params = {
 			offset = offset,
@@ -595,8 +595,8 @@ minetest.register_decoration({
 	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	noise_params = {
-		offset = 0.04,
-		scale = 0.01,
+		offset = 0.02,
+		scale = 0.015,
 		spread = {x = 250, y = 250, z = 250},
 		seed = 2,
 		octaves = 3,
@@ -609,6 +609,27 @@ minetest.register_decoration({
 	flags = "place_center_x, place_center_z",
 })
 
+--Oak tree
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:dirt_with_grass"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.01,
+		scale = 0.01,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 2,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"deciduous_forest"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("hyrule_mapgen").."/schematics/oak_tall.mts",
+	flags = "place_center_x, place_center_z",
+})
+
 --aspen tree
 
 minetest.register_decoration({
@@ -616,8 +637,8 @@ minetest.register_decoration({
 	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	noise_params = {
-		offset = 0.02,
-		scale = 0.001,
+		offset = 0.01,
+		scale = 0.0005,
 		spread = {x = 250, y = 250, z = 250},
 		seed = 2,
 		octaves = 3,
@@ -896,7 +917,7 @@ minetest.register_decoration({
 	place_on = {"default:snowblock", "default:dirt_with_snow"},
 	sidelen = 26,
 	fill_ratio = 0.002,
-	biomes = {"taiga"},
+	biomes = {"taiga", "icesheet", "tundra", "icesheet_ocean"},
 	decoration = "hyrule_mapgen:chillshroom",
 	height = 1,
 })
@@ -1144,8 +1165,8 @@ minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"default:sand"},
 		noise_params = {
-			offset = -0.1,
-			scale = 0.1,
+			offset = -0.08,
+			scale = 0.08,
 			spread = {x = 200, y = 200, z = 200},
 			seed = 7013,
 			octaves = 3,
@@ -1155,8 +1176,9 @@ minetest.register_decoration({
 			"desert_ocean",
 			"savanna_ocean",
 			"rainforest_ocean",
+			"deciduous_forest_ocean",
 		},
-		y_min = -8,
+		y_min = -6,
 		y_max = -2,
 		schematic = minetest.get_modpath("default") .. "/schematics/corals.mts",
 		flags = "place_center_x, place_center_z",
@@ -1513,6 +1535,48 @@ minetest.register_ore({
 	y_max          = -66,
 })
 
+--coral ore
+minetest.register_ore({
+	ore_type       = "blob",
+	ore            = "hyrule_mapgen:coral",
+	wherein        = {"default:coral_orange"},
+	clust_scarcity = 2 * 2 * 2,
+	clust_num_ores = 10,
+	clust_size     = 8,
+	y_min          = -100,
+	y_max          = 30,
+})
+minetest.register_ore({
+	ore_type       = "blob",
+	ore            = "hyrule_mapgen:coral2",
+	wherein        = {"default:coral_orange"},
+	clust_scarcity = 2 * 2 * 2,
+	clust_num_ores = 10,
+	clust_size     = 8,
+	y_min          = -100,
+	y_max          = 30,
+})
+minetest.register_ore({
+	ore_type       = "blob",
+	ore            = "hyrule_mapgen:coral3",
+	wherein        = {"default:coral_brown"},
+	clust_scarcity = 2 * 2 * 2,
+	clust_num_ores = 10,
+	clust_size     = 8,
+	y_min          = -100,
+	y_max          = 30,
+})
+minetest.register_ore({
+	ore_type       = "blob",
+	ore            = "hyrule_mapgen:coral2",
+	wherein        = {"default:coral_brown"},
+	clust_scarcity = 2 * 2 * 2,
+	clust_num_ores = 10,
+	clust_size     = 8,
+	y_min          = -100,
+	y_max          = 30,
+})
+
 --ice caves
 minetest.register_ore({
 		ore_type        = "blob",
@@ -1521,7 +1585,7 @@ minetest.register_ore({
 		clust_scarcity  = 16 * 16 * 16,
 		clust_size      = 12,
 		y_min           = -31000,
-		y_max           = 31000,
+		y_max           = 10,
 		noise_threshold = 0.0,
 		noise_params    = {
 			offset = 0.5,
@@ -1531,8 +1595,7 @@ minetest.register_ore({
 			octaves = 1,
 			persist = 0.0
 		},
-	})
-	
+})
 	
 --rupees
 
@@ -1789,7 +1852,7 @@ minetest.register_on_generated(function(minp, maxp)
 		end
 	end
 end)
-
+--[[
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 21000 then
 		return
@@ -1823,8 +1886,9 @@ minetest.register_on_generated(function(minp, maxp)
 				end
 		end
 	end
-end)
+end)]]
 
+--[[
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 11000 then
 		return
@@ -1888,7 +1952,7 @@ minetest.register_on_generated(function(minp, maxp)
 				end
 		end
 	end
-end)
+end)]]
 
 minetest.register_on_generated(function(minp, maxp)
 	if maxp.y < -1 or maxp.y > 11000 then
@@ -1937,3 +2001,35 @@ minetest.register_on_generated(function(minp, maxp)
 		end
 	end
 end)
+
+minetest.register_on_generated(function(minp, maxp)
+	if minp.x < 50 and 50 < maxp.x and minp.y < 10 and 10 < maxp.y and minp.z < 50 and 50 < maxp.z then
+		minetest.place_schematic({x=0,y=10,z=0}, minetest.get_modpath("hyrule_mapgen").."/schematics/tower_ground.mts", 0, {["hyrule_mapgen:tower_dev"] = "hyrule_mapgen:tower_spawner",}, true)
+		local air = minetest.find_nodes_in_area({x=-14, y=-10, z=-14}, {x=14, y=9, z=14}, {"air"})
+		for _, air_pos in ipairs(air) do
+				minetest.set_node(air_pos, {name="default:dirt"})
+		end
+	end
+end)
+
+--Tower Generation
+
+-- minetest.register_on_newplayer(function(player)
+	-- if player:get_player_name() == "singleplayer" then
+		-- minetest.place_schematic({x=0,y=15,z=0}, minetest.get_modpath("hyrule_mapgen").."/schematics/tower_ground.mts", 0, {["hyrule_mapgen:tower_dev"] = "hyrule_mapgen:tower_spawner",}, true)
+	-- end
+-- end)
+
+minetest.register_lbm({
+	name = "hyrule_mapgen:apple_growth",
+	nodenames = {"default:leaves", "hyrule_mapgen:wild_leaves"},
+	run_at_every_load = true,
+	action = function(pos, node)
+		if math.random(1,200) == 1 and not minetest.find_node_near(pos, 3, {"default:apple"}) then 
+			pos.y = pos.y-1
+			if minetest.get_node(pos).name == "air" then
+			minetest.set_node(pos, {name="default:apple"})
+			end
+		end
+	end
+})

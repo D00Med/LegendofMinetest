@@ -23,7 +23,7 @@ minetest.register_node("hyrule_weather:ice", {
 			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5}, -- NodeBox1
 		}
 	},
-	drop = "hyruletools:ice_fragment",
+	drop = "",
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -36,16 +36,10 @@ local apply_weather = function(player, pos, weather_type)
 		player:set_sky({r=208, g=223, b=238}, "plain", nil, true)
 		end
 		for i=1,8 do
-		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-4,4), z=pos.z+math.random(-7,7)}, 10, {"default:water_source", "default:river_water_source"}, true)
-		if not water then return end
-		water.y =  water.y+1
-		if minetest.get_node(water).name == "air" then
-			minetest.set_node(water, {name="hyrule_weather:ice"})
-		end
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=math.random(-5,5)/10, y=math.random(-4,-6), z=math.random(-5,5)/10},
-			acceleration = {x=math.random(-1,1)/10, y=math.random(-5,-10)/10, z=math.random(-1,1)/10},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-6,-4), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
 			expirationtime = 3,
 			size = math.random(3,5),
 			collisiondetection = true,
@@ -54,15 +48,37 @@ local apply_weather = function(player, pos, weather_type)
 			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
 			glow = 0
 		})
+		minetest.add_particle({
+			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
+			velocity = {x=math.random(-5,5)/10, y=math.random(-6,-4), z=math.random(-5,5)/10},
+			acceleration = {x=math.random(-1,1)/10, y=math.random(-10,-5)/10, z=math.random(-1,1)/10},
+			expirationtime = 3,
+			size = math.random(3,5),
+			collisiondetection = true,
+			collision_removal = true,
+			vertical = false,
+			texture = "hyrule_weather_snow_"..math.random(1,2)..".png",
+			glow = 0
+		})
+		local water = minetest.find_node_near({x=pos.x+math.random(-7,7), y=pos.y+math.random(-4,4), z=pos.z+math.random(-7,7)}, 10, {"default:water_source", "default:river_water_source"}, true)
+		if not water then return end
+		water.y =  water.y+1
+		if minetest.get_node(water).name == "air" then
+			minetest.set_node(water, {name="hyrule_weather:ice"})
+			if math.random(1,2) == 2 then
+				minetest.sound_play("freeze", {pos=water, gain=1.2,  max_hear_distance = 5, loop=false})
+			end
+		end
 		end
 	elseif weather_type == "rain" then
 		if minetest.get_timeofday()*24000 >= 6000 and minetest.get_timeofday()*24000 <= 19000 then
 		player:set_sky({r=177, g=177, b=177}, "plain", nil, true)
 		end
-		for i=1,12 do
+		for i=1,24 do
+		minetest.after((math.random(1,10)/10), function(dtime)
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
-			velocity = {x=0, y=math.random(-15,-20), z=0},
+			velocity = {x=0, y=math.random(-20,-15), z=0},
 			acceleration = {x=0, y=-1, z=0},
 			expirationtime = 2,
 			size = math.random(3,5),
@@ -72,12 +88,14 @@ local apply_weather = function(player, pos, weather_type)
 			texture = "hyrule_weather_rain_"..math.random(1,2)..".png",
 			glow = 0
 		})
+		end)
 		end
 	elseif weather_type == "storm" then
 		if minetest.get_timeofday()*24000 >= 6000 and minetest.get_timeofday()*24000 <= 19000 then
 		player:set_sky({r=101, g=101, b=101}, "plain", nil, true)
 		end
-		for i=1,25 do
+		for i=1,30 do
+		minetest.after((math.random(1,10)/10), function(dtime)
 		minetest.add_particle({
 			pos = {x=pos.x+math.random(-10,10), y=pos.y+math.random(12,17), z=pos.z+math.random(-10,10)},
 			velocity = {x=0, y=math.random(-30,-25), z=0},
@@ -90,6 +108,7 @@ local apply_weather = function(player, pos, weather_type)
 			texture = "hyrule_weather_rain_3.png",
 			glow = 0
 		})
+		end)
 		if math.random(1,2000) == 1 then
 			lightning.strike()
 		end
@@ -133,7 +152,11 @@ local apply_weather = function(player, pos, weather_type)
 	elseif weather_type == "insects" then
 		player:set_sky(nil, "regular", nil, true)
 	elseif weather_type == "none" then
+		if underwater then
+			player:set_sky({r=13, g=50, b=157}, "plain", nil, true)
+		else
 		player:set_sky(nil, "regular", nil, true)
+		end
 		return 
 	end
 end
@@ -147,6 +170,9 @@ minetest.register_on_joinplayer(function()
 		end
 	end
 end)
+
+local sound_ready = true
+local underwater = false
 
 minetest.register_globalstep(function(dtime)
 	if math.random(1,4) ~= 4 or hyrule_weather.weather == "twilight" then return end
@@ -178,10 +204,31 @@ minetest.register_globalstep(function(dtime)
 		end
 		if pos.y <= -20 then display_weather = false end
 		--apply weather effect
-		if display_weather then
+		if display_weather and not underwater then
 			apply_weather(player, pos, hyrule_weather.weather)
+			if sound_ready and hyrule_weather.weather ~= nil then 
+				local weather_name = hyrule_weather.weather
+				local plyr = player:get_player_name()
+				minetest.sound_play(weather_name, {to_player=plyr, gain=1.5,  max_hear_distance = 3, loop=false})
+				sound_ready = false
+				minetest.after(33, function()
+					sound_ready = true
+				end)
+			end
 		else
 			apply_weather(player, pos, "none")
+		end
+		--underwater effects
+		if minetest.setting_get("underwater_effects") then
+			if minetest.get_node({x=pos.x, y=pos.y+0.5, z=pos.z}).name == "default:water_source" and minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name == "default:water_source" then
+			underwater = true
+			player:set_sky({r=13, g=50, b=157}, "plain", nil, true)
+			else
+			underwater = false
+			if not display_weather then
+			player:set_sky(nil, "regular", nil, true)
+			end
+			end
 		end
 	end
 end)

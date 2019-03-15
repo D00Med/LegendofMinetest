@@ -103,7 +103,7 @@ mobs:alias_mob("mobs:cow", "mobs_animal:cow")
 
 -- bucket of milk
 minetest.register_craftitem(":mobs:bucket_milk", {
-	description = "Bucket of Milk",
+	description = "Bottle of Milk",
 	inventory_image = "mobs_bucket_milk.png",
 	stack_max = 1,
 	on_use = minetest.item_eat(8, 'bucket:bucket_empty'),
