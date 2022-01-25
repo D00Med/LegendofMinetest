@@ -24,11 +24,14 @@ function creative.init_creative_inventory(player)
 			return -1
 		end,
 		on_move = function(inv, from_list, from_index, to_list, to_index, count, player2)
+			minetest.sound_play("take", {to_player=player2:get_player_name(), gain=0.5, loop=false})
 		end,
 		on_put = function(inv, listname, index, stack, player2)
+			minetest.sound_play("put", {to_player=player2:get_player_name(), gain=0.5, loop=false})
 		end,
 		on_take = function(inv, listname, index, stack, player2)
 			if stack and stack:get_count() > 0 then
+				minetest.sound_play("take", {to_player=player2:get_player_name(), gain=0.5, loop=false})
 				minetest.log("action", player_name .. " takes " .. stack:get_name().. " from creative inventory")
 			end
 		end,
@@ -126,12 +129,14 @@ function creative.register_tab(name, title, items)
 			assert(inv)
 
 			if fields.creative_clear then
+				minetest.sound_play("click2_2", {to_player=player_name, gain=1.2, loop=false})
 				inv.start_i = 0
 				inv.filter = ""
 				creative.update_creative_inventory(player_name, items)
 				sfinv.set_player_inventory_formspec(player, context)
 			elseif fields.creative_search or
 					fields.key_enter_field == "creative_filter" then
+				minetest.sound_play("click2", {to_player=player_name, gain=0.8, loop=false})
 				inv.start_i = 0
 				inv.filter = fields.creative_filter:lower()
 				creative.update_creative_inventory(player_name, items)
@@ -140,6 +145,7 @@ function creative.register_tab(name, title, items)
 				local start_i = inv.start_i or 0
 
 				if fields.creative_prev then
+				minetest.sound_play("click2", {to_player=player_name, gain=0.8, loop=false})
 					start_i = start_i - 3*8
 					if start_i < 0 then
 						start_i = inv.size - (inv.size % (3*8))
@@ -148,6 +154,7 @@ function creative.register_tab(name, title, items)
 						end
 					end
 				elseif fields.creative_next then
+					minetest.sound_play("click2", {to_player=player_name, gain=0.8, loop=false})
 					start_i = start_i + 3*8
 					if start_i >= inv.size then
 						start_i = 0

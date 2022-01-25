@@ -148,6 +148,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					page:on_enter(player, context)
 				end
 				sfinv.set_player_inventory_formspec(player, context)
+				minetest.sound_play("click2", {to_player=name, gain=0.5, loop=false})
 			end
 		end
 		return

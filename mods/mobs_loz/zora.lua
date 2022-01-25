@@ -26,7 +26,7 @@ mobs:register_mob("mobs_loz:zora_male", {
 	jump = false,
 		stepheight = 0,
 		fly = true,
-		fly_in = "default:water_source",
+		fly_in = {"default:water_source", "moreplants:coral", "moreplants:seaweed1", "moreplants:seaweed2", "moreplants:seaweed3", "moreplants:seaweed4", "moreplants:coral2", "moreplants:coral3"},
 	jump_height = 0,
 	fall_damage = 0,
 	fall_speed = -6,
@@ -36,6 +36,10 @@ mobs:register_mob("mobs_loz:zora_male", {
 		{name = "hyruletools:green_rupee",
 		chance = 5, min = 1, max = 2},
 	},
+	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then return end
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if math.random(1,7) == 2 then
@@ -94,7 +98,7 @@ mobs:register_mob("mobs_loz:zora_female", {
 	jump = false,
 		stepheight = 0,
 		fly = true,
-		fly_in = "default:water_source",
+		fly_in = {"default:water_source", "moreplants:coral", "moreplants:seaweed1", "moreplants:seaweed2", "moreplants:seaweed3", "moreplants:seaweed4", "moreplants:coral2", "moreplants:coral3"},
 	jump_height = 0,
 	fall_damage = 0,
 	fall_speed = -6,
@@ -104,6 +108,10 @@ mobs:register_mob("mobs_loz:zora_female", {
 		{name = "hyruletools:green_rupee",
 		chance = 5, min = 1, max = 2},
 	},
+	do_custom = function(self, dtime)
+	if math.random(1,1000) ~= 1 then return end
+	mobs_loz.speech(self, mobs_loz.mob_text)
+	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if math.random(1,7) == 2 then

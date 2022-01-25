@@ -40,6 +40,52 @@ minetest.register_entity("vehicles:horse", {
 
 --register_vehicle_spawner("vehicles:horse", "Horse", "vehicles_horse_inv.png")
 
+minetest.register_entity("vehicles:wooden_boat", {
+	visual = "mesh",
+	mesh = "boats_boat.obj",
+	textures = {"default_wood.png"},
+	velocity = 15,
+	acceleration = -5,
+	stepheight = 0,
+	hp_max = 200,
+	physical = true,
+	collisionbox = {-0.5, -0.4, -0.5, 0.5, 0.3, 0.5},
+	on_rightclick = function(self, clicker)
+		if self.driver and clicker == self.driver then
+		vehicles.object_detach(self, clicker, {x=1, y=0, z=1})
+		elseif not self.driver then
+		vehicles.object_attach(self, clicker, {x=0, y=12, z=-5}, true, {x=0, y=1, z=1})
+		end
+	end,
+	on_punch = vehicles.on_punch,
+	on_step = function(self, dtime)
+		return vehicles.on_step(self, dtime, {
+			speed = 6, 
+			decell = 0.85,
+			is_watercraft = true,
+			gravity = 0,
+			boost = true,
+			boost_duration = 10,
+			boost_effect = "vehicles_splash.png",
+			brakes = false,
+			braking_effect = "vehicles_splash.png",
+			handling = {initial=3, braking=1.8}
+		})
+	end,
+})
+
+vehicles.register_spawner("vehicles:wooden_boat", S("Wooden Boat"), "boats_inventory.png", true)
+
+minetest.register_craft({
+	output = "vehicles:wooden_boat_spawner",
+	recipe = {
+		{"",           "",           ""          },
+		{"group:wood", "",           "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+	},
+})
+
+
 minetest.register_entity("vehicles:ship", {
 	visual = "mesh",
 	mesh = "ship.b3d",

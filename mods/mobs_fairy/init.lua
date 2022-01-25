@@ -10,8 +10,9 @@ if mobs.mod and mobs.mod == "redo" then
 		hp_min = 7,
 		hp_max = 12,
 		armor = 130,
-		collisionbox = {-0.1,-0.1,-0.1, 0.1,0.1,0.1},
+		collisionbox = {-0.15,-0.15,-0.15, 0.15,0.15,0.15},
 		visual = "mesh",
+		glow = 12,
 		mesh = "fairy2.b3d",
 		textures = {
 		{"fairy.png"},

@@ -79,7 +79,8 @@ mobs:register_mob("mobs_loz:dodongo", {
 	hp_min = 22,
 	hp_max = 35,
 	armor = 100,
-	collisionbox = {-0.7, 0, -0.7, 0.7, 1.2, 0.7},
+	visual_size = {x=0.5,y=0.5},
+	collisionbox = {-0.7, -0.1, -0.7, 0.7, 1.2, 0.7},
 	visual = "mesh",
 	mesh = "dodongo.b3d",
 	textures = {

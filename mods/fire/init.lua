@@ -80,6 +80,34 @@ minetest.register_node("fire:permanent_flame", {
 	end,
 })
 
+minetest.register_node("fire:fake_flame", {
+	description = "Fake Flame",
+	drawtype = "firelike",
+	tiles = {
+		{
+			name = "fire_basic_flame_animated.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 1
+			},
+		},
+	},
+	inventory_image = "fire_basic_flame.png",
+	paramtype = "light",
+	light_source = 11,
+	walkable = false,
+	buildable_to = true,
+	sunlight_propagates = true,
+	damage_per_second = 4,
+	groups = {dig_immediate = 3},
+	drop = "",
+
+	on_blast = function()
+	end,
+})
+
 
 -- Flint and steel
 

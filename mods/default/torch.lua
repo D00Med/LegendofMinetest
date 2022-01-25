@@ -43,19 +43,19 @@ minetest.register_node("default:torch", {
 	wield_image = "default_torch_on_floor.png",
 	tiles = {{
 		    name = "default_torch_on_floor_animated.png",
-		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1}
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
 	}},
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
 	liquids_pointable = false,
-	light_source = 13,
+	light_source = 12,
 	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1},
 	drop = "default:torch",
 	selection_box = {
 		type = "wallmounted",
-		wall_bottom = {-1/16, -0.5, -1/16, 1/16, 2/16, 1/16},
+		wall_bottom = {-1/8, -1/2, -1/8, 1/8, 2/16, 1/8},
 	},
 	sounds = default.node_sound_wood_defaults(),
 	on_place = function(itemstack, placer, pointed_thing)
@@ -91,18 +91,18 @@ minetest.register_node("default:torch_wall", {
 	mesh = "torch_wall.obj",
 	tiles = {{
 		    name = "default_torch_on_floor_animated.png",
-		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1}
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
 	}},
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
-	light_source = 13,
+	light_source = 12,
 	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
 	drop = "default:torch",
 	selection_box = {
 		type = "wallmounted",
-		wall_side = {-0.5, -0.3, -0.1, -0.2, 0.3, 0.1},
+		wall_side = {-1/2, -1/2, -1/8, -1/8, 1/8, 1/8},
 	},
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -112,18 +112,18 @@ minetest.register_node("default:torch_ceiling", {
 	mesh = "torch_ceiling.obj",
 	tiles = {{
 		    name = "default_torch_on_floor_animated.png",
-		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1}
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
 	}},
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
-	light_source = 13,
+	light_source = 12,
 	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
 	drop = "default:torch",
 	selection_box = {
 		type = "wallmounted",
-		wall_top = {-0.1, -0.1, -0.25, 0.1, 0.5, 0.1},
+		wall_top = {-1/8, -1/16, -5/16, 1/8, 1/2, 1/8},
 	},
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -144,4 +144,3 @@ minetest.register_lbm({
 		end
 	end
 })
-

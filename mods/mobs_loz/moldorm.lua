@@ -120,3 +120,57 @@ mobs:register_mob("mobs_loz:great_moldorm", {
 })
 
 mobs:register_egg("mobs_loz:great_moldorm", "Great Moldorm", "mobs_zol.png^[colorize:yellow:20", 1)
+
+mobs:register_mob("mobs_loz:moldorm_leech", {
+	type = "monster",
+	passive = false,
+	attack_type = "dogfight",
+	reach = 1,
+	damage = 1,
+	hp_min = 12,
+	hp_max = 25,
+	armor = 120,
+	collisionbox = {-0.2, -0.1, -0.2, 0.2, 0.4, 0.4},
+	visual = "mesh",
+	mesh = "bdodongo.b3d",
+	textures = {
+	{"mobs_moldorm_leech.png"},
+	},
+	makes_footstep_sound = false,
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+	walk_velocity = 3,
+	run_velocity = 4,
+	jump = 1,
+	floats = 1,
+	view_range = 5,
+	drops = {
+		{name = "default:gravel",
+		chance = 3, min = 1, max = 2},
+	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		if math.random(1,4) == 2 then
+		minetest.env:add_entity(pos, "hyruletools:heart_entity")
+		end
+		minetest.env:add_entity(pos, "experience:orb")
+	end,
+	water_damage = 0,
+	lava_damage = 2,
+	light_damage = 1,
+	animation = {
+		speed_normal = 15,
+		speed_run = 20,
+		stand_start = 3,
+		stand_end = 3,
+		walk_start = 3,
+		walk_end = 21,
+		run_start = 3,
+		run_end = 21,
+		punch_start = 3,
+		punch_end = 21,
+	},
+})
+
+mobs:register_egg("mobs_loz:moldorm_leech", "Moldorm Leech", "default_stone.png", 1)

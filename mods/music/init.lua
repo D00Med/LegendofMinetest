@@ -5,7 +5,7 @@ local music_name = ""
 local duration = 0
 local gain = 0
 
-if not minetest.setting_get("music") == 0 then
+if minetest.setting_get("music") == 1 then
 minetest.register_globalstep(function()
 	for _, player in ipairs(minetest.get_connected_players()) do	
 		local playername = player:get_player_name()
@@ -25,7 +25,7 @@ minetest.register_globalstep(function()
 			music_name = "Villageforest"
 			duration = 93
 			gain = 1
-		elseif math.random(1, 10000) == 1 then
+		elseif math.random(1, 5000) == 1 then
 			music = true
 			music_name = "Downtime"
 			duration = 75

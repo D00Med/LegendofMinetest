@@ -1,11 +1,19 @@
 
 --friendlies
 mobs:spawn({
+	name = "mobs_loz:seafish",
+	nodes = {"default:water_source"},
+	min_light = 10,
+	chance = 9000,
+	min_height = -20,
+	day_toggle = true,
+})
+mobs:spawn({
 	name = "mobs_loz:zora_male",
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,
-	min_height = 0,
+	min_height = -10,
 	day_toggle = true,
 })
 mobs:spawn({
@@ -13,7 +21,7 @@ mobs:spawn({
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,
-	min_height = 0,
+	min_height = -10,
 	day_toggle = true,
 })
 mobs:spawn({
@@ -21,7 +29,7 @@ mobs:spawn({
 	nodes = {"default:water_source"},
 	min_light = 10,
 	chance = 15000,
-	min_height = 0,
+	min_height = -20,
 	day_toggle = true,
 })
 mobs:spawn({
@@ -155,6 +163,22 @@ mobs:spawn({
 	day_toggle = false,
 })
 mobs:spawn({
+	name = "mobs_loz:keese_fire",
+	nodes = {"default:desert_cobble", "default:desert_sandstone_brick", "default:lava_source", "quartz:wall_immortal", "quartz:block_immortal"},
+	min_light = 0,
+	chance = 15000,
+	min_height = -2000,
+	day_toggle = false,
+})
+mobs:spawn({
+	name = "mobs_loz:keese_ice",
+	nodes = {"default:ice", "hyrule_mapgen:ice_brick", "quartz:wall_immortal", "quartz:block_immortal"},
+	min_light = 0,
+	chance = 15000,
+	min_height = -2000,
+	day_toggle = false,
+})
+mobs:spawn({
 	name = "mobs_loz:leever",
 	nodes = {"default:sand", "default:desert_sand", "default:sandstone",},
 	min_light = 0,
@@ -227,10 +251,26 @@ mobs:spawn({
 	day_toggle = false,
 })
 mobs:spawn({
+	name = "mobs_loz:stalchilled",
+	nodes = {"hyrule_mapgen:ice_brick", "default:ice", "quartz:wall_immortal", "quartz:block_immortal"},
+	min_light = 0,
+	chance = 7000,
+	min_height = -2000,
+	day_toggle = false,
+})
+mobs:spawn({
+	name = "mobs_loz:stalchild_dark",
+	nodes = {"default:obsidian", "default:lava_source", "quartz:wall_immortal", "quartz:block_immortal"},
+	min_light = 0,
+	chance = 7000,
+	min_height = -2000,
+	day_toggle = false,
+})
+mobs:spawn({
 	name = "mobs_loz:tingle",
 	nodes = {"default:dirt_with_grass", "default:dirt_with_grass2", "default:dirt_with_grass3"},
 	min_light = 0, --tingle spawns in darkness :]
-	chance = 90000,
+	chance = 900000,
 	min_height = 0,
 	day_toggle = true,
 })
@@ -257,4 +297,12 @@ mobs:spawn({
 	chance = 15000,
 	min_height = -5000,
 	day_toggle = true,
+})
+mobs:spawn({
+	name = "mobs_loz:zol_friendly",
+	nodes = {"default:dirt_with_dry_grass", "default:dirt_with_grass3",},
+	min_light = 6,
+	chance = 30000,
+	min_height = -200,
+	day_toggle = false,
 })

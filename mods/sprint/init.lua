@@ -12,7 +12,7 @@ SPRINT_METHOD = 1
 SPRINT_SPEED = 1.9
 SPRINT_JUMP = 1.4
 SPRINT_STAMINA = 5
-SPRINT_TIMEOUT = 0.05 --Only used if SPRINT_METHOD = 0
+SPRINT_TIMEOUT = 0.03 --Only used if SPRINT_METHOD = 0
 
 if minetest.get_modpath("hudbars") ~= nil then
 	hb.register_hudbar("sprint", 0xFFFFFF, "Stamina",

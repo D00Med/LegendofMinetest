@@ -36,7 +36,7 @@ mobs:register_mob("mobs_loz:deku_scrub", {
 	stepheight = 3,
 	drops = {
 		{name = "hyruletools:blue_rupee",
-		chance = 5, min = 5, max = 3},
+		chance = 5, min = 3, max = 5},
 	},
 	on_die = function(self)
 		local pos = self.object:getpos()
