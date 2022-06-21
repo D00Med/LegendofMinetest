@@ -1,8 +1,8 @@
 --Node Registration
 
-is_54 = has_feature("direct_velocity_on_players")
+is_52 = has_feature("pathfinder_works")
 
-if is_54 then
+if is_52 then
 nssd = { default.node_sound_stone_defaults() }
 else
 nssd = default.node_sound_stone_defaults()
