@@ -1,4 +1,4 @@
-# minetest game Legend of Minetest
+minetest game Legend of Minetest
 ==================================
 
 ```
@@ -11,12 +11,15 @@
              __/ |                                                                
             |___/                                                                 
 ```
-
 ## Information
 --------------
 
+Game inspired in the Legend of Zelda.
+
 Created by D00Med, but with a lot of help from tobyplowy (aka toby109tt),
 and also help from Noah K.(aka WinkingBaby)(https://www.youtube.com/channel/UCu8MTAFrihYO9PxKm-pk_xw), Mastersyfodiaz, and Sam Labbato(https://soundcloud.com/sam-labbato)
+
+![menu/header.png]([menu/header.png)
 
 #### Gameplay information:
 
@@ -40,7 +43,7 @@ the usual mining aspect, some materials can be traded with npc's.
 -----------------
 
 To use this (sub)game with the Minetest engine, insert this repository 
-at the path of `.minetest/games` or `/usr/share/minetest/games` or `<PATH OF MIENTEST>/games`.
+at the path of `.minetest/games` or `/usr/share/minetest/games` or `<PATH OF MINETEST>/games`.
 
 The Minetest engine can be found at https://github.com/minetest/minetest/
 
@@ -50,7 +53,7 @@ many of the updated mobs come from the minenux project
 #### Compatibility
 
 This mod implements their own default mods set, if you have similar or 
-extra ones, then must be xplicit disabled.
+extra ones, then must be explicit disabled.
 
 This game its already tested again following engines:
 
@@ -64,7 +67,7 @@ This game its already tested again following engines:
 
 The Minetest Game github master HEAD is generally not compatible with this game
 master HEAD because of the changed nature of developers of minetest, 
-they break somany things and never care about the others.
+they break so many things and never care about the others.
 
 #### mods packaged
 
@@ -99,9 +102,9 @@ Others:
 
 ## LICENSE
 
-License of code: GNU GPL v3 (C) 2016-2017,2022 D00Med
-License of code: GNU GPL v3 (C) 2022 PICCORO Lenz McKAY
-License of textures: CC BY-SA 3.0 (C) 2016-2017 D00Med and tobyplowy(aka toby109tt)
+* License of code: GNU GPL v3 (C) 2016-2017,2022 D00Med
+* License of code: GNU GPL v3 (C) 2022 PICCORO Lenz McKAY
+* License of textures: CC BY-SA 3.0 (C) 2016-2017 D00Med and tobyplowy(aka toby109tt)
 
 For other mods see license.txt in the folder of each mod.
 
