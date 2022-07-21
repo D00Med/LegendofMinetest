@@ -1,6 +1,6 @@
 --Node Registration
 
-is_52 = has_feature("pathfinder_works")
+is_52 = minetest.has_feature("pathfinder_works")
 
 if is_52 then
 nssd = { default.node_sound_stone_defaults() }
