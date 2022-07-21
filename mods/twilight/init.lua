@@ -12,7 +12,12 @@ local twilightsky = {
 "sky_pos_x.png",
 }
 
-if minetest.setting_getbool("twilight") then
+weather_mode = false
+if minetest.setting_get("enable_weather") then
+weather_mode = true
+end
+
+if minetest.setting_getbool("twilight") and weather_mode then
 twilight_mode = true
 else
 twilight_mode = false
@@ -141,11 +146,13 @@ if twilight_mode == true then
 end
 else
 	for _, player in ipairs(minetest.get_connected_players()) do
+	if weather_mode then
 	if hyrule_weather.weather == "twilight" then
 	player:set_sky({}, "regular", {}) -- Sets skybox
 	player:override_day_night_ratio(nil)
 	hyrule_weather.weather = "none"
 	hyrule_weather.current = 7
+	end
 	end
 			local pname = player:get_player_name();
 	local inv = minetest.get_inventory({type="player", name=pname});
