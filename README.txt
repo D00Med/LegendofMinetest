@@ -91,6 +91,7 @@ Mods by D00Med:
 Mods by minenux
 
 * bucket https://codeberg.org/minenux/minetest-mod-bucket/commit/1d9f32295aba3ef2a86be302050f34c1766e93d5
+* fire (with fake flame feature) https://codeberg.org/minenux/minetest-mod-fire/commit/4e5f7ad55314bd9b126fb133cfc5a32fa58b20d2
 
 Default ones (not upgradable due nature modifications)
 
