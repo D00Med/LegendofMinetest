@@ -19,7 +19,7 @@ Game inspired in the Legend of Zelda.
 Created by D00Med, but with a lot of help from tobyplowy (aka toby109tt),
 and also help from Noah K.(aka WinkingBaby)(https://www.youtube.com/channel/UCu8MTAFrihYO9PxKm-pk_xw), Mastersyfodiaz, and Sam Labbato(https://soundcloud.com/sam-labbato)
 
-![menu/header.png]([menu/header.png)
+![menu/header.png](menu/header.png)
 
 #### Gameplay information:
 
@@ -90,7 +90,7 @@ Mods by D00Med:
 
 Mods by minenux
 
-* TODO will be upgraded some due provide backguard compat for both engines (v0.4 and v5)
+* bucket https://codeberg.org/minenux/minetest-mod-bucket/commit/1d9f32295aba3ef2a86be302050f34c1766e93d5
 
 Default ones (not upgradable due nature modifications)
 
