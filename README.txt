@@ -11,15 +11,14 @@ minetest game Legend of Minetest
              __/ |                                                                
             |___/                                                                 
 ```
+
 ## Information
 --------------
 
-Game inspired in the Legend of Zelda.
+A work in progress (but working) Game inspired in the Legend of Zelda as WIP.
 
 Created by D00Med, but with a lot of help from tobyplowy (aka toby109tt),
 and also help from Noah K.(aka WinkingBaby)(https://www.youtube.com/channel/UCu8MTAFrihYO9PxKm-pk_xw), Mastersyfodiaz, and Sam Labbato(https://soundcloud.com/sam-labbato)
-
-![menu/header.png](menu/header.png)
 
 #### Gameplay information:
 
@@ -52,7 +51,9 @@ many of the updated mobs come from the minenux project
 
 #### Compatibility
 
-This mod implements their own default mods set, if you have similar or 
+**This is a WIP game, could have some issues and help its appreciate.**
+
+This game implements their own default mods set, if you have similar or 
 extra ones, then must be explicit disabled.
 
 This game its already tested again following engines:

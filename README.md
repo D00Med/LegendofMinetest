@@ -1,25 +1,15 @@
 minetest game Legend of Minetest
 ==================================
 
-```
- _                               _        _____  ____            _            _   
-| |                             | |      / _|  \/  (_)          | |          | |  
-| |     ___  __ _  ___ _ __   __| | ___ | |_| .  . |_ _ __   ___| |_ ___  ___| |_ 
-| |    / _ \/ _` |/ _ \ '_ \ / _` |/ _ \|  _| |\/| | | '_ \ / _ \ __/ _ \/ __| __|
-| |___|  __/ (_| |  __/ | | | (_| | (_) | | | |  | | | | | |  __/ ||  __/\__ \ |_ 
-\_____/\___|\__, |\___|_| |_|\__,_|\___/|_| \_|  |_/_|_| |_|\___|\__\___||___/\__|
-             __/ |                                                                
-            |___/                                                                 
-```
+![menu/header.png](menu/header.png)
+
 ## Information
 --------------
 
-Game inspired in the Legend of Zelda.
+A work in progress (but working) Game inspired in the Legend of Zelda.
 
 Created by D00Med, but with a lot of help from tobyplowy (aka toby109tt),
 and also help from Noah K.(aka WinkingBaby)(https://www.youtube.com/channel/UCu8MTAFrihYO9PxKm-pk_xw), Mastersyfodiaz, and Sam Labbato(https://soundcloud.com/sam-labbato)
-
-![menu/header.png](menu/header.png)
 
 #### Gameplay information:
 
@@ -52,7 +42,9 @@ many of the updated mobs come from the minenux project
 
 #### Compatibility
 
-This mod implements their own default mods set, if you have similar or 
+**This is a WIP game, could have some issues and help its appreciate.**
+
+This game implements their own default mods set, if you have similar or 
 extra ones, then must be explicit disabled.
 
 This game its already tested again following engines:
