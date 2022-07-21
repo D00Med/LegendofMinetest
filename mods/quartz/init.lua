@@ -1,5 +1,13 @@
 --Node Registration
 
+is_52 = has_feature("pathfinder_works")
+
+if is_52 then
+nssd = { default.node_sound_stone_defaults() }
+else
+nssd = default.node_sound_stone_defaults()
+end
+
 --Quartz Crystal
 minetest.register_craftitem("quartz:quartz_crystal", {
 	description = "Quartz Crystal",
@@ -12,7 +20,7 @@ minetest.register_node("quartz:quartz_ore", {
  	tiles = {"default_stone.png^quartz_ore.png"},
 	groups = {cracky=3, stone=1, xp=1},
 	drop = 'quartz:quartz_crystal',
-    sounds = default.node_sound_stone_defaults(),
+    sounds = nssd,
 })
 	 
 minetest.register_ore({
@@ -31,7 +39,7 @@ minetest.register_node("quartz:block", {
 	description = "Quartz Block",
 	tiles = {"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
 	groups = {snappy=1,bendy=2,cracky=1,level=2},
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 })
 
 --Chiseled Quartz
@@ -39,7 +47,7 @@ minetest.register_node("quartz:chiseled", {
 	description = "Chiseled Quartz",
 	tiles = {"quartz_chiseled_top.png", "quartz_chiseled_top.png", "quartz_chiseled_side.png"},
 	groups = {snappy=1,bendy=2,cracky=1,level=2},
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 })
 
 --Quartz Pillar
@@ -47,7 +55,7 @@ minetest.register_node("quartz:pillar", {
 	description = "Quartz Pillar",
 	tiles = {"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
 	groups = {snappy=1,bendy=2,cracky=1,level=2},
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 	on_place = minetest.rotate_node,
 	paramtype2 = "facedir"
 })
@@ -59,7 +67,7 @@ stairs.register_stair_and_slab("quartzblock", "quartz:block",
 	{"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
 	"Quartz stair",
 	"Quartz slab",
-	default.node_sound_stone_defaults()
+	nssd
 )
 
 stairs.register_slab("quartzstair", "quartz:pillar",
@@ -67,7 +75,7 @@ stairs.register_slab("quartzstair", "quartz:pillar",
 	{"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
 	"Quartz Pillar stair",
 	"Quartz Pillar slab",
-	default.node_sound_stone_defaults()
+	nssd
 )		
 
 --Unbreakeable nodes
@@ -78,7 +86,7 @@ minetest.register_node("quartz:wall_immortal", {
 	tiles = {"quartz_wall.png",},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
 	is_ground_content = false,
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 	on_blast = function(pos, intensity) 
 	end,
 })
@@ -88,7 +96,7 @@ minetest.register_node("quartz:block_immortal", {
 	description = "Unbreakeable Quartz Block",
 	tiles = {"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 	is_ground_content = false,
 	on_blast = function(pos, intensity) 
 	end,
@@ -99,7 +107,7 @@ minetest.register_node("quartz:chiseled_immortal", {
 	description = "Unbreakeable Chiseled Quartz",
 	tiles = {"quartz_chiseled_top.png", "quartz_chiseled_top.png", "quartz_chiseled_side.png"},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 	is_ground_content = false,
 	on_blast = function(pos, intensity) 
 	end,
@@ -110,7 +118,7 @@ minetest.register_node("quartz:pillar_immortal", {
 	description = "Unbreakeable Quartz Pillar",
 	tiles = {"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
 	groups = {snappy=0,bendy=0,cracky=0, not_in_creative_inventory=1},
-	sounds = default.node_sound_stone_defaults(),
+	sounds = nssd,
 	is_ground_content = false,
 	on_blast = function(pos, intensity)
 	end,
@@ -125,7 +133,7 @@ stairs.register_stair_and_slab("quartzblock_immortal", nil,
 	{"quartz_block_top.png", "quartz_block_bottom.png", "quartz_block_side.png"},
 	"Unbreakeable Quartz stair",
 	"Unbreakeable Quartz slab",
-	default.node_sound_stone_defaults()
+	nssd
 )
 
 stairs.register_slab("quartzstair_immortal", nil,
@@ -133,7 +141,7 @@ stairs.register_slab("quartzstair_immortal", nil,
 	{"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
 	"Unbreakeable Quartz Pillar stair",
 	"Unbreakeable Quartz Pillar slab",
-	default.node_sound_stone_defaults()
+	nssd
 )	
 
 --Crafting
