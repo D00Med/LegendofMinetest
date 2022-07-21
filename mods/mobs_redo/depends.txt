@@ -1,4 +1,5 @@
 default
+fire?
 invisibility?
 intllib?
 lucky_block?
